@@ -152,6 +152,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\img\cache\readme.txt" />
     <Content Include="Content\img\motorcycle.jpeg" />
     <Content Include="Content\css\frameworks\jquery\south-street\images\animated-overlay.gif" />
     <Content Include="Content\css\frameworks\jquery\south-street\images\ui-bg_glass_55_fcf0ba_1x400.png" />
@@ -197,7 +198,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\pages\" />
-    <Folder Include="Content\img\cache\" />
     <Folder Include="Content\js\pages\" />
     <Folder Include="Engine\Logic\" />
     <Folder Include="Models\" />
@@ -236,6 +236,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Properties\PublishProfiles\ftp.pubxml" />
+    <Content Include="Views\Home\OnlineUsers.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

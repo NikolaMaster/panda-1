@@ -1,12 +1,31 @@
 ﻿@model PandaWebApp.ViewModels.PandaPulse
 
 <div class="pulse">
+    <script type="text/javascript">
+        $(function () {
+            setInterval(function () {
+                $.ajax({
+                    url: "/Home/OnlineUsers",
+                    success: function (data) {
+                        var previousValue = $('#onlineUsers').data('previous-value');
+                        if (data != previousValue) {
+                            $('#onlineUsers').slideUp({
+                                complete: function () {
+                                    $(this).data('previous-value', data).html(data)
+                                }
+                            }).slideDown();
+                        }
+                    }
+                });
+            }, 3000);
+        });
+    </script>
 	<div class="title">Панда пульс</div>
 	    <ul>
 		    <li class="temp"></li>
 			<li class="header">
 				<span class="left">ОНЛАЙН</span>
-				<span class="right"><a href="#">@Model.Online</a></span>
+				<span class="right"><a id="onlineUsers" href="#" data-previous-value="@Model.Online">@Model.Online</a></span>
 				<div class="clear"></div>
 			</li>
                 @{

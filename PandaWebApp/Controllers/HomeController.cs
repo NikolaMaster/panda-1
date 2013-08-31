@@ -21,6 +21,11 @@ namespace PandaWebApp.Controllers
         {
             return View();
         }
+        
+        public ActionResult OnlineUsers()
+        {
+            return PartialView(DataAccessLayer.OnlineUsers<UserBase>());
+        }
 
         public ActionResult PandaPulse() 
         {
