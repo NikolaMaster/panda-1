@@ -123,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromouterController.cs" />
     <Compile Include="Engine\Binders\BaseBinder.cs" />
     <Compile Include="Engine\Binders\CreateBlogToBlogPost.cs" />
@@ -226,6 +227,9 @@
   <ItemGroup>
     <Content Include="Views\Blog\ViewPost.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\PandaPulse.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -242,7 +246,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>8748</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:2550/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

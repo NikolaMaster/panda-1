@@ -8,9 +8,6 @@ namespace PandaDataAccessLayer.Entities
 {
     public abstract class EmployerUser : UserBase
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string City { get; set; }
-        public string Phone { get; set; }
+
     }
 }
