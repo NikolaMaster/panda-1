@@ -1,6 +1,7 @@
 ﻿using PandaDataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace PandaDataAccessLayer.DAL
         public static int OnlineUsers<TEntity>(this  DAL<MainDbContext> dal)
              where TEntity : UserBase
         {
-            return dal.DbContext.Set<TEntity>().Count(x => x.Sessions.Any(y => (DateTime.Now - y.LastHit).TotalSeconds < OnlineTimeout));
+            return dal.DbContext.Set<TEntity>().Count(x => x.Sessions.Any(y => EntityFunctions.DiffSeconds(DateTime.Now, y.LastHit) < OnlineTimeout));
         }
     }
 }

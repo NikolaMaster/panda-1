@@ -19,6 +19,11 @@ namespace PandaDataAccessLayer.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Number { get; set; }
 
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string City { get; set; }
+        public string Phone { get; set; }
+
         public virtual SeoEntry SeoEntry { get; set; }
         public virtual Photo Avatar { get; set; }
 

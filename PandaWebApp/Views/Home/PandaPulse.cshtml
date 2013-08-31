@@ -1,0 +1,24 @@
+﻿@model PandaWebApp.ViewModels.PandaPulse
+
+<div class="pulse">
+	<div class="title">Панда пульс</div>
+	    <ul>
+		    <li class="temp"></li>
+			<li class="header">
+				<span class="left">ОНЛАЙН</span>
+				<span class="right"><a href="#">@Model.Online</a></span>
+				<div class="clear"></div>
+			</li>
+                @{
+                    var counter = 0;
+                    foreach (var entry in Model.Items)
+                    {
+                        <li @(counter == 0 ? @"class=""first"" " : string.Empty)>
+				            <span class="icon"><img src="@entry.Image" /></span>
+				            <span class="name"><a href="#">@entry.Name</a></span>
+			            </li>        
+                    }
+                }
+	    </ul>
+	<img src="/Content/img/pulse-bottom.png" />
+</div>
