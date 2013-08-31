@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.Entities
 {
-    public class Photo
+    public class Photo : IGuidIdentifiable
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }

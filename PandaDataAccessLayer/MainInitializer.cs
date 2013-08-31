@@ -11,11 +11,14 @@ namespace PandaDataAccessLayer
 {
     public class MainInitializer  : DropCreateDatabaseIfModelChanges<MainDbContext>
     {
+        internal const string DefaultAvatarImage = "motorcycle.jpeg";
+
         protected override void Seed(MainDbContext context)
         {
             addDefaultAttribTypes(context);
             addDefaultChecklistTypes(context);
             addDefaulAttributes(context);
+            addDefaultImages(context);
         }
 
         private void addDefaultDictAttribTypes(MainDbContext context)
@@ -409,6 +412,17 @@ namespace PandaDataAccessLayer
             };
             foreach (var attrib in attribs)
                 dal.Create<Attrib>(attrib);
+            context.SaveChanges();
+        }
+
+
+        private void addDefaultImages(MainDbContext context)
+        {
+            var dal = new DAL<MainDbContext>(context);
+            var defaultAvatar = dal.Create<Photo>(new Photo
+            {
+                SourceUrl = DefaultAvatarImage
+            });
             context.SaveChanges();
         }
     }

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\ChecklistDAL.cs" />
+    <Compile Include="DAL\Constants.cs" />
     <Compile Include="DAL\DAL.cs" />
     <Compile Include="DAL\DictDAL.cs" />
     <Compile Include="Entities\Album.cs" />

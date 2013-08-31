@@ -29,6 +29,10 @@ namespace PandaDataAccessLayer.DAL
                         User = user,
                     }));
             }
+            if (user.Avatar == null)
+            {
+                user.Avatar = dal.Constants.DefaultAvatar;
+            }
             return dal.Create<TEntity>(user);
         }
 

@@ -17,15 +17,21 @@ namespace PandaDataAccessLayer.DAL
         }
 
         private TDbContext mDbContext;
+        private Constants<TDbContext> mConstants;
 
         public TDbContext DbContext 
         {
             get { return mDbContext; } 
         }
 
-        public DAL() 
+        public Constants<TDbContext> Constants
         {
-            mDbContext = new TDbContext();
+            get { return mConstants; }
+        }
+
+        public DAL() : this(new TDbContext())
+        {
+            mConstants = new Constants<TDbContext>(this);
         }
 
         public DAL(TDbContext dbContext)
