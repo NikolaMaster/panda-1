@@ -1,0 +1,16 @@
+﻿@model PandaWebApp.ViewModels.Feedback
+
+
+<div>
+    Озывы 
+    <a id="feedbackCount" href="#">@Model.Count</a> 
+    @foreach (var entry in Model.Entries)
+    {
+        @entry.UserName
+        <br />
+        @entry.Text
+        <br />
+        <hr />
+    }
+
+</div>

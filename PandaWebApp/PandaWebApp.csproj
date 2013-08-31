@@ -127,6 +127,7 @@
     <Compile Include="Controllers\PromouterController.cs" />
     <Compile Include="Engine\Binders\BaseBinder.cs" />
     <Compile Include="Engine\Binders\CreateBlogToBlogPost.cs" />
+    <Compile Include="Engine\Binders\FeedbackToReview.cs" />
     <Compile Include="Engine\Binders\RegisterPromouterToUsers.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Crypt.cs" />
@@ -237,6 +238,8 @@
     <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Properties\PublishProfiles\ftp.pubxml" />
     <Content Include="Views\Home\OnlineUsers.cshtml" />
+    <Content Include="Views\Home\Feedback.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
