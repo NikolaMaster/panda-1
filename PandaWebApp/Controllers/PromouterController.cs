@@ -75,8 +75,7 @@ namespace PandaWebApp.Controllers
             
 #if DEBUG
             throw new Exception("ModelState is invalid");
-#endif
-#if RELEASE
+#else
             return new EmptyResult();
 #endif
         }

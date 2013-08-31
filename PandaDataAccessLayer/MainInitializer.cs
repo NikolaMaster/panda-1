@@ -9,7 +9,7 @@ using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer
 {
-    public class MainInitializer  : DropCreateDatabaseIfModelChanges<MainDbContext>
+    public class MainInitializer  : CreateDatabaseIfNotExists<MainDbContext>//DropCreateDatabaseIfModelChanges<MainDbContext>
     {
         internal const string DefaultAvatarImage = "motorcycle.jpeg";
 
