@@ -53,7 +53,7 @@ namespace PandaWebApp.Controllers
                 return HttpNotFound("Promouter not found");
             }
 
-            var model = new ViewModels.Promouter();
+            var model = new Promouter();
             var binder = new ViewPromouterToUsers();
             binder.InverseLoad(entry, model);
 

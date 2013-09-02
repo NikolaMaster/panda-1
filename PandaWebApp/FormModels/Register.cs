@@ -55,5 +55,21 @@ namespace PandaWebApp.FormModels
 
             public Guid Id { get; set; }
         }
+
+
+        public class Employer
+        {
+            [Required]
+            [EmailAddress]
+            public string Email { get; set; }
+            [Required]
+            [PromouterPasswordLength]
+            public string Password { get; set; }
+            [Required]
+            [Compare("Password")]
+            public string PasswordConfirmation { get; set; }
+
+            public Guid Id { get; set; }
+        }
     }
 }

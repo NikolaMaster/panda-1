@@ -1,0 +1,29 @@
+﻿@model PandaWebApp.ViewModels.Blog
+@{
+    ViewBag.Title = "Блог";
+}
+
+
+<h2>Уютный блог Панды</h2>
+
+    @foreach (var iter in Model.Posts)
+    {
+        <div>
+            <div>
+                <p>Создан: @iter.CreatedDate</p>
+                <p>Редактирован: @iter.ModifyDate</p>
+                <a href="./Detail?id=@iter.Id">
+                    <div>@iter.Title</div>
+                </a>
+
+                <br/>
+                @iter.ShortText
+                <br/>
+            </div>
+        </div>
+    }
+    
+    <p class="blog">
+        Всего постов: @Model.Posts.Count 
+    </p>
+    <a href="@Url.Content("Create")">Создать пост</a>

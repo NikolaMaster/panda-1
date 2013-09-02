@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using PandaWebApp.Engine;
@@ -10,6 +11,7 @@ namespace PandaWebApp.ViewModels
     {
         public class Entry
         {
+            [Required]
             public string Title { get; set; }
             public string Image { get; set; }
             public string ShortText 
@@ -28,6 +30,7 @@ namespace PandaWebApp.ViewModels
                     return FullText.Shorten(200);
                 }
             }
+            [Required]
             public string FullText { get; set; }
 
             public DateTime CreatedDate { get; set; }
@@ -38,7 +41,7 @@ namespace PandaWebApp.ViewModels
         }
 
         public int Count;
-        public ICollection<Blog> Posts; 
+        public ICollection<Blog.Entry> Posts; 
         public string Title { get; set; }
     }
 }

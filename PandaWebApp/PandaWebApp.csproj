@@ -122,13 +122,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromouterController.cs" />
     <Compile Include="Engine\Binders\BaseBinder.cs" />
     <Compile Include="Engine\Binders\CreateBlogToBlogPost.cs" />
+    <Compile Include="Engine\Binders\RegisterEmployerToUsers.cs" />
     <Compile Include="Engine\Binders\RegisterPromouterToUsers.cs" />
+    <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Crypt.cs" />
+    <Compile Include="Engine\Editors\EmployerEditor.cs" />
     <Compile Include="Engine\Editors\PromouterEditor.cs" />
     <Compile Include="Engine\Encodings.cs" />
     <Compile Include="Engine\Extensions.cs" />
@@ -141,6 +145,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Blog.cs" />
+    <Compile Include="ViewModels\Employer.cs" />
     <Compile Include="ViewModels\Feedback.cs" />
     <Compile Include="ViewModels\PandaPulse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,15 +224,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Blog\Index.cshtml">
-      <BrowseToURL>~/Blog/Index</BrowseToURL>
+    <Content Include="Views\Blog\Posts.cshtml">
+      <BrowseToURL>~/Blog/Posts</BrowseToURL>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Blog\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Blog\ViewPost.cshtml" />
+    <Content Include="Views\Blog\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\PandaPulse.cshtml" />
@@ -236,7 +241,9 @@
     <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Properties\PublishProfiles\ftp.pubxml" />
     <Content Include="Views\Home\OnlineUsers.cshtml" />
-    <Content Include="Views\Blog\Update.cshtml" />
+    <Content Include="Views\Blog\Edit.cshtml" />
+    <Content Include="Views\Employer\Detail.cshtml" />
+    <Content Include="Views\Employer\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
