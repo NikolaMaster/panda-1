@@ -39,6 +39,12 @@ namespace PandaDataAccessLayer.DAL
             mDbContext = dbContext;
         }
 
+        public IEnumerable<TEntity> Get<TEntity>() 
+            where TEntity : class, IGuidIdentifiable
+        {
+            return mDbContext.Set<TEntity>().ToList();
+        }
+
         #region CRUD by Id
 
         public TEntity GetById<TEntity>(Guid id) where TEntity : class, IGuidIdentifiable
@@ -94,6 +100,18 @@ namespace PandaDataAccessLayer.DAL
             where TEntity : class, IGuidIdentifiable
         {
             return mDbContext.Set<TEntity>().OrderBy(x => new Guid()).Take(count).ToList();
+        }
+
+        public int Count<TEntity>()
+            where TEntity : class, IGuidIdentifiable
+        {
+            return mDbContext.Set<TEntity>().Count();
+        }
+
+        public int Count<TEntity>(Expression<Func<TEntity, bool>> filter)
+            where TEntity : class, IGuidIdentifiable
+        {
+            return mDbContext.Set<TEntity>().Count(filter);
         }
         #endregion
 

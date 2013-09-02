@@ -15,7 +15,7 @@ namespace PandaWebApp.Controllers
     public class HomeController : ModelCareController
     {
         public const int OnlineUsersCount = 10;
-        public const int FeedbacksCount = 10;
+        
         //
         // GET: /Home/
 
@@ -24,21 +24,7 @@ namespace PandaWebApp.Controllers
             return View();
         }
 
-        public ActionResult Feedback() 
-        {
-            var binder = new FeedbackToReview();
-            var feedback = new Feedback
-            {
-                Count = DataAccessLayer.Count<Review>(),
-                Entries = DataAccessLayer.TopRandom<Review>(FeedbacksCount).Select(x =>
-                {
-                    var entry = new Feedback.Entry();
-                    binder.InverseLoad(x, entry);
-                    return entry;
-                }).ToList()
-            };
-            return PartialView(feedback);
-        }
+
 
         public ActionResult OnlineUsers()
         {

@@ -20,8 +20,10 @@ namespace PandaWebApp.Engine.Binders
             var user = source.Users.First();
             dest.Text = source.Text;
             dest.Title = source.Title;
+            dest.Rating = source.Rating;
+            dest.SendDate = source.CreationDate;
             dest.UserName = user.FirstName;
-            dest.UserPhoto = user.Avatar.SourceUrl;
+            dest.UserPhoto = user.Avatar == null ? string.Empty : user.Avatar.SourceUrl;            
         }
     }
 }
