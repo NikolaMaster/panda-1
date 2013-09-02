@@ -51,9 +51,12 @@ namespace PandaDataAccessLayer.DAL
             mDbContext.Set<TEntity>().Remove(GetById<TEntity>(id));
         }
 
-        public void UpdateById<TEntity>(Guid id, Expression<Func<TEntity, TEntity>> updateExpression) where TEntity : class, IGuidIdentifiable
+        public void UpdateById<TEntity>(Guid id, Action<TEntity> updateExpression) where TEntity : class, IGuidIdentifiable
         {
-            mDbContext.Set<TEntity>().Update(x => x.Id == id, updateExpression);
+            foreach (var item in mDbContext.Set<TEntity>().Where(x => x.Id == id))
+            {
+                updateExpression(item);
+            }
         }
 
         #endregion
