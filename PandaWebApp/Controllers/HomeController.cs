@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace PandaWebApp.Controllers
 {
     public class HomeController : ModelCareController
@@ -21,9 +22,10 @@ namespace PandaWebApp.Controllers
         {
             return View();
         }
-        
+
         public ActionResult OnlineUsers()
         {
+            var user = DataAccessLayer.DbContext.Users.First();
             return PartialView(DataAccessLayer.OnlineUsers<UserBase>());
         }
 
