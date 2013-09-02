@@ -37,6 +37,8 @@ namespace PandaWebApp.ViewModels
             public Guid Id { get; set; }
         }
 
+        public int Count;
+        public ICollection<Blog> Posts; 
         public string Title { get; set; }
     }
 }

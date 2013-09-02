@@ -14,17 +14,20 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.Title = source.Title;
             dest.FullText = source.FullText;
+            //dest.Image = source.Picture.SourceUrl;
             dest.CreationDate = source.CreatedDate;
-            dest.ModifyDate = source.CreatedDate;
+            dest.ModifyDate = source.ModifyDate;
             dest.Id = source.Id;
         }
 
         public override void InverseLoad(BlogPost source, Blog.Entry dest)
         {
-            source.Title = dest.Title;
-            source.FullText = dest.FullText;
-            source.CreationDate = dest.CreatedDate;
-            source.Id = dest.Id;
+            dest.Title = source.Title;
+            dest.FullText = source.FullText;
+            //dest.Image = source.Picture.SourceUrl;
+            dest.CreatedDate = source.CreationDate;
+            dest.ModifyDate = source.ModifyDate;
+            dest.Id = source.Id;
         }
     }
 }

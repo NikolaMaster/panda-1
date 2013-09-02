@@ -4,20 +4,29 @@
 }
 <h2>Уютный блог Панды</h2>
 
-    @Html.ValidationSummary()
+@Html.ValidationSummary()
 
-  
-<h3>
-    <div class="editor">@Model.Title</div>
-</h3>
+<div class="blog">
+    <div class="blog-link">
+        <p>Создан: @Model.CreatedDate</p>
+        <p>Редактирован: @Model.ModifyDate</p>
 
-<h4>
-    <div class="editor"> @Model.FullText</div>
-</h4>
+               
+        <a href="./ViewPost?id=@Model.Id">
+            <div">@Model.Title</div>
+        </a>
+                
 
-    
-<div class="label">Был создан: @Model.CreatedDate</div>
-   
+        <br/>
+             
+        @Model.FullText
+                
+    </div>
+</div>
+
+
+<a href="./Update?id=@Model.Id">Редактировать</a>
+<a href="./Delete?id=@Model.Id">Удалить</a>
 <a href="./Posts">Просмотреть все посты</a>
 
 

@@ -53,8 +53,7 @@
       <HintPath>..\packages\EntityFramework.Extended.5.0.0.73\lib\net45\EntityFramework.Extended.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PandaDataAccessLayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="PandaDataAccessLayer">
       <HintPath>..\PandaDataAccessLayer\bin\Debug\PandaDataAccessLayer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -220,7 +219,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Blog\Posts.cshtml">
+    <Content Include="Views\Blog\Index.cshtml">
       <BrowseToURL>~/Blog/Index</BrowseToURL>
     </Content>
   </ItemGroup>
@@ -237,6 +236,7 @@
     <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Properties\PublishProfiles\ftp.pubxml" />
     <Content Include="Views\Home\OnlineUsers.cshtml" />
+    <Content Include="Views\Blog\Update.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

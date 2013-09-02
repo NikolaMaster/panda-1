@@ -1,0 +1,19 @@
+﻿@model PandaWebApp.ViewModels.Blog.Entry
+@{
+    ViewBag.Title = "Редактирование поста";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    
+    
+    <div class="label">Тема</div>
+    <div class="editor">@Html.TextBoxFor(model => model.Title)</div>
+
+    <div class="label">Описание</div>
+    <div class="editor">@Html.TextAreaFor(model => model.FullText)</div>
+
+    <input type="submit" value="Применить" />
+    <a href="./Posts">Просмотреть все посты</a>
+}

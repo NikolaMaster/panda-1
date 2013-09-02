@@ -14,7 +14,7 @@ namespace PandaWebApp.Controllers
     public class BlogController : ModelCareController
     {
         [HttpGet]
-        public ActionResult Posts()
+        public ActionResult Index()
         {
             //TODO: get list of blogs by UserId
             //Guid id = new Guid("428efc0e-27a8-4cf7-a036-88228253a2cd");
@@ -27,12 +27,10 @@ namespace PandaWebApp.Controllers
             var posts = new List<Blog.Entry>();
             foreach (var blogPost in listOfPosts)
             {
-                var post = new Blog.Entry();
-                post.CreatedDate = blogPost.CreationDate;
-                post.FullText = blogPost.FullText;
-                post.Title = blogPost.Title;
-                post.Id = blogPost.Id;
-                posts.Add(post);
+                var binder = new CreateBlogToBlogPost();
+                var entry = new Blog.Entry();
+                binder.InverseLoad(blogPost, entry);
+                posts.Add(entry);
             }
             return View(posts);
         }
@@ -45,23 +43,38 @@ namespace PandaWebApp.Controllers
             return View();
         }
 
-
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult Create(Blog.Entry model)
         {
+            /*var model = new Blog.Entry();
+            model.CreatedDate = DateTime.Now;
+            model.ModifyDate = DateTime.Now;
+            model.Title = title;
+            model.FullText = fullText;
+            var binder = new CreateBlogToBlogPost();
+            var entry = new BlogPost();
+            binder.Load(model, entry);
+            DataAccessLayer.Create<BlogPost>(entry);
+            DataAccessLayer.DbContext.SaveChanges();
+            return RedirectToAction("Index");
+            */
+
             if (ModelState.IsValid)
             {
                 model.CreatedDate = DateTime.Now;
+                model.ModifyDate = DateTime.Now;
+
                 var binder = new CreateBlogToBlogPost();
                 var entry = new BlogPost();
                 binder.Load(model, entry);
                 DataAccessLayer.Create<BlogPost>(entry);
                 DataAccessLayer.DbContext.SaveChanges();
-                return RedirectToAction("./Posts");
+                return RedirectToAction("Index");
             }
-            return View(model);
+            return View();
         }
-        
+
 
         [HttpGet]
         public ActionResult ViewPost(Guid id)
@@ -72,13 +85,49 @@ namespace PandaWebApp.Controllers
                 return HttpNotFound("Post not found");
             }
 
-            var blogEntry = new Blog.Entry();
-            blogEntry.Title = post.Title;
-            blogEntry.FullText = post.FullText;
-            blogEntry.CreatedDate = post.CreationDate;
-            blogEntry.ModifyDate = post.ModifyDate;
 
-            return View(blogEntry);
+            var binder = new CreateBlogToBlogPost();
+            var entry = new Blog.Entry();
+            binder.InverseLoad(post, entry);
+            return View(entry);
+        }
+
+
+        [HttpGet]
+        public ActionResult Update(Guid id)
+        {
+            var post = DataAccessLayer.GetById<BlogPost>(id);
+            if (post == null)
+            {
+                return HttpNotFound("Post not found");
+            }
+
+
+            var binder = new CreateBlogToBlogPost();
+            var entry = new Blog.Entry();
+            binder.InverseLoad(post, entry);
+            return View(entry);
+        }
+
+        [HttpPost]
+        public ActionResult Update(Blog model)
+        {
+            //DataAccessLayer.UpdateById<BlogPost>(model.Id,null);
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Delete(Guid id)
+        {
+            var post = DataAccessLayer.GetById<BlogPost>(id);
+            if (post == null)
+            {
+                return HttpNotFound("Post not found");
+            }
+
+            DataAccessLayer.DeleteById<BlogPost>(id);
+            DataAccessLayer.DbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
