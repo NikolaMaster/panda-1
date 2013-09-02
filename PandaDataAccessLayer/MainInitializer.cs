@@ -19,6 +19,7 @@ namespace PandaDataAccessLayer
             addDefaultChecklistTypes(context);
             addDefaulAttributes(context);
             addDefaultImages(context);
+            addDebugEntities(context);
         }
 
         private void addDefaultDictAttribTypes(MainDbContext context)
@@ -425,5 +426,42 @@ namespace PandaDataAccessLayer
             });
             context.SaveChanges();
         }
+
+
+        #region DEBUG!!!
+        public void addDebugEntities(MainDbContext context) 
+        {
+            var dal = new DAL<MainDbContext>(context);
+            var user = dal.Create<PromouterUser>(new PromouterUser()
+            {
+                FirstName = "Dmitry",
+                LastName = "Kostyanetsky",
+                City = "Tyumen",
+                Email = "redrick.tmn@gmail.com",
+                Phone = "+79123833395",
+                Password = "123",
+            });
+            dal.Create<Review>(new Review()
+            {
+                CreationDate = DateTime.Now,
+                ModifyDate = DateTime.Now,
+                Rating = 5,
+                Text = "Sonme text blah blah blah <b>BOLD</b>",
+                Title = "Title",
+                Users = new List<UserBase>() { user }
+            });
+            dal.Create<Review>(new Review()
+            {
+                CreationDate = DateTime.Now,
+                ModifyDate = DateTime.Now,
+                Rating = 2,
+                Text = "Sasdasdasdasd",
+                Title = "Title #2",
+                Users = new List<UserBase>() { user }
+            });
+            dal.DbContext.SaveChanges();
+
+        }
+        #endregion
     }
 }

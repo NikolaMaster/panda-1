@@ -1,0 +1,20 @@
+﻿@model PandaWebApp.ViewModels.Feedback
+
+@{
+    ViewBag.Title = "Отзывы";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Отзывы (@Model.Count):</h2>
+
+@foreach (var entry in Model.Entries)
+{
+    <div class="feedback">
+        <h3>@entry.UserName</h3>
+        <h2>@entry.SendDate.ToPandaString()</h2>
+        <img src="@ImageCreator.Create(entry.UserPhoto, 128, 128)" />
+        <h3>@entry.Title</h3>
+        <p>@entry.Text</p>
+        <div>Rating: @entry.Rating.ToPandaString()</div>
+    </div>
+}

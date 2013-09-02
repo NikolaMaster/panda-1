@@ -2,6 +2,7 @@
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
+using PandaWebApp.Engine.Binders;
 using PandaWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,8 @@ namespace PandaWebApp.Controllers
 {
     public class HomeController : ModelCareController
     {
-        public int OnlineUsersCount = 10;
+        public const int OnlineUsersCount = 10;
+        
         //
         // GET: /Home/
 
@@ -22,6 +24,8 @@ namespace PandaWebApp.Controllers
         {
             return View();
         }
+        
+
 
         public ActionResult OnlineUsers()
         {
