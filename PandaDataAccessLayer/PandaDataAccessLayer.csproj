@@ -58,6 +58,7 @@
     <Compile Include="DAL\Constants.cs" />
     <Compile Include="DAL\DAL.cs" />
     <Compile Include="DAL\DictDAL.cs" />
+    <Compile Include="DAL\ReviewDAL.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\BlogPost.cs" />
     <Compile Include="Entities\DesiredWork.cs" />

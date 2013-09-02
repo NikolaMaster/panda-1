@@ -123,11 +123,13 @@
   <ItemGroup>
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromouterController.cs" />
     <Compile Include="Engine\Binders\BaseBinder.cs" />
     <Compile Include="Engine\Binders\CreateBlogToBlogPost.cs" />
     <Compile Include="Engine\Binders\RegisterEmployerToUsers.cs" />
+    <Compile Include="Engine\Binders\FeedbackToReview.cs" />
     <Compile Include="Engine\Binders\RegisterPromouterToUsers.cs" />
     <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
@@ -244,6 +246,11 @@
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Employer\Detail.cshtml" />
     <Content Include="Views\Employer\Create.cshtml" />
+    <Content Include="Views\Blog\Update.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Feedback\UserFeedback.cshtml" />
+    <Content Include="Views\Feedback\IndexFeedback.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -259,7 +266,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>8748</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
