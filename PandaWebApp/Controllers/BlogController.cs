@@ -21,7 +21,7 @@ namespace PandaWebApp.Controllers
             //var t = DataAccessLayer.DbContext.PromouterUsers;
             //var pr = DataAccessLayer.GetById<UserBase>(new Guid("80fa3949-4b83-4587-b24d-fe140b5743aa"));
 
-            var online = DataAccessLayer.OnlineUsers<UserBase>();
+            var online = DataAccessLayer.OnlineUsers();
             var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(5);
             if (listOfPosts == null)
             {
