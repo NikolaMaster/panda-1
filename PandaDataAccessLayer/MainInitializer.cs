@@ -440,7 +440,7 @@ namespace PandaDataAccessLayer
                 Password = "123",
                 
             });
-            user.Checklists = new List<Checklist> { mDal.Create(user, new List<AttribValue> 
+            mDal.Create(user, new List<AttribValue> 
             {   
                 mDal.Create<AttribValue>(new AttribValue { 
                     Attrib = mDal.Get<Attrib>("Фамилия"),
@@ -450,7 +450,7 @@ namespace PandaDataAccessLayer
                     Attrib = mDal.Get<Attrib>("Город"),
                     Value = "Тюмень"
                 }),
-            }) };
+            });
             mDal.Create<Review>(new Review()
             {
                 CreationDate = DateTime.Now,
