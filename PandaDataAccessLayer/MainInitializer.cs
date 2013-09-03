@@ -11,21 +11,23 @@ namespace PandaDataAccessLayer
 {
     public class MainInitializer  : CreateDatabaseIfNotExists<MainDbContext>//DropCreateDatabaseIfModelChanges<MainDbContext>
     {
-        internal const string DefaultAvatarImage = "motorcycle.jpeg";
+        private MainDbContext mContext;
+        private DataAccessLayer mDal;
 
         protected override void Seed(MainDbContext context)
         {
-            addDefaultAttribTypes(context);
-            addDefaultChecklistTypes(context);
-            addDefaulAttributes(context);
-            addDefaultImages(context);
-            addDebugEntities(context);
+            mDal = new DataAccessLayer(context);
+            mContext = context;
+
+            addDefaultAttribTypes();
+            addDefaultChecklistTypes();
+            addDefaulAttributes();
+            addDefaultImages();
+            addDebugEntities();
         }
 
-        private void addDefaultDictAttribTypes(MainDbContext context)
+        private void addDefaultDictAttribTypes()
         {
-            var dal = new DAL<MainDbContext>(context);
-
             #region sex
 
             var sexGroup = new DictGroup
@@ -35,19 +37,19 @@ namespace PandaDataAccessLayer
                 };
             var sexValues = new List<DictValue>() 
                 {
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "MALE",
                         Description = "Мужской",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "FEMALE",
                         Description = "Женский",
                     }),
                 };
-            sexGroup = dal.CreateDictGroup(sexGroup, sexValues).Key;
-            dal.Create<AttribType>(new AttribType
+            sexGroup = mDal.Create(sexGroup, sexValues).Key;
+            mDal.Create<AttribType>(new AttribType
                 {
                     DictGroup = sexGroup,
                     Type = typeof(DictGroup).FullName,
@@ -65,14 +67,14 @@ namespace PandaDataAccessLayer
             var costs = new int[] { 150, 170, 180, 200, 220, 240, 250, 
                 270, 280, 300, 350, 400, 450, 500, 550, 600, 650, 700, 
                 800, 900, 1000, 1500, 2000, 3000, 4000, 5000 };
-            var costValues = costs.ToList().Select(x => dal.Create<DictValue>(new DictValue
+            var costValues = costs.ToList().Select(x => mDal.Create<DictValue>(new DictValue
                     {
                         Code = "COST_" + x.ToString(),
                         Description = x.ToString(),
                     }));
 
-            costGroup = dal.CreateDictGroup(costGroup, costValues).Key;
-            dal.Create<AttribType>(new AttribType
+            costGroup = mDal.Create(costGroup, costValues).Key;
+            mDal.Create<AttribType>(new AttribType
             {
                 DictGroup = costGroup,
                 Type = typeof(DictGroup).FullName,
@@ -89,29 +91,29 @@ namespace PandaDataAccessLayer
             };
             var educationValues = new List<DictValue>() 
                 {
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "MIDDLE",
                         Description = "Среднее",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "MIDDLE_FULL",
                         Description = "Среднее полное",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "INCOMPLETE_HEIGHT",
                         Description = "Неоконченное высшее",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "HEIGHT",
                         Description = "Высшее",
                     }),
                 };
-            educationGroup = dal.CreateDictGroup(educationGroup, educationValues).Key;
-            dal.Create<AttribType>(new AttribType
+            educationGroup = mDal.Create(educationGroup, educationValues).Key;
+            mDal.Create<AttribType>(new AttribType
             {
                 DictGroup = educationGroup,
                 Type = typeof(DictGroup).FullName,
@@ -128,89 +130,89 @@ namespace PandaDataAccessLayer
             };
             var workValues = new List<DictValue>() 
                 {
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "MERC",
                         Description = "Мерчендайзер",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "SUPER",
                         Description = "Супервайзер",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "COURIER",
                         Description = "Курьер",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "AUDITOR",
                         Description = "Аудитор/Чекер",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "BUYER",
                         Description = "Тайный покупатель",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "PROMOUTER",
                         Description = "Промоутер",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "AUDITOR",
                         Description = "Аудитор/Чекер",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "ANIMATOR",
                         Description = "Аниматор",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "PROMO_MODEL",
                         Description = "Промо-модель",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "MASCOT",
                         Description = "Ростовая кукла",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "INTERVIEWER",
                         Description = "Интервьюер",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "MODEL",
                         Description = "Модель",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "WORKER",
                         Description = "Разнорабочий",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "BARMEN",
                         Description = "Бармен",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "WAITER",
                         Description = "Официант",
                     }),
-                    dal.Create<DictValue>(new DictValue
+                    mDal.Create<DictValue>(new DictValue
                     {
                         Code = "HOSTESS",
                         Description = "Хостес",
                     }),
                 };
-            workGroup = dal.CreateDictGroup(workGroup, workValues).Key;
-            dal.Create<AttribType>(new AttribType
+            workGroup = mDal.Create(workGroup, workValues).Key;
+            mDal.Create<AttribType>(new AttribType
             {
                 DictGroup = workGroup,
                 Type = typeof(DictGroup).FullName,
@@ -219,9 +221,8 @@ namespace PandaDataAccessLayer
             #endregion
         }
 
-        private void addDefaultAttribTypes(MainDbContext context) 
+        private void addDefaultAttribTypes() 
         {
-            var dal = new DAL<MainDbContext>(context);
             
             var types = new[] 
             { 
@@ -231,12 +232,12 @@ namespace PandaDataAccessLayer
                 typeof(DateTime),
                 typeof(EntityList),
             };
-            Array.ForEach(types, x => dal.Create<AttribType>(new AttribType { Type = x.FullName }));
-            addDefaultDictAttribTypes(context);
-            context.SaveChanges();
+            Array.ForEach(types, x => mDal.Create<AttribType>(new AttribType { Type = x.FullName }));
+            addDefaultDictAttribTypes();
+            mContext.SaveChanges();
         }
 
-        private void addDefaultChecklistTypes(MainDbContext context)
+        private void addDefaultChecklistTypes()
         {
             var defaultChecklistTypes = new List<ChecklistType> { 
                 new ChecklistType {
@@ -246,193 +247,190 @@ namespace PandaDataAccessLayer
                     Code = "Company"
                 },
              };
-            defaultChecklistTypes.ForEach(x => context.ChecklistTypes.Add(x));
-            context.SaveChanges();
+            defaultChecklistTypes.ForEach(x => mContext.ChecklistTypes.Add(x));
+            mContext.SaveChanges();
         }
 
-        private void addDefaulAttributes(MainDbContext context) 
+        private void addDefaulAttributes() 
         {
-            var dal = new DAL<MainDbContext>(context);
             var attribs = new[] {
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Фамилия",
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Фамилия",
                     Weight = 1,
                 },
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Имя"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Имя"
                 },
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Отчество"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Отчество"
                 },
                 new Attrib 
                 {
-                    AttribType = dal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "SEX"),
-                    Name = "Пол",
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "SEX"),
+                    Code = "Пол",
                 },
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(DateTime)),
-                    Name = "Дата рождения",
+                    AttribType = mDal.GetAttribType(typeof(DateTime)),
+                    Code = "Дата рождения",
                 },
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(bool)),
-                    Name = "Медицинская книжка",
+                    AttribType = mDal.GetAttribType(typeof(bool)),
+                    Code = "Медицинская книжка",
                 },
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(bool)),
-                    Name = "Автомобиль",
+                    AttribType = mDal.GetAttribType(typeof(bool)),
+                    Code = "Автомобиль",
                 },
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(bool)),
-                    Name = "Автомобиль",
+                    AttribType = mDal.GetAttribType(typeof(bool)),
+                    Code = "Автомобиль",
                 },
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(bool)),
-                    Name = "Готов работать сейчас",
+                    AttribType = mDal.GetAttribType(typeof(bool)),
+                    Code = "Готов работать сейчас",
                 },
                 new Attrib 
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Мобильный телефон",
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Мобильный телефон",
                 },
                 new Attrib 
                 {
-                    AttribType = dal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "COST"),
-                    Name = "Цена работы за час",
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "COST"),
+                    Code = "Цена работы за час",
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Город"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Город"
                 },
                 new Attrib 
                 {                    
-                    AttribType = dal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "EDUCATION"),
-                    Name = "Образование",
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "EDUCATION"),
+                    Code = "Образование",
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(EntityList)),
-                    Name = "Опыт работы",
+                    AttribType = mDal.GetAttribType(typeof(EntityList)),
+                    Code = "Опыт работы",
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(EntityList)),
-                    Name = "Интересующая работа",
+                    AttribType = mDal.GetAttribType(typeof(EntityList)),
+                    Code = "Интересующая работа",
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(EntityList)),
-                    Name = "Желаемое время работы",
+                    AttribType = mDal.GetAttribType(typeof(EntityList)),
+                    Code = "Желаемое время работы",
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(int)),
-                    Name = "Рост"
+                    AttribType = mDal.GetAttribType(typeof(int)),
+                    Code = "Рост"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Телосложение"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Телосложение"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(int)),
-                    Name = "Вес"
+                    AttribType = mDal.GetAttribType(typeof(int)),
+                    Code = "Вес"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Тип кожи"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Тип кожи"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Цвет глаз"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Цвет глаз"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Цвет волос"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Цвет волос"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Длина волос"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Длина волос"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(int)),
-                    Name = "Размер одежды"
+                    AttribType = mDal.GetAttribType(typeof(int)),
+                    Code = "Размер одежды"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(int)),
-                    Name = "Размер обуви"
+                    AttribType = mDal.GetAttribType(typeof(int)),
+                    Code = "Размер обуви"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(int)),
-                    Name = "Размер груди"
+                    AttribType = mDal.GetAttribType(typeof(int)),
+                    Code = "Размер груди"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(int)),
-                    Name = "Размер обуви"
+                    AttribType = mDal.GetAttribType(typeof(int)),
+                    Code = "Размер обуви"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(bool)),
-                    Name = "Роликовые коньки"
+                    AttribType = mDal.GetAttribType(typeof(bool)),
+                    Code = "Роликовые коньки"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(bool)),
-                    Name = "Зимние коньки"
+                    AttribType = mDal.GetAttribType(typeof(bool)),
+                    Code = "Зимние коньки"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "О себе"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "О себе"
                 },
                 new Attrib
                 {
-                    AttribType = dal.GetAttribType(typeof(string)),
-                    Name = "Интересы"
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Интересы"
                 },
             };
             foreach (var attrib in attribs)
-                dal.Create<Attrib>(attrib);
-            context.SaveChanges();
+                mDal.Create<Attrib>(attrib);
+           mContext.SaveChanges();
         }
 
 
-        private void addDefaultImages(MainDbContext context)
+        private void addDefaultImages()
         {
-            var dal = new DAL<MainDbContext>(context);
-            var defaultAvatar = dal.Create<Photo>(new Photo
+            var defaultAvatar = mDal.Create<Photo>(new Photo
             {
-                SourceUrl = DefaultAvatarImage
+                SourceUrl = Constants.DefaultAvatarImage
             });
-            context.SaveChanges();
+            mContext.SaveChanges();
         }
 
 
         #region DEBUG!!!
-        public void addDebugEntities(MainDbContext context) 
+        public void addDebugEntities() 
         {
-            var dal = new DAL<MainDbContext>(context);
-            var user = dal.Create<PromouterUser>(new PromouterUser()
+            var user = mDal.Create(new PromouterUser()
             {
                 FirstName = "Dmitry",
                 LastName = "Kostyanetsky",
@@ -440,8 +438,9 @@ namespace PandaDataAccessLayer
                 Email = "redrick.tmn@gmail.com",
                 Phone = "+79123833395",
                 Password = "123",
+
             });
-            dal.Create<Review>(new Review()
+            mDal.Create<Review>(new Review()
             {
                 CreationDate = DateTime.Now,
                 ModifyDate = DateTime.Now,
@@ -450,7 +449,7 @@ namespace PandaDataAccessLayer
                 Title = "Title",
                 Users = new List<UserBase>() { user }
             });
-            dal.Create<Review>(new Review()
+            mDal.Create<Review>(new Review()
             {
                 CreationDate = DateTime.Now,
                 ModifyDate = DateTime.Now,
@@ -459,8 +458,7 @@ namespace PandaDataAccessLayer
                 Title = "Title #2",
                 Users = new List<UserBase>() { user }
             });
-            dal.DbContext.SaveChanges();
-
+            mDal.DbContext.SaveChanges();
         }
         #endregion
     }

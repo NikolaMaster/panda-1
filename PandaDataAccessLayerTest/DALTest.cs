@@ -24,7 +24,7 @@ namespace PandaDataAccessLayerTest
         [TestMethod]
         public void CreateAndDeleteUsersTest()
         {
-            using (var dal = new DAL<MainDbContext>())
+            using (var dal = new DataAccessLayer<MainDbContext>())
             {
                 var userCount = dal.DbContext.PromouterUsers.Count();
                 var promouter = dal.Create<PromouterUser>(new PromouterUser 

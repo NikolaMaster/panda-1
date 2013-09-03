@@ -42,7 +42,7 @@ namespace PandaWebApp.Engine.Editors
                 };
 
                 #region Big switch [TODO by code field]
-                switch (attribute.Name)
+                switch (attribute.Code)
                 {
                     case "Фамилия":
                         //TODO

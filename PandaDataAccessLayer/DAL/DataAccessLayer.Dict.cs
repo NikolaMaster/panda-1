@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.DAL
 {
-    public static class DictDAL
+    public partial class DataAccessLayer : DataAccessLayer<MainDbContext>
     {
-        public static KeyValuePair<DictGroup, IEnumerable<DictValue>> CreateDictGroup(this DAL<MainDbContext> dal, DictGroup dictGroup, IEnumerable<DictValue> values)
+        public KeyValuePair<DictGroup, IEnumerable<DictValue>> Create(DictGroup dictGroup, IEnumerable<DictValue> values)
         {
-            var newDictGroup = dal.Create<DictGroup>(dictGroup);
+            var newDictGroup = Create<DictGroup>(dictGroup);
             foreach (var value in values)
             {
                 value.DictGroup = newDictGroup;
-                dal.Create(value);
+                Create(value);
             }
             return new KeyValuePair<DictGroup, IEnumerable<DictValue>>(newDictGroup, values);
         }

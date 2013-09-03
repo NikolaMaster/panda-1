@@ -34,8 +34,8 @@ namespace PandaWebApp.Controllers
                 var binder = new RegisterPromouterToUsers();
                 var entry = new PromouterUser();
                 binder.Load(model, entry);
-             
-                DataAccessLayer.Create<UserBase>(entry, new SeoEntry());
+
+                DataAccessLayer.Create(entry);
                 DataAccessLayer.DbContext.SaveChanges();
 
                 return RedirectToAction("Detail", new { id = entry.Id });

@@ -23,7 +23,7 @@ namespace PandaDataAccessLayerTest
         [TestMethod]
         public void CreateAndDeleteChecklistTest() 
         {
-            using (var dal = new DAL<MainDbContext>())
+            using (var dal = new DataAccessLayer<MainDbContext>())
             {
                 var checklistCount = dal.DbContext.Checklists.Count();
                 var promouter = dal.Create<PrivateEmployer>(

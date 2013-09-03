@@ -10,11 +10,11 @@ namespace PandaWebApp.Engine
 {
     public class ModelCareController : Controller
     {
-        protected DAL<MainDbContext> DataAccessLayer;
+        protected DataAccessLayer DataAccessLayer;
 
         public ModelCareController()
         {
-            DataAccessLayer = new DAL<MainDbContext>();
+            DataAccessLayer = new DataAccessLayer();
         }
 
         protected override void Dispose(bool disposing)

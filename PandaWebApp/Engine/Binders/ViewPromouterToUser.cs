@@ -40,7 +40,7 @@ namespace PandaWebApp.Engine.Binders
                 bool.TryParse(stringValue, out boolValue);
 
                 #region Big switch [TODO by code field]
-                switch (attrib.Attrib.Name)
+                switch (attrib.Attrib.Code)
                 {
                     case "Фамилия":
                         //TODO

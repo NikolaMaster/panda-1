@@ -11,7 +11,6 @@ namespace PandaWebApp.Engine
     public class ImageCreator
     {
         private const string CachePath = "/Content/img/cache/";
-        private const string ImagesPath = "/Content/img/";
 
         private static string generatePath(string srcImagePath, int width, int height)
         {
@@ -21,7 +20,7 @@ namespace PandaWebApp.Engine
 
         public static string Create(string src, int? width, int? height)
         {
-            var sourcePath = HttpContext.Current.Server.MapPath(ImagesPath + src);
+            var sourcePath = HttpContext.Current.Server.MapPath(src);
             if (string.IsNullOrEmpty(sourcePath) || !File.Exists(sourcePath))
             {
                 return string.Empty;

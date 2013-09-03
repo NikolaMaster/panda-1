@@ -30,21 +30,22 @@ namespace PandaWebApp.Controllers
         public ActionResult OnlineUsers()
         {
             var user = DataAccessLayer.DbContext.Users.First();
-            return PartialView(DataAccessLayer.OnlineUsers<UserBase>());
+            return PartialView(DataAccessLayer.OnlineUsers());
         }
 
         public ActionResult PandaPulse() 
         {
+            var binder = new PandaPulseToUserBase(DataAccessLayer);
             var pandaPulse = new PandaPulse
             {
-                Online = DataAccessLayer.OnlineUsers<UserBase>(),
+                Online = DataAccessLayer.OnlineUsers(),
                 Items = DataAccessLayer.TopRandom<UserBase>(OnlineUsersCount)
-                    .Select(x => new PandaPulse.Entry
-                        {
-                            //TODO: default avatar  for new users
-                            Image = (x.Avatar != null ?  x.Avatar.SourceUrl : string.Empty),
-                            Name = x.FirstName
-                        })
+                    .Select(x =>
+                    {
+                        var t = new PandaPulse.Entry();
+                        binder.InverseLoad(x, t);
+                        return t;
+                    })
             };
             return PartialView(pandaPulse);
         }

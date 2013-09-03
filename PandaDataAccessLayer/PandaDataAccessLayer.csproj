@@ -54,18 +54,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\ChecklistDAL.cs" />
     <Compile Include="DAL\Constants.cs" />
-    <Compile Include="DAL\DAL.cs" />
-    <Compile Include="DAL\DictDAL.cs" />
-    <Compile Include="DAL\ReviewDAL.cs" />
+    <Compile Include="DAL\DataAccessLayerBase.cs" />
+    <Compile Include="DAL\DataAccessLayer.cs" />
+    <Compile Include="DAL\DataAccessLayer.Dict.cs" />
+    <Compile Include="DAL\DataAccessLayer.Users.cs" />
     <Compile Include="Entities\Album.cs" />
     <Compile Include="Entities\BlogPost.cs" />
     <Compile Include="Entities\DesiredWork.cs" />
     <Compile Include="Entities\DesiredWorkTime.cs" />
     <Compile Include="Entities\EntityList.cs" />
+    <Compile Include="Entities\ICodeIdentifiable.cs" />
     <Compile Include="Entities\IGuidIdentifiable.cs" />
-    <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Entities\Attrib.cs" />
     <Compile Include="Entities\AttribValue.cs" />
     <Compile Include="Entities\AttribType.cs" />
@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="DAL\DataAccessLayer.Checklists.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

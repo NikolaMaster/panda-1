@@ -22,7 +22,7 @@ namespace PandaDataAccessLayerTest
         [TestMethod]
         public void CreateUserWithSeo()
         {
-            using (var dal = new DAL<MainDbContext>())
+            using (var dal = new DataAccessLayer<MainDbContext>())
             {
                 var userCount = dal.DbContext.Users.Count();
                 var user = dal.Create<PromouterUser>();

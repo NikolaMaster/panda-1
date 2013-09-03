@@ -9,5 +9,9 @@ namespace PandaDataAccessLayer.Entities
 {
     public class PromouterUser : UserBase
     {
+        public Checklist Checklist 
+        {
+            get { return Checklists.First(); }
+        }
     }
 }

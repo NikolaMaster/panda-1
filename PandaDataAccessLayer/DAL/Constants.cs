@@ -8,20 +8,35 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.DAL
 {
-    public class Constants<TDbContext> where TDbContext : DbContext, new()
+    public class Constants
     {
-        private DAL<TDbContext> mDal;
+        public const string PromouterChecklistTypeCode = "Promouter";
+        public const string CompanyChecklistTypeCode = "Company";
+        public const string DefaultAvatarImage = "motorcycle.jpeg";
+
+        public DataAccessLayer DataAccessLayer { get;private set; }
 
         private Constants() { }
 
-        internal Constants(DAL<TDbContext> dal)
+        internal Constants(DataAccessLayer dataAccessLayer)
         {
-            mDal = dal;
+            DataAccessLayer = dataAccessLayer;
         }
 
         public Photo DefaultAvatar
         {
-            get { return mDal.DbContext.Set<Photo>().Single(x => x.SourceUrl == MainInitializer.DefaultAvatarImage); }
+            get { return DataAccessLayer.DbContext.Set<Photo>().Single(x => x.SourceUrl == DefaultAvatarImage); }
         }
+
+        public ChecklistType PromouterChecklistType 
+        {
+            get { return DataAccessLayer.Get<ChecklistType>(PromouterChecklistTypeCode); }
+        }
+
+        public ChecklistType CompanyChecklistType
+        {
+            get { return DataAccessLayer.Get<ChecklistType>(CompanyChecklistTypeCode); }
+        }
+
     }
 }

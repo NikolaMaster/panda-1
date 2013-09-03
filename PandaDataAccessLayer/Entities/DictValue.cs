@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.Entities
 {
-    public class DictValue : IGuidIdentifiable
+    public class DictValue : IGuidIdentifiable, ICodeIdentifiable
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }

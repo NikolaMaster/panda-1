@@ -128,6 +128,7 @@
     <Compile Include="Engine\Binders\BaseBinder.cs" />
     <Compile Include="Engine\Binders\CreateBlogToBlogPost.cs" />
     <Compile Include="Engine\Binders\FeedbackToReview.cs" />
+    <Compile Include="Engine\Binders\PandaPulseToUserBase.cs" />
     <Compile Include="Engine\Binders\RegisterPromouterToUsers.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Crypt.cs" />

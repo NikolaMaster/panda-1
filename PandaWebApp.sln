@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PandaWebApp", "PandaWebApp\PandaWebApp.csproj", "{2A719454-12A2-4976-808E-D2F8862386A0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7940D2C5-4E88-4EB3-ABAB-FCB008E19BD9} = {7940D2C5-4E88-4EB3-ABAB-FCB008E19BD9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PandaDataAccessLayer", "PandaDataAccessLayer\PandaDataAccessLayer.csproj", "{7940D2C5-4E88-4EB3-ABAB-FCB008E19BD9}"
 EndProject
