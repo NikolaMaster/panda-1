@@ -10,22 +10,17 @@
     <div class="blog-link">
         <p>Создан: @Model.CreatedDate</p>
         <p>Редактирован: @Model.ModifyDate</p>
-
-               
-        <a href="./ViewPost?id=@Model.Id">
-            <div">@Model.Title</div>
+        
+        <a href="/Detail?id=@Model.Id">
+            <div>@Model.Title</div>
         </a>
-                
-
-        <br/>
-             
+        
         @Model.FullText
                 
     </div>
 </div>
 
-
-<a href="./Update?id=@Model.Id">Редактировать</a>
+<a href="./Edit?id=@Model.Id">Редактировать</a>
 <a href="./Delete?id=@Model.Id">Удалить</a>
 <a href="./Posts">Просмотреть все посты</a>
 
