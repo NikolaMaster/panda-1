@@ -43,7 +43,7 @@ namespace PandaDataAccessLayer.DAL
         }
 
         public TEntity Create<TEntity>(TEntity entity) 
-            where TEntity : class, IGuidIdentifiable, new()
+            where TEntity : class, new()
         {
             DbContext.Set<TEntity>().Add(entity);
             return entity;

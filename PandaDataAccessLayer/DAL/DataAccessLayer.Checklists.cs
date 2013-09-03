@@ -12,6 +12,8 @@ namespace PandaDataAccessLayer.DAL
         public Checklist Create(UserBase user, IEnumerable<AttribValue> attributeValues)
         {
             var checkList = Create<Checklist>(new Checklist { });
+            foreach (var i in attributeValues)
+                i.Checklist = checkList;
             checkList.AttrbuteValues = new List<AttribValue>(attributeValues);
             var checklistTypeCode = string.Empty;
             if (user is PromouterUser)

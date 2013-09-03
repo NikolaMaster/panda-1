@@ -16,6 +16,6 @@ namespace PandaDataAccessLayer.Entities
 
         public virtual UserBase User { get; set; }
         public virtual ChecklistType ChecklistType { get; set; }
-        public virtual List<AttribValue> AttrbuteValues { get; set; }
+        public virtual ICollection<AttribValue> AttrbuteValues { get; set; }
     }
 }
