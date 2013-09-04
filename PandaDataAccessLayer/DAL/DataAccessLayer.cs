@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.DAL
 {
-    public partial class DataAccessLayer
+    public partial class DataAccessLayer : DataAccessLayerBase<MainDbContext>
     {
         public Constants Constants { get; private set; }
 
@@ -16,7 +16,7 @@ namespace PandaDataAccessLayer.DAL
             Constants = new Constants(this);
         }
 
-        public DataAccessLayer(MainDbContext dbContext)
+        internal DataAccessLayer(MainDbContext dbContext)
             : base(dbContext)
         {
             Constants = new Constants(this);

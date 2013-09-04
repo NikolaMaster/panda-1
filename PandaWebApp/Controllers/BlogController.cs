@@ -52,8 +52,8 @@ namespace PandaWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.CreatedDate = DateTime.Now;
-                model.ModifyDate = DateTime.Now;
+                model.CreatedDate = DateTime.UtcNow;
+                model.ModifyDate = DateTime.UtcNow;
 
                 var binder = new CreateBlogToBlogPost();
                 var entry = new BlogPost();
@@ -104,7 +104,7 @@ namespace PandaWebApp.Controllers
                     {
                         x.Title = model.Title;
                         x.FullText = model.FullText;
-                        x.ModifyDate = DateTime.Now;
+                        x.ModifyDate = DateTime.UtcNow;
                     });
                 DataAccessLayer.DbContext.SaveChanges();
                 return Detail(model.Id);

@@ -10,20 +10,20 @@ using PandaDataAccessLayer.Entities;
 
 namespace PandaDataAccessLayer.DAL
 {
-    public class DataAccessLayer<TDbContext> : IDisposable where TDbContext : DbContext, new()
+    public class DataAccessLayerBase<TDbContext> : IDisposable where TDbContext : DbContext, new()
     {
-        static DataAccessLayer() 
+        static DataAccessLayerBase() 
         {
             Database.SetInitializer<MainDbContext>(new MainInitializer());
         }
 
         public TDbContext DbContext { get;private set; }
 
-        public DataAccessLayer() : this(new TDbContext())
+        public DataAccessLayerBase() : this(new TDbContext())
         {
         }
 
-        public DataAccessLayer(TDbContext dbContext)
+        public DataAccessLayerBase(TDbContext dbContext)
         {
             DbContext = dbContext;
         }

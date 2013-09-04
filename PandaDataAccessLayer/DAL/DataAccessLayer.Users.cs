@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.DAL
 {
-    public partial class DataAccessLayer : DataAccessLayer<MainDbContext>
+    public partial class DataAccessLayer : DataAccessLayerBase<MainDbContext>
     {
         private const string MainAlbumName = "Основной альбом";
         private const int OnlineTimeout = 2 * 60;
@@ -39,9 +39,31 @@ namespace PandaDataAccessLayer.DAL
             return user;
         }
 
+        public EmployerUser Create(EmployerUser user)
+        {
+            if (user.SeoEntry == null)
+            {
+                user.SeoEntry = Create<SeoEntry>(new SeoEntry { });
+            }
+            if (user.Albums.Count == 0)
+            {
+                user.Albums.Add(Create<Album>(new Album()
+                {
+                    Name = MainAlbumName,
+                    User = user,
+                }));
+            }
+            if (user.Avatar == null)
+            {
+                user.Avatar = Constants.DefaultAvatar;
+            }
+            DbContext.Users.Add(user);
+            return user;
+        }
+
         public int OnlineUsers()
         {
-            return DbContext.Users.Count(x => x.Sessions.Any(y => EntityFunctions.DiffSeconds(DateTime.Now, y.LastHit) < OnlineTimeout));
+            return DbContext.Users.Count(x => x.Sessions.Any(y => EntityFunctions.DiffSeconds(DateTime.UtcNow, y.LastHit) < OnlineTimeout));
         }
     }
 }

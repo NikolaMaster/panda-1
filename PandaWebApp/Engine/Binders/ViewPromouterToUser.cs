@@ -72,7 +72,7 @@ namespace PandaWebApp.Engine.Binders
                     case "Цена работы за час":
                         dest.CostForHour = intValue;
                         break;
-                    case "Город":
+                    case "CITY":
                         dest.City = stringValue;
                         break;
                     case "Образование":

@@ -15,9 +15,6 @@ namespace PandaDataAccessLayer
         //Users
         public DbSet<UserBase> Users { get; set; }
         public DbSet<EmployerUser> EmployerUsers { get; set; }
-        public DbSet<CompanyMember> CompanyMembers { get; set; }
-        public DbSet<PrivateEmployer> PrivateEmployers { get; set; }
-        public DbSet<PrivateRecruiter> PrivateRecruiters { get; set; }
         public DbSet<PromouterUser> PromouterUsers { get; set; }
         //Checklists
         public DbSet<Checklist> Checklists { get; set; }
@@ -50,9 +47,6 @@ namespace PandaDataAccessLayer
         {
             modelBuilder.Entity<UserBase>().ToTable("UserBase");
             modelBuilder.Entity<EmployerUser>().ToTable("EmployerUser");
-            modelBuilder.Entity<CompanyMember>().ToTable("CompanyMember");
-            modelBuilder.Entity<PrivateEmployer>().ToTable("PrivateEmployer");
-            modelBuilder.Entity<PrivateRecruiter>().ToTable("PrivateRecruiter");
             modelBuilder.Entity<PromouterUser>().ToTable("PromouterUser");    
         /*
             //users mapping

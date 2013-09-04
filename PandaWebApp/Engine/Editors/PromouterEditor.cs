@@ -74,7 +74,7 @@ namespace PandaWebApp.Engine.Editors
                     case "Цена работы за час":
                         attributeValue.Value = source.CostForHour.ToPandaString();
                         break;
-                    case "Город":
+                    case "CITY":
                         attributeValue.Value = source.City;
                         break;
                     case "Образование":

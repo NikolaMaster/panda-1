@@ -9,7 +9,7 @@ using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer
 {
-    public class MainInitializer : DropCreateDatabaseAlways<MainDbContext>//CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
+    public class MainInitializer : CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
     {
         private MainDbContext mContext;
         private DataAccessLayer mDal;
@@ -28,14 +28,14 @@ namespace PandaDataAccessLayer
 
         private void addDefaultDictAttribTypes()
         {
-            #region sex
+            #region gender
 
-            var sexGroup = new DictGroup
+            var genderGroup = new DictGroup
                 {
-                    Code = "SEX",
+                    Code = "GENDER",
                     Description = "Пол"
                 };
-            var sexValues = new List<DictValue>() 
+            var genderValues = new List<DictValue>() 
                 {
                     mDal.Create<DictValue>(new DictValue
                     {
@@ -48,10 +48,10 @@ namespace PandaDataAccessLayer
                         Description = "Женский",
                     }),
                 };
-            sexGroup = mDal.Create(sexGroup, sexValues).Key;
+            genderGroup = mDal.Create(genderGroup, genderValues).Key;
             mDal.Create<AttribType>(new AttribType
                 {
-                    DictGroup = sexGroup,
+                    DictGroup = genderGroup,
                     Type = typeof(DictGroup).FullName,
                 });
 
@@ -125,7 +125,7 @@ namespace PandaDataAccessLayer
 
             var workGroup = new DictGroup
             {
-                Code = "JOB",
+                Code = Constants.DesiredWorkCode,
                 Description = "Желаеммая работа"
             };
             var workValues = new List<DictValue>() 
@@ -272,7 +272,7 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib 
                 {
-                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "SEX"),
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "GENDER"),
                     Code = "Пол",
                 },
                 new Attrib 
@@ -313,7 +313,7 @@ namespace PandaDataAccessLayer
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Город"
+                    Code = "CITY"
                 },
                 new Attrib 
                 {                    
@@ -328,7 +328,7 @@ namespace PandaDataAccessLayer
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(EntityList)),
-                    Code = "Интересующая работа",
+                    Code = "DESIRED_WORK"//"Интересующая работа",
                 },
                 new Attrib
                 {
@@ -440,6 +440,7 @@ namespace PandaDataAccessLayer
                 Password = "123",
                 
             });
+
             mDal.Create(user, new List<AttribValue> 
             {   
                 mDal.Create<AttribValue>(new AttribValue { 
@@ -447,14 +448,16 @@ namespace PandaDataAccessLayer
                     Value = "Иванов"
                 }),
                 mDal.Create<AttribValue>(new AttribValue { 
-                    Attrib = mDal.Get<Attrib>("Город"),
+                    Attrib = mDal.Get<Attrib>("CITY"),
                     Value = "Тюмень"
-                }),
+                })
             });
+
+
             mDal.Create<Review>(new Review()
             {
-                CreationDate = DateTime.Now,
-                ModifyDate = DateTime.Now,
+                CreationDate = DateTime.UtcNow,
+                ModifyDate = DateTime.UtcNow,
                 Rating = 5,
                 Text = "Sonme text blah blah blah <b>BOLD</b>",
                 Title = "Title",
@@ -462,13 +465,51 @@ namespace PandaDataAccessLayer
             });
             mDal.Create<Review>(new Review()
             {
-                CreationDate = DateTime.Now,
-                ModifyDate = DateTime.Now,
+                CreationDate = DateTime.UtcNow,
+                ModifyDate = DateTime.UtcNow,
                 Rating = 2,
                 Text = "Sasdasdasdasd",
                 Title = "Title #2",
                 Users = new List<UserBase>() { user }
             });
+
+            var user2 = mDal.Create(new EmployerUser()
+            {
+                FirstName = "Dmitry",
+                LastName = "Kostyanetsky",
+                City = "Tyumen",
+                Email = "redrick.tmn@gmail.com",
+                Phone = "+79123833395",
+                Password = "123"
+            });
+
+            var entList = mDal.Create<EntityList>(new EntityList());
+            var work = mDal.Create<DesiredWork>(new DesiredWork() 
+            {
+                EntityList = entList,
+                Work = mDal.Get<DictValue>("MERC"),
+            });
+
+            mDal.DbContext.SaveChanges();
+
+            var value = mDal.DbContext.Entry(entList).Entity.Id;
+
+            mDal.Create(user2, new List<AttribValue> 
+            {   
+                mDal.Create<AttribValue>(new AttribValue { 
+                    Attrib = mDal.Get<Attrib>("Фамилия"),
+                    Value = "Иванов"
+                }),
+                mDal.Create<AttribValue>(new AttribValue { 
+                    Attrib = mDal.Get<Attrib>("CITY"),
+                    Value = "Тюмень"
+                }),
+                mDal.Create<AttribValue>(new AttribValue{
+                    Attrib = mDal.Constants.DesiredWork,
+                    Value = value.ToString()
+                }),
+            });
+
             mDal.DbContext.SaveChanges();
         }
         #endregion

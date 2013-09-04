@@ -9,18 +9,16 @@ using System.Web;
 
 namespace PandaWebApp.Engine.Binders
 {
-    public class PandaPulseToUserBase : BaseBinder<PandaPulse.Entry, UserBase>
+    public class PandaPulseToUserBase : BaseDataAccessLayerBinder<PandaPulse.Entry, UserBase>
     {
         public const string CompanyImage = "~/Content/img/company.png";
         public const string MaleImage = "~/Content/img/male.png";
         public const string FeemaleImage = "~/Content/img/feemale.png";
         public const string UnknownGenderImage = "~/Content/img/car.png";
 
-        public DataAccessLayer DataAccessLayer { get; private set; }
-
-        public PandaPulseToUserBase(DataAccessLayer dataAccessLayer) 
+        public PandaPulseToUserBase(DataAccessLayer dataAccessLayer)
+            : base(dataAccessLayer)
         {
-            DataAccessLayer = dataAccessLayer;
         }
 
         public override void Load(PandaPulse.Entry source, UserBase dest)

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PandaDataAccessLayer.Entities
+namespace PandaDataAccessLayer.DAL
 {
-    public class PrivateEmployer : EmployerUser
+    public partial class DataAccessLayer : DataAccessLayerBase<MainDbContext>
     {
+
     }
 }

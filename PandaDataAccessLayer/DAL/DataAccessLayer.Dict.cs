@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.DAL
 {
-    public partial class DataAccessLayer : DataAccessLayer<MainDbContext>
+    public partial class DataAccessLayer : DataAccessLayerBase<MainDbContext>
     {
         public KeyValuePair<DictGroup, IEnumerable<DictValue>> Create(DictGroup dictGroup, IEnumerable<DictValue> values)
         {

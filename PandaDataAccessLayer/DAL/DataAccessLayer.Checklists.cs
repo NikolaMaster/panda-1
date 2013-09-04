@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.DAL
 {
-    public partial class DataAccessLayer : DataAccessLayer<MainDbContext>
+    public partial class DataAccessLayer : DataAccessLayerBase<MainDbContext>
     {
         public Checklist Create(PromouterUser user, IEnumerable<AttribValue> attributeValues)
         {
@@ -84,6 +84,13 @@ namespace PandaDataAccessLayer.DAL
         {
             return DbContext.AttribValues.Where(x => x.ChecklistId == checklistId).ToList();
         }
+
+
+        public AttribValue GetAttributeValue(Guid checklistId, string attribCode)
+        {
+            return DbContext.AttribValues.Single(x => x.ChecklistId == checklistId && x.Attrib.Code == attribCode);
+        }
+
 
         public AttribType GetAttribType(Type type)
         {

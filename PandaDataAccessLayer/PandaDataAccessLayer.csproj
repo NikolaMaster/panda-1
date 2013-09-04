@@ -72,14 +72,11 @@
     <Compile Include="Entities\Attrib2ChecklistType.cs" />
     <Compile Include="Entities\Checklist.cs" />
     <Compile Include="Entities\ChecklistType.cs" />
-    <Compile Include="Entities\CompanyMember.cs" />
     <Compile Include="Entities\DictGroup.cs" />
     <Compile Include="Entities\DictValue.cs" />
     <Compile Include="Entities\EmployerUser.cs" />
     <Compile Include="Entities\MvcAction.cs" />
     <Compile Include="Entities\Photo.cs" />
-    <Compile Include="Entities\PrivateEmployer.cs" />
-    <Compile Include="Entities\PrivateRecruiter.cs" />
     <Compile Include="Entities\PromouterUser.cs" />
     <Compile Include="Entities\Review.cs" />
     <Compile Include="Entities\SeoEntry.cs" />
@@ -93,6 +90,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <Compile Include="DAL\DataAccessLayer.Checklists.cs" />
+    <Compile Include="DAL\DataAccessLayer.Search.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

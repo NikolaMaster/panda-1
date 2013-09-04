@@ -1,0 +1,39 @@
+﻿@model PandaWebApp.FormModels.SearchForm
+@{
+    ViewBag.Title = "Поиск вакансий";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Поиск вакансий</h2>
+
+<div>
+@using (Ajax.BeginForm("CompanySearchResult", new AjaxOptions
+    {
+        UpdateTargetId = "companySearchResult",
+        HttpMethod = "POST"
+    }))
+{
+    <h3>Поиск</h3>
+    <div>@Html.TextBoxFor(x => x.Query) <input type="submit" value="Поиск" /></div>
+    <hr />
+    <h3>Тип</h3>
+    <div>
+        @{ 
+            
+            int i = 0;
+            foreach (var item in Model.DesiredWork)
+            { 
+                <input type="hidden" name="@String.Format("DesiredWork[{0}].Code", i)" value="@item.Code" />
+                @Html.CheckBox(String.Format("DesiredWork[{0}].Value", i), item.Value)
+                <label for="@item.Value">@item.Title</label>  
+                i++;
+            }
+        }
+    </div>
+    <hr />
+    <div>Город @Html.TextBoxFor(x => x.City)</div>
+    <hr />
+}
+
+@Html.Partial("CompanySearchResult", new List<PandaWebApp.ViewModels.SearchView>())
+</div>

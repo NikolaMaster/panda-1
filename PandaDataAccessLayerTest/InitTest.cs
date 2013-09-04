@@ -23,7 +23,7 @@ namespace PandaDataAccessLayerTest
         [TestMethod]
         public void DefaultAttribTypesExistsTest()
         {
-            using (var dal = new DataAccessLayer<MainDbContext>())
+            using (var dal = new DataAccessLayerBase<MainDbContext>())
             {
                 Assert.IsTrue(dal.DbContext.AttribTypes.Count() > 0);
             }
@@ -32,7 +32,7 @@ namespace PandaDataAccessLayerTest
         [TestMethod]
         public void DefaultChecklistTypesExistsTest()
         {
-            using (var dal = new DataAccessLayer<MainDbContext>())
+            using (var dal = new DataAccessLayerBase<MainDbContext>())
             {
                 Assert.IsTrue(dal.DbContext.ChecklistTypes.Count() > 0);
             }

@@ -1,0 +1,15 @@
+﻿@model IEnumerable<PandaWebApp.ViewModels.SearchView>
+
+
+    
+    <div id ="companySearchResult">
+    <br />
+    <h2>Результаты поиска:</h2>
+    @foreach (var item in Model)
+    { 
+        <div>
+            <div>Город: @item.City</div>
+        </div>
+        <hr />
+    } 
+    </div>
