@@ -48,7 +48,7 @@ namespace PandaWebApp.Engine.Editors
                         //TODO
                         break;
                     case "Имя":
-                        attributeValue.Value = source.Name;
+                        attributeValue.Value = source.FirstName;
                         break;
                     case "Отчество":
                         //TODO

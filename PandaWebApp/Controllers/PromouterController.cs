@@ -1,4 +1,5 @@
-﻿using PandaWebApp.Engine;
+﻿using System.Data.Entity;
+using PandaWebApp.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,11 +53,11 @@ namespace PandaWebApp.Controllers
             {
                 return HttpNotFound("Promouter not found");
             }
-
+           
             var model = new Promouter();
-            var binder = new ViewPromouterToUsers();
+            var binder = new ViewPromouterToUsers(DataAccessLayer);
             binder.InverseLoad(entry, model);
-
+          
             return View(model);
         }
 

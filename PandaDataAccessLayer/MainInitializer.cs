@@ -9,7 +9,8 @@ using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer
 {
-    public class MainInitializer : DropCreateDatabaseAlways<MainDbContext>//CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
+    //DropCreateDatabaseAlways<MainDbContext>//
+    public class MainInitializer :CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
     {
         private MainDbContext mContext;
         private DataAccessLayer mDal;
@@ -293,11 +294,6 @@ namespace PandaDataAccessLayer
                 new Attrib 
                 {
                     AttribType = mDal.GetAttribType(typeof(bool)),
-                    Code = "Автомобиль",
-                },
-                new Attrib 
-                {
-                    AttribType = mDal.GetAttribType(typeof(bool)),
                     Code = "Готов работать сейчас",
                 },
                 new Attrib 
@@ -378,17 +374,7 @@ namespace PandaDataAccessLayer
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(int)),
-                    Code = "Размер обуви"
-                },
-                new Attrib
-                {
-                    AttribType = mDal.GetAttribType(typeof(int)),
                     Code = "Размер груди"
-                },
-                new Attrib
-                {
-                    AttribType = mDal.GetAttribType(typeof(int)),
-                    Code = "Размер обуви"
                 },
                 new Attrib
                 {
@@ -428,36 +414,722 @@ namespace PandaDataAccessLayer
 
 
         #region DEBUG!!!
-        public void addDebugEntities() 
+
+        private void addUser1()
+        {
+            var user = mDal.Create(new PromouterUser()
+                {
+                    FirstName = "Катя",
+                    LastName = "Иванова",
+                    City = "Сургут",
+                    Email = "kate.tmn@gmail.com",
+                    Phone = "+7999999999",
+                    Password = "123"
+                });
+
+            
+       
+            var sex = mDal.Get<DictValue>(x => x.Code == "FEMALE").First();
+            var bithday = new DateTime(1991, 12, 3);
+            var middleName = "Андреевна";
+
+            var desiredWorksEntity = mDal.Create<EntityList>(new EntityList() {Id = new Guid()});
+
+            mDal.DbContext.SaveChanges();
+
+            var work1 = mDal.Get<DictValue>(x => x.Code == "SUPER").First();
+            var work2 = mDal.Get<DictValue>(x => x.Code == "COURIER").First();
+            var work3 = mDal.Get<DictValue>(x => x.Code == "WAITER").First();
+            var work4 = mDal.Get<DictValue>(x => x.Code == "ANIMATOR").First();
+            var work5 = mDal.Get<DictValue>(x => x.Code == "AUDITOR").First();
+            var work6 = mDal.Get<DictValue>(x => x.Code == "MODEL").First();
+
+            #region DesiredWork
+
+            mDal.Create<DesiredWork>(new DesiredWork
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Work = work1
+                });
+            mDal.Create<DesiredWork>(new DesiredWork
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Work = work2
+                });
+
+            mDal.Create<DesiredWork>(new DesiredWork
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Work = work3
+                });
+
+            mDal.Create<DesiredWork>(new DesiredWork
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Work = work4
+                });
+
+            mDal.Create<DesiredWork>(new DesiredWork
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Work = work5
+                });
+            mDal.Create<DesiredWork>(new DesiredWork
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Work = work6
+                });
+
+            #endregion
+
+            #region DesiredWorkTime
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow,
+                    DayOfWeek = 0
+                });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow,
+                    DayOfWeek = 0
+                });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow,
+                    DayOfWeek = 1
+                });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow,
+                    DayOfWeek = 4
+                });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow,
+                    DayOfWeek = 2
+                });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow,
+                    DayOfWeek = 1
+                });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Start = DateTime.UtcNow,
+                    End = DateTime.UtcNow,
+                    Title = "Title",
+                    Hours = 24
+                });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Start = DateTime.UtcNow,
+                    End = DateTime.UtcNow,
+                    Title = "Title2",
+                    Hours = 12
+                });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Start = DateTime.UtcNow,
+                    End = DateTime.UtcNow,
+                    Title = "Газпром",
+                    Hours = 12
+                });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Start = DateTime.UtcNow,
+                    End = DateTime.UtcNow,
+                    Title = "Title2",
+                    Hours = 12
+                });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Start = DateTime.UtcNow,
+                    End = DateTime.UtcNow,
+                    Title = "Title2",
+                    Hours = 12
+                });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Start = DateTime.UtcNow,
+                    End = DateTime.UtcNow,
+                    Title = "Title2",
+                    Hours = 12
+                });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+                {
+                    Id = new Guid(),
+                    EntityList = desiredWorksEntity,
+                    Start = DateTime.UtcNow,
+                    End = DateTime.UtcNow,
+                    Title = "Title2",
+                    Hours = 12
+                });
+
+            #endregion
+
+            mDal.DbContext.SaveChanges();
+
+            #region create attributes
+            mDal.Create(user, new List<AttribValue>
+                {
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Телосложение"),
+                            Value = "Стройняшка"
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Фамилия"),
+                            Value = user.LastName
+                        }),
+                     mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("Отчество"),
+                                Value = middleName
+                         }),
+
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Имя"),
+                            Value = user.FirstName
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Город"),
+                            Value = user.City
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Медицинская книжка"),
+                            Value = "true"
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Интересующая работа"),
+                            Value = desiredWorksEntity.Id.ToString()
+                        }),
+
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Опыт работы"),
+                            Value = desiredWorksEntity.Id.ToString()
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Желаемое время работы"),
+                            Value = desiredWorksEntity.Id.ToString()
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Пол"),
+                            Value = sex.Code
+                        }),
+                     mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("Дата рождения"),
+                                Value = bithday.ToString()
+                         }),
+
+                         mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("О себе"),
+                                Value = "Я такая какая есть"
+                         }),
+
+                         mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("Интересы"),
+                                Value = "Книги, библиотека, бумага,вышивание"
+                         }),
+                         mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("Цена работы за час"),
+                                Value = mDal.Get<DictValue>("COST_700").Description
+                         })
+                });
+
+#endregion
+            mDal.DbContext.SaveChanges();
+            //var entry = mDal.Get<DesiredWork>(x => x.EntityList.Id == desiredWorksEntity.Id);
+
+            #region add album
+
+            var albomFirst = mDal.Create<Album>(new Album()
+                {
+                    Id = new Guid(),
+                    Name = "Это первый альбом",
+                    User = user
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = albomFirst,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            var albomSecond = mDal.Create<Album>(new Album()
+                {
+                    Id = new Guid(),
+                    Name = "Это третий альбом",
+                    User = user
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = albomSecond,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+
+            var mainAlbom = mDal.Get<Album>(x => x.Name == "Основной альбом" && x.User.Id == user.Id).First();
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = mainAlbom,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = mainAlbom,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = mainAlbom,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = mainAlbom,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = mainAlbom,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = mainAlbom,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = mainAlbom,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            mDal.Create<Photo>(new Photo()
+                {
+                    Id = new Guid(),
+                    Album = mainAlbom,
+                    SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+                });
+
+            #endregion
+
+            #region review
+
+            mDal.Create<Review>(new Review()
+                {
+                    CreationDate = DateTime.Now,
+                    ModifyDate = DateTime.Now,
+                    Rating = 5,
+                    Text = "Катя ты не очень",
+                    Title = "Страшная",
+                    Users = new List<UserBase>() {user}
+                });
+            mDal.Create<Review>(new Review()
+                {
+                    CreationDate = DateTime.Now,
+                    ModifyDate = DateTime.Now,
+                    Rating = 2,
+                    Text = "Нормальная",
+                    Title = "Ниче такая",
+                    Users = new List<UserBase>() {user}
+                });
+
+            #endregion
+        }
+
+        private void addUser2()
         {
             var user = mDal.Create(new PromouterUser()
             {
-                FirstName = "Dmitry",
-                LastName = "Kostyanetsky",
-                City = "Tyumen",
-                Email = "redrick.tmn@gmail.com",
-                Phone = "+79123833395",
-                Password = "123",
-                
+                FirstName = "Петя",
+                LastName = "Петров",
+                City = "Тюмень",
+                Email = "petrov@gmail.com",
+                Phone = "+123333",
+                Password = "123"
             });
-            mDal.Create(user, new List<AttribValue> 
-            {   
-                mDal.Create<AttribValue>(new AttribValue { 
-                    Attrib = mDal.Get<Attrib>("Фамилия"),
-                    Value = "Иванов"
-                }),
-                mDal.Create<AttribValue>(new AttribValue { 
-                    Attrib = mDal.Get<Attrib>("Город"),
-                    Value = "Тюмень"
-                }),
+
+            var sex = mDal.Get<DictValue>(x => x.Code == "FEMALE").First();
+            var bithday = new DateTime(1991, 12, 3);
+            var middleName = "Петрович";
+
+            #region add DesiredWork
+            var desiredWorksEntity = mDal.Create<EntityList>(new EntityList()
+            {
+                Id = new Guid()
+            }
+            );
+            mDal.DbContext.SaveChanges();
+
+            var work1 = mDal.Get<DictValue>(x =>
+
+                    x.Code == "SUPER"
+
+                ).First();
+
+            var work2 = mDal.Get<DictValue>(x =>
+
+                    x.Code == "COURIER"
+
+                ).First();
+
+            var work3 = mDal.Get<DictValue>(x =>
+
+                    x.Code == "WAITER"
+
+                ).First();
+
+            mDal.Create<DesiredWork>(new DesiredWork
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Work = work1
             });
+
+            mDal.Create<DesiredWork>(new DesiredWork
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Work = work2
+            });
+
+            mDal.Create<DesiredWork>(new DesiredWork
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Work = work3
+            });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 1
+            });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 5
+            });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 6
+            });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 6
+            });
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 2
+            });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 2
+            });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Start = DateTime.UtcNow,
+                End = DateTime.Now,
+                Title = "Title",
+                Hours = 24
+            });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Start = DateTime.UtcNow,
+                End = DateTime.UtcNow,
+                Title = "Газпром",
+                Hours = 12
+            });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Start = DateTime.UtcNow,
+                End = DateTime.UtcNow,
+                Title = "Шлюм",
+                Hours = 12
+            });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Start = DateTime.UtcNow,
+                End = DateTime.UtcNow,
+                Title = "Title2",
+                Hours = 12
+            });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Start = DateTime.UtcNow,
+                End = DateTime.UtcNow,
+                Title = "Фриланс",
+                Hours = 12
+            });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Start = DateTime.UtcNow,
+                End = DateTime.UtcNow,
+                Title = "Садик",
+                Hours = 12
+            });
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Start = DateTime.UtcNow,
+                End = DateTime.UtcNow,
+                Title = "Магазин обуви",
+                Hours = 12
+            });
+
+            mDal.DbContext.SaveChanges();
+
+            #endregion
+
+            mDal.DbContext.SaveChanges();
+
+            #region create attributes
+            mDal.Create(user, new List<AttribValue>
+                {
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Телосложение"),
+                            Value = "Дрыщ"
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Фамилия"),
+                            Value = user.LastName
+                        }),
+                     mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("Отчество"),
+                                Value = middleName
+                         }),
+
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Имя"),
+                            Value = user.FirstName
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Город"),
+                            Value = user.City
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Медицинская книжка"),
+                            Value = "true"
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Интересующая работа"),
+                            Value = desiredWorksEntity.Id.ToString()
+                        }),
+
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Опыт работы"),
+                            Value = desiredWorksEntity.Id.ToString()
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Желаемое время работы"),
+                            Value = desiredWorksEntity.Id.ToString()
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Пол"),
+                            Value = sex.Code
+                        }),
+                     mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("Дата рождения"),
+                                Value = bithday.ToString()
+                         }),
+                         mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("О себе"),
+                                Value = "Я лучший"
+                         }),
+
+                         mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("Интересы"),
+                                Value = "Тачки, девочки, тачки"
+                         }),
+                         mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>("Цена работы за час"),
+                                Value = mDal.Get<DictValue>("COST_220").Description
+                         })
+                });
+#endregion
+
+            mDal.DbContext.SaveChanges();
+            //var entry = mDal.Get<DesiredWork>(x => x.EntityList.Id == desiredWorks.Id);
+
+            #region add album
+            var albomFirst = mDal.Create<Album>(new Album()
+            {
+                Id = new Guid(),
+                Name = "Телочки",
+                User = user
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = albomFirst,
+                SourceUrl = "http://t2.gstatic.com/images?q=tbn:ANd9GcQG4W7WLhXnnZdVaQypIqIC1YQIjdnpyF3muXyhaFNAEbUxEGt2qg"
+            });
+
+
+            var albomSecond = mDal.Create<Album>(new Album()
+            {
+                Id = new Guid(),
+                Name = "Это второй альбом",
+                User = user
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = albomSecond,
+                SourceUrl = "http://t2.gstatic.com/images?q=tbn:ANd9GcQG4W7WLhXnnZdVaQypIqIC1YQIjdnpyF3muXyhaFNAEbUxEGt2qg"
+            });
+
+            #endregion
+
+            #region review
             mDal.Create<Review>(new Review()
             {
                 CreationDate = DateTime.Now,
                 ModifyDate = DateTime.Now,
                 Rating = 5,
-                Text = "Sonme text blah blah blah <b>BOLD</b>",
-                Title = "Title",
+                Text = "Петя мыжик",
+                Title = "мУжик",
                 Users = new List<UserBase>() { user }
             });
             mDal.Create<Review>(new Review()
@@ -465,10 +1137,20 @@ namespace PandaDataAccessLayer
                 CreationDate = DateTime.Now,
                 ModifyDate = DateTime.Now,
                 Rating = 2,
-                Text = "Sasdasdasdasd",
-                Title = "Title #2",
+                Text = "Хорош",
+                Title = "Збс",
                 Users = new List<UserBase>() { user }
             });
+            #endregion
+        }
+
+        public void addDebugEntities() 
+        {
+            #region add user&attributes
+            addUser1();
+            addUser2();
+            #endregion
+            
             mDal.DbContext.SaveChanges();
         }
         #endregion

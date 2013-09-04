@@ -26,4 +26,4 @@
     <p class="blog">
         Всего постов: @Model.Posts.Count 
     </p>
-    <a href="@Url.Content("Create")">Создать пост</a>
+@Html.ActionLink("Создать пост", "Create", "Blog") 
