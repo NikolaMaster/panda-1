@@ -1,3 +1,78 @@
 ﻿@model PandaWebApp.ViewModels.Employer
+@{
+    ViewBag.Title = "Detail";
+}
 
+<div class="base-content left">
+    <div class="user">
+        <div class="header">
+            <div class="left">
+                <span class="user-gender-icon"><img src="@Model.Icon" /></span>
+                <span class="user-name">@Model.Name</span>
+                <span class="user-number">@Model.Number</span>
+            </div>
+            <div class="right user-status">@Model.Status</div>
+            <div class="clear"></div>
+        </div>					
+        <div class="photo left">
+            <img src="@Model.Photo" />
+        </div>
 
+        <div class="info right">
+            <div class="col-2-1">На сайте <span class="days-on-site">#DAYS#</span></div>
+            @if(Model.AccountConfirmed)
+            {
+                <div class="col-2-2 days-on-site">Аккаунт подтвержден</div>
+            }
+            else
+            {
+                <div class="col-2-2 days-on-site">Аккаунт не подтвержден</div>
+            }
+         
+            <div class="clear"></div>
+            <div class="col-2-1">Город</div>
+            <div class="col-2-2">@Model.City</div>
+            <div class="clear"></div>
+            <div class="col-2-1">Адрес офиса</div>
+            <div class="col-2-2">@Model.Address</div>
+            <div class="clear"></div>
+            <div class="col-2-1"><img src="../../Content/img/phone.png" />Телефон</div>
+            <div class="col-2-2">@Model.MobilePhone</div>
+            <div class="clear"></div>
+            <div class="col-2-1"><img src="#" />e-mail</div>
+            <div class="col-2-2">@Model.Email</div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="full-info">
+            <div class="header">О компании:</div>
+            <div class="clear"></div>
+            <div class="photo-album clear">
+                <div class="header">Фотоотчеты</div>
+                <div class="album">
+                    <ul class="horiz">
+                        @{
+                            var index = 0;
+                            foreach(var item in Model.Album)
+                            {
+                                <li class="@(index == 0 ? "first" : "")">
+                                    <img src="@item" />
+                                </li>
+                                index++;
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="clear"></div>
+                <div class="more"><p>Просмотреть все фотоотчеты</p></div>
+            </div>
+             <div class="header">Открытые вакансии</div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+
+   @{ Html.RenderAction("UserFeedback", "Feedback", new { userId = Model.UserId }); }
+   
+ 
+</div>

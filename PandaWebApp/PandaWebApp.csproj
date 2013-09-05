@@ -126,12 +126,14 @@
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromouterController.cs" />
+    <Compile Include="Controllers\StaticPageController.cs" />
     <Compile Include="Engine\Binders\BaseBinder.cs" />
-    <Compile Include="Engine\Binders\CreateBlogToBlogPost.cs" />
+    <Compile Include="Engine\Binders\BlogToBlogPost.cs" />
     <Compile Include="Engine\Binders\RegisterEmployerToUsers.cs" />
     <Compile Include="Engine\Binders\FeedbackToReview.cs" />
     <Compile Include="Engine\Binders\PandaPulseToUserBase.cs" />
     <Compile Include="Engine\Binders\RegisterPromouterToUsers.cs" />
+    <Compile Include="Engine\Binders\StaticPageToStaticPageUnit.cs" />
     <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Crypt.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ProjectParticipants.cs" />
     <Compile Include="ViewModels\Promouter.cs" />
+    <Compile Include="ViewModels\StaticPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -253,6 +256,7 @@
     <Content Include="Views\Feedback\UserFeedback.cshtml" />
     <Content Include="Views\Feedback\IndexFeedback.cshtml" />
     <Content Include="Views\Feedback\Index.cshtml" />
+    <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -270,9 +274,10 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>8748</DevelopmentServerPort>
+          <DevelopmentServerPort>1276</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2550/</IISUrl>
+          <IISUrl>
+          </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

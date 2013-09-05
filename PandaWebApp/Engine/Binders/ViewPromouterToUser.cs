@@ -29,6 +29,11 @@ namespace PandaWebApp.Engine.Binders
             dest.Email = source.Email;
             dest.Photo = source.Avatar.SourceUrl;
             dest.Number = source.Number;
+            dest.IntrestingWork1 = new List<string>();
+            dest.IntrestingWork2 = new List<string>();
+
+            //get main album
+            dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 
             var checklist = source.Checklists.FirstOrDefault();
             if (checklist == null)
@@ -40,10 +45,7 @@ namespace PandaWebApp.Engine.Binders
                 return;
 #endif
             }
-            
-            dest.IntrestingWork1 = new List<string>();
-            dest.IntrestingWork2 = new List<string>();
-
+           
             foreach (var attrib in checklist.AttrbuteValues)
             {
                 var dateTimeValue = DateTime.UtcNow;
@@ -149,16 +151,16 @@ namespace PandaWebApp.Engine.Binders
                 #endregion
             }
 
-            //get main albom
-            dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
+           
             
         }
+
         private void getDesiredWork(Guid entityId, Promouter dest)
         {
             var desiredWorks = DataAccessLayer.Get<DesiredWork>(
                 x => x.EntityList.Id == entityId);
 
-
+            //i don't understand why this Enumerable contans works which are null
             return;
 
             var listWorks = new List<string>();
@@ -265,7 +267,8 @@ namespace PandaWebApp.Engine.Binders
                         Title = expirience.Title,
                         StartTime = expirience.Start.ToPandaString(),
                         EndTime = expirience.End.ToPandaString(),
-                        Hours = (expirience.Start - expirience.End).Hours
+                        Hours = (expirience.Start - expirience.End).Hours,
+                        WorkName = expirience.WorkName
                     });
                 }
                 else
@@ -275,7 +278,8 @@ namespace PandaWebApp.Engine.Binders
                         Title = expirience.Title,
                         StartTime = expirience.Start.ToPandaString(),
                         EndTime = expirience.End.ToPandaString(),
-                        Hours = (expirience.End - expirience.Start).Hours
+                        Hours = (expirience.End - expirience.Start).Hours,
+                        WorkName = expirience.WorkName
                     });
                 }
                 countExperience++;

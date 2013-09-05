@@ -8,7 +8,7 @@ using PandaWebApp.ViewModels;
 
 namespace PandaWebApp.Engine.Binders
 {
-    public class CreateBlogToBlogPost : BaseBinder<Blog.Entry, BlogPost>
+    public class BlogToBlogPost : BaseBinder<Blog.Entry, BlogPost>
     {
         public override void Load(Blog.Entry source, BlogPost dest)
         {
