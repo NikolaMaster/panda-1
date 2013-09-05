@@ -160,7 +160,7 @@ namespace PandaWebApp.Engine.Binders
             var desiredWorks = DataAccessLayer.Get<DesiredWork>(
                 x => x.EntityList.Id == entityId);
 
-
+            //i don't understand why this Enumerable contans works which are null
             return;
 
             var listWorks = new List<string>();

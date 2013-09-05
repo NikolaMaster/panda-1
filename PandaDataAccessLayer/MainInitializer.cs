@@ -1270,12 +1270,52 @@ namespace PandaDataAccessLayer
             #endregion
         }
 
+        private void addStaticPages()
+        {
+            //add static pages
+            mDal.Create<StaticPageUnit>(new StaticPageUnit()
+            {
+                Id = new Guid(),
+                Code = "About",
+                Content = "Первая статичная панда-страница"
+            });
+
+            mDal.Create<StaticPageUnit>(new StaticPageUnit()
+            {
+                Id = new Guid(),
+                Code = "Dictionary",
+                Content = "Вторая статичная панда-страница"
+            });
+
+            mDal.Create<StaticPageUnit>(new StaticPageUnit()
+            {
+                Id = new Guid(),
+                Code = "FAQ",
+                Content = "Третяя статичная панда-страница"
+            });
+
+            mDal.Create<StaticPageUnit>(new StaticPageUnit()
+            {
+                Id = new Guid(),
+                Code = "Contacts",
+                Content = "Четвертая статичная панда-страница"
+            });
+
+            mDal.Create<StaticPageUnit>(new StaticPageUnit()
+            {
+                Id = new Guid(),
+                Code = "PaidServices",
+                Content = "Пятая статичная панда-страница"
+            });
+        }
         public void addDebugEntities() 
         {
             #region add user&attributes
             addUser1();
             addUser2();
             addUser3();
+            addStaticPages();
+
             #endregion
             
             mDal.DbContext.SaveChanges();
