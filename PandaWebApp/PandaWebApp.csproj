@@ -259,7 +259,6 @@
     <Content Include="Views\Blog\Edit.cshtml" />
     <Content Include="Views\Employer\Detail.cshtml" />
     <Content Include="Views\Employer\Create.cshtml" />
-    <Content Include="Views\Blog\Update.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Feedback\UserFeedback.cshtml" />
     <Content Include="Views\Feedback\IndexFeedback.cshtml" />

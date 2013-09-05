@@ -9,7 +9,7 @@ using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer
 {
-    public class MainInitializer : DropCreateDatabaseAlways<MainDbContext>// CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
+    public class MainInitializer : DropCreateDatabaseIfModelChanges<MainDbContext>// CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
     {
         private MainDbContext mContext;
         private DataAccessLayer mDal;
