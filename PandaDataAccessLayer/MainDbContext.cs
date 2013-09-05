@@ -42,6 +42,8 @@ namespace PandaDataAccessLayer
         public DbSet<Review> Reviews { get; set; }
         public DbSet<DesiredWork> DesiredWork { get; set; }
         public DbSet<DesiredWorkTime> DesiredWorkTime { get; set; }
+        //Static page
+        public DbSet<StaticPageUnit> StaticPageUnit { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

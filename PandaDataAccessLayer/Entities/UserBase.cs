@@ -31,7 +31,7 @@ namespace PandaDataAccessLayer.Entities
         public virtual ICollection<Session> Sessions { get; set; }
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
-
+     
         public UserBase() 
         {
             if (Checklists == null)

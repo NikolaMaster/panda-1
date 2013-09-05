@@ -38,12 +38,12 @@
 				<div class="right">
 					<div class="banner-top"></div>
 					<ul class="main-menu horiz">
-						<li><a href="#">О проекте</a></li>
-						<li><a href="#">Словарь</a></li>
-						<li><a href="@Url.Action("Posts", "Blog")">Блог</a></li>
-						<li><a href="#">Вопрос-Ответ</a></li>
-						<li><a href="#">Контакты</a></li>
-						<li><a href="#">Платные услуги</a></li>
+						<li><a href="@Url.Action("IndexStaticPage", "StaticPage", new { code = "About" })">О проекте</a></li>
+						<li><a href="@Url.Action("IndexStaticPage", "StaticPage", new { code = "Dictionary" })">Словарь</a></li>
+						<li><a href="@Url.Action("Posts","Blog")">Блог</a></li>
+						<li><a href="@Url.Action("IndexStaticPage", "StaticPage", new { code = "FAQ" })">Вопрос-Ответ</a></li>
+						<li><a href="@Url.Action("IndexStaticPage", "StaticPage", new { code = "Contacts" })">Контакты</a></li>
+						<li><a href="@Url.Action("IndexStaticPage", "StaticPage", new { code = "PaidServices" })">Платные услуги</a></li>
 					</ul>
 				</div>
 				<div class="clear"></div>

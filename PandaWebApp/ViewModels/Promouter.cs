@@ -12,13 +12,25 @@ namespace PandaWebApp.ViewModels
         {
             public string Day;
             public bool IWantIt;
-            public IEnumerable<string> Time;
+            public List<string> Time;
+        }
+
+        public struct WorkExperienceUnit
+        {
+            public string Title;
+            public string StartTime;
+            public string EndTime;
+            public string WorkName;
+            public int Hours;
         }
 
         public Guid UserId { get; set; }
 
         public string Icon { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string MiddleName { get; set; }
+        public string Sex { get; set; }
         public string Status { get; set; }
         public string Photo { get; set; }
         public string MobilePhone { get; set; }
@@ -79,5 +91,8 @@ namespace PandaWebApp.ViewModels
         public IEnumerable<string> IntrestingWork2 { get; set; }
         public IEnumerable<TimeOfWorkUnit> TimeOfWork { get; set; }
         public IEnumerable<Feedback> Reviews { get; set; }
+        public IEnumerable<WorkExperienceUnit> WorkExperience1 { get; set; }
+        public IEnumerable<WorkExperienceUnit> WorkExperience2 { get; set; }
+
     }
 }

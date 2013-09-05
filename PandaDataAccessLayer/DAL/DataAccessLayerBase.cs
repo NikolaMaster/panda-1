@@ -135,6 +135,12 @@ namespace PandaDataAccessLayer.DAL
         {
             return DbContext.Set<TEntity>().Count(filter);
         }
+
+        public TEntity Refresh<TEntity>(TEntity entity)
+            where TEntity : class
+        {
+            return DbContext.Entry<TEntity>(entity).Entity;
+        }
         #endregion
 
         public void Dispose()

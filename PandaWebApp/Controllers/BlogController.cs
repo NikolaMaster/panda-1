@@ -32,7 +32,7 @@ namespace PandaWebApp.Controllers
             blog.Posts = new List<Blog.Entry>();
             foreach (var blogPost in listOfPosts)
             {
-                var binder = new CreateBlogToBlogPost();
+                var binder = new BlogToBlogPost();
                 var entry = new Blog.Entry();
                 binder.InverseLoad(blogPost, entry);
                 blog.Posts.Add(entry);
@@ -55,7 +55,7 @@ namespace PandaWebApp.Controllers
                 model.CreatedDate = DateTime.UtcNow;
                 model.ModifyDate = DateTime.UtcNow;
 
-                var binder = new CreateBlogToBlogPost();
+                var binder = new BlogToBlogPost();
                 var entry = new BlogPost();
                 binder.Load(model, entry);
                 DataAccessLayer.Create<BlogPost>(entry);
@@ -74,7 +74,7 @@ namespace PandaWebApp.Controllers
                 return HttpNotFound("Post not found");
             }
 
-            var binder = new CreateBlogToBlogPost();
+            var binder = new BlogToBlogPost();
             var entry = new Blog.Entry();
             binder.InverseLoad(post, entry);
 
@@ -89,7 +89,7 @@ namespace PandaWebApp.Controllers
             {
                 return HttpNotFound("Post not found");
             }
-            var binder = new CreateBlogToBlogPost();
+            var binder = new BlogToBlogPost();
             var entry = new Blog.Entry();
             binder.InverseLoad(post, entry);
             return View(entry);

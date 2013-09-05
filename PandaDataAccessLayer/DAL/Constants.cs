@@ -17,6 +17,7 @@ namespace PandaDataAccessLayer.DAL
         public const string CityCode = "CITY";
         public const string GenderCode = "GENDER";
         public const string SalaryCode = "SALARY";
+        public const string CompanyNameCode = "COMPANY_NAME";
 
         public DataAccessLayer DataAccessLayer { get;private set; }
 
@@ -62,7 +63,11 @@ namespace PandaDataAccessLayer.DAL
         {
             get { return DataAccessLayer.Get<Attrib>(SalaryCode); }
         }
-        
+
+        public Attrib CompanyName 
+        {
+            get { return DataAccessLayer.Get<Attrib>(CompanyNameCode); }
+        }
 
     }
 }

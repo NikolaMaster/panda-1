@@ -37,7 +37,10 @@ namespace PandaWebApp.Engine.Logic
                 var compareResult = true;
                 foreach (var value in values)
                 {
-                    var storedValue = attribValues.Single(x => x.Attrib == value.Key);
+                    var storedValue = attribValues.FirstOrDefault(x => x.Attrib == value.Key);
+                    if (value.Value == null || (storedValue == null && value.Value == null))
+                        continue;
+
                     var comparer = Comparers.ContainsKey(value.Key) ? Comparers[value.Key] : DefaultComparer;
                     if (!comparer.Compare(storedValue, value.Value))
                     {
@@ -75,10 +78,15 @@ namespace PandaWebApp.Engine.Logic
 
         public override bool Compare(AttribValue storedValue, object value)
         {
-            if (value == null)
-                return true;
-            dynamic tmp = value;
-            return storedValue.Value == tmp.ToPandaString();
+            if (storedValue != null)
+            {
+                dynamic tmp = value;
+                return storedValue.Value == tmp.ToPandaString();
+            }
+            else
+            {
+                return value != null;
+            }
         }
     }
 
@@ -91,11 +99,19 @@ namespace PandaWebApp.Engine.Logic
 
         public override bool Compare(AttribValue storedValue, object value)
         {
-            var entityListId = Guid.Parse(storedValue.Value);
-            var storedDesiredWork = DataAccessLayer.GetById<EntityList>(entityListId).DesiredWork.Select(x => x.Work);
-
             var castedValue = (IEnumerable<DictValue>)value;
-            return castedValue.All(x => storedDesiredWork.Contains(x));
+            if (storedValue != null)
+            {
+                var entityListId = Guid.Parse(storedValue.Value);
+                var storedDesiredWork = DataAccessLayer.GetById<EntityList>(entityListId).DesiredWork.Select(x => x.Work);
+
+                
+                return castedValue.All(x => storedDesiredWork.Contains(x));
+            }
+            else 
+            {
+                return castedValue == null;
+            }
         }
     }
 
@@ -108,9 +124,14 @@ namespace PandaWebApp.Engine.Logic
 
         public override bool Compare(AttribValue storedValue, object value)
         {
-            if (value == null)
-                return true;
-            return value.ToString() == storedValue.Value;
+            if (storedValue != null)
+            {
+                return value.ToString() == storedValue.Value;
+            }
+            else 
+            {
+                return value == null;
+            }
         }
     }
 

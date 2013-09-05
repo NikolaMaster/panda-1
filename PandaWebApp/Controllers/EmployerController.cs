@@ -23,19 +23,35 @@ namespace PandaWebApp.Controllers
         [HttpPost]
         public ActionResult Create(FormModels.Register.Employer model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                model.Password = Password.MakePassword(model.Password, DateTime.UtcNow);
+                var binder = new RegisterEmployerToUsers();
+                var entry = new EmployerUser();
+                binder.Load(model, entry);
+                DataAccessLayer.Create(entry);
+                DataAccessLayer.DbContext.SaveChanges();
+
+                return RedirectToAction("Detail", new { id = entry.Id });
+            }
+
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult Detail(Guid id)
         {
-            return View();
-        }
+            var entry = DataAccessLayer.GetById<EmployerUser>(id);
+            if (entry == null)
+            {
+                return HttpNotFound("Employer not found");
+            }
 
-        [HttpPost]
-        public ActionResult Edit(Employer model)
-        {
-            return View();
+            var model = new Employer();
+            var binder = new ViewEmployerToUser(DataAccessLayer);
+            binder.InverseLoad(entry, model);
+
+            return View(model);
         }
     }
 }

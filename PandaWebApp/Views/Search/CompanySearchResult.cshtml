@@ -8,7 +8,10 @@
     @foreach (var item in Model)
     { 
         <div>
+            <div>Компания: @item.CompanyName </div>
             <div>Город: @item.City</div>
+            <div>Работа: @item.Work</div>
+            <div>Оплата: @item.Salary рублей в час</div>
         </div>
         <hr />
     } 

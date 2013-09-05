@@ -10,6 +10,14 @@ namespace PandaWebApp.Engine.Binders
 {
     public class ViewPromouterToUsers : BaseBinder<Promouter, PromouterUser>
     {
+        public DataAccessLayer DataAccessLayer { get; private set; }
+
+
+        public ViewPromouterToUsers(DataAccessLayer dataAccessLayer) 
+        {
+            DataAccessLayer = dataAccessLayer;
+        }
+
         public override void Load(Promouter source, PromouterUser dest)
         {
             throw new Exception("Only view bind allowed");
@@ -17,7 +25,15 @@ namespace PandaWebApp.Engine.Binders
 
         public override void InverseLoad(PromouterUser source, Promouter dest)
         {
+            dest.UserId = source.Id;
             dest.Email = source.Email;
+            dest.Photo = source.Avatar.SourceUrl;
+            dest.Number = source.Number;
+            dest.IntrestingWork1 = new List<string>();
+            dest.IntrestingWork2 = new List<string>();
+
+            //get main album
+            dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 
             var checklist = source.Checklists.FirstOrDefault();
             if (checklist == null)
@@ -29,6 +45,7 @@ namespace PandaWebApp.Engine.Binders
                 return;
 #endif
             }
+           
             foreach (var attrib in checklist.AttrbuteValues)
             {
                 var dateTimeValue = DateTime.UtcNow;
@@ -43,16 +60,16 @@ namespace PandaWebApp.Engine.Binders
                 #region Big switch [TODO by code field]
                 switch (attrib.Attrib.Code)
                 {
+                    case Constants.GenderCode:
+                        dest.Sex = attrib.Value;
+                        break;
                     case "Фамилия":
-                        //TODO
+                        dest.LastName = attrib.Value;
                         break;
                     case "Имя":
-                        dest.Name = attrib.Value;
+                        dest.FirstName = attrib.Value;
                         break;
                     case "Отчество":
-                        //TODO
-                        break;
-                    case Constants.GenderCode:
                         //TODO
                         break;
                     case "Дата рождения":
@@ -65,12 +82,12 @@ namespace PandaWebApp.Engine.Binders
                         dest.Car = boolValue;
                         break;
                     case "Готов работать сейчас":
-                        //TODO
+                        dest.Status = attrib.Value;
                         break;
                     case "Мобильный телефон":
                         dest.MobilePhone = stringValue;
                         break;
-                    case "Цена работы за час":
+                    case Constants.SalaryCode:
                         dest.CostForHour = intValue;
                         break;
                     case Constants.CityCode:
@@ -80,7 +97,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.Education = stringValue;
                         break;
                     case "Опыт работы":
-                        //TODO
+                        getWorkExperience(new Guid(stringValue), dest);
                         break;
                     case "Рост":
                         dest.Height = intValue;
@@ -118,14 +135,159 @@ namespace PandaWebApp.Engine.Binders
                     case "Зимние коньки":
                         dest.WinterSkates = boolValue;
                         break;
+                    case "О себе":
+                        dest.About = stringValue;
+                        break;
+                    case "Интересы":
+                        dest.Hobbies = stringValue;
+                        break;
+                    case Constants.DesiredWorkCode:
+                       getDesiredWork(new Guid(stringValue),dest );
+                       break;
+                    case "Желаемое время работы":
+                       getDesiredTimeOfWork(new Guid(stringValue), dest);
+                        break;
                 }
                 #endregion
             }
 
-            //fake
-            dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
-            dest.IntrestingWork1 = new List<string>();
-            dest.IntrestingWork2 = new List<string>();
+           
+            
+        }
+
+        private void getDesiredWork(Guid entityId, Promouter dest)
+        {
+            var desiredWorks = DataAccessLayer.Get<DesiredWork>(
+                x => x.EntityList.Id == entityId);
+
+            //i don't understand why this Enumerable contans works which are null
+            return;
+
+            var listWorks = new List<string>();
+            foreach (var desiredWork in desiredWorks)
+            {
+                listWorks.Add(desiredWork.Work.Description);
+            }
+            dest.IntrestingWork1 = listWorks;
+        }
+
+        private void getDesiredTimeOfWork(Guid entityId, Promouter dest)
+        {
+            var desiredWorkTimes = DataAccessLayer.Get<DesiredWorkTime>(x => x.EntityList.Id == entityId);
+            var sortedDictionary = new SortedDictionary<int, List<string>>();
+
+            foreach (var desiredWorkTime in desiredWorkTimes)
+            {
+                var time = string.Format("с {0} до {1}", desiredWorkTime.StartTime.ToPandaString(),
+                                         desiredWorkTime.EndTime.ToPandaString());
+
+                if (!sortedDictionary.ContainsKey(desiredWorkTime.DayOfWeek))
+                {
+                    sortedDictionary.Add(desiredWorkTime.DayOfWeek, new List<string>() { time });
+                }
+                else
+                {
+                    sortedDictionary[desiredWorkTime.DayOfWeek].Add(time);
+                }
+            }
+
+            var timeOfWorkUnits = new List<Promouter.TimeOfWorkUnit>();
+            foreach (var iter in sortedDictionary)
+            {
+                switch (iter.Key)
+                {
+                    case 0:
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        {
+                            Day = "Понедельник",
+                            Time = iter.Value
+                        });
+                        break;
+                    case 1:
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        {
+                            Day = "Вторник",
+                            Time = iter.Value
+                        });
+                        break;
+                    case 2:
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        {
+                            Day = "Среда",
+                            Time = iter.Value
+                        });
+                        break;
+                    case 3:
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        {
+                            Day = "Четверг",
+                            Time = iter.Value
+                        });
+                        break;
+                    case 4:
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        {
+                            Day = "Пятница",
+                            Time = iter.Value
+                        });
+                        break;
+                    case 5:
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        {
+                            Day = "Суббота",
+                            Time = iter.Value
+                        });
+                        break;
+                    case 6:
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        {
+                            Day = "Воскресенье",
+                            Time = iter.Value
+                        });
+                        break;
+                }
+            }
+
+            dest.TimeOfWork = timeOfWorkUnits;
+        }
+
+        private void getWorkExperience(Guid entityId, Promouter dest)
+        {
+            var experienceUnits1 = new List<Promouter.WorkExperienceUnit>();
+            var experienceUnits2 = new List<Promouter.WorkExperienceUnit>();
+            var workExpirience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId);
+            int countExperience = 0;
+
+            foreach (var expirience in workExpirience)
+            {
+                if (countExperience >= workExpirience.Count()/2 )
+                {
+                    experienceUnits1.Add(new Promouter.WorkExperienceUnit()
+                    {
+                        Title = expirience.Title,
+                        StartTime = expirience.Start.ToPandaString(),
+                        EndTime = expirience.End.ToPandaString(),
+                        Hours = (expirience.Start - expirience.End).Hours,
+                        WorkName = expirience.WorkName
+                    });
+                }
+                else
+                {
+                    experienceUnits2.Add(new Promouter.WorkExperienceUnit()
+                    {
+                        Title = expirience.Title,
+                        StartTime = expirience.Start.ToPandaString(),
+                        EndTime = expirience.End.ToPandaString(),
+                        Hours = (expirience.End - expirience.Start).Hours,
+                        WorkName = expirience.WorkName
+                    });
+                }
+                countExperience++;
+            }
+
+            dest.WorkExperience1 = experienceUnits1;
+            dest.WorkExperience2 = experienceUnits2;
+
         }
     }
 }

@@ -21,6 +21,8 @@ namespace PandaDataAccessLayer.Entities
         public string Title { get; set; }
         [Required]
         public int Hours { get; set; }
+        [Required]
+        public string WorkName { get; set; }
 
         public virtual EntityList EntityList { get; set; }
     }

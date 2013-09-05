@@ -22,7 +22,22 @@ namespace PandaWebApp.Engine.Binders
 
         public override void InverseLoad(Checklist source, SearchView dest)
         {
-            dest.City = DataAccessLayer.GetAttributeValue(source.Id, "CITY").Value;
+            var cityAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.CityCode);
+            var salaryAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.SalaryCode);
+            var desiredWorkAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.DesiredWorkCode);
+            var companyNameAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.CompanyNameCode);
+
+            DesiredWork desiredWork = null;
+            if (desiredWorkAttribute != null)
+            {
+                var entListId = new Guid(desiredWorkAttribute.Value);
+                desiredWork = DataAccessLayer.Get<DesiredWork>(x => x.EntityList.Id == entListId).FirstOrDefault();
+            }
+
+            dest.City = cityAttribute != null ? cityAttribute.Value : null;
+            dest.Salary = salaryAttribute != null ? salaryAttribute.Value : null;
+            dest.Work = desiredWork != null ? desiredWork.Work.Description : null;
+            dest.CompanyName = companyNameAttribute != null ? companyNameAttribute.Value : null;
         }
     }
 }

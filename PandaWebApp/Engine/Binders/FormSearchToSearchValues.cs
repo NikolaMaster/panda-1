@@ -19,7 +19,8 @@ namespace PandaWebApp.Engine.Binders
         {
             var desiredWork = new List<DictValue>();
             desiredWork.AddRange(source.DesiredWork.Where(x => x.Value).Select(x => DataAccessLayer.Get<DictValue>(x.Code)));
-
+            if (desiredWork.Count == 0)
+                desiredWork = null;
             dest.Add(DataAccessLayer.Constants.DesiredWork, desiredWork);
             dest.Add(DataAccessLayer.Constants.City, source.City);
             dest.Add(DataAccessLayer.Constants.Gender, source.Gender);
