@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.Entities
 {
-    public abstract class EmployerUser : UserBase
+    public class EmployerUser : UserBase
     {
 
     }

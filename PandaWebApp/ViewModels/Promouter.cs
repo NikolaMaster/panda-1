@@ -20,6 +20,7 @@ namespace PandaWebApp.ViewModels
             public string Title;
             public string StartTime;
             public string EndTime;
+            public string WorkName;
             public int Hours;
         }
 

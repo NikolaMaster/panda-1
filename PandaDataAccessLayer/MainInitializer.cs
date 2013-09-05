@@ -396,6 +396,16 @@ namespace PandaDataAccessLayer
                     AttribType = mDal.GetAttribType(typeof(string)),
                     Code = "Интересы"
                 },
+                new Attrib
+                {
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Адрес"
+                },
+                 new Attrib
+                {
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = "Наименование компании"
+                }
             };
             foreach (var attrib in attribs)
                 mDal.Create<Attrib>(attrib);
@@ -419,30 +429,29 @@ namespace PandaDataAccessLayer
         {
             var user = mDal.Create(new PromouterUser()
                 {
-                    FirstName = "Катя",
+                    FirstName = "Екатерина",
                     LastName = "Иванова",
                     City = "Сургут",
                     Email = "kate.tmn@gmail.com",
                     Phone = "+7999999999",
-                    Password = "123"
+                    Password = "123456"
                 });
 
-            
-       
             var sex = mDal.Get<DictValue>(x => x.Code == "FEMALE").First();
             var bithday = new DateTime(1991, 12, 3);
-            var middleName = "Андреевна";
-
+           
             var desiredWorksEntity = mDal.Create<EntityList>(new EntityList() {Id = new Guid()});
 
             mDal.DbContext.SaveChanges();
 
+            #region works
             var work1 = mDal.Get<DictValue>(x => x.Code == "SUPER").First();
             var work2 = mDal.Get<DictValue>(x => x.Code == "COURIER").First();
             var work3 = mDal.Get<DictValue>(x => x.Code == "WAITER").First();
             var work4 = mDal.Get<DictValue>(x => x.Code == "ANIMATOR").First();
             var work5 = mDal.Get<DictValue>(x => x.Code == "AUDITOR").First();
             var work6 = mDal.Get<DictValue>(x => x.Code == "MODEL").First();
+#endregion
 
             #region DesiredWork
 
@@ -543,6 +552,9 @@ namespace PandaDataAccessLayer
                     EndTime = DateTime.UtcNow,
                     DayOfWeek = 1
                 });
+#endregion
+
+            #region WorkExpirience
 
             mDal.Create<WorkExpirience>(new WorkExpirience
                 {
@@ -550,8 +562,9 @@ namespace PandaDataAccessLayer
                     EntityList = desiredWorksEntity,
                     Start = DateTime.UtcNow,
                     End = DateTime.UtcNow,
-                    Title = "Title",
-                    Hours = 24
+                    Title = "СургутНИПИ",
+                    Hours = 24,
+                    WorkName = "Слесарь"
                 });
 
             mDal.Create<WorkExpirience>(new WorkExpirience
@@ -560,8 +573,9 @@ namespace PandaDataAccessLayer
                     EntityList = desiredWorksEntity,
                     Start = DateTime.UtcNow,
                     End = DateTime.UtcNow,
-                    Title = "Title2",
-                    Hours = 12
+                    Title = "Нефтемашстрой",
+                    Hours = 12,
+                    WorkName = "Водитель"
                 });
 
             mDal.Create<WorkExpirience>(new WorkExpirience
@@ -571,7 +585,8 @@ namespace PandaDataAccessLayer
                     Start = DateTime.UtcNow,
                     End = DateTime.UtcNow,
                     Title = "Газпром",
-                    Hours = 12
+                    Hours = 12,
+                    WorkName = "Дворник"
                 });
 
             mDal.Create<WorkExpirience>(new WorkExpirience
@@ -580,38 +595,9 @@ namespace PandaDataAccessLayer
                     EntityList = desiredWorksEntity,
                     Start = DateTime.UtcNow,
                     End = DateTime.UtcNow,
-                    Title = "Title2",
-                    Hours = 12
-                });
-
-            mDal.Create<WorkExpirience>(new WorkExpirience
-                {
-                    Id = new Guid(),
-                    EntityList = desiredWorksEntity,
-                    Start = DateTime.UtcNow,
-                    End = DateTime.UtcNow,
-                    Title = "Title2",
-                    Hours = 12
-                });
-
-            mDal.Create<WorkExpirience>(new WorkExpirience
-                {
-                    Id = new Guid(),
-                    EntityList = desiredWorksEntity,
-                    Start = DateTime.UtcNow,
-                    End = DateTime.UtcNow,
-                    Title = "Title2",
-                    Hours = 12
-                });
-
-            mDal.Create<WorkExpirience>(new WorkExpirience
-                {
-                    Id = new Guid(),
-                    EntityList = desiredWorksEntity,
-                    Start = DateTime.UtcNow,
-                    End = DateTime.UtcNow,
-                    Title = "Title2",
-                    Hours = 12
+                    Title = "УрюпинскНефтьГаз",
+                    Hours = 12,
+                    WorkName = "Менеджер"
                 });
 
             #endregion
@@ -634,7 +620,7 @@ namespace PandaDataAccessLayer
                      mDal.Create<AttribValue>(new AttribValue
                         {
                                 Attrib = mDal.Get<Attrib>("Отчество"),
-                                Value = middleName
+                                Value = "Валентиновна"
                          }),
 
                     mDal.Create<AttribValue>(new AttribValue
@@ -698,6 +684,7 @@ namespace PandaDataAccessLayer
                 });
 
 #endregion
+
             mDal.DbContext.SaveChanges();
             //var entry = mDal.Get<DesiredWork>(x => x.EntityList.Id == desiredWorksEntity.Id);
 
@@ -821,42 +808,30 @@ namespace PandaDataAccessLayer
             var user = mDal.Create(new PromouterUser()
             {
                 FirstName = "Петя",
-                LastName = "Петров",
-                City = "Тюмень",
-                Email = "petrov@gmail.com",
-                Phone = "+123333",
-                Password = "123"
+                LastName = "Сергееев",
+                City = "Москва",
+                Email = "pet@gmail.com",
+                Phone = "+234234",
+                Password = "123456"
             });
 
-            var sex = mDal.Get<DictValue>(x => x.Code == "FEMALE").First();
-            var bithday = new DateTime(1991, 12, 3);
-            var middleName = "Петрович";
+            var sex = mDal.Get<DictValue>(x => x.Code == "MALE").First();
+            var bithday = new DateTime(1980, 7, 3);
 
-            #region add DesiredWork
-            var desiredWorksEntity = mDal.Create<EntityList>(new EntityList()
-            {
-                Id = new Guid()
-            }
-            );
+            var desiredWorksEntity = mDal.Create<EntityList>(new EntityList() { Id = new Guid() });
+
             mDal.DbContext.SaveChanges();
 
-            var work1 = mDal.Get<DictValue>(x =>
+            #region works
+            var work1 = mDal.Get<DictValue>(x => x.Code == "SUPER").First();
+            var work2 = mDal.Get<DictValue>(x => x.Code == "COURIER").First();
+            var work3 = mDal.Get<DictValue>(x => x.Code == "WAITER").First();
+            var work4 = mDal.Get<DictValue>(x => x.Code == "ANIMATOR").First();
+            var work5 = mDal.Get<DictValue>(x => x.Code == "AUDITOR").First();
+            var work6 = mDal.Get<DictValue>(x => x.Code == "MODEL").First();
+            #endregion
 
-                    x.Code == "SUPER"
-
-                ).First();
-
-            var work2 = mDal.Get<DictValue>(x =>
-
-                    x.Code == "COURIER"
-
-                ).First();
-
-            var work3 = mDal.Get<DictValue>(x =>
-
-                    x.Code == "WAITER"
-
-                ).First();
+            #region DesiredWork
 
             mDal.Create<DesiredWork>(new DesiredWork
             {
@@ -864,7 +839,6 @@ namespace PandaDataAccessLayer
                 EntityList = desiredWorksEntity,
                 Work = work1
             });
-
             mDal.Create<DesiredWork>(new DesiredWork
             {
                 Id = new Guid(),
@@ -877,6 +851,48 @@ namespace PandaDataAccessLayer
                 Id = new Guid(),
                 EntityList = desiredWorksEntity,
                 Work = work3
+            });
+
+            mDal.Create<DesiredWork>(new DesiredWork
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Work = work4
+            });
+
+            mDal.Create<DesiredWork>(new DesiredWork
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Work = work5
+            });
+            mDal.Create<DesiredWork>(new DesiredWork
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Work = work6
+            });
+
+            #endregion
+
+            #region DesiredWorkTime
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 0
+            });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 0
             });
 
             mDal.Create<DesiredWorkTime>(new DesiredWorkTime
@@ -894,33 +910,7 @@ namespace PandaDataAccessLayer
                 EntityList = desiredWorksEntity,
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow,
-                DayOfWeek = 5
-            });
-
-            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
-            {
-                Id = new Guid(),
-                EntityList = desiredWorksEntity,
-                StartTime = DateTime.UtcNow,
-                EndTime = DateTime.UtcNow,
-                DayOfWeek = 6
-            });
-
-            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
-            {
-                Id = new Guid(),
-                EntityList = desiredWorksEntity,
-                StartTime = DateTime.UtcNow,
-                EndTime = DateTime.UtcNow,
-                DayOfWeek = 6
-            });
-            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
-            {
-                Id = new Guid(),
-                EntityList = desiredWorksEntity,
-                StartTime = DateTime.UtcNow,
-                EndTime = DateTime.UtcNow,
-                DayOfWeek = 2
+                DayOfWeek = 4
             });
 
             mDal.Create<DesiredWorkTime>(new DesiredWorkTime
@@ -930,6 +920,29 @@ namespace PandaDataAccessLayer
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow,
                 DayOfWeek = 2
+            });
+
+            mDal.Create<DesiredWorkTime>(new DesiredWorkTime
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                DayOfWeek = 1
+            });
+            #endregion
+
+            #region WorkExpirience
+
+            mDal.Create<WorkExpirience>(new WorkExpirience
+            {
+                Id = new Guid(),
+                EntityList = desiredWorksEntity,
+                Start = DateTime.UtcNow,
+                End = DateTime.UtcNow,
+                Title = "ПарикМэйкер",
+                Hours = 24,
+                WorkName = "Стилист"
             });
 
             mDal.Create<WorkExpirience>(new WorkExpirience
@@ -937,9 +950,10 @@ namespace PandaDataAccessLayer
                 Id = new Guid(),
                 EntityList = desiredWorksEntity,
                 Start = DateTime.UtcNow,
-                End = DateTime.Now,
-                Title = "Title",
-                Hours = 24
+                End = DateTime.UtcNow,
+                Title = "НефтеМэйкер",
+                Hours = 12,
+                WorkName = "Парикмахер"
             });
 
             mDal.Create<WorkExpirience>(new WorkExpirience
@@ -949,7 +963,8 @@ namespace PandaDataAccessLayer
                 Start = DateTime.UtcNow,
                 End = DateTime.UtcNow,
                 Title = "Газпром",
-                Hours = 12
+                Hours = 12,
+                WorkName = "Дворник"
             });
 
             mDal.Create<WorkExpirience>(new WorkExpirience
@@ -958,51 +973,10 @@ namespace PandaDataAccessLayer
                 EntityList = desiredWorksEntity,
                 Start = DateTime.UtcNow,
                 End = DateTime.UtcNow,
-                Title = "Шлюм",
-                Hours = 12
+                Title = "УрюпНефтьГазМэйкер",
+                Hours = 12,
+                WorkName = "Менеджер"
             });
-
-            mDal.Create<WorkExpirience>(new WorkExpirience
-            {
-                Id = new Guid(),
-                EntityList = desiredWorksEntity,
-                Start = DateTime.UtcNow,
-                End = DateTime.UtcNow,
-                Title = "Title2",
-                Hours = 12
-            });
-
-            mDal.Create<WorkExpirience>(new WorkExpirience
-            {
-                Id = new Guid(),
-                EntityList = desiredWorksEntity,
-                Start = DateTime.UtcNow,
-                End = DateTime.UtcNow,
-                Title = "Фриланс",
-                Hours = 12
-            });
-
-            mDal.Create<WorkExpirience>(new WorkExpirience
-            {
-                Id = new Guid(),
-                EntityList = desiredWorksEntity,
-                Start = DateTime.UtcNow,
-                End = DateTime.UtcNow,
-                Title = "Садик",
-                Hours = 12
-            });
-
-            mDal.Create<WorkExpirience>(new WorkExpirience
-            {
-                Id = new Guid(),
-                EntityList = desiredWorksEntity,
-                Start = DateTime.UtcNow,
-                End = DateTime.UtcNow,
-                Title = "Магазин обуви",
-                Hours = 12
-            });
-
-            mDal.DbContext.SaveChanges();
 
             #endregion
 
@@ -1014,7 +988,7 @@ namespace PandaDataAccessLayer
                     mDal.Create<AttribValue>(new AttribValue
                         {
                             Attrib = mDal.Get<Attrib>("Телосложение"),
-                            Value = "Дрыщ"
+                            Value = "Стройняшка"
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                         {
@@ -1024,7 +998,7 @@ namespace PandaDataAccessLayer
                      mDal.Create<AttribValue>(new AttribValue
                         {
                                 Attrib = mDal.Get<Attrib>("Отчество"),
-                                Value = middleName
+                                Value = "Анатольевич"
                          }),
 
                     mDal.Create<AttribValue>(new AttribValue
@@ -1068,29 +1042,181 @@ namespace PandaDataAccessLayer
                                 Attrib = mDal.Get<Attrib>("Дата рождения"),
                                 Value = bithday.ToString()
                          }),
+
                          mDal.Create<AttribValue>(new AttribValue
                         {
                                 Attrib = mDal.Get<Attrib>("О себе"),
-                                Value = "Я лучший"
+                                Value = "Я такая какая есть"
                          }),
 
                          mDal.Create<AttribValue>(new AttribValue
                         {
                                 Attrib = mDal.Get<Attrib>("Интересы"),
-                                Value = "Тачки, девочки, тачки"
+                                Value = "Книги, библиотека, бумага,вышивание"
                          }),
                          mDal.Create<AttribValue>(new AttribValue
                         {
                                 Attrib = mDal.Get<Attrib>("Цена работы за час"),
-                                Value = mDal.Get<DictValue>("COST_220").Description
+                                Value = mDal.Get<DictValue>("COST_700").Description
                          })
                 });
-#endregion
+
+            #endregion
 
             mDal.DbContext.SaveChanges();
-            //var entry = mDal.Get<DesiredWork>(x => x.EntityList.Id == desiredWorks.Id);
+            //var entry = mDal.Get<DesiredWork>(x => x.EntityList.Id == desiredWorksEntity.Id);
 
             #region add album
+
+            var albomFirst = mDal.Create<Album>(new Album()
+            {
+                Id = new Guid(),
+                Name = "Это первый альбом",
+                User = user
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = albomFirst,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            var albomSecond = mDal.Create<Album>(new Album()
+            {
+                Id = new Guid(),
+                Name = "Это третий альбом",
+                User = user
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = albomSecond,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+
+            var mainAlbom = mDal.Get<Album>(x => x.Name == "Основной альбом" && x.User.Id == user.Id).First();
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = mainAlbom,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = mainAlbom,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = mainAlbom,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = mainAlbom,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = mainAlbom,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = mainAlbom,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = mainAlbom,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            mDal.Create<Photo>(new Photo()
+            {
+                Id = new Guid(),
+                Album = mainAlbom,
+                SourceUrl = "http://trinixy.ru/pics5/20121108/awesome_40.jpg"
+            });
+
+            #endregion
+
+            #region review
+
+            mDal.Create<Review>(new Review()
+            {
+                CreationDate = DateTime.Now,
+                ModifyDate = DateTime.Now,
+                Rating = 5,
+                Text = "Петя норм пашет",
+                Title = "Работает все отлино",
+                Users = new List<UserBase>() { user }
+            });
+            mDal.Create<Review>(new Review()
+            {
+                CreationDate = DateTime.Now,
+                ModifyDate = DateTime.Now,
+                Rating = 2,
+                Text = "Зашибись работает",
+                Title = "Ниче так",
+                Users = new List<UserBase>() { user }
+            });
+
+            #endregion
+        }
+
+        private void addUser3()
+        {
+            var user = mDal.Create(new EmployerUser()
+            {
+                LastName = "ООО 'Рога и копытца'",
+                City = "Тюмень",
+                Email = "petrov@gmail.com",
+                Phone = "+123333",
+                Password = "123"
+            });
+            
+            mDal.DbContext.SaveChanges();
+            
+            mDal.Create(user, new List<AttribValue>
+                {
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("О себе"),
+                            Value = "Хорошая компания"
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                        {
+                            Attrib = mDal.Get<Attrib>("Адрес"),
+                            Value = "в зареке"
+                        }),
+                    mDal.Create<AttribValue>(new AttribValue
+                    {
+                        Attrib = mDal.Get<Attrib>("Наименование компании"),
+                        Value = "ООО 'Рога и копытца'"
+                    })
+                });
+            
+            mDal.DbContext.SaveChanges();
+            
+            #region add album
+
             var albomFirst = mDal.Create<Album>(new Album()
             {
                 Id = new Guid(),
@@ -1128,8 +1254,8 @@ namespace PandaDataAccessLayer
                 CreationDate = DateTime.Now,
                 ModifyDate = DateTime.Now,
                 Rating = 5,
-                Text = "Петя мыжик",
-                Title = "мУжик",
+                Text = "Не понравиилось",
+                Title = "Девочки не очень",
                 Users = new List<UserBase>() { user }
             });
             mDal.Create<Review>(new Review()
@@ -1137,7 +1263,7 @@ namespace PandaDataAccessLayer
                 CreationDate = DateTime.Now,
                 ModifyDate = DateTime.Now,
                 Rating = 2,
-                Text = "Хорош",
+                Text = "Хорошая добрая компания",
                 Title = "Збс",
                 Users = new List<UserBase>() { user }
             });
@@ -1149,6 +1275,7 @@ namespace PandaDataAccessLayer
             #region add user&attributes
             addUser1();
             addUser2();
+            addUser3();
             #endregion
             
             mDal.DbContext.SaveChanges();
