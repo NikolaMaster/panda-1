@@ -88,13 +88,13 @@ namespace PandaDataAccessLayer.DAL
 
         public AttribValue GetAttributeValue(Guid checklistId, string attribCode)
         {
-            return DbContext.AttribValues.Single(x => x.ChecklistId == checklistId && x.Attrib.Code == attribCode);
+            return DbContext.AttribValues.FirstOrDefault(x => x.ChecklistId == checklistId && x.Attrib.Code == attribCode);
         }
 
 
         public AttribType GetAttribType(Type type)
         {
-            return DbContext.AttribTypes.Single(x => x.Type == type.FullName);
+            return DbContext.AttribTypes.FirstOrDefault(x => x.Type == type.FullName);
         }
     }
 }

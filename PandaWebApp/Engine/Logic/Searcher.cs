@@ -7,14 +7,13 @@ using System.Web;
 
 namespace PandaWebApp.Engine.Logic
 {
-
-
     public class Searcher
     {
         public DataAccessLayer DataAccessLayer { get; protected set; }
         public Dictionary<Attrib, ComparerBase> Comparers { get; protected set; }
 
         public ComparerBase DefaultComparer { get; protected set; }
+        public FullTextComparer FullTextComparer { get; protected set; }
 
         public Searcher(DataAccessLayer dataAccessLayer)
         {
@@ -23,10 +22,14 @@ namespace PandaWebApp.Engine.Logic
             Comparers = new Dictionary<Attrib, ComparerBase>()
                 {
                     { DataAccessLayer.Constants.DesiredWork, new DesiredWorkComparer(DataAccessLayer) },
+                    { DataAccessLayer.Constants.City, new DynamicToPandaStringComparer(DataAccessLayer) },
+                    { DataAccessLayer.Constants.Gender, new DictValueComparer(DataAccessLayer) },
+                    { DataAccessLayer.Constants.Salary, new DictValueComparer(DataAccessLayer) }
                 };
+            FullTextComparer = new FullTextComparer(DataAccessLayer);
         }
 
-        public IEnumerable<Checklist> Search(IEnumerable<Checklist> checklists, Dictionary<Attrib, object> values)
+        public IEnumerable<Checklist> Search(IEnumerable<Checklist> checklists, Dictionary<Attrib, object> values, string query)
         {
             foreach (var checklist in checklists)
             {
@@ -42,6 +45,7 @@ namespace PandaWebApp.Engine.Logic
                         break;
                     }
                 }
+                compareResult &= FullTextComparer.Compare(checklist, query);
                 if (compareResult)
                     yield return checklist;
             }
@@ -71,6 +75,8 @@ namespace PandaWebApp.Engine.Logic
 
         public override bool Compare(AttribValue storedValue, object value)
         {
+            if (value == null)
+                return true;
             dynamic tmp = value;
             return storedValue.Value == tmp.ToPandaString();
         }
@@ -90,6 +96,51 @@ namespace PandaWebApp.Engine.Logic
 
             var castedValue = (IEnumerable<DictValue>)value;
             return castedValue.All(x => storedDesiredWork.Contains(x));
+        }
+    }
+
+    public class DictValueComparer : ComparerBase 
+    {
+        public DictValueComparer(DataAccessLayer dataAccessLayer)
+            : base(dataAccessLayer)
+        {
+        }
+
+        public override bool Compare(AttribValue storedValue, object value)
+        {
+            if (value == null)
+                return true;
+            return value.ToString() == storedValue.Value;
+        }
+    }
+
+    public class FullTextComparer
+    {
+        public DataAccessLayer DataAccessLayer { get; protected set; }
+
+        public FullTextComparer(DataAccessLayer dataAccessLayer)
+        {
+            DataAccessLayer = dataAccessLayer;
+        }
+
+        public bool Compare(Checklist checklist, string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return true;
+            var queryStr = value.Trim();
+            var fullStr = string.Empty;
+            foreach (var i in checklist.AttrbuteValues)
+            {
+                var strValue = i.Value.ToString();
+                if (i.Attrib.AttribType.Type == typeof(DictGroup).FullName)
+                {
+                    strValue = DataAccessLayer.Get<DictValue>(i.Value.ToString()).Description;   
+                }
+                if (i.Attrib.AttribType.Type == typeof(EntityList).FullName)
+                    continue;
+                fullStr += strValue + " ";
+            }
+            return fullStr.Contains(queryStr);
         }
     }
 }

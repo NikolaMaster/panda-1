@@ -30,7 +30,7 @@ namespace PandaWebApp.Engine.Binders
         {
             if (source is PromouterUser)
             {
-                var sex = (source as PromouterUser).Checklist.AttrbuteValues.FirstOrDefault(x => x.Attrib.Code == "Пол");
+                var sex = (source as PromouterUser).Checklist.AttrbuteValues.FirstOrDefault(x => x.Attrib.Code == "GENDER");
                 var male = DataAccessLayer.Get<DictValue>("MALE");
                 var feemale = DataAccessLayer.Get<DictValue>("MALE");
                 if (sex == null)

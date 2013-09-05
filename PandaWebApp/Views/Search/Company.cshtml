@@ -32,6 +32,8 @@
     </div>
     <hr />
     <div>Город @Html.TextBoxFor(x => x.City)</div>
+    <div>Пол @Html.ListBoxFor(x => x.Gender, Model.GenderValues)</div>
+    <div>Цена за час @Html.ListBoxFor(x => x.Salary, Model.SalaryValues)</div>
     <hr />
 }
 

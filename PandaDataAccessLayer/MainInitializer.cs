@@ -9,7 +9,7 @@ using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer
 {
-    public class MainInitializer : CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
+    public class MainInitializer : DropCreateDatabaseAlways<MainDbContext>// CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
     {
         private MainDbContext mContext;
         private DataAccessLayer mDal;
@@ -61,15 +61,15 @@ namespace PandaDataAccessLayer
 
             var costGroup = new DictGroup
             {
-                Code = "COST",
-                Description = "Цена"
+                Code = "SALARY",
+                Description = "Заработная плата за час"
             };
             var costs = new int[] { 150, 170, 180, 200, 220, 240, 250, 
                 270, 280, 300, 350, 400, 450, 500, 550, 600, 650, 700, 
                 800, 900, 1000, 1500, 2000, 3000, 4000, 5000 };
             var costValues = costs.ToList().Select(x => mDal.Create<DictValue>(new DictValue
                     {
-                        Code = "COST_" + x.ToString(),
+                        Code = "SALARY_" + x.ToString(),
                         Description = x.ToString(),
                     }));
 
@@ -273,7 +273,7 @@ namespace PandaDataAccessLayer
                 new Attrib 
                 {
                     AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "GENDER"),
-                    Code = "Пол",
+                    Code = "GENDER",
                 },
                 new Attrib 
                 {
@@ -307,8 +307,8 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib 
                 {
-                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "COST"),
-                    Code = "Цена работы за час",
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "SALARY"),
+                    Code = "SALARY",
                 },
                 new Attrib
                 {
@@ -497,8 +497,12 @@ namespace PandaDataAccessLayer
             mDal.Create(user2, new List<AttribValue> 
             {   
                 mDal.Create<AttribValue>(new AttribValue { 
-                    Attrib = mDal.Get<Attrib>("Фамилия"),
-                    Value = "Иванов"
+                    Attrib = mDal.Get<Attrib>("GENDER"),
+                    Value = "MALE"
+                }),
+                mDal.Create<AttribValue>(new AttribValue { 
+                    Attrib = mDal.Get<Attrib>("SALARY"),
+                    Value = "SALARY_150"
                 }),
                 mDal.Create<AttribValue>(new AttribValue { 
                     Attrib = mDal.Get<Attrib>("CITY"),

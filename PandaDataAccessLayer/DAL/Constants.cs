@@ -15,6 +15,8 @@ namespace PandaDataAccessLayer.DAL
         public const string DefaultAvatarImage = "motorcycle.jpeg";
         public const string DesiredWorkCode = "DESIRED_WORK";
         public const string CityCode = "CITY";
+        public const string GenderCode = "GENDER";
+        public const string SalaryCode = "SALARY";
 
         public DataAccessLayer DataAccessLayer { get;private set; }
 
@@ -49,6 +51,16 @@ namespace PandaDataAccessLayer.DAL
         public Attrib City 
         {
             get { return DataAccessLayer.Get<Attrib>(CityCode); }
+        }
+
+        public Attrib Gender 
+        {
+            get { return DataAccessLayer.Get<Attrib>(GenderCode); }
+        }
+
+        public Attrib Salary 
+        {
+            get { return DataAccessLayer.Get<Attrib>(SalaryCode); }
         }
         
 

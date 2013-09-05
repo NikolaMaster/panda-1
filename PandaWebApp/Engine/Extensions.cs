@@ -40,6 +40,11 @@ namespace PandaWebApp.Engine
             return Encodings.GetBytes(str);
         }
 
+        public static string ToPandaString(this string str) 
+        {
+            return str;
+        }
+
         #endregion
 
         #region Password

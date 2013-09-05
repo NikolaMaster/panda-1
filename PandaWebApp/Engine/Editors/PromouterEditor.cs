@@ -1,4 +1,5 @@
-﻿using PandaDataAccessLayer.Entities;
+﻿using PandaDataAccessLayer.DAL;
+using PandaDataAccessLayer.Entities;
 using PandaWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace PandaWebApp.Engine.Editors
                     case "Отчество":
                         //TODO
                         break;
-                    case "Пол":
+                    case Constants.GenderCode:
                         //TODO
                         break;
                     case "Дата рождения":
@@ -71,10 +72,10 @@ namespace PandaWebApp.Engine.Editors
                     case "Мобильный телефон":
                         attributeValue.Value = source.MobilePhone;
                         break;
-                    case "Цена работы за час":
+                    case Constants.SalaryCode:
                         attributeValue.Value = source.CostForHour.ToPandaString();
                         break;
-                    case "CITY":
+                    case Constants.CityCode:
                         attributeValue.Value = source.City;
                         break;
                     case "Образование":

@@ -28,22 +28,21 @@ namespace PandaWebApp.Controllers
         [HttpPost]
         public ActionResult CompanySearchResult(SearchForm model)
         {
-            var desiredWork = new List<DictValue>();
-            desiredWork.AddRange(model.DesiredWork.Where(x => x.Value).Select(x => DataAccessLayer.Get<DictValue>(x.Code)));
 
-            var searchValues = new Dictionary<Attrib, object>
-            {
-                { DataAccessLayer.Constants.DesiredWork, desiredWork }
-            };
-                
-            var searcher = new Searcher(DataAccessLayer);
             var searchCollection = DataAccessLayer.Get<Checklist>(x => x.ChecklistType.Code == Constants.CompanyChecklistTypeCode);
-            var searchResult = searcher.Search(searchCollection, searchValues);
-            var binder = new ViewSearchToChecklist(DataAccessLayer);
+
+            var formValues = new Dictionary<Attrib, object>();
+            var formBinder = new FormSearchToSearchValues(DataAccessLayer);
+
+            formBinder.Load(model, formValues);
+
+            var searchResult = (new Searcher(DataAccessLayer)).Search(searchCollection, formValues, model.Query);
+
+            var viewBinder = new ViewSearchToChecklist(DataAccessLayer);
             var resultModel = searchResult.Select(x =>
             {
                 var t = new SearchView();
-                binder.InverseLoad(x, t);
+                viewBinder.InverseLoad(x, t);
                 return t;
             });
             return PartialView(resultModel);

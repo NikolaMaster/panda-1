@@ -1,4 +1,5 @@
-﻿using PandaDataAccessLayer.Entities;
+﻿using PandaDataAccessLayer.DAL;
+using PandaDataAccessLayer.Entities;
 using PandaWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace PandaWebApp.Engine.Binders
                     case "Отчество":
                         //TODO
                         break;
-                    case "Пол":
+                    case Constants.GenderCode:
                         //TODO
                         break;
                     case "Дата рождения":
@@ -72,7 +73,7 @@ namespace PandaWebApp.Engine.Binders
                     case "Цена работы за час":
                         dest.CostForHour = intValue;
                         break;
-                    case "CITY":
+                    case Constants.CityCode:
                         dest.City = stringValue;
                         break;
                     case "Образование":
