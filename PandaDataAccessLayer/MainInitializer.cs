@@ -61,7 +61,7 @@ namespace PandaDataAccessLayer
 
             var costGroup = new DictGroup
             {
-                Code = "SALARY",
+                Code = Constants.SalaryCode,
                 Description = "Заработная плата за час"
             };
             var costs = new int[] { 150, 170, 180, 200, 220, 240, 250, 
@@ -86,7 +86,7 @@ namespace PandaDataAccessLayer
 
             var educationGroup = new DictGroup
             {
-                Code = "EDUCATION",
+                Code = Constants.EducationCode,
                 Description = "Образование"
             };
             var educationValues = new List<DictValue>() 
@@ -297,8 +297,8 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib 
                 {
-                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "SALARY"),
-                    Code = "SALARY",
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.SalaryCode),
+                    Code = Constants.SalaryCode,
                 },
                 new Attrib
                 {
@@ -307,8 +307,8 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib 
                 {                    
-                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "EDUCATION"),
-                    Code = "Образование",
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.EducationCode),
+                    Code = Constants.EducationCode,
                 },
                 new Attrib
                 {
@@ -673,7 +673,7 @@ namespace PandaDataAccessLayer
                          mDal.Create<AttribValue>(new AttribValue
                         {
                                 Attrib = mDal.Get<Attrib>(Constants.SalaryCode),
-                                Value = mDal.Get<DictValue>("SALARY_700").Description
+                                Value = mDal.Get<DictValue>("SALARY_700").Code
                          })
                 });
 
@@ -1052,7 +1052,7 @@ namespace PandaDataAccessLayer
                          mDal.Create<AttribValue>(new AttribValue
                         {
                                 Attrib = mDal.Get<Attrib>(Constants.SalaryCode),
-                                Value = mDal.Get<DictValue>("SALARY_700").Description
+                                Value = mDal.Get<DictValue>("SALARY_700").Code
                          })
                 });
 

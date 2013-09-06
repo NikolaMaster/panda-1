@@ -8,11 +8,12 @@ using System.Web;
 
 namespace PandaWebApp.Engine.Editors
 {
-    public class PromouterEditor
+    public class PromouterEditor : BaseEditor
     {
         public IEnumerable<Attrib> Attributes { get; private set; }
 
-        public PromouterEditor(IEnumerable<Attrib> attributes)
+        public PromouterEditor(DataAccessLayer dataAccessLayer, IEnumerable<Attrib> attributes)
+            : base(dataAccessLayer)
         {
             Attributes = attributes;
         }
@@ -20,7 +21,7 @@ namespace PandaWebApp.Engine.Editors
         public void Edit(Promouter source, PromouterUser dest)
         {
             //source.Email = dest.Email;
-
+            dest = DataAccessLayer.Refresh(dest);
             var checklist = dest.Checklists.FirstOrDefault();
             if (checklist == null)
             {
@@ -73,12 +74,12 @@ namespace PandaWebApp.Engine.Editors
                         attributeValue.Value = source.MobilePhone;
                         break;
                     case Constants.SalaryCode:
-                        attributeValue.Value = source.CostForHour.ToPandaString();
+                        attributeValue.Value = source.Salary;
                         break;
                     case Constants.CityCode:
                         attributeValue.Value = source.City;
                         break;
-                    case "Образование":
+                    case Constants.EducationCode:
                         attributeValue.Value = source.Education;
                         break;
                     case "Опыт работы":

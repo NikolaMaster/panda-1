@@ -9,6 +9,7 @@ using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
 using PandaWebApp.Engine.Editors;
 using PandaWebApp.ViewModels;
+using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Controllers
 {
@@ -51,6 +52,16 @@ namespace PandaWebApp.Controllers
             var binder = new ViewEmployerToUser(DataAccessLayer);
             binder.InverseLoad(entry, model);
 
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
+            var binder = new ViewEmployerToUser(DataAccessLayer);
+            var user = DataAccessLayer.GetById<EmployerUser>(id);
+            var model = new EmployerForm(DataAccessLayer);
+            binder.InverseLoad(user, model);
             return View(model);
         }
     }

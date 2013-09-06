@@ -7,7 +7,7 @@ namespace PandaWebApp.ViewModels
 {
     public class PandaPulse
     {
-        public struct Entry
+        public class Entry
         {
             public string Image;
             public string Name;

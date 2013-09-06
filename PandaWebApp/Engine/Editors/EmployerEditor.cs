@@ -4,15 +4,17 @@ using System.Linq;
 using System.Web;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.ViewModels;
+using PandaDataAccessLayer.DAL;
 
 namespace PandaWebApp.Engine.Editors
 {
 
-    public class EmployerEditor
+    public class EmployerEditor : BaseEditor
     {
         public IEnumerable<Attrib> Attributes { get; private set; }
 
-        public EmployerEditor(IEnumerable<Attrib> attributes)
+        public EmployerEditor(DataAccessLayer dataAccessLayer, IEnumerable<Attrib> attributes)
+            : base(dataAccessLayer)
         {
             Attributes = attributes;
         }

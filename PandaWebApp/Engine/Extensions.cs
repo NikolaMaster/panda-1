@@ -1,7 +1,10 @@
-﻿using System;
+﻿using PandaDataAccessLayer.DAL;
+using PandaDataAccessLayer.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace PandaWebApp.Engine
 {
@@ -81,6 +84,28 @@ namespace PandaWebApp.Engine
             return i.ToString();
         }
 
+        #endregion
+
+        #region DataAccessLayer
+        public static IEnumerable<SelectListItem> ListItemsFromDict(this DataAccessLayer dataAccessLayer, string groupCode, bool empty = true)
+        {
+            var result = new List<SelectListItem>();
+            if (empty)
+            {
+                result.Add(new SelectListItem
+                {
+                });
+            }
+            result.AddRange(dataAccessLayer.Get<DictGroup>(groupCode)
+                .DictValues
+                .Select(x => new SelectListItem
+                {
+                    Selected = false,
+                    Text = x.Description,
+                    Value = x.Code,
+                }));
+            return result;
+        }
         #endregion
     }
 }

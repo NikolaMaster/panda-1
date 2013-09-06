@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PandaWebApp.Engine;
 
 namespace PandaWebApp.FormModels
 {
@@ -38,27 +39,9 @@ namespace PandaWebApp.FormModels
                     Title = x.Description,
                 });
             DesiredWork = new List<DesiredWorkDescription>(desiredWork);
-            GenderValues = listItemsFromDict(dataAccessLayer, "GENDER");
-            SalaryValues = listItemsFromDict(dataAccessLayer, "SALARY")
+            GenderValues = dataAccessLayer.ListItemsFromDict(Constants.GenderCode);
+            SalaryValues = dataAccessLayer.ListItemsFromDict(Constants.SalaryCode)
                 .OrderBy(x => string.IsNullOrEmpty(x.Text) ? -1 : int.Parse(x.Text));
-        }
-
-        private IEnumerable<SelectListItem> listItemsFromDict(DataAccessLayer dataAccessLayer, string groupCode)
-        {
-            var result = new List<SelectListItem>();
-            result.Add(new SelectListItem
-            {
-                Selected = true,
-            });
-            result.AddRange(dataAccessLayer.Get<DictGroup>(groupCode)
-                .DictValues
-                .Select(x => new SelectListItem
-                {
-                    Selected = false,
-                    Text = x.Description,
-                    Value = x.Code,
-                }));
-            return result;
         }
     }
 }

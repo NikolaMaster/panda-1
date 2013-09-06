@@ -141,6 +141,7 @@
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Binders\ViewSearchToChecklist.cs" />
     <Compile Include="Engine\Crypt.cs" />
+    <Compile Include="Engine\Editors\BaseEditor.cs" />
     <Compile Include="Engine\Editors\EmployerEditor.cs" />
     <Compile Include="Engine\Editors\PromouterEditor.cs" />
     <Compile Include="Engine\Encodings.cs" />
@@ -150,6 +151,8 @@
     <Compile Include="Engine\Logic\Searcher.cs" />
     <Compile Include="Engine\ModelCareController.cs" />
     <Compile Include="Engine\Password.cs" />
+    <Compile Include="FormModels\EmployerForm.cs" />
+    <Compile Include="FormModels\PromouterForm.cs" />
     <Compile Include="FormModels\Register.cs" />
     <Compile Include="FormModels\SearchForm.cs" />
     <Compile Include="Global.asax.cs">
@@ -245,7 +248,6 @@
     <Folder Include="Content\css\pages\" />
     <Folder Include="Content\js\pages\" />
     <Folder Include="Models\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -288,6 +290,9 @@
     <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
     <Content Include="Views\Promouter\Detail.cshtml" />
     <Content Include="Views\Shared\Layout.cshtml" />
+    <Content Include="Views\Promouter\Edit.cshtml" />
+    <Content Include="Views\Job\Index.cshtml" />
+    <Content Include="Views\Employer\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

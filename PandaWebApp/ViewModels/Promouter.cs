@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PandaWebApp.Engine;
+using PandaDataAccessLayer.Entities;
 
 namespace PandaWebApp.ViewModels
 {
@@ -84,7 +85,7 @@ namespace PandaWebApp.ViewModels
 
         public DateTime BirthDate { get; set; }
 
-        public double CostForHour { get; set; }
+        public string Salary { get; set; }
 
         public IEnumerable<string> Album { get; set; }
         public IEnumerable<string> IntrestingWork1 { get; set; }
@@ -93,6 +94,5 @@ namespace PandaWebApp.ViewModels
         public IEnumerable<Feedback> Reviews { get; set; }
         public IEnumerable<WorkExperienceUnit> WorkExperience1 { get; set; }
         public IEnumerable<WorkExperienceUnit> WorkExperience2 { get; set; }
-
     }
 }

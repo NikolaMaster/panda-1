@@ -12,8 +12,8 @@ namespace PandaWebApp.Engine.Binders
     public class PandaPulseToUserBase : BaseDataAccessLayerBinder<PandaPulse.Entry, UserBase>
     {
         public const string CompanyImage = "~/Content/img/company.png";
-        public const string MaleImage = "~/Content/img/male.png";
-        public const string FeemaleImage = "~/Content/img/feemale.png";
+        public const string MaleImage = "~/Content/img/man.png";
+        public const string FeemaleImage = "~/Content/img/woman.png";
         public const string UnknownGenderImage = "~/Content/img/car.png";
 
         public PandaPulseToUserBase(DataAccessLayer dataAccessLayer)
@@ -30,6 +30,7 @@ namespace PandaWebApp.Engine.Binders
         {
             if (source is PromouterUser)
             {
+                dest.Name = source.FirstName;
                 var sex = (source as PromouterUser).Checklist.AttrbuteValues.FirstOrDefault(x => x.Attrib.Code == "GENDER");
                 var male = DataAccessLayer.Get<DictValue>("MALE");
                 var feemale = DataAccessLayer.Get<DictValue>("MALE");
@@ -52,7 +53,6 @@ namespace PandaWebApp.Engine.Binders
             {
                 dest.Image = CompanyImage;
             }
-            dest.Name = source.FirstName;
         }
     }
 }

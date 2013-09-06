@@ -52,10 +52,15 @@ namespace PandaWebApp.Engine.Binders
                 var stringValue = attrib.Value;
                 var intValue = 0;
                 var boolValue = true;
+                string dictValue = null;
 
                 DateTime.TryParse(stringValue, out dateTimeValue);
                 int.TryParse(stringValue, out intValue);
                 bool.TryParse(stringValue, out boolValue);
+                if (attrib.Attrib.AttribType.DictGroup != null)
+                {
+                    dictValue = DataAccessLayer.Get<DictValue>(attrib.Value).Description;
+                }
 
                 #region Big switch [TODO by code field]
                 switch (attrib.Attrib.Code)
@@ -88,12 +93,12 @@ namespace PandaWebApp.Engine.Binders
                         dest.MobilePhone = stringValue;
                         break;
                     case Constants.SalaryCode:
-                        dest.CostForHour = intValue;
+                        dest.Salary = dictValue;
                         break;
                     case Constants.CityCode:
                         dest.City = stringValue;
                         break;
-                    case "Образование":
+                    case Constants.EducationCode:
                         dest.Education = stringValue;
                         break;
                     case "Опыт работы":

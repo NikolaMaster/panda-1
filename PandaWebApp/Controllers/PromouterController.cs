@@ -12,6 +12,7 @@ using PandaDataAccessLayer.Entities;
 using PandaDataAccessLayer.DAL;
 using PandaWebApp.ViewModels;
 using PandaWebApp.Engine.Editors;
+using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Controllers
 {
@@ -61,13 +62,23 @@ namespace PandaWebApp.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
+            var binder = new ViewPromouterToUsers(DataAccessLayer);
+            var user = DataAccessLayer.GetById<PromouterUser>(id);
+            var model = new PromouterForm(DataAccessLayer);
+            binder.InverseLoad(user, model);
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Edit(Promouter model)
         {
             if (ModelState.IsValid)
             {
                 var allAttributes = DataAccessLayer.GetAllAttributes();
-                var editor = new PromouterEditor(allAttributes);
+                var editor = new PromouterEditor(DataAccessLayer, allAttributes);
                 var user = new PromouterUser();
                 editor.Edit(model, user);
                 DataAccessLayer.DbContext.SaveChanges();
