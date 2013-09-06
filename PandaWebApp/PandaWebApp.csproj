@@ -169,7 +169,29 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\img\all-feedbacks-mark.png" />
     <Content Include="Content\img\cache\readme.txt" />
+    <Content Include="Content\img\company.png" />
+    <Content Include="Content\img\del-0.png" />
+    <Content Include="Content\img\del-1-0.png" />
+    <Content Include="Content\img\del-1-1.png" />
+    <Content Include="Content\img\del-1-2.png" />
+    <Content Include="Content\img\del-1-3.png" />
+    <Content Include="Content\img\del-1-4.png" />
+    <Content Include="Content\img\del-1.png" />
+    <Content Include="Content\img\del-2-0.png" />
+    <Content Include="Content\img\del-2.png" />
+    <Content Include="Content\img\del-3-0.png" />
+    <Content Include="Content\img\del-3.png" />
+    <Content Include="Content\img\del-4.png" />
+    <Content Include="Content\img\del-5.png" />
+    <Content Include="Content\img\five-reasons-marker.png" />
+    <Content Include="Content\img\five-reasons-top-bg.png" />
+    <Content Include="Content\img\five-resons.png" />
+    <Content Include="Content\img\mail.png" />
+    <Content Include="Content\img\main.jpg" />
+    <Content Include="Content\img\man.png" />
+    <Content Include="Content\img\medical-book.png" />
     <Content Include="Content\img\motorcycle.jpeg" />
     <Content Include="Content\css\frameworks\jquery\south-street\images\animated-overlay.gif" />
     <Content Include="Content\css\frameworks\jquery\south-street\images\ui-bg_glass_55_fcf0ba_1x400.png" />
@@ -193,11 +215,15 @@
     <Content Include="Content\img\car.png" />
     <Content Include="Content\img\enter-button.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\offline.png" />
+    <Content Include="Content\img\online.png" />
     <Content Include="Content\img\phone.png" />
     <Content Include="Content\img\pulse-bottom.png" />
     <Content Include="Content\img\ready-to-work.png" />
     <Content Include="Content\img\shadow.png" />
+    <Content Include="Content\img\simple-delimiter.png" />
     <Content Include="Content\img\top.png" />
+    <Content Include="Content\img\woman.png" />
     <Content Include="Content\js\frameworks\custom\inplace-editor.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-1.9.1.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.js" />
@@ -226,12 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Promouter\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Promouter\Create.cshtml">
@@ -266,6 +286,8 @@
     <Content Include="Views\Search\Company.cshtml" />
     <Content Include="Views\Search\CompanySearchResult.cshtml" />
     <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
+    <Content Include="Views\Promouter\Detail.cshtml" />
+    <Content Include="Views\Shared\Layout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

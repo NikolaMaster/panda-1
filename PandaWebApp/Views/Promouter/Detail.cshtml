@@ -1,138 +1,166 @@
-﻿@model PandaWebApp.ViewModels.Promouter
+﻿@using PandaWebApp.ViewModels
+@model PandaWebApp.ViewModels.Promouter
 @{
     ViewBag.Title = "Detail";
 }
 
-<div class="base-content left">
-    <div class="user">
-        <div class="header">
-            <div class="left">
-                <span class="user-gender-icon"><img src="@Model.Icon" /></span>
-                <span class="user-name">@Model.FirstName @Model.LastName</span>
-                <span class="user-number">@Model.Number</span>
-            </div>
-            <div class="right user-status">@Model.Status</div>
-            <div class="clear"></div>
-        </div>					
-        <div class="photo left">
-            <img src="@Model.Photo" />
-            <span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
+
+
+<div class="user">
+    <div class="header">
+        <div class="left">
+            <img src="img/woman.png" />
+            <span class="user-name">@string.Format("{0} {1}",Model.FirstName,@Model.LastName)</span>
+            <span class="user-number">#@Model.Number</span>
         </div>
-        <div class="info right">
-            <div class="col-2-1">На сайте <span class="days-on-site">#DAYS#</span></div>
-            @if(Model.AccountConfirmed)
-            {
-                <div class="col-2-2 days-on-site">Аккаунт подтвержден</div>
-            }
-            else
-            {
-                <div class="col-2-2 days-on-site">Аккаунт не подтвержден</div>
-            }
-            
-            <div class="clear"></div>
-            <div class="col-2-1">Дата рождения</div>
-            <div class="col-2-2">@Model.BirthDate.ToPandaString()</div>
-            <div class="clear"></div>
-            <div class="col-2-1">Количество полных лет</div>
-            <div class="col-2-2">@Model.FullYears</div>
-            <div class="clear"></div>
-            <div class="col-2-1">Мед. Книжка</div>
-                @if (@Model.MedicalBook)
+        <div class="right user-status">
+            <img src="img/offline.png" />
+            <span>@Model.Status</span>
+        </div>
+							
+        <div class="clear"></div>
+    </div>
+					
+    <div class="photo left">
+        <img src="@Model.Photo" />
+        <span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
+    </div>
+    <div class="info right">
+        <div class="table-2">
+            <div class="column">
+                <div class="row on-site">На сайте <span class="days">#DAYS#</span></div>
+                <div class="row">Дата рождения</div>
+                <div class="row">Количество полных лет</div>
+                <div class="row"><div class="icon left"><img src="img/medical-book.png" /></div>Мед. Книжка</div>
+                <div class="row"><div class="icon left"><img src="img/car.png" /></div>Автомобиль</div>
+                <div class="row gap"></div>
+                <div class="row"><div class="icon left"><img src="img/phone.png" /></div>Мобильный телефон</div>
+                <div class="row"><div class="icon left"><img src="img/mail.png" /></div>e-mail</div>
+                <div class="row">Желаемая цена за час работы</div>
+                <div class="row">Город</div>
+                <div class="row">Образование</div>
+
+            </div>
+            <div class="column">
+                @if (Model.AccountConfirmed)
                 {
-                    <div class="col-2-2">Есть</div>
+                    <div class="row confirmed-true"><p class="right-aligned">Аккаунт подтвержден</p></div>
                 }
                 else
                 {
-                    <div class="col-2-2">Нет</div>
+                    <div class="row confirmed-false"><p class="right-aligned">Аккаунт не подтвержден</p></div>
                 }
-            <div class="clear"></div>
-            <div class="col-2-1"><img src="../../Content/img/car.png" />Автомобиль</div>
-            
-            @if (Model.Car)
-            {
-                <div class="col-2-2">Есть</div>
-            }
-            else
-            {
-                <div class="col-2-2">Нет</div>
-            }
-            <div class="clear"></div>
-            <div class="col-2-1"><img src="../../Content/img/phone.png" />Мобильный телефон</div>
-            <div class="col-2-2">@Model.MobilePhone</div>
-            <div class="clear"></div>
-            <div class="col-2-1">e-mail</div>
-            <div class="col-2-2">@Model.Email</div>
-            <div class="clear"></div>
-            <div class="col-2-1">Желаемая цена за час работы</div>
-            <div class="col-2-2">@Model.CostForHour</div><div class="clear"></div>
-            <div class="col-2-1">Город</div>
-            <div class="col-2-2">@Model.City</div>
-            <div class="clear"></div>
-            <div class="col-2-1">Образование</div>
-            <div class="col-2-2">@Model.Education</div>
+
+                    
+                <div class="row">@Model.BirthDate</div>
+                <div class="row">@Model.FullYears</div>
+                @if (@Model.MedicalBook)
+                {
+                    <div class="row">есть</div>
+                }
+                else
+                {
+                    <div class="row">нет</div>
+                }
+
+                <div class="row">@Model.Car</div>
+                    
+                <div class="row gap"></div>
+                <div class="row"><a href="#" class="open">открыть</a></div>
+                <div class="row"><a href="#" class="open">открыть</a></div>
+                <div class="row">@Model.CostForHour р.</div>
+                <div class="row">@Model.City</div>
+                <div class="row">@Model.Education</div>
+            </div>
             <div class="clear"></div>
         </div>
-        <div class="photo-album clear">
-            <div class="header">Фото альбом портфолио</div>
-            <div class="album">
-                <ul class="horiz">
-                    @{
-                        var index = 0;
-                        foreach(var item in Model.Album)
-                        {
-                            <li class="@(index == 0 ? "first" : "")">
-                                <img src="@item" />
-                            </li>
-                            index++;
-                        }
+    </div>
+    <div class="photo-album clear">
+        <div class="header">Фото альбом портфолио</div>
+        <div class="album">
+            <ul class="horiz">
+                @{
+                    var index = 0;
+                    foreach(var item in Model.Album)
+                    {
+                        <li class="@(index == 0 ? "first" : "")">
+                            <img src="@item" />
+                        </li>
+                        index++;
                     }
-                </ul>
-            </div>
-            <div class="clear"></div>
-            <div class="more"><p>Больше фотографий</p></div>
+                }
+            </ul>
         </div>
+        <div class="clear"></div>
+        <div class="more"><p>Больше фотографий</p></div>
+    </div>
 						
-        <div class="full-info">
-            <div class="col-2-1 header">Внешние данные</div>
-            <div class="col-2-2 header">Параметры и размеры</div>
-            <div class="clear"></div>
-            <div class="col-2-1 simple">
-                <div class="col-2-1">Рост</div>
-                <div class="col-2-2">@Model.Height</div>
-                <div class="clear"></div>
-                <div class="col-2-1">Телосложение</div>
-                <div class="col-2-2">@Model.Build</div>
-                <div class="clear"></div>
-                <div class="col-2-1">Вес</div>
-                <div class="col-2-2">@Model.Weight</div>
-                <div class="clear"></div>
-                <div class="col-2-1">Тип кожи</div>
-                <div class="col-2-2">@Model.SkinType</div>
-                <div class="clear"></div>
-                <div class="col-2-1">Цвет глаз</div>
-                <div class="col-2-2">@Model.EyeColor</div>
-                <div class="clear"></div>
-                <div class="col-2-1">Цвет волос</div>
-                <div class="col-2-2">@Model.HairColor</div>
-                <div class="clear"></div>
-                <div class="col-2-1">Длина волос</div>
-                <div class="col-2-2">@Model.HairLength</div>
-                <div class="clear"></div>
+    <div class="full-info">
+
+        <!-- parameters -->
+        <div class="table-2">
+
+            <div class="column">
+                <div class="row header">Внешние данные</div>
+                <div class="row">
+
+                    <div class="table-2 inner-table">
+											
+                        <div class="column">
+                            <div class="row">Рост</div>
+                            <div class="row">Телосложение</div>
+                            <div class="row">Вес</div>
+                            <div class="row">Тип кожи</div>
+                            <div class="row">Цвет глаз</div>
+                            <div class="row">Цвет волос</div>
+                            <div class="row">Длина волос</div>
+                        </div>
+
+                        <div class="column">
+                            <div class="row">@Model.Height см.</div>
+                            <div class="row">@Model.Build</div>
+                            <div class="row">@Model.Weight кг.</div>
+                            <div class="row">@Model.SkinType</div>
+                            <div class="row">@Model.EyeColor</div>
+                            <div class="row">@Model.HairColor</div>
+                            <div class="row">@Model.HairLength</div>
+                        </div>
+
+                        <div class="clear"></div>
+
+                    </div>
+                </div>
             </div>
-            <div class="col-2-2 simple">
-                <div class="col-2-1">Размер одежды</div>
-                <div class="col-2-2">@Model.SizeClothes</div>
-                <div class="clear"></div>
-                <div class="col-2-1">Размер обуви</div>
-                <div class="col-2-2">@Model.SizeShoes</div>
-                <div class="clear"></div>
-                <div class="col-2-1">Размер груди</div>
-                <div class="col-2-2">@Model.SizeChest</div>
-                <div class="clear"></div>
+
+            <div class="column">
+                <div class="row header">Параметры и размеры</div>
+                <div class="row">
+                    <div class="table-2 inner-table">
+                        <div class="column">
+                            <div class="row">Размер одежды</div>
+                            <div class="row">Размер обуви</div>
+                            <div class="row">Размер груди</div>
+                        </div>
+
+                        <div class="column">
+                            <div class="row">@Model.SizeClothes (М)</div>
+                            <div class="row">@Model.SizeShoes</div>
+                            <div class="row">@Model.SizeChest</div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
             </div>
+
             <div class="clear"></div>
-            <div class="header">Интересующая работа:</div>
-            <div class="col-2-2 simple">
+
+        </div>
+							
+        <!-- intresting job -->
+        <div class="header">Интересующая работа</div>
+        <div class="table-2 intresting-work">
+            <div class="column">
                 <ul class="list-style">
                     @foreach (var item in Model.IntrestingWork1)
                     {
@@ -140,7 +168,7 @@
                     }
                 </ul>
             </div>
-            <div class="col-2-2 simple">
+            <div class="column">
                 <ul class="list-style">
                     @foreach (var item in Model.IntrestingWork2)
                     {
@@ -149,62 +177,123 @@
                 </ul>
             </div>
             <div class="clear"></div>
-            <div class="header">Желаемое время работы:</div>
-            <div class ="timeOfWork">
-            @foreach (var iter in Model.TimeOfWork)
-            {
-                <div>@iter.Day</div>
-                foreach (var time in iter.Time)
+        </div>
+    </div>
+
+    <div class="work-time">
+        <div class="header">Желаемое время работы</div>
+        <div class="table-7">
+            @{
+                string[] days = new string[]
+                    {
+                        "Понедельник",
+                        "Вторник",
+                        "Среда",
+                        "Четверг",
+                        "Пятница",
+                        "Суббота",
+                        "Воскресенье"
+                    };
+
+                for (int i = 0; i < 7; i++)
                 {
-                    <div >@time</div>
+                    <div class="column even">
+                        <div class="row header"><p class="center-aligned">@days[i]</p></div>
+                        @foreach (var iter in Model.TimeOfWork)
+                        {
+                            if (iter.Day.Equals(days[i]))
+                            {
+                                foreach (var time in iter.Time)
+                                {
+                                    <div class="row"><p class="center-aligned">@time</p></div>
+                                }
+                            }
+                        }
+                    </div>
                 }
             }
-            </div>    
-                            
-
-            <div class="clear"></div>
-            <div class="header">Интересы:</div>
-            <div class="row-1">@Model.Hobbies</div>
-            <div class="clear"></div>
-            <div class="header">О себе:</div>
-            <div class="row-1">@Model.About</div>
-            <div class="clear"></div>
-            <div class="header">Опыт работы</div>
-            <div class="clear"></div>
-            <div class="col-2-1 simple">
-                @foreach (var experience in Model.WorkExperience1)
-                {
-                    <div class="col-2-1">Место работы</div>
-                    <div class="col-2-2">@experience.Title</div>
-                    <div class="clear"></div>
-                    <div class="col-2-1">Кем работал</div>
-                    <div class="col-2-2">#</div>
-                    <div class="clear"></div>
-                    <div class="col-2-1">Время работы</div>
-                    <div class="col-2-2">@experience.Hours</div>
-                    <div class="clear"></div>
-                    <div class="clear"></div>
-                }
-            </div>
-            <div class="col-2-2 simple">
-                @foreach (var experience in Model.WorkExperience2)
-                {
-                    <div class="col-2-1">Место работы</div>
-                    <div class="col-2-2">@experience.Title</div>
-                    <div class="clear"></div>
-                    <div class="col-2-1">Кем работал</div>
-                    <div class="col-2-2">@experience.WorkName</div>
-                    <div class="clear"></div>
-                    <div class="col-2-1">Время работы</div>
-                    <div class="col-2-2">@experience.Hours</div>
-                    <div class="clear"></div>
-                }
-            </div>
             <div class="clear"></div>
         </div>
     </div>
 
-   @{ Html.RenderAction("UserFeedback", "Feedback", new { userId = Model.UserId }); }
-   
- 
+    <div class="intresting-things">
+        <div class="header">Интересы:</div>
+        <div class="things">
+            @if (string.IsNullOrEmpty(@Model.Hobbies))
+            {
+                <p class="nothing">Пользователь еще не заполнил свои интересы, вы можете <a href="#">попросить его</a> заполнить свои интересы</p>
+            }
+            else
+            {
+                <p class="nothing">@Model.Hobbies</p>
+            }
+        </div>
+    </div>
+
+    <div class="about">
+        <div class="header">О себе:</div>
+        <div class="things">
+            @if (string.IsNullOrEmpty(@Model.About))
+            {
+                <p class="nothing">Пользователь еще не написал о себе, вы можете <a href="#">попросить его</a> рассказать о себе подробнее</p>
+            }
+            else
+            {
+                <p class="nothing">@Model.About</p>
+            }
+        </div>
+    </div>
+
+    <div class="work-exp">
+        <div class="header">Опыт работы</div>
+        <div class="exp">
+            <div class="table-2">
+                @{
+                    <div class="column">
+                        @foreach (var experience in Model.WorkExperience1)
+                        {
+                            <div class="row">
+                                <p>Место работы @experience.Title</p>
+                                <p>Кем работал @experience.WorkName</p>
+                                <p>Время работы @experience.Hours</p>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="column">
+                        @foreach (var experience in Model.WorkExperience2)
+                        {
+                            <div class="row">
+                                <p>Место работы @experience.Title</p>
+                                <p>Кем работал @experience.WorkName</p>
+                                <p>Время работы @experience.Hours</p>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="clear"></div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="simple-delimiter"></div>
+        @{ Html.RenderAction("UserFeedback", "Feedback", new { userId = Model.UserId }); }
+    <div class="promouter-top">
+        <div class="header">
+            Еще промоутеры
+        </div>
+        <ul class="album horiz">
+            <li class="rounded-borders-4"><img src="img/del-0.png" /></li>
+            <li class="rounded-borders-4"><img src="img/del-1.png" /></li>
+            <li class="rounded-borders-4"><img src="img/del-2.png" /></li>
+            <li class="rounded-borders-4"><img src="img/del-3.png" /></li>
+            <li class="rounded-borders-4"><img src="img/del-4.png" /></li>
+            <li class="rounded-borders-4"><img src="img/del-5.png" /></li>
+        </ul>
+        <p class="right-aligned clear"><a href="#HREF_TO_SEARCH#">начать поиск по исполнителям</a></p>
+    </div>
 </div>
+
+
+
+				
