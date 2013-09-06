@@ -27,7 +27,9 @@ namespace PandaWebApp.Controllers
                     var result = new Feedback.Entry();
                     binder.InverseLoad(x, result);
                     return result;
-                }).ToList()
+                }).ToList(),
+
+
             }; 
         }
 
@@ -46,9 +48,10 @@ namespace PandaWebApp.Controllers
         public ActionResult UserFeedback(Guid userId)
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
+            var type = user as EmployerUser;
             var feedback = prepareFeedbacks(user.Reviews, UserFeedbacksCount);
+            feedback.UserType = type != null ? "EmployerUser" : "PromouterUser";
             return PartialView(feedback);
         }
-
     }
 }

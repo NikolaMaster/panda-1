@@ -19,7 +19,7 @@ namespace PandaWebApp.ViewModels
 
         public int Count { get; set; }
         public ICollection<Entry> Entries { get; set; }
-
+        public string UserType { get; set; }
         public Feedback() 
         {
             Entries = new List<Entry>();

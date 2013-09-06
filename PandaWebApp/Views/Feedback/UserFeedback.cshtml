@@ -1,6 +1,16 @@
 ﻿@model PandaWebApp.ViewModels.Feedback
 <div class="feedbacks">
-    <div class="header">Мнение о промоутере</div>
+    
+        @if (@Model.UserType.Equals("EmployerUser"))
+        {
+            <div class="header">Отзывы о компании</div>
+        }
+        else
+        {
+            <div class="header">Мнение о промоутере</div>
+        }
+        
+   
     <ul>
         @foreach (var entry in Model.Entries)
         {

@@ -1,3 +1,5 @@
 ﻿@model PandaWebApp.ViewModels.StaticPage
 
-@Model.Content
+@Html.Raw(Model.Content)
+
+<a href="@Url.Action("Panel1","Admin", new { pageId = Model.Id})"/>Отредактировать</a>

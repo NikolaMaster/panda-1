@@ -1,10 +1,7 @@
-﻿@using PandaWebApp.ViewModels
-@model PandaWebApp.ViewModels.Promouter
+﻿@model PandaWebApp.ViewModels.Promouter
 @{
     ViewBag.Title = "Detail";
 }
-
-
 
 <div class="user">
     <div class="header">
@@ -290,7 +287,7 @@
             <li class="rounded-borders-4"><img src="img/del-4.png" /></li>
             <li class="rounded-borders-4"><img src="img/del-5.png" /></li>
         </ul>
-        <p class="right-aligned clear"><a href="#HREF_TO_SEARCH#">начать поиск по исполнителям</a></p>
+        <p class="right-aligned clear"><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "About"})">начать поиск по исполнителям</a></p>
     </div>
 </div>
 
