@@ -26,7 +26,7 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.UserId = source.Id;
             dest.Email  = source.Email;
-           // dest.Photo  = source.Avatar.SourceUrl;
+            dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl; 
             dest.Number = source.Number;
             dest.City = source.City;
             //get main album
@@ -64,19 +64,42 @@ namespace PandaWebApp.Engine.Binders
                         dest.About = stringValue;
                         break;
                     case Constants.CompanyNameCode:
-                        dest.Name = stringValue;
+                        dest.CompanyName = stringValue;
                         break;
                     case "Адрес":
                         dest.Address = stringValue;
                         break;
+                    case Constants.VacancyCode:
+                        getVacation(new Guid(stringValue), dest);
+                        break;
                 }
                 #endregion
             }
-
-
-
         }
 
+        private void getVacation(Guid id,Employer dest)
+        {
+            
+            var vacancies = DataAccessLayer.Get<Vacancy>(
+                x => x.EntityList.Id == id);
+            var vacancyList = new List<Employer.VacancyUnit>();
+            foreach (var vacancy in vacancies)
+            {
+                vacancyList.Add
+                    (
+                    new Employer.VacancyUnit()
+                        {
+                            //Title = vacancy.Work.Description,
+                            StartTime = vacancy.StartTime.ToPandaString(),
+                            EndTime = vacancy.EndTime.ToPandaString(),
+                            FullDescription = vacancy.WorkDescription,
+                            CostOfHours = vacancy.CostOfHours,
+                            //WorkName = vacancy.Work.Description
+                        }
+                    );
+            }
 
+            dest.Vacancies = vacancyList;
+        }
     }
 }

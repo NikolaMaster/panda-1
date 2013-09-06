@@ -17,6 +17,7 @@ namespace PandaWebApp.ViewModels
             public DateTime SendDate { get; set; }
         }
 
+        public Guid UserId { get; set; }
         public int Count { get; set; }
         public ICollection<Entry> Entries { get; set; }
         public string UserType { get; set; }

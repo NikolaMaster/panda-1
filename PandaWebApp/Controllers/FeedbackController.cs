@@ -50,7 +50,7 @@ namespace PandaWebApp.Controllers
             var user = DataAccessLayer.GetById<UserBase>(userId);
             var type = user as EmployerUser;
             var feedback = prepareFeedbacks(user.Reviews, UserFeedbacksCount);
-            feedback.UserType = type != null ? "EmployerUser" : "PromouterUser";
+            feedback.UserType = type != null ? Constants.CompanyChecklistTypeCode : Constants.PromouterChecklistTypeCode;
             return PartialView(feedback);
         }
     }

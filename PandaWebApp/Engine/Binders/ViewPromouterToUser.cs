@@ -70,7 +70,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.FirstName = attrib.Value;
                         break;
                     case "Отчество":
-                        //TODO
+                        dest.MiddleName = attrib.Value;
                         break;
                     case "Дата рождения":
                         dest.BirthDate = dateTimeValue;

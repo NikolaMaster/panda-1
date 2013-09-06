@@ -1,7 +1,8 @@
-﻿@model PandaWebApp.ViewModels.Feedback
+﻿@using PandaDataAccessLayer.DAL
+@model PandaWebApp.ViewModels.Feedback
 <div class="feedbacks">
     
-        @if (@Model.UserType.Equals("EmployerUser"))
+        @if (@Model.UserType.Equals(Constants.PromouterChecklistTypeCode))
         {
             <div class="header">Отзывы о компании</div>
         }

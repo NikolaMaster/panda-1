@@ -8,9 +8,20 @@ namespace PandaWebApp.ViewModels
 {
     public class Employer
     {
+        public struct VacancyUnit
+        {
+            public string Title;
+            public string StartTime;
+            public string EndTime;
+            public string WorkName;
+            public int CostOfHours;
+            public int DaysOnSite;
+            public string FullDescription;
+        }
+
         public Guid UserId { get; set; }
         public string Icon { get; set; }
-        public string Name { get; set; }
+        public string CompanyName { get; set; }
         public string Status { get; set; }
         public string Photo { get; set; }
         public string MobilePhone { get; set; }
@@ -24,6 +35,6 @@ namespace PandaWebApp.ViewModels
         public bool AccountConfirmed { get; set; }
         public IEnumerable<string> Album { get; set; }
         public IEnumerable<Feedback> Reviews { get; set; }
-        public IEnumerable<string> Vacation { get; set; }
+        public IEnumerable<VacancyUnit> Vacancies { get; set; }
     }
 }
