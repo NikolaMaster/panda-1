@@ -12,6 +12,11 @@
             <div>Город: @item.City</div>
             <div>Работа: @item.Work</div>
             <div>Оплата: @item.Salary рублей в час</div>
+            @{
+
+                <div>@Html.ActionLink("Посмотреть профиль", "Detail", "Employer", new { id = item.Checklist.User.Id}, null)</div> 
+            }
+
         </div>
         <hr />
     } 

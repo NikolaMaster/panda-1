@@ -36,8 +36,10 @@ namespace PandaWebApp.Engine.Binders
 
             dest.City = cityAttribute != null ? cityAttribute.Value : null;
             dest.Salary = salaryAttribute != null ? salaryAttribute.Value : null;
-            dest.Work = desiredWork != null ? desiredWork.Work.Description : null;
+            dest.Work = desiredWork != null && desiredWork.Work != null ? desiredWork.Work.Description : null;
             dest.CompanyName = companyNameAttribute != null ? companyNameAttribute.Value : null;
+            dest.Checklist = source;
+            dest.Controller = source.ChecklistType.Code == Constants.CompanyChecklistTypeCode ? "Employer" : "Promouter";
         }
     }
 }
