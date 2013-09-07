@@ -8,7 +8,7 @@
         <div class="header">
             <div class="left">
                 <span class="user-gender-icon"><img src="@Model.Icon" /></span>
-                <span class="user-name">@Model.Name</span>
+                <span class="user-name">@Model.EmployerName</span>
                 <span class="user-number">#@Model.Number</span>
             </div>
             <div class="right user-status">@Model.Status</div>
@@ -67,7 +67,19 @@
                 <div class="clear"></div>
                 <div class="more"><p>Просмотреть все фотоотчеты</p></div>
             </div>
-             <div class="header">Открытые вакансии</div>
+            <div class="header">Открытые вакансии</div>
+            @{
+                foreach (var vacancy in Model.Vacancies)
+                {
+                    <div>Наименование работы: @vacancy.WorkName</div>
+                    <div>Заголовок: @vacancy.Title</div>
+                    <div>Описание работы: @vacancy.FullDescription</div>
+                    <div>С: @vacancy.StartTime</div>
+                    <div>До: @vacancy.EndTime</div>
+                    <div>Цена за час: @vacancy.CostOfHours</div>
+                    <div>На сайте: @vacancy.DaysOnSite</div>
+                }
+            }
             <div class="clear"></div>
         </div>
 

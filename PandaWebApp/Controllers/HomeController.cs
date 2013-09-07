@@ -29,7 +29,6 @@ namespace PandaWebApp.Controllers
 
         public ActionResult OnlineUsers()
         {
-            var user = DataAccessLayer.DbContext.Users.First();
             return PartialView(DataAccessLayer.OnlineUsers());
         }
 

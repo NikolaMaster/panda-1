@@ -7,7 +7,7 @@
 <h2>Поиск вакансий</h2>
 
 <div>
-@using (Ajax.BeginForm("CompanySearchResult", new AjaxOptions
+@using (Ajax.BeginForm("EmployerSearchResult", new AjaxOptions
     {
         UpdateTargetId = "companySearchResult",
         HttpMethod = "POST"
@@ -37,5 +37,5 @@
     <hr />
 }
 
-@Html.Partial("CompanySearchResult", new List<PandaWebApp.ViewModels.SearchView>())
+@Html.Partial("EmployerSearchResult", new List<PandaWebApp.ViewModels.SearchView>())
 </div>

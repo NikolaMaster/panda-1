@@ -11,7 +11,7 @@ namespace PandaWebApp.Engine.Binders
 {
     public class PandaPulseToUserBase : BaseDataAccessLayerBinder<PandaPulse.Entry, UserBase>
     {
-        public const string CompanyImage = "~/Content/img/company.png";
+        public const string EmployerImage = "~/Content/img/company.png";
         public const string MaleImage = "~/Content/img/man.png";
         public const string FeemaleImage = "~/Content/img/woman.png";
         public const string UnknownGenderImage = "~/Content/img/car.png";
@@ -28,21 +28,25 @@ namespace PandaWebApp.Engine.Binders
 
         public override void InverseLoad(UserBase source, PandaPulse.Entry dest)
         {
+            dest.User = source;
             if (source is PromouterUser)
             {
-                dest.Name = source.FirstName;
-                var sex = (source as PromouterUser).Checklist.AttrbuteValues.FirstOrDefault(x => x.Attrib.Code == "GENDER");
+                dest.Name = source.LastName + " " + source.FirstName;
+
+                var checklist = (source as PromouterUser).Checklist;
+                var gender = DataAccessLayer.GetAttributeValue(checklist.Id, Constants.GenderCode);
+
                 var male = DataAccessLayer.Get<DictValue>("MALE");
-                var feemale = DataAccessLayer.Get<DictValue>("MALE");
-                if (sex == null)
+                var feemale = DataAccessLayer.Get<DictValue>("FEMALE");
+                if (gender == null)
                 { 
                     dest.Image = UnknownGenderImage;
                 }
                 else
                 {
-                    if (sex.Value == male.Code)
+                    if (gender.Value == male.Code)
                         dest.Image = MaleImage;
-                    else if (sex.Value == feemale.Code)
+                    else if (gender.Value == feemale.Code)
                         dest.Image = FeemaleImage;
                     else
                         dest.Image = UnknownGenderImage;
@@ -51,7 +55,8 @@ namespace PandaWebApp.Engine.Binders
             }
             else
             {
-                dest.Image = CompanyImage;
+                dest.Image = EmployerImage;
+                dest.Name = source.LastName;
             }
         }
     }

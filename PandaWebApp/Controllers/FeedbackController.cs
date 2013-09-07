@@ -27,7 +27,9 @@ namespace PandaWebApp.Controllers
                     var result = new Feedback.Entry();
                     binder.InverseLoad(x, result);
                     return result;
-                }).ToList()
+                }).ToList(),
+
+
             }; 
         }
 
@@ -35,6 +37,14 @@ namespace PandaWebApp.Controllers
         {
             var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>());
             return View(feedback);
+        }
+
+        [ActionName("IndexById")]
+        public ActionResult Index(Guid userid)
+        {
+            var user = DataAccessLayer.GetById<UserBase>(userid);
+            var feedback = prepareFeedbacks(user.Reviews);
+            return View("Index", feedback);
         }
 
         public ActionResult IndexFeedback()
@@ -46,9 +56,10 @@ namespace PandaWebApp.Controllers
         public ActionResult UserFeedback(Guid userId)
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
+            var type = user as EmployerUser;
             var feedback = prepareFeedbacks(user.Reviews, UserFeedbacksCount);
+            feedback.User = user;
             return PartialView(feedback);
         }
-
     }
 }

@@ -19,17 +19,17 @@ namespace PandaWebApp.Controllers
         //
         // GET: /Search/
         [HttpGet]
-        public ActionResult Company()
+        public ActionResult Employer()
         {
             var model = new SearchForm(DataAccessLayer);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult CompanySearchResult(SearchForm model)
+        public ActionResult EmployerSearchResult(SearchForm model)
         {
 
-            var searchCollection = DataAccessLayer.Get<Checklist>(x => x.ChecklistType.Code == Constants.CompanyChecklistTypeCode);
+            var searchCollection = DataAccessLayer.Get<Checklist>(x => x.ChecklistType.Code == Constants.EmployerChecklistTypeCode);
 
             var formValues = new Dictionary<Attrib, object>();
             var formBinder = new FormSearchToSearchValues(DataAccessLayer);

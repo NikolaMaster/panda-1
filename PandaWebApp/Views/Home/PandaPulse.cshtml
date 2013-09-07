@@ -34,7 +34,9 @@
                     {
                         <li @(counter == 0 ? @"class=""first"" " : string.Empty)>
 				            <span class="icon"><img src="@ImageCreator.Create(entry.Image, 24, 24)" /></span>
-				            <span class="name"><a href="#">@entry.Name</a></span>
+				            <span class="name">
+                            @Html.ActionLink(entry.Name, "Detail", entry.User.ControllerNameByUser(), new { id = entry.User.Id }, new { })
+                            </span>
 			            </li>        
                     }
                 }

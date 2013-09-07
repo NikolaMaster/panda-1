@@ -8,11 +8,10 @@ namespace PandaWebApp.ViewModels
 {
     public class SearchView
     {
-        public string CompanyName { get; set; }
+        public string EmployerName { get; set; }
         public string City { get; set; }
         public string Salary { get; set; }
         public string Work { get; set; }
         public Checklist Checklist { get; set; }
-        public string Controller { get; set; }
     }
 }

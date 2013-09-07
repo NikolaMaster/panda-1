@@ -29,7 +29,7 @@ namespace PandaDataAccessLayer.DAL
         {
             var checkList = Create<Checklist>(new Checklist 
                 {
-                    ChecklistType = Constants.CompanyChecklistType,
+                    ChecklistType = Constants.EmployerChecklistType,
                     User = user,
                 });
             checkList.AttrbuteValues = new List<AttribValue>(attributeValues.Select(x => {

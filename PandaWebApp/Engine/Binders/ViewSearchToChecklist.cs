@@ -25,7 +25,7 @@ namespace PandaWebApp.Engine.Binders
             var cityAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.CityCode);
             var salaryAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.SalaryCode);
             var desiredWorkAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.DesiredWorkCode);
-            var companyNameAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.CompanyNameCode);
+            var companyNameAttribute = DataAccessLayer.GetAttributeValue(source.Id, Constants.EmployerNameCode);
 
             DesiredWork desiredWork = null;
             if (desiredWorkAttribute != null)
@@ -37,9 +37,8 @@ namespace PandaWebApp.Engine.Binders
             dest.City = cityAttribute != null ? cityAttribute.Value : null;
             dest.Salary = salaryAttribute != null ? salaryAttribute.Value : null;
             dest.Work = desiredWork != null && desiredWork.Work != null ? desiredWork.Work.Description : null;
-            dest.CompanyName = companyNameAttribute != null ? companyNameAttribute.Value : null;
+            dest.EmployerName = companyNameAttribute != null ? companyNameAttribute.Value : null;
             dest.Checklist = source;
-            dest.Controller = source.ChecklistType.Code == Constants.CompanyChecklistTypeCode ? "Employer" : "Promouter";
         }
     }
 }

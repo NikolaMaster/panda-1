@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PandaDataAccessLayer.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,9 +18,9 @@ namespace PandaWebApp.ViewModels
             public DateTime SendDate { get; set; }
         }
 
+        public UserBase User { get; set; }
         public int Count { get; set; }
         public ICollection<Entry> Entries { get; set; }
-
         public Feedback() 
         {
             Entries = new List<Entry>();

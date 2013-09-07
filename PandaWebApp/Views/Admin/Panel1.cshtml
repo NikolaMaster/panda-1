@@ -1,0 +1,40 @@
+﻿@model PandaWebApp.ViewModels.StaticPage
+@{
+    ViewBag.Title = "Администрирование";
+}
+
+<h2>Редактирование статичной страницы</h2>
+
+
+@using (Html.BeginForm())
+{
+   
+    <div class="label">Guid</div>
+    <div class="editor">@Html.TextAreaFor(model => model.Id)</div>
+    <div class="label">Code:</div>
+    <div class="editor">@Html.TextAreaFor(model => model.Code)</div>
+    <div class="label">Content:</div>
+    <div class="editor">@Html.TextAreaFor(model => model.Content)</div>
+    
+    
+     <input type="submit" value="Применить" />
+}
+
+
+
+@*@using (Ajax.BeginForm("Panel1", new AjaxOptions
+    {
+        UpdateTargetId = "panel1",
+        HttpMethod = "POST"
+    }))
+{
+    <div class="label">Guid</div>
+    <div class="editor">@Html.TextAreaFor(model => model.Id)</div>
+    <div class="label">Code:</div>
+    <div class="editor">@Html.TextAreaFor(model => model.Code)</div>
+    <div class="label">Content:</div>
+    <div class="editor">@Html.TextAreaFor(model => model.Content)</div>
+    
+    <input type="submit" value="Применить" />
+}
+*@

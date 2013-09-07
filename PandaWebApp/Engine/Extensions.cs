@@ -107,5 +107,19 @@ namespace PandaWebApp.Engine
             return result;
         }
         #endregion
+
+        #region user
+        public static string ControllerNameByUser(this UserBase user)
+        {
+            var promouterUser = user as PromouterUser;
+            var employerUser = user as EmployerUser;
+            if (promouterUser != null)
+                return "Promouter";
+            else if (employerUser != null)
+                return "Employer";
+            else
+                throw new Exception("Incorrect user type");
+        }
+        #endregion
     }
 }

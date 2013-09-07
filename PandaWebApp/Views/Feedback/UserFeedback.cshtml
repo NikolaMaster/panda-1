@@ -1,6 +1,17 @@
-﻿@model PandaWebApp.ViewModels.Feedback
+﻿@using PandaDataAccessLayer.DAL
+@model PandaWebApp.ViewModels.Feedback
 <div class="feedbacks">
-    <div class="header">Мнение о промоутере</div>
+    
+        @if (@Model.User is PandaDataAccessLayer.Entities.EmployerUser)
+        {
+            <div class="header">Отзывы о компании</div>
+        }
+        else
+        {
+            <div class="header">Мнение о промоутере</div>
+        }
+        
+   
     <ul>
         @foreach (var entry in Model.Entries)
         {
@@ -24,6 +35,6 @@
             </li>
         }
     </ul>
-    <div class="more"><p>@Html.ActionLink("Больше мнений", "Index", "Feedback")</p></div>
+    <div class="more"><p>@Html.ActionLink("Больше мнений", "IndexById", "Feedback", new { userId = Model.User.Id }, null)</p></div>
 </div>
 

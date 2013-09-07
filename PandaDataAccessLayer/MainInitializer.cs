@@ -236,10 +236,10 @@ namespace PandaDataAccessLayer
         {
             var defaultChecklistTypes = new List<ChecklistType> { 
                 new ChecklistType {
-                    Code = "Promouter"
+                    Code = Constants.PromouterChecklistTypeCode
                 },
                 new ChecklistType {
-                    Code = "Company"
+                    Code = Constants.EmployerChecklistTypeCode
                 },
              };
             defaultChecklistTypes.ForEach(x => mContext.ChecklistTypes.Add(x));
@@ -398,8 +398,14 @@ namespace PandaDataAccessLayer
                  new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = Constants.CompanyNameCode
+                    Code = Constants.EmployerNameCode
+                },
+                new Attrib
+                {
+                    AttribType = mDal.GetAttribType(typeof(string)),
+                    Code = Constants.VacancyCode
                 }
+                
             };
             foreach (var attrib in attribs)
                 mDal.Create<Attrib>(attrib);
@@ -1187,19 +1193,40 @@ namespace PandaDataAccessLayer
                 Password = "123"
             });
 
-            var desiredWorksEntity = mDal.Create<EntityList>(new EntityList() { });
 
             mDal.DbContext.SaveChanges();
 
-            
+            var entityList = mDal.Create<EntityList>(new EntityList() { });
+            mDal.DbContext.SaveChanges();
+
+            mDal.Create<Vacancy>(new Vacancy
+            {
+                EntityList = entityList,
+                Work = mDal.Get<DictValue>("MERC"),
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.UtcNow,
+                CostOfHours = int.Parse(mDal.Get<DictValue>("SALARY_650").Description),
+                WorkDescription = "не надо ничего делать"
+            });
+         
+            mDal.Create<Vacancy>(new Vacancy
+            {
+                EntityList = entityList,
+                Work = mDal.Get<DictValue>("COURIER"),
+                StartTime = DateTime.UtcNow,
+                EndTime = DateTime.MaxValue,
+                CostOfHours = int.Parse(mDal.Get<DictValue>("SALARY_250").Description),
+                WorkDescription = "надо кодить по ночам"
+            });
 
             mDal.Create<DesiredWork>(new DesiredWork
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = entityList,
                 Work = mDal.Get<DictValue>("SUPER"),
             });
 
+            
             mDal.Create(user, new List<AttribValue>
                 {
                     mDal.Create<AttribValue>(new AttribValue
@@ -1214,14 +1241,14 @@ namespace PandaDataAccessLayer
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                     {
-                        Attrib = mDal.Constants.CompanyName,
+                        Attrib = mDal.Constants.EmployerName,
                         Value = "ООО 'Рога и копытца'"
                     }),
                     mDal.Create<AttribValue>(new AttribValue
                     {
-                        Attrib = mDal.Constants.DesiredWork,
-                        Value = desiredWorksEntity.Id.ToString()
-                    }),
+                        Attrib = mDal.Constants.Vacancy,
+                        Value = entityList.Id.ToString()
+                    })
                 });
             
             mDal.DbContext.SaveChanges();

@@ -19,6 +19,8 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.Id = source.Id.ToString();
             dest.Content = source.Content;
+            dest.Code = source.Code;
+
         }
     }
 }

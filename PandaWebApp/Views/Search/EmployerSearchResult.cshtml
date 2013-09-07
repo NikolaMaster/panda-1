@@ -8,13 +8,13 @@
     @foreach (var item in Model)
     { 
         <div>
-            <div>Компания: @item.CompanyName </div>
+            <div>Компания: @item.EmployerName </div>
             <div>Город: @item.City</div>
             <div>Работа: @item.Work</div>
             <div>Оплата: @item.Salary рублей в час</div>
             @{
 
-                <div>@Html.ActionLink("Посмотреть профиль", "Detail", "Employer", new { id = item.Checklist.User.Id}, null)</div> 
+                <div>@Html.ActionLink("Посмотреть профиль", "Detail", item.Checklist.User.ControllerNameByUser(), new { id = item.Checklist.User.Id}, null)</div> 
             }
 
         </div>

@@ -11,13 +11,14 @@ namespace PandaDataAccessLayer.DAL
     public class Constants
     {
         public const string PromouterChecklistTypeCode = "Promouter";
-        public const string CompanyChecklistTypeCode = "Company";
+        public const string EmployerChecklistTypeCode = "Employer";
         public const string DefaultAvatarImage = "motorcycle.jpeg";
         public const string DesiredWorkCode = "DESIRED_WORK";
         public const string CityCode = "CITY";
         public const string GenderCode = "GENDER";
         public const string SalaryCode = "SALARY";
-        public const string CompanyNameCode = "COMPANY_NAME";
+        public const string EmployerNameCode = "EMPLOYER_NAME";
+        public const string VacancyCode = "VACANCY";
         public const string EducationCode = "EDUCATION";
 
         public DataAccessLayer DataAccessLayer { get;private set; }
@@ -39,9 +40,9 @@ namespace PandaDataAccessLayer.DAL
             get { return DataAccessLayer.Get<ChecklistType>(PromouterChecklistTypeCode); }
         }
 
-        public ChecklistType CompanyChecklistType
+        public ChecklistType EmployerChecklistType
         {
-            get { return DataAccessLayer.Get<ChecklistType>(CompanyChecklistTypeCode); }
+            get { return DataAccessLayer.Get<ChecklistType>(EmployerChecklistTypeCode); }
         }
 
         
@@ -65,9 +66,14 @@ namespace PandaDataAccessLayer.DAL
             get { return DataAccessLayer.Get<Attrib>(SalaryCode); }
         }
 
-        public Attrib CompanyName 
+        public Attrib EmployerName 
         {
-            get { return DataAccessLayer.Get<Attrib>(CompanyNameCode); }
+            get { return DataAccessLayer.Get<Attrib>(EmployerNameCode); }
+        }
+
+        public Attrib Vacancy
+        {
+            get { return DataAccessLayer.Get<Attrib>(VacancyCode); }
         }
 
         public Attrib Education 

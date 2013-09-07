@@ -5,10 +5,11 @@ using System.Web;
 
 namespace PandaWebApp.ViewModels
 {
-    public class StaticPage
+    public class Admin
     {
         public string Id { get; set; }
-        public string Code { get; set; }
         public string Content { get; set; }
+        public Guid PageId { get; set; }
+
     }
 }

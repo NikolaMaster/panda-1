@@ -17,7 +17,7 @@ namespace PandaWebApp.FormModels
             }
 
             public string Name { get; set; }
-            public string CompanyType { get; set; }
+            public string EmployerType { get; set; }
             public string About { get; set; }
             public string Surname { get; set; }
             public string Position { get; set; }

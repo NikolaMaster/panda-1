@@ -121,6 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Admin.cs" />
     <Compile Include="ViewModels\Blog.cs" />
     <Compile Include="ViewModels\Employer.cs" />
     <Compile Include="ViewModels\Feedback.cs" />
@@ -234,7 +236,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -285,14 +289,15 @@
     <Content Include="Views\Feedback\UserFeedback.cshtml" />
     <Content Include="Views\Feedback\IndexFeedback.cshtml" />
     <Content Include="Views\Feedback\Index.cshtml" />
-    <Content Include="Views\Search\Company.cshtml" />
-    <Content Include="Views\Search\CompanySearchResult.cshtml" />
+    <Content Include="Views\Search\Employer.cshtml" />
+    <Content Include="Views\Search\EmployerSearchResult.cshtml" />
     <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
     <Content Include="Views\Promouter\Detail.cshtml" />
     <Content Include="Views\Shared\Layout.cshtml" />
     <Content Include="Views\Promouter\Edit.cshtml" />
     <Content Include="Views\Job\Index.cshtml" />
     <Content Include="Views\Employer\Edit.cshtml" />
+    <Content Include="Views\Admin\Panel1.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
