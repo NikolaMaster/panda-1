@@ -57,16 +57,16 @@ namespace PandaWebApp.Engine.Binders
                 #region Big switch [TODO by code field]
                 switch (attrib.Attrib.Code)
                 {
-                    case "Мобильный телефон":
+                    case Constants.MobilePhoneCode:
                         dest.MobilePhone = stringValue;
                         break;
-                    case "О себе":
+                    case Constants.AboutCode:
                         dest.About = stringValue;
                         break;
                     case Constants.EmployerNameCode:
                         dest.EmployerName = stringValue;
                         break;
-                    case "Адрес":
+                    case Constants.AddressCode:
                         dest.Address = stringValue;
                         break;
                     case Constants.VacancyCode:

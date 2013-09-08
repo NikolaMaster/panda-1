@@ -1,0 +1,12 @@
+﻿@model PandaWebApp.FormModels.PromouterForm
+
+<div id ="workExperience">
+    @for (var i = 0;i<Model.WorkExperience.Count;i++)
+    {
+        @Html.EditorFor(x => x.WorkExperience[i], "WorkExperience")
+    }
+
+    <br/>
+    @Ajax.ActionLink("Добавить", "Create", new {userId = Model.UserId}, new AjaxOptions {UpdateTargetId = "workExperience"});
+</div>
+

@@ -1,5 +1,7 @@
-﻿using PandaDataAccessLayer.DAL;
+﻿using System.Globalization;
+using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
+using PandaWebApp.FormModels;
 using PandaWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,19 +12,31 @@ namespace PandaWebApp.Engine.Editors
 {
     public class PromouterEditor : BaseEditor
     {
-        public IEnumerable<Attrib> Attributes { get; private set; }
-
-        public PromouterEditor(DataAccessLayer dataAccessLayer, IEnumerable<Attrib> attributes)
+        public PromouterEditor(DataAccessLayer dataAccessLayer)
             : base(dataAccessLayer)
         {
-            Attributes = attributes;
         }
 
-        public void Edit(Promouter source, PromouterUser dest)
+        private void clearChecklist(Checklist checklist)
         {
-            //source.Email = dest.Email;
-            dest = DataAccessLayer.Refresh(dest);
-            var checklist = dest.Checklists.FirstOrDefault();
+            foreach (var attrbuteValue in checklist.AttrbuteValues)
+            {
+                if (attrbuteValue.Attrib.AttribType.Type == typeof (EntityList).FullName)
+                {
+                    var entityListId = Guid.Parse(attrbuteValue.Value);
+                    var entityList = DataAccessLayer.GetById<EntityList>(entityListId);
+                    entityList.DesiredWork.Clear();
+                    entityList.DesiredWorkTime.Clear();
+                    entityList.WorkExpirience.Clear();
+                    DataAccessLayer.Delete(entityList);
+                }
+            }   
+            checklist.AttrbuteValues.Clear();
+        }
+
+        public void Edit(PromouterForm source, PromouterUser dest)
+        {
+            var checklist = dest.Checklist;
             if (checklist == null)
             {
 #if DEBUG
@@ -33,9 +47,9 @@ namespace PandaWebApp.Engine.Editors
 #endif
             }
 
-            checklist.AttrbuteValues.Clear();
+            clearChecklist(checklist);
 
-            foreach (var attribute in Attributes)
+            foreach (var attribute in DataAccessLayer.GetAttributes(DataAccessLayer.Constants.PromouterChecklistType.Id))
             {
                 var attributeValue = new AttribValue
                 {
@@ -58,19 +72,19 @@ namespace PandaWebApp.Engine.Editors
                     case Constants.GenderCode:
                         //TODO
                         break;
-                    case "Дата рождения":
+                    case Constants.DateOfBirthCode:
                         attributeValue.Value = source.BirthDate.ToPandaString();
                         break;
-                    case "Медицинская книжка":
-                        attributeValue.Value = source.MedicalBook.ToPandaString();
+                    case Constants.MedicalBookCode:
+                        attributeValue.Value = source.MedicalBook.ToString();
                         break;
-                    case "Автомобиль":
-                        attributeValue.Value = source.Car.ToPandaString();
+                    case Constants.CarCode:
+                        attributeValue.Value = source.Car.ToString();
                         break;
                     case "Готов работать сейчас":
                         //TODO
                         break;
-                    case "Мобильный телефон":
+                    case Constants.MobilePhoneCode:
                         attributeValue.Value = source.MobilePhone;
                         break;
                     case Constants.SalaryCode:
@@ -82,50 +96,110 @@ namespace PandaWebApp.Engine.Editors
                     case Constants.EducationCode:
                         attributeValue.Value = source.Education;
                         break;
-                    case "Опыт работы":
-                        //TODO
+                    case Constants.WorkExperienceCode:
+                        attributeValue.Value =  editWorkExperience(source);
                         break;
-                    case "Рост":
+                    case Constants.HeightCode:
                         attributeValue.Value = source.Height.ToPandaString();
                         break;
-                    case "Телосложение":
+                    case Constants.BuildCode:
                         attributeValue.Value = source.Build;
                         break;
-                    case "Вес":
-                        attributeValue.Value = source.Weight.ToPandaString();
+                    case Constants.WeightCode:
+                        attributeValue.Value = source.Weight.ToString(CultureInfo.InvariantCulture);
                         break;
-                    case "Тип кожи":
+                    case Constants.SkinTypeCode:
                         attributeValue.Value = source.SkinType;
                         break;
-                    case "Цвет глаз":
+                    case Constants.EyeColorCode:
                         attributeValue.Value = source.EyeColor;
                         break;
-                    case "Цвет волос":
+                    case Constants.HairColorCode:
                         attributeValue.Value = source.HairColor;
                         break;
-                    case "Длина волос":
+                    case Constants.HairLengthCode:
                         attributeValue.Value = source.HairLength;
                         break;
-                    case "Размер одежды":
+                    case Constants.SizeClothesCode:
                         attributeValue.Value = source.SizeClothes;
                         break;
-                    case "Размер обуви":
+                    case Constants.SizeShoesCode:
                         attributeValue.Value = source.SizeShoes;
                         break;
-                    case "Размер груди":
+                    case Constants.SizeChestCode:
                         attributeValue.Value = source.SizeChest;
                         break;
-                    case "Роликовые коньки":
-                        attributeValue.Value = source.RollerSkates.ToPandaString();
+                    case Constants.RollerSkatesCode:
+                        attributeValue.Value = source.RollerSkates.ToString();
                         break;
-                    case "Зимние коньки":
-                        attributeValue.Value = source.WinterSkates.ToPandaString();
+                    case Constants.WinterSkatesCode:
+                        attributeValue.Value = source.WinterSkates.ToString();
+                        break;
+                    case Constants.AboutCode:
+                        attributeValue.Value = source.About;
+                        break;
+                    case Constants.HobbiesCode:
+                        attributeValue.Value = source.Hobbies;
+                        break;
+                    case Constants.DesiredWorkTimeCode:
+                        attributeValue.Value = editDesiredWorkTime(source);
+                        break;
+                    case Constants.DesiredWorkCode:
+                        attributeValue.Value = editDesiredWork(source);
                         break;
                 }
                 #endregion
 
                 checklist.AttrbuteValues.Add(attributeValue);
             }
+        }
+
+        private string editWorkExperience(PromouterForm source) 
+        {
+            var entityList = DataAccessLayer.Create(new EntityList { });
+            foreach (var item in source.WorkExperience)
+            {
+                DataAccessLayer.Create(new WorkExpirience
+                {
+                    EntityList = entityList,
+                    Start = item.StartTime,
+                    End = item.EndTime,
+                    Hours = item.Hours,
+                    Title = item.Title,
+                    WorkName = item.WorkName
+                });
+            }
+            return entityList.Id.ToString();
+        }
+
+        private string editDesiredWorkTime(PromouterForm source)
+        {
+            var entityList = DataAccessLayer.Create(new EntityList { });
+            foreach (var item in source.DesiredWorkTime)
+            {
+                DataAccessLayer.Create(new DesiredWorkTime
+                {
+                    EntityList = entityList,
+                    StartTime = item.StartTime,
+                    EndTime = item.EndTime,
+                    DayOfWeek = int.Parse(item.DayOfWeek),
+                });
+            }
+            return entityList.Id.ToString();
+        }
+
+        private string editDesiredWork(PromouterForm source)
+        {
+            var entityList = DataAccessLayer.Create(new EntityList { });
+            foreach (var item in source.DesiredWork.Where(item => item.Value))
+            {
+                DataAccessLayer.Create(new DesiredWork
+                {
+                    EntityList = entityList,
+                    Work = DataAccessLayer.Get<DictValue>(item.Code)
+                });
+            }
+            return entityList.Id.ToString();
         }
     }
 }

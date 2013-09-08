@@ -159,7 +159,7 @@
         <div class="table-2 intresting-work">
             <div class="column">
                 <ul class="list-style">
-                    @foreach (var item in Model.IntrestingWork1)
+                    @foreach (var item in Model.DesiredWork1)
                     {
                         <li>@item</li>
                     }
@@ -167,7 +167,7 @@
             </div>
             <div class="column">
                 <ul class="list-style">
-                    @foreach (var item in Model.IntrestingWork2)
+                    @foreach (var item in Model.DesiredWork2)
                     {
                         <li>@item</li>
                     }
@@ -196,7 +196,7 @@
                 {
                     <div class="column even">
                         <div class="row header"><p class="center-aligned">@days[i]</p></div>
-                        @foreach (var iter in Model.TimeOfWork)
+                        @foreach (var iter in Model.DesiredWorkTime)
                         {
                             if (iter.Day.Equals(days[i]))
                             {

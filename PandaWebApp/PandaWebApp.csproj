@@ -123,11 +123,14 @@
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\DesiredWorkTimeController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Engine\Binders\FormPromouterToUsers.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromouterController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\WorkExperienceController.cs" />
     <Compile Include="Engine\Binders\BaseBinder.cs" />
     <Compile Include="Engine\Binders\BaseDataAccessLayerBinder.cs" />
     <Compile Include="Engine\Binders\FormSearchToSearchValues.cs" />
@@ -298,6 +301,10 @@
     <Content Include="Views\Job\Index.cshtml" />
     <Content Include="Views\Employer\Edit.cshtml" />
     <Content Include="Views\Admin\Panel1.cshtml" />
+    <Content Include="Views\WorkExperience\Index.cshtml" />
+    <Content Include="Views\DesiredWorkTime\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\WorkExperience.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DesiredWorkTime.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

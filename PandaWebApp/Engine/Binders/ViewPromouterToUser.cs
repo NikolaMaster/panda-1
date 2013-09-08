@@ -8,14 +8,12 @@ using System.Web;
 
 namespace PandaWebApp.Engine.Binders
 {
-    public class ViewPromouterToUsers : BaseBinder<Promouter, PromouterUser>
+    public class ViewPromouterToUsers : BaseDataAccessLayerBinder<Promouter, PromouterUser>
     {
-        public DataAccessLayer DataAccessLayer { get; private set; }
-
 
         public ViewPromouterToUsers(DataAccessLayer dataAccessLayer) 
+            : base(dataAccessLayer)
         {
-            DataAccessLayer = dataAccessLayer;
         }
 
         public override void Load(Promouter source, PromouterUser dest)
@@ -29,8 +27,8 @@ namespace PandaWebApp.Engine.Binders
             dest.Email = source.Email;
             dest.Photo = source.Avatar.SourceUrl;
             dest.Number = source.Number;
-            dest.IntrestingWork1 = new List<string>();
-            dest.IntrestingWork2 = new List<string>();
+            dest.DesiredWork1 = new List<string>();
+            dest.DesiredWork2 = new List<string>();
 
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
@@ -66,7 +64,7 @@ namespace PandaWebApp.Engine.Binders
                 switch (attrib.Attrib.Code)
                 {
                     case Constants.GenderCode:
-                        dest.Sex = attrib.Value;
+                        dest.Gender = attrib.Value;
                         break;
                     case "Фамилия":
                         dest.LastName = attrib.Value;
@@ -77,19 +75,19 @@ namespace PandaWebApp.Engine.Binders
                     case "Отчество":
                         dest.MiddleName = attrib.Value;
                         break;
-                    case "Дата рождения":
+                    case Constants.DateOfBirthCode:
                         dest.BirthDate = dateTimeValue;
                         break;
-                    case "Медицинская книжка":
+                    case Constants.MedicalBookCode:
                         dest.MedicalBook = boolValue;
                         break;
-                    case "Автомобиль":
+                    case Constants.CarCode:
                         dest.Car = boolValue;
                         break;
                     case "Готов работать сейчас":
                         dest.Status = attrib.Value;
                         break;
-                    case "Мобильный телефон":
+                    case Constants.MobilePhoneCode:
                         dest.MobilePhone = stringValue;
                         break;
                     case Constants.SalaryCode:
@@ -101,56 +99,56 @@ namespace PandaWebApp.Engine.Binders
                     case Constants.EducationCode:
                         dest.Education = stringValue;
                         break;
-                    case "Опыт работы":
+                    case Constants.WorkExperienceCode:
                         getWorkExperience(new Guid(stringValue), dest);
                         break;
-                    case "Рост":
+                    case Constants.HeightCode:
                         dest.Height = intValue;
                         break;
-                    case "Телосложение":
+                    case Constants.BuildCode:
                         dest.Build = stringValue;
                         break;
-                    case "Вес":
+                    case Constants.WeightCode:
                         dest.Weight = intValue;
                         break;
-                    case "Тип кожи":
+                    case Constants.SkinTypeCode:
                         dest.SkinType = stringValue;
                         break;
-                    case "Цвет глаз":
+                    case Constants.EyeColorCode:
                         dest.EyeColor = stringValue;
                         break;
-                    case "Цвет волос":
+                    case Constants.HairColorCode:
                         dest.HairColor = stringValue;
                         break;
-                    case "Длина волос":
+                    case Constants.HairLengthCode:
                         dest.HairLength = stringValue;
                         break;
-                    case "Размер одежды":
+                    case Constants.SizeClothesCode:
                         dest.SizeClothes = stringValue;
                         break;
-                    case "Размер обуви":
+                    case Constants.SizeShoesCode:
                         dest.SizeShoes = stringValue;
                         break;
-                    case "Размер груди":
+                    case Constants.SizeChestCode:
                         dest.SizeChest = stringValue;
                         break;
-                    case "Роликовые коньки":
+                    case Constants.RollerSkatesCode:
                         dest.RollerSkates = boolValue;
                         break;
-                    case "Зимние коньки":
+                    case Constants.WinterSkatesCode:
                         dest.WinterSkates = boolValue;
                         break;
-                    case "О себе":
+                    case Constants.AboutCode:
                         dest.About = stringValue;
                         break;
-                    case "Интересы":
+                    case Constants.HobbiesCode:
                         dest.Hobbies = stringValue;
                         break;
                     case Constants.DesiredWorkCode:
-                       getDesiredWork(new Guid(stringValue),dest );
+                        getDesiredWork(new Guid(stringValue),dest );
                        break;
-                    case "Желаемое время работы":
-                       getDesiredTimeOfWork(new Guid(stringValue), dest);
+                    case Constants.DesiredWorkTimeCode:
+                        getDesiredTimeOfWork(new Guid(stringValue), dest);
                         break;
                 }
                 #endregion
@@ -165,15 +163,12 @@ namespace PandaWebApp.Engine.Binders
             var desiredWorks = DataAccessLayer.Get<DesiredWork>(
                 x => x.EntityList.Id == entityId);
 
-            //i don't understand why this Enumerable contans works which are null
-            return;
-
             var listWorks = new List<string>();
             foreach (var desiredWork in desiredWorks)
             {
                 listWorks.Add(desiredWork.Work.Description);
             }
-            dest.IntrestingWork1 = listWorks;
+            dest.DesiredWork1 = listWorks;
         }
 
         private void getDesiredTimeOfWork(Guid entityId, Promouter dest)
@@ -183,8 +178,8 @@ namespace PandaWebApp.Engine.Binders
 
             foreach (var desiredWorkTime in desiredWorkTimes)
             {
-                var time = string.Format("с {0} до {1}", desiredWorkTime.StartTime.ToPandaString(),
-                                         desiredWorkTime.EndTime.ToPandaString());
+                var time = string.Format("с {0} по {1}", desiredWorkTime.StartTime.ToPandaString(),
+                                                         desiredWorkTime.EndTime.ToPandaString());
 
                 if (!sortedDictionary.ContainsKey(desiredWorkTime.DayOfWeek))
                 {
@@ -202,49 +197,49 @@ namespace PandaWebApp.Engine.Binders
                 switch (iter.Key)
                 {
                     case 0:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
                         {
                             Day = "Понедельник",
                             Time = iter.Value
                         });
                         break;
                     case 1:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
                         {
                             Day = "Вторник",
                             Time = iter.Value
                         });
                         break;
                     case 2:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
                         {
                             Day = "Среда",
                             Time = iter.Value
                         });
                         break;
                     case 3:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
                         {
                             Day = "Четверг",
                             Time = iter.Value
                         });
                         break;
                     case 4:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
                         {
                             Day = "Пятница",
                             Time = iter.Value
                         });
                         break;
                     case 5:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
                         {
                             Day = "Суббота",
                             Time = iter.Value
                         });
                         break;
                     case 6:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit()
+                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
                         {
                             Day = "Воскресенье",
                             Time = iter.Value
@@ -253,39 +248,34 @@ namespace PandaWebApp.Engine.Binders
                 }
             }
 
-            dest.TimeOfWork = timeOfWorkUnits;
+            dest.DesiredWorkTime = timeOfWorkUnits;
         }
 
         private void getWorkExperience(Guid entityId, Promouter dest)
         {
             var experienceUnits1 = new List<Promouter.WorkExperienceUnit>();
             var experienceUnits2 = new List<Promouter.WorkExperienceUnit>();
-            var workExpirience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId);
-            int countExperience = 0;
-
-            foreach (var expirience in workExpirience)
-            {
-                if (countExperience >= workExpirience.Count()/2 )
+            var allWorkExperience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId)
+                .Select(x => new Promouter.WorkExperienceUnit
                 {
-                    experienceUnits1.Add(new Promouter.WorkExperienceUnit()
-                    {
-                        Title = expirience.Title,
-                        StartTime = expirience.Start.ToPandaString(),
-                        EndTime = expirience.End.ToPandaString(),
-                        Hours = (expirience.Start - expirience.End).Hours,
-                        WorkName = expirience.WorkName
-                    });
+                    Title = x.Title,
+                    StartTime = x.Start.HasValue ? x.Start.Value.ToPandaString() : null,
+                    EndTime = x.End.HasValue ? x.End.Value.ToPandaString() : null,
+                    Hours = x.Hours,// (expirience.Start - expirience.End).Hours,
+                    WorkName = x.WorkName,
+                }).ToList();
+
+            var countExperience = 0;
+
+            foreach (var expirience in allWorkExperience)
+            {
+                if (countExperience >= allWorkExperience.Count() / 2)
+                {
+                    experienceUnits1.Add(expirience);
                 }
                 else
                 {
-                    experienceUnits2.Add(new Promouter.WorkExperienceUnit()
-                    {
-                        Title = expirience.Title,
-                        StartTime = expirience.Start.ToPandaString(),
-                        EndTime = expirience.End.ToPandaString(),
-                        Hours = (expirience.End - expirience.Start).Hours,
-                        WorkName = expirience.WorkName
-                    });
+                    experienceUnits2.Add(expirience);
                 }
                 countExperience++;
             }

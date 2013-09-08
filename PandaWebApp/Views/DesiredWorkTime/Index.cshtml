@@ -1,0 +1,12 @@
+﻿@model PandaWebApp.FormModels.PromouterForm
+
+<div id ="desireWorkTime">
+    @for (var i = 0; i < Model.DesiredWorkTime.Count; i++)
+    {
+        @Html.EditorFor(x => Model.DesiredWorkTime[i], "DesiredWorkTime")
+    }
+    <br/>
+    @Ajax.ActionLink("Добавить", "Create", new { userId = Model.UserId }, new AjaxOptions {UpdateTargetId = "desireWorkTime"});
+</div>
+
+    

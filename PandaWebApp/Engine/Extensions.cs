@@ -66,6 +66,11 @@ namespace PandaWebApp.Engine
             return dt.ToString("dd.MM.yyyy");
         }
 
+        public static string ToPandaString(this DateTime? dt)
+        {
+            return dt.HasValue ? dt.Value.ToPandaString() : string.Empty;
+        }
+
         #endregion
 
         #region Double

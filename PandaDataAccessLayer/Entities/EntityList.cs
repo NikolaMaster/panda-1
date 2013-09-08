@@ -10,7 +10,7 @@ namespace PandaDataAccessLayer.Entities
 {
     public class EntityList : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
 
         public virtual ICollection<WorkExpirience> WorkExpirience { get; set; }
@@ -20,6 +20,7 @@ namespace PandaDataAccessLayer.Entities
 
         public EntityList() 
         {
+            Id = Guid.NewGuid();
             if (WorkExpirience == null)
                 WorkExpirience = new List<WorkExpirience>();
             if (DesiredWork == null)

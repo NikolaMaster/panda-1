@@ -13,15 +13,11 @@ namespace PandaDataAccessLayer.Entities
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Required]
-        public DateTime Start { get; set; }
+        public DateTime? Start { get; set; }
         //null means in present time
-        public DateTime End { get; set; }
-        [Required]
+        public DateTime? End { get; set; }
         public string Title { get; set; }
-        [Required]
         public int Hours { get; set; }
-        [Required]
         public string WorkName { get; set; }
 
         public virtual EntityList EntityList { get; set; }

@@ -49,7 +49,7 @@ namespace PandaDataAccessLayer
         {
             modelBuilder.Entity<UserBase>().ToTable("UserBase");
             modelBuilder.Entity<EmployerUser>().ToTable("EmployerUser");
-            modelBuilder.Entity<PromouterUser>().ToTable("PromouterUser");    
+            modelBuilder.Entity<PromouterUser>().ToTable("PromouterUser");
         /*
             //users mapping
             modelBuilder.Entity<CompanyMember>().Map(m =>

@@ -7,22 +7,23 @@ using PandaDataAccessLayer.Entities;
 
 namespace PandaWebApp.ViewModels
 {
+
     public class Promouter
     {
-        public struct TimeOfWorkUnit
+        public class TimeOfWorkUnit
         {
-            public string Day;
-            public bool IWantIt;
-            public List<string> Time;
+            public string Day { get; set; }
+            public bool IWantIt { get; set; }
+            public List<string> Time { get; set; }
         }
 
-        public struct WorkExperienceUnit
+        public class WorkExperienceUnit
         {
-            public string Title;
-            public string StartTime;
-            public string EndTime;
-            public string WorkName;
-            public int Hours;
+            public string Title { get; set; }
+            public string StartTime { get; set; }
+            public string EndTime { get; set; }
+            public string WorkName { get; set; }
+            public int Hours { get; set; }
         }
 
         public Guid UserId { get; set; }
@@ -31,7 +32,7 @@ namespace PandaWebApp.ViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
-        public string Sex { get; set; }
+        public string Gender { get; set; }
         public string Status { get; set; }
         public string Photo { get; set; }
         public string MobilePhone { get; set; }
@@ -88,9 +89,9 @@ namespace PandaWebApp.ViewModels
         public string Salary { get; set; }
 
         public IEnumerable<string> Album { get; set; }
-        public IEnumerable<string> IntrestingWork1 { get; set; }
-        public IEnumerable<string> IntrestingWork2 { get; set; }
-        public IEnumerable<TimeOfWorkUnit> TimeOfWork { get; set; }
+        public IEnumerable<string> DesiredWork1 { get; set; }
+        public IEnumerable<string> DesiredWork2 { get; set; }
+        public IEnumerable<TimeOfWorkUnit> DesiredWorkTime { get; set; }
         public IEnumerable<Feedback> Reviews { get; set; }
         public IEnumerable<WorkExperienceUnit> WorkExperience1 { get; set; }
         public IEnumerable<WorkExperienceUnit> WorkExperience2 { get; set; }

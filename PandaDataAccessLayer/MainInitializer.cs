@@ -1,4 +1,5 @@
-﻿using PandaDataAccessLayer.Entities;
+﻿using System.Globalization;
+using PandaDataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -22,6 +23,7 @@ namespace PandaDataAccessLayer
             addDefaultAttribTypes();
             addDefaultChecklistTypes();
             addDefaulAttributes();
+            addAttrib2ChecklistType();
             addDefaultImages();
             addDebugEntities();
         }
@@ -32,8 +34,8 @@ namespace PandaDataAccessLayer
 
             var genderGroup = new DictGroup
                 {
-                    Code = "GENDER",
-                    Description = Constants.GenderCode
+                    Code = Constants.GenderCode,
+                    Description = "Пол"
                 };
             var genderValues = new List<DictValue>() 
                 {
@@ -64,17 +66,15 @@ namespace PandaDataAccessLayer
                 Code = Constants.SalaryCode,
                 Description = "Заработная плата за час"
             };
-            var costs = new int[] { 150, 170, 180, 200, 220, 240, 250, 
-                270, 280, 300, 350, 400, 450, 500, 550, 600, 650, 700, 
-                800, 900, 1000, 1500, 2000, 3000, 4000, 5000 };
-            var costValues = costs.ToList().Select(x => mDal.Create<DictValue>(new DictValue
-                    {
-                        Code = "SALARY_" + x.ToString(),
-                        Description = x.ToString(),
-                    }));
+            var costValues = Constants.SalaryValues.Select((t, i) => new DictValue
+            {
+                Code = Constants.SalaryValuesCode[i], 
+                Description = t.ToString(CultureInfo.InvariantCulture)
+            })
+            .ToList();
 
             costGroup = mDal.Create(costGroup, costValues).Key;
-            mDal.Create<AttribType>(new AttribType
+            mDal.Create(new AttribType
             {
                 DictGroup = costGroup,
                 Type = typeof(DictGroup).FullName,
@@ -89,31 +89,15 @@ namespace PandaDataAccessLayer
                 Code = Constants.EducationCode,
                 Description = "Образование"
             };
-            var educationValues = new List<DictValue>() 
-                {
-                    mDal.Create<DictValue>(new DictValue
-                    {
-                        Code = "MIDDLE",
-                        Description = "Среднее",
-                    }),
-                    mDal.Create<DictValue>(new DictValue
-                    {
-                        Code = "MIDDLE_FULL",
-                        Description = "Среднее полное",
-                    }),
-                    mDal.Create<DictValue>(new DictValue
-                    {
-                        Code = "INCOMPLETE_HEIGHT",
-                        Description = "Неоконченное высшее",
-                    }),
-                    mDal.Create<DictValue>(new DictValue
-                    {
-                        Code = "HEIGHT",
-                        Description = "Высшее",
-                    }),
-                };
+            var educationValues = Constants.EducationValues.Select((t, i) => new DictValue
+            {
+                Code = Constants.EducationValuesCode[i],
+                Description = t
+            })
+            .ToList();
+
             educationGroup = mDal.Create(educationGroup, educationValues).Key;
-            mDal.Create<AttribType>(new AttribType
+            mDal.Create(new AttribType
             {
                 DictGroup = educationGroup,
                 Type = typeof(DictGroup).FullName,
@@ -267,23 +251,23 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib 
                 {
-                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == "GENDER"),
-                    Code = "GENDER",
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.GenderCode),
+                    Code = Constants.GenderCode,
                 },
                 new Attrib 
                 {
                     AttribType = mDal.GetAttribType(typeof(DateTime)),
-                    Code = "Дата рождения",
+                    Code = Constants.DateOfBirthCode,
                 },
                 new Attrib 
                 {
                     AttribType = mDal.GetAttribType(typeof(bool)),
-                    Code = "Медицинская книжка",
+                    Code = Constants.MedicalBookCode,
                 },
                 new Attrib 
                 {
                     AttribType = mDal.GetAttribType(typeof(bool)),
-                    Code = "Автомобиль",
+                    Code = Constants.CarCode,
                 },
                 new Attrib 
                 {
@@ -293,7 +277,7 @@ namespace PandaDataAccessLayer
                 new Attrib 
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Мобильный телефон",
+                    Code = Constants.MobilePhoneCode,
                 },
                 new Attrib 
                 {
@@ -303,7 +287,7 @@ namespace PandaDataAccessLayer
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "CITY"
+                    Code = Constants.CityCode
                 },
                 new Attrib 
                 {                    
@@ -313,7 +297,7 @@ namespace PandaDataAccessLayer
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(EntityList)),
-                    Code = "Опыт работы",
+                    Code = Constants.WorkExperienceCode,
                 },
                 new Attrib
                 {
@@ -323,77 +307,82 @@ namespace PandaDataAccessLayer
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(EntityList)),
-                    Code = "Желаемое время работы",
+                    Code = Constants.DesiredWorkTimeCode,
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(int)),
-                    Code = "Рост"
+                    Code = Constants.HeightCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Телосложение"
+                    Code = Constants.BuildCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(int)),
-                    Code = "Вес"
+                    Code = Constants.WeightCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Тип кожи"
+                    Code = Constants.SkinTypeCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Цвет глаз"
+                    Code = Constants.EyeColorCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Цвет волос"
+                    Code = Constants.HairColorCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Длина волос"
+                    Code = Constants.HairLengthCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(int)),
-                    Code = "Размер одежды"
+                    Code = Constants.SizeClothesCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(int)),
-                    Code = "Размер груди"
+                    Code = Constants.SizeShoesCode
+                },
+                new Attrib
+                {
+                    AttribType = mDal.GetAttribType(typeof(int)),
+                    Code = Constants.SizeChestCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(bool)),
-                    Code = "Роликовые коньки"
+                    Code = Constants.RollerSkatesCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(bool)),
-                    Code = "Зимние коньки"
+                    Code = Constants.WinterSkatesCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "О себе"
+                    Code = Constants.AboutCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Интересы"
+                    Code = Constants.HobbiesCode
                 },
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(string)),
-                    Code = "Адрес"
+                    Code = Constants.AddressCode
                 },
                  new Attrib
                 {
@@ -422,6 +411,47 @@ namespace PandaDataAccessLayer
             mContext.SaveChanges();
         }
 
+        
+        private void addAttrib2ChecklistType() 
+        {
+            #region Promouter
+            var promouter = new Attrib[]{
+                mDal.Constants.DateOfBirth,
+                mDal.Constants.MedicalBook,
+                mDal.Constants.Car,
+                mDal.Constants.MobilePhone,
+                mDal.Constants.Salary,
+                mDal.Constants.City,
+                mDal.Constants.Education,
+                mDal.Constants.DesiredWork,
+                mDal.Constants.Gender,
+                mDal.Constants.Height,
+                mDal.Constants.Build,
+                mDal.Constants.EyeColor,
+                mDal.Constants.SkinType,
+                mDal.Constants.HairColor,
+                mDal.Constants.HairLength,
+                mDal.Constants.SizeClothes,
+                mDal.Constants.SizeShoes,
+                mDal.Constants.SizeChest,
+                mDal.Constants.Hobbies,
+                mDal.Constants.About,
+                mDal.Constants.DesiredWorkTime
+
+            };
+
+            foreach (var attrib2checklist in promouter.Select(x => new Attrib2ChecklistType 
+                {
+                    Attribute = x, ChecklistType = mDal.Constants.PromouterChecklistType 
+                }))
+            {
+                mDal.Create<Attrib2ChecklistType>(attrib2checklist);
+            }
+            
+
+            #endregion
+            mContext.SaveChanges();
+        }
 
         #region DEBUG!!!
 
@@ -440,7 +470,7 @@ namespace PandaDataAccessLayer
             var sex = mDal.Get<DictValue>(x => x.Code == "FEMALE").First();
             var bithday = new DateTime(1991, 12, 3);
            
-            var desiredWorksEntity = mDal.Create<EntityList>(new EntityList() {Id = new Guid()});
+            var desiredWorksEntity = mDal.Create(new EntityList() { });
 
             mDal.DbContext.SaveChanges();
 
@@ -455,13 +485,13 @@ namespace PandaDataAccessLayer
 
             #region DesiredWork
 
-            mDal.Create<DesiredWork>(new DesiredWork
+            mDal.Create(new DesiredWork
                 {
                     Id = new Guid(),
                     EntityList = desiredWorksEntity,
                     Work = work1
                 });
-            mDal.Create<DesiredWork>(new DesiredWork
+            mDal.Create(new DesiredWork
                 {
                     Id = new Guid(),
                     EntityList = desiredWorksEntity,
@@ -609,7 +639,7 @@ namespace PandaDataAccessLayer
                 {
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Телосложение"),
+                            Attrib = mDal.Get<Attrib>(Constants.BuildCode),
                             Value = "Стройняшка"
                         }),
                     mDal.Create<AttribValue>(new AttribValue
@@ -635,7 +665,7 @@ namespace PandaDataAccessLayer
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Медицинская книжка"),
+                            Attrib = mDal.Get<Attrib>(Constants.MedicalBookCode),
                             Value = "true"
                         }),
                     mDal.Create<AttribValue>(new AttribValue
@@ -646,12 +676,12 @@ namespace PandaDataAccessLayer
 
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Опыт работы"),
+                            Attrib = mDal.Get<Attrib>(Constants.WorkExperienceCode),
                             Value = desiredWorksEntity.Id.ToString()
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Желаемое время работы"),
+                            Attrib = mDal.Get<Attrib>(Constants.DesiredWorkTimeCode),
                             Value = desiredWorksEntity.Id.ToString()
                         }),
                     mDal.Create<AttribValue>(new AttribValue
@@ -661,19 +691,19 @@ namespace PandaDataAccessLayer
                         }),
                      mDal.Create<AttribValue>(new AttribValue
                         {
-                                Attrib = mDal.Get<Attrib>("Дата рождения"),
+                                Attrib = mDal.Get<Attrib>(Constants.DateOfBirthCode),
                                 Value = bithday.ToString()
                          }),
 
                          mDal.Create<AttribValue>(new AttribValue
                         {
-                                Attrib = mDal.Get<Attrib>("О себе"),
+                                Attrib = mDal.Get<Attrib>(Constants.AboutCode),
                                 Value = "Я такая какая есть"
                          }),
 
                          mDal.Create<AttribValue>(new AttribValue
                         {
-                                Attrib = mDal.Get<Attrib>("Интересы"),
+                                Attrib = mDal.Get<Attrib>(Constants.HobbiesCode),
                                 Value = "Книги, библиотека, бумага,вышивание"
                          }),
                          mDal.Create<AttribValue>(new AttribValue
@@ -812,17 +842,21 @@ namespace PandaDataAccessLayer
                 City = "Москва",
                 Email = "pet@gmail.com",
                 Phone = "+234234",
-                Password = "123456"
+                Password = "123456",
+                Id = new Guid("4D5BDBDA-B62C-4461-8DD4-2AE327A292CD")
             });
 
-            var sex = mDal.Get<DictValue>(x => x.Code == "MALE").First();
+            var gender = mDal.Get<DictValue>(x => x.Code == "MALE").First();
             var bithday = new DateTime(1980, 7, 3);
 
-            var desiredWorksEntity = mDal.Create<EntityList>(new EntityList() { });
-
+            var desiredWorksEntity = mDal.Create(new EntityList() { });
+            var desiredWorkTimesEntity = mDal.Create(new EntityList() { });
+            var workExperienceEntity = mDal.Create(new EntityList() { });
             mDal.DbContext.SaveChanges();
 
             desiredWorksEntity = mDal.Refresh(desiredWorksEntity);
+            desiredWorkTimesEntity = mDal.Refresh(desiredWorkTimesEntity);
+            workExperienceEntity = mDal.Refresh(workExperienceEntity);
             #region works
             var work1 = mDal.Get<DictValue>("SUPER");
             var work2 = mDal.Get<DictValue>("COURIER");
@@ -881,7 +915,7 @@ namespace PandaDataAccessLayer
             mDal.Create<DesiredWorkTime>(new DesiredWorkTime
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = desiredWorkTimesEntity,
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow,
                 DayOfWeek = 0
@@ -890,7 +924,7 @@ namespace PandaDataAccessLayer
             mDal.Create<DesiredWorkTime>(new DesiredWorkTime
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = desiredWorkTimesEntity,
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow,
                 DayOfWeek = 0
@@ -899,7 +933,7 @@ namespace PandaDataAccessLayer
             mDal.Create<DesiredWorkTime>(new DesiredWorkTime
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = desiredWorkTimesEntity,
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow,
                 DayOfWeek = 1
@@ -908,7 +942,7 @@ namespace PandaDataAccessLayer
             mDal.Create<DesiredWorkTime>(new DesiredWorkTime
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = desiredWorkTimesEntity,
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow,
                 DayOfWeek = 4
@@ -917,7 +951,7 @@ namespace PandaDataAccessLayer
             mDal.Create<DesiredWorkTime>(new DesiredWorkTime
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = desiredWorkTimesEntity,
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow,
                 DayOfWeek = 2
@@ -926,7 +960,7 @@ namespace PandaDataAccessLayer
             mDal.Create<DesiredWorkTime>(new DesiredWorkTime
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = desiredWorkTimesEntity,
                 StartTime = DateTime.UtcNow,
                 EndTime = DateTime.UtcNow,
                 DayOfWeek = 1
@@ -938,7 +972,7 @@ namespace PandaDataAccessLayer
             mDal.Create<WorkExpirience>(new WorkExpirience
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = workExperienceEntity,
                 Start = DateTime.UtcNow,
                 End = DateTime.UtcNow,
                 Title = "ПарикМэйкер",
@@ -949,7 +983,7 @@ namespace PandaDataAccessLayer
             mDal.Create<WorkExpirience>(new WorkExpirience
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = workExperienceEntity,
                 Start = DateTime.UtcNow,
                 End = DateTime.UtcNow,
                 Title = "НефтеМэйкер",
@@ -960,7 +994,7 @@ namespace PandaDataAccessLayer
             mDal.Create<WorkExpirience>(new WorkExpirience
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = workExperienceEntity,
                 Start = DateTime.UtcNow,
                 End = DateTime.UtcNow,
                 Title = "Газпром",
@@ -971,7 +1005,7 @@ namespace PandaDataAccessLayer
             mDal.Create<WorkExpirience>(new WorkExpirience
             {
                 Id = new Guid(),
-                EntityList = desiredWorksEntity,
+                EntityList = workExperienceEntity,
                 Start = DateTime.UtcNow,
                 End = DateTime.UtcNow,
                 Title = "УрюпНефтьГазМэйкер",
@@ -988,19 +1022,19 @@ namespace PandaDataAccessLayer
             {   
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Телосложение"),
+                            Attrib = mDal.Get<Attrib>(Constants.BuildCode),
                             Value = "Стройняшка"
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                    Attrib = mDal.Get<Attrib>("Фамилия"),
+                            Attrib = mDal.Get<Attrib>("Фамилия"),
                             Value = user.LastName
-                }),
+                        }),
                      mDal.Create<AttribValue>(new AttribValue
                         {
-                                Attrib = mDal.Get<Attrib>("Отчество"),
-                                Value = "Анатольевич"
-                         }),
+                        Attrib = mDal.Get<Attrib>("Отчество"),
+                        Value = "Анатольевич"
+                        }),
 
                     mDal.Create<AttribValue>(new AttribValue
                         {
@@ -1014,7 +1048,7 @@ namespace PandaDataAccessLayer
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Медицинская книжка"),
+                            Attrib = mDal.Get<Attrib>(Constants.MedicalBookCode),
                             Value = "true"
                         }),
                     mDal.Create<AttribValue>(new AttribValue
@@ -1025,34 +1059,34 @@ namespace PandaDataAccessLayer
 
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Опыт работы"),
-                            Value = desiredWorksEntity.Id.ToString()
+                            Attrib = mDal.Get<Attrib>(Constants.WorkExperienceCode),
+                            Value = workExperienceEntity.Id.ToString()
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Желаемое время работы"),
-                            Value = desiredWorksEntity.Id.ToString()
+                            Attrib = mDal.Get<Attrib>(Constants.DesiredWorkTimeCode),
+                            Value = desiredWorkTimesEntity.Id.ToString()
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                         {
                             Attrib = mDal.Get<Attrib>(Constants.GenderCode),
-                            Value = sex.Code
+                            Value = gender.Code
                         }),
                      mDal.Create<AttribValue>(new AttribValue
                         {
-                                Attrib = mDal.Get<Attrib>("Дата рождения"),
+                                Attrib = mDal.Get<Attrib>(Constants.DateOfBirthCode),
                                 Value = bithday.ToString()
                          }),
 
                          mDal.Create<AttribValue>(new AttribValue
                         {
-                                Attrib = mDal.Get<Attrib>("О себе"),
+                                Attrib = mDal.Get<Attrib>(Constants.AboutCode),
                                 Value = "Я такая какая есть"
                          }),
 
                          mDal.Create<AttribValue>(new AttribValue
                         {
-                                Attrib = mDal.Get<Attrib>("Интересы"),
+                                Attrib = mDal.Get<Attrib>(Constants.HobbiesCode),
                                 Value = "Книги, библиотека, бумага,вышивание"
                          }),
                          mDal.Create<AttribValue>(new AttribValue
@@ -1231,12 +1265,12 @@ namespace PandaDataAccessLayer
                 {
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("О себе"),
+                            Attrib = mDal.Get<Attrib>(Constants.AboutCode),
                             Value = "Хорошая компания"
                         }),
                     mDal.Create<AttribValue>(new AttribValue
                         {
-                            Attrib = mDal.Get<Attrib>("Адрес"),
+                            Attrib = mDal.Get<Attrib>(Constants.AddressCode),
                             Value = "в зареке"
                         }),
                     mDal.Create<AttribValue>(new AttribValue

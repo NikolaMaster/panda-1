@@ -65,24 +65,30 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            var binder = new ViewPromouterToUsers(DataAccessLayer);
+            var binder = new FormPromouterToUsers(DataAccessLayer);
             var user = DataAccessLayer.GetById<PromouterUser>(id);
-            var model = new PromouterForm(DataAccessLayer);
+            var model = new PromouterForm();
             binder.InverseLoad(user, model);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(Promouter model)
+        public ActionResult Edit(PromouterForm model)
         {
             if (ModelState.IsValid)
             {
-                var allAttributes = DataAccessLayer.GetAllAttributes();
-                var editor = new PromouterEditor(DataAccessLayer, allAttributes);
-                var user = new PromouterUser();
+                var user = DataAccessLayer.GetById<PromouterUser>(model.UserId);
+                var editor = new PromouterEditor(DataAccessLayer);
                 editor.Edit(model, user);
-                DataAccessLayer.DbContext.SaveChanges();
-                return Detail(model.UserId);
+                try
+                {
+                    DataAccessLayer.DbContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                }
+                
+                return View(model);
             }
             
 #if DEBUG
