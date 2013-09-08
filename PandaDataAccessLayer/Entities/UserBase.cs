@@ -23,7 +23,7 @@ namespace PandaDataAccessLayer.Entities
         public string LastName { get; set; }
         public string City { get; set; }
         public string Phone { get; set; }
-
+        public DateTime CreationDate { get; set; }
         public virtual SeoEntry SeoEntry { get; set; }
         public virtual Photo Avatar { get; set; }
 
@@ -42,6 +42,8 @@ namespace PandaDataAccessLayer.Entities
                 Albums = new List<Album>();
             if (Reviews == null)
                 Reviews = new List<Review>();
+
+            CreationDate = DateTime.UtcNow;
         }
     }
 }

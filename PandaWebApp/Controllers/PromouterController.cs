@@ -26,6 +26,24 @@ namespace PandaWebApp.Controllers
             return View();
         }
 
+       
+        public ActionResult TopPromouters(int count)
+        {
+            var topPromoutersUserBase = DataAccessLayer.TopRandom<PromouterUser>(count);
+            var models = new List<Promouter>();
+            foreach (var promouterUserBase in topPromoutersUserBase)
+            {
+                var model = new Promouter();
+                var binder = new ViewPromouterToUsers(DataAccessLayer);
+                binder.InverseLoad(promouterUserBase, model);
+                models.Add(model);
+            }
+
+            return PartialView(models);
+        }
+
+
+
         [HttpPost]
         public ActionResult Create(FormModels.Register.Promouter model)
         {

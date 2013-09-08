@@ -12,11 +12,11 @@ namespace PandaDataAccessLayer.Entities
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public DictValue Work { get; set; }
+        public virtual DictValue Work { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public int CostOfHours { get; set; }
         public string WorkDescription { get; set; }
+        public virtual DictValue CostOfHours { get; set; }
         public virtual EntityList EntityList { get; set; }
     }
 }

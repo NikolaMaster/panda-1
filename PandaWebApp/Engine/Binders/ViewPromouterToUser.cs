@@ -25,13 +25,28 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.UserId = source.Id;
             dest.Email = source.Email;
-            dest.Photo = source.Avatar.SourceUrl;
+            dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl; 
             dest.Number = source.Number;
             dest.DesiredWork1 = new List<string>();
             dest.DesiredWork2 = new List<string>();
+            dest.DaysOnSite = DateTime.UtcNow.Day - source.CreationDate.Day;
+
+            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id);
+            if (session.Any())
+            {
+                var lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes,0);
+                dest.Status = Equals(lastHit, 0) ? "Онлайн" : string.Format("Был на сайте {0} минут назад",lastHit);
+            }
+            else
+            {
+                dest.Status = "Оффлайн";
+            }
+
 
             //get main album
-            dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
+            var firstOrDefault = source.Albums.FirstOrDefault(x => x.Name == "Основной альбом");
+            if (firstOrDefault != null)
+                dest.Album = firstOrDefault.Photos.Select(x => x.SourceUrl);
 
             var checklist = source.Checklists.FirstOrDefault();
             if (checklist == null)
@@ -145,10 +160,10 @@ namespace PandaWebApp.Engine.Binders
                         dest.Hobbies = stringValue;
                         break;
                     case Constants.DesiredWorkCode:
-                        getDesiredWork(new Guid(stringValue),dest );
+                       getDesiredWork(new Guid(stringValue),dest );
                        break;
                     case Constants.DesiredWorkTimeCode:
-                        getDesiredTimeOfWork(new Guid(stringValue), dest);
+                       getDesiredTimeOfWork(new Guid(stringValue), dest);
                         break;
                 }
                 #endregion
@@ -178,9 +193,14 @@ namespace PandaWebApp.Engine.Binders
 
             foreach (var desiredWorkTime in desiredWorkTimes)
             {
+                //TODO: fix this code
+                /*
+                var time = string.Format("с {0}:{1} до {2}:{3}", desiredWorkTime.StartTime.TimeOfDay.Hours,desiredWorkTime.StartTime.TimeOfDay.Minutes,
+                                         desiredWorkTime.EndTime.TimeOfDay.Hours, desiredWorkTime.EndTime.TimeOfDay.Minutes);
+                 *      */
                 var time = string.Format("с {0} по {1}", desiredWorkTime.StartTime.ToPandaString(),
                                                          desiredWorkTime.EndTime.ToPandaString());
-
+           
                 if (!sortedDictionary.ContainsKey(desiredWorkTime.DayOfWeek))
                 {
                     sortedDictionary.Add(desiredWorkTime.DayOfWeek, new List<string>() { time });
@@ -268,9 +288,9 @@ namespace PandaWebApp.Engine.Binders
             var countExperience = 0;
 
             foreach (var expirience in allWorkExperience)
-            {
-                if (countExperience >= allWorkExperience.Count() / 2)
                 {
+                if (countExperience >= allWorkExperience.Count() / 2)
+                    {
                     experienceUnits1.Add(expirience);
                 }
                 else

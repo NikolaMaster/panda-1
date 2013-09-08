@@ -1,29 +1,14 @@
 ﻿@model PandaWebApp.ViewModels.Blog
-@{
-    ViewBag.Title = "Блог";
-}
 
+<div class="blog">
+    <div class="header">Уютный бложечек нашей компании <span class="count">(@Model.Posts.Count )</span></div>
+    <ul class="messages">
+        @foreach (var iter in Model.Posts)
+        {
+             Html.RenderAction("Detail", "Blog", new { id = iter.Id }); 
+        }
+    </ul>
+</div>
 
-<h2>Уютный блог Панды</h2>
-
-    @foreach (var iter in Model.Posts)
-    {
-        <div>
-            <div>
-                <p>Создан: @iter.CreatedDate</p>
-                <p>Редактирован: @iter.ModifyDate</p>
-                <a href="./Detail?id=@iter.Id">
-                    <div>@iter.Title</div>
-                </a>
-
-                <br/>
-                @iter.ShortText
-                <br/>
-            </div>
-        </div>
-    }
-    
-    <p class="blog">
-        Всего постов: @Model.Posts.Count 
-    </p>
 @Html.ActionLink("Создать пост", "Create", "Blog") 
+

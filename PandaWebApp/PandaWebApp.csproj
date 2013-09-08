@@ -166,6 +166,7 @@
     <Compile Include="ViewModels\Blog.cs" />
     <Compile Include="ViewModels\Employer.cs" />
     <Compile Include="ViewModels\Feedback.cs" />
+    <Compile Include="ViewModels\HomeView.cs" />
     <Compile Include="ViewModels\PandaPulse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ProjectParticipants.cs" />
@@ -305,6 +306,9 @@
     <Content Include="Views\DesiredWorkTime\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\WorkExperience.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DesiredWorkTime.cshtml" />
+    <Content Include="Views\Home\MainView.cshtml" />
+    <Content Include="Views\Employer\TopEmployers.cshtml" />
+    <Content Include="Views\Promouter\TopPromouters.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -322,7 +326,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1276</DevelopmentServerPort>
+          <DevelopmentServerPort>4392</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

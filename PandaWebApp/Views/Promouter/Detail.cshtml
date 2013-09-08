@@ -1,38 +1,37 @@
 ﻿@model PandaWebApp.ViewModels.Promouter
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Информация о промоутере";
 }
 
 <div class="user">
     <div class="header">
         <div class="left">
-            <img src="img/woman.png" />
-            <span class="user-name">@string.Format("{0} {1}",Model.FirstName,@Model.LastName)</span>
+            <img src="~/Content/img/woman.png" />
+            <span class="user-name">@string.Format("{0} {1}",Model.FirstName,Model.LastName)</span>
             <span class="user-number">#@Model.Number</span>
         </div>
         <div class="right user-status">
-            <img src="img/offline.png" />
+            <img src="@(Model.Status == "Онлайн" ? "/Content/img/online.png" : "/Content/img/offline.png")" />
             <span>@Model.Status</span>
         </div>
-							
         <div class="clear"></div>
     </div>
 					
     <div class="photo left">
-        <img src="@Model.Photo" />
+        <img src="@ImageCreator.Create(Model.Photo, 128, 128)" />
         <span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
     </div>
     <div class="info right">
         <div class="table-2">
             <div class="column">
-                <div class="row on-site">На сайте <span class="days">#DAYS#</span></div>
+                <div class="row on-site">На сайте <span class="days">@Model.DaysOnSite</span></div>
                 <div class="row">Дата рождения</div>
                 <div class="row">Количество полных лет</div>
-                <div class="row"><div class="icon left"><img src="img/medical-book.png" /></div>Мед. Книжка</div>
-                <div class="row"><div class="icon left"><img src="img/car.png" /></div>Автомобиль</div>
+                <div class="row"><div class="icon left"><img src="~/Content/img/medical-book.png" /></div>Мед. Книжка</div>
+                <div class="row"><div class="icon left"><img src="~/Content/img/car.png" /></div>Автомобиль</div>
                 <div class="row gap"></div>
-                <div class="row"><div class="icon left"><img src="img/phone.png" /></div>Мобильный телефон</div>
-                <div class="row"><div class="icon left"><img src="img/mail.png" /></div>e-mail</div>
+                <div class="row"><div class="icon left"><img src="~/Content/img/phone.png" /></div>Мобильный телефон</div>
+                <div class="row"><div class="icon left"><img src="~/Content/img/mail.png" /></div>e-mail</div>
                 <div class="row">Желаемая цена за час работы</div>
                 <div class="row">Город</div>
                 <div class="row">Образование</div>
@@ -83,8 +82,16 @@
                         <li class="@(index == 0 ? "first" : "")">
                             <img src="@item" />
                         </li>
+                    
+                        if (index == 4)
+                        {
+                            index = 0;
+                        }
+                        else
+                        {
                         index++;
                     }
+                }
                 }
             </ul>
         </div>
@@ -181,7 +188,7 @@
         <div class="header">Желаемое время работы</div>
         <div class="table-7">
             @{
-                string[] days = new string[]
+                var days = new[]
                     {
                         "Понедельник",
                         "Вторник",
@@ -194,7 +201,7 @@
 
                 for (int i = 0; i < 7; i++)
                 {
-                    <div class="column even">
+                    <div class=" @(i % 2 == 0 ? "column even" : "column odd")">
                         <div class="row header"><p class="center-aligned">@days[i]</p></div>
                         @foreach (var iter in Model.DesiredWorkTime)
                         {
@@ -275,19 +282,12 @@
     </div>
     <div class="simple-delimiter"></div>
         @{ Html.RenderAction("UserFeedback", "Feedback", new { userId = Model.UserId }); }
+    
     <div class="promouter-top">
         <div class="header">
             Еще промоутеры
         </div>
-        <ul class="album horiz">
-            <li class="rounded-borders-4"><img src="img/del-0.png" /></li>
-            <li class="rounded-borders-4"><img src="img/del-1.png" /></li>
-            <li class="rounded-borders-4"><img src="img/del-2.png" /></li>
-            <li class="rounded-borders-4"><img src="img/del-3.png" /></li>
-            <li class="rounded-borders-4"><img src="img/del-4.png" /></li>
-            <li class="rounded-borders-4"><img src="img/del-5.png" /></li>
-        </ul>
-        <p class="right-aligned clear"><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "About"})">начать поиск по исполнителям</a></p>
+        @{ Html.RenderAction("TopPromouters", "Promouter", new { count = 6 }); }
     </div>
 </div>
 

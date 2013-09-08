@@ -157,17 +157,20 @@ namespace PandaWebApp.Engine.Editors
         private string editWorkExperience(PromouterForm source) 
         {
             var entityList = DataAccessLayer.Create(new EntityList { });
-            foreach (var item in source.WorkExperience)
+            if (source.WorkExperience != null)
             {
-                DataAccessLayer.Create(new WorkExpirience
+                foreach (var item in source.WorkExperience)
                 {
-                    EntityList = entityList,
-                    Start = item.StartTime,
-                    End = item.EndTime,
-                    Hours = item.Hours,
-                    Title = item.Title,
-                    WorkName = item.WorkName
-                });
+                    DataAccessLayer.Create(new WorkExpirience
+                    {
+                        EntityList = entityList,
+                        Start = item.StartTime,
+                        End = item.EndTime,
+                        Hours = item.Hours,
+                        Title = item.Title,
+                        WorkName = item.WorkName
+                    });
+                }
             }
             return entityList.Id.ToString();
         }
@@ -175,15 +178,18 @@ namespace PandaWebApp.Engine.Editors
         private string editDesiredWorkTime(PromouterForm source)
         {
             var entityList = DataAccessLayer.Create(new EntityList { });
-            foreach (var item in source.DesiredWorkTime)
+            if (source.DesiredWorkTime != null)
             {
-                DataAccessLayer.Create(new DesiredWorkTime
+                foreach (var item in source.DesiredWorkTime)
                 {
-                    EntityList = entityList,
-                    StartTime = item.StartTime,
-                    EndTime = item.EndTime,
-                    DayOfWeek = int.Parse(item.DayOfWeek),
-                });
+                    DataAccessLayer.Create(new DesiredWorkTime
+                    {
+                        EntityList = entityList,
+                        StartTime = item.StartTime,
+                        EndTime = item.EndTime,
+                        DayOfWeek = int.Parse(item.DayOfWeek),
+                    });
+                }
             }
             return entityList.Id.ToString();
         }
@@ -191,13 +197,16 @@ namespace PandaWebApp.Engine.Editors
         private string editDesiredWork(PromouterForm source)
         {
             var entityList = DataAccessLayer.Create(new EntityList { });
-            foreach (var item in source.DesiredWork.Where(item => item.Value))
+            if (source.DesiredWork != null)
             {
-                DataAccessLayer.Create(new DesiredWork
+                foreach (var item in source.DesiredWork.Where(item => item.Value))
                 {
-                    EntityList = entityList,
-                    Work = DataAccessLayer.Get<DictValue>(item.Code)
-                });
+                    DataAccessLayer.Create(new DesiredWork
+                    {
+                        EntityList = entityList,
+                        Work = DataAccessLayer.Get<DictValue>(item.Code)
+                    });
+                }
             }
             return entityList.Id.ToString();
         }

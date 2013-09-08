@@ -1,17 +1,19 @@
 ﻿@model PandaWebApp.ViewModels.Employer
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = "Информация о компании";
 }
 
-<div class="base-content left">
     <div class="user">
         <div class="header">
             <div class="left">
-                <span class="user-gender-icon"><img src="@Model.Icon" /></span>
-                <span class="user-name">@Model.EmployerName</span>
+            <span class="user-gender-icon"><img src="~/Content/img/company.png" /></span>
+            <span class="user-name">@Model.EmployerName</span>
                 <span class="user-number">#@Model.Number</span>
             </div>
-            <div class="right user-status">@Model.Status</div>
+        <div class="right user-status">
+            <img src="@(Model.Status == "Онлайн" ? "/Content/img/online.png" : "/Content/img/offline.png")" />
+            <span>@Model.Status</span>
+        </div>
             <div class="clear"></div>
         </div>					
         <div class="photo left">
@@ -19,37 +21,52 @@
         </div>
 
         <div class="info right">
-            <div class="col-2-1">На сайте <span class="days-on-site">#DAYS#</span></div>
-            @if(Model.AccountConfirmed)
+        <div class="table-2">
+            <div class="column">
+                <div class="row on-site">На сайте <span class="days">@Model.DaysOnSite</span></div>
+                <div class="row">Город</div>
+                <div class="row">Адрес офиса</div> 
+                <div class="row"><img src="~/Content/img/phone.png" />Телефон</div>
+                <div class="row"><img src="~/Content/img/mail.png" />e-mail</div>
+            </div>
+
+            <div class="column">
+                @if (Model.AccountConfirmed)
             {
-                <div class="col-2-2 days-on-site">Аккаунт подтвержден</div>
+                    <div class="row confirmed-true"><p class="right-aligned">Аккаунт подтвержден</p></div>
             }
             else
             {
-                <div class="col-2-2 days-on-site">Аккаунт не подтвержден</div>
+                    <div class="row confirmed-false"><p class="right-aligned">Аккаунт не подтвержден</p></div>
             }
-         
-            <div class="clear"></div>
-            <div class="col-2-1">Город</div>
-            <div class="col-2-2">@Model.City</div>
-            <div class="clear"></div>
-            <div class="col-2-1">Адрес офиса</div>
-            <div class="col-2-2">@Model.Address</div>
-            <div class="clear"></div>
-            <div class="col-2-1"><img src="../../Content/img/phone.png" />Телефон</div>
-            <div class="col-2-2">@Model.MobilePhone</div>
-            <div class="clear"></div>
-            <div class="col-2-1"><img src="#" />e-mail</div>
-            <div class="col-2-2">@Model.Email</div>
+                <div class="row">@Model.City</div>
+                <div class="row">@Model.Address</div>
+                <div class="row">@Model.MobilePhone</div>
+                <div class="row">@Model.Email</div>
+            </div>
             <div class="clear"></div>
         </div>
-        <div class="clear"></div>
-        <div class="full-info">
-            <div class="header">О компании:</div>
-
+    </div>
+         
             <div class="clear"></div>
+        
+    <div class="about">
+        <div class="header">О компании:</div>
+        <div class="things">
+            @if (string.IsNullOrEmpty(@Model.About))
+            {
+                <p class="nothing">Пользователь еще не написал о себе, вы можете <a href="#">попросить его</a> рассказать о себе подробнее</p>
+            }
+            else
+            {
+                <p class="nothing">@Model.About</p>
+            }
+        </div>
+        </div>
+        <div class="clear"></div>
+
             <div class="photo-album clear">
-                <div class="header">Фотоотчеты</div>
+        <div class="header">Фото альбом портфолио</div>
                 <div class="album">
                     <ul class="horiz">
                         @{
@@ -59,14 +76,23 @@
                                 <li class="@(index == 0 ? "first" : "")">
                                     <img src="@item" />
                                 </li>
+                    
+                        if (index == 4)
+                        {
+                            index = 0;
+                        }
+                        else
+                        {
                                 index++;
                             }
                         }
+                }
                     </ul>
                 </div>
                 <div class="clear"></div>
                 <div class="more"><p>Просмотреть все фотоотчеты</p></div>
             </div>
+        
             <div class="header">Открытые вакансии</div>
             @{
                 foreach (var vacancy in Model.Vacancies)
@@ -81,11 +107,14 @@
                 }
             }
             <div class="clear"></div>
-        </div>
 
-    </div>
 
    @{ Html.RenderAction("UserFeedback", "Feedback", new { userId = Model.UserId }); }
    
- 
+    <div class="promouter-top">
+        <div class="header">
+            Другие компании
+        </div>
+         @{ Html.RenderAction("TopEmployers", "Employer", new { count = 6 }); }
+    </div>
 </div>
