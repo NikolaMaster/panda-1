@@ -1,0 +1,12 @@
+﻿@model ICollection<PandaWebApp.ViewModels.Employer>
+
+
+<ul class="album horiz">
+    @foreach (var employer in Model)
+    {
+        <li class="rounded-borders-4"><img src="@employer.Photo" /></li>
+    }
+</ul>
+<p class="right-aligned clear"><a href="#">начать поиск по компаниям</a></p>
+
+

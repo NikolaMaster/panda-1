@@ -15,21 +15,19 @@ namespace PandaWebApp.Controllers
 {
     public class BlogController : ModelCareController
     {
+        public const int BlogsCount = 3;
+
         [HttpGet]
         public ActionResult Posts()
         {
-            //var t = DataAccessLayer.DbContext.PromouterUsers;
-            //var pr = DataAccessLayer.GetById<UserBase>(new Guid("80fa3949-4b83-4587-b24d-fe140b5743aa"));
-
-            var online = DataAccessLayer.OnlineUsers();
-            var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(5);
+            var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(BlogsCount);
             if (listOfPosts == null)
             {
                 return HttpNotFound("Posts not found");
             }
 
-            var blog = new Blog();
-            blog.Posts = new List<Blog.Entry>();
+            var blog = new Blog {Posts = new List<Blog.Entry>()};
+
             foreach (var blogPost in listOfPosts)
             {
                 var binder = new BlogToBlogPost();
@@ -38,7 +36,7 @@ namespace PandaWebApp.Controllers
                 blog.Posts.Add(entry);
             }
 
-            return View(blog);
+            return PartialView(blog);
         }
 
         [HttpGet]
@@ -92,7 +90,7 @@ namespace PandaWebApp.Controllers
             var binder = new BlogToBlogPost();
             var entry = new Blog.Entry();
             binder.InverseLoad(post, entry);
-            return View(entry);
+            return PartialView(entry);
         }
 
         [HttpPost]

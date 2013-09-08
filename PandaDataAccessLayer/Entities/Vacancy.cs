@@ -15,8 +15,8 @@ namespace PandaDataAccessLayer.Entities
         public DictValue Work { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public int CostOfHours { get; set; }
         public string WorkDescription { get; set; }
+        public string CostOfHours { get; set; }
         public virtual EntityList EntityList { get; set; }
     }
 }

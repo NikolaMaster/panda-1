@@ -14,10 +14,26 @@ namespace PandaWebApp.Controllers
 {
     public class EmployerController : ModelCareController
     {
+
         [HttpGet]
         public ActionResult Create()
         {
             return View();
+        }
+        
+        public ActionResult TopEmployers(int count)
+        {
+            var topEmployersUserBase = DataAccessLayer.TopRandom<EmployerUser>(count);
+            var models = new List<Employer>();
+            foreach (var employerUserBase in topEmployersUserBase)
+            {
+                var model = new Employer();
+                var binder = new ViewEmployerToUser(DataAccessLayer);
+                binder.InverseLoad(employerUserBase, model);
+                models.Add(model);
+            }
+            
+            return PartialView(models);
         }
 
         [HttpPost]

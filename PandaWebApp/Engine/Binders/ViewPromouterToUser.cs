@@ -27,13 +27,29 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.UserId = source.Id;
             dest.Email = source.Email;
-            dest.Photo = source.Avatar.SourceUrl;
+            dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl; 
             dest.Number = source.Number;
+            dest.DaysOnSite = DateTime.UtcNow.Day - source.CreationDate.Day;
+
+            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id);
+            if (session.Any())
+            {
+                var lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes,0);
+                dest.Status = Equals(lastHit, 0) ? "Онлайн" : string.Format("Был на сайте {0} минут назад",lastHit);
+            }
+            else
+            {
+                dest.Status = "Оффлайн";
+            }
+
+
             dest.IntrestingWork1 = new List<string>();
             dest.IntrestingWork2 = new List<string>();
 
             //get main album
-            dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
+            var firstOrDefault = source.Albums.FirstOrDefault(x => x.Name == "Основной альбом");
+            if (firstOrDefault != null)
+                dest.Album = firstOrDefault.Photos.Select(x => x.SourceUrl);
 
             var checklist = source.Checklists.FirstOrDefault();
             if (checklist == null)
@@ -88,7 +104,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.MobilePhone = stringValue;
                         break;
                     case Constants.SalaryCode:
-                        dest.CostForHour = intValue;
+                        dest.CostForHour = int.Parse(DataAccessLayer.Get<DictValue>(stringValue).Description);
                         break;
                     case Constants.CityCode:
                         dest.City = stringValue;
@@ -178,8 +194,8 @@ namespace PandaWebApp.Engine.Binders
 
             foreach (var desiredWorkTime in desiredWorkTimes)
             {
-                var time = string.Format("с {0} до {1}", desiredWorkTime.StartTime.ToPandaString(),
-                                         desiredWorkTime.EndTime.ToPandaString());
+                var time = string.Format("с {0}:{1} до {2}:{3}", desiredWorkTime.StartTime.TimeOfDay.Hours,desiredWorkTime.StartTime.TimeOfDay.Minutes,
+                                         desiredWorkTime.EndTime.TimeOfDay.Hours, desiredWorkTime.EndTime.TimeOfDay.Minutes);
 
                 if (!sortedDictionary.ContainsKey(desiredWorkTime.DayOfWeek))
                 {

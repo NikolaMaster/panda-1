@@ -47,7 +47,6 @@ namespace PandaWebApp.ViewModels
         public string SizeChest { get; set; }
         public string Hobbies { get; set; }
         public string About { get; set; }
-
         public int Weight { get; set; }
         public int Number { get; set; }
         public int DaysOnSite { get; set; }

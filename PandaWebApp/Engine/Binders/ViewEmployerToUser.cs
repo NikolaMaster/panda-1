@@ -29,19 +29,25 @@ namespace PandaWebApp.Engine.Binders
             dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl; 
             dest.Number = source.Number;
             dest.City = source.City;
+            dest.DaysOnSite = DateTime.UtcNow.Day - source.CreationDate.Day;
+            dest.MobilePhone = source.Phone;
+
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 
-            var checklist = source.Checklists.FirstOrDefault();
-            if (checklist == null)
+
+            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id);
+            if (session.Any())
             {
-#if DEBUG
-                throw new HttpException(404, "Checklist not found");
-#endif
-#if RELEASE
-                return;
-#endif
+                var lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes, 0);
+                dest.Status = Equals(lastHit, 0) ? "Онлайн" : string.Format("Был на сайте {0} минут назад", lastHit);
             }
+            else
+            {
+                dest.Status = "Оффлайн";
+            }
+
+            var checklist = source.Checklists.FirstOrDefault();
 
             foreach (var attrib in checklist.AttrbuteValues)
             {
@@ -70,19 +76,21 @@ namespace PandaWebApp.Engine.Binders
                         dest.Address = stringValue;
                         break;
                     case Constants.VacancyCode:
-                        getVacation(new Guid(stringValue), dest);
+                        getVacancy(new Guid(stringValue), dest);
                         break;
                 }
                 #endregion
             }
         }
 
-        private void getVacation(Guid id,Employer dest)
+        private void getVacancy(Guid id,Employer dest)
         {
             
             var vacancies = DataAccessLayer.Get<Vacancy>(
                 x => x.EntityList.Id == id);
             var vacancyList = new List<Employer.VacancyUnit>();
+
+            
             foreach (var vacancy in vacancies)
             {
                 vacancyList.Add
@@ -93,7 +101,7 @@ namespace PandaWebApp.Engine.Binders
                             StartTime = vacancy.StartTime.ToPandaString(),
                             EndTime = vacancy.EndTime.ToPandaString(),
                             FullDescription = vacancy.WorkDescription,
-                            CostOfHours = vacancy.CostOfHours,
+                            CostOfHours = int.Parse(DataAccessLayer.Get<DictValue>(vacancy.CostOfHours).Description),
                             //WorkName = vacancy.Work.Description
                         }
                     );
