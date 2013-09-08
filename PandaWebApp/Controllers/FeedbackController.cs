@@ -48,8 +48,8 @@ namespace PandaWebApp.Controllers
         public ActionResult UserFeedback(Guid userId)
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
-            var type = user as EmployerUser;
             var feedback = prepareFeedbacks(user.Reviews, UserFeedbacksCount);
+            var type = user as EmployerUser;
             feedback.UserType = type != null ? Constants.CompanyChecklistTypeCode : Constants.PromouterChecklistTypeCode;
             return PartialView(feedback);
         }

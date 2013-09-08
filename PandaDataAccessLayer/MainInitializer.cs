@@ -9,8 +9,8 @@ using EntityFramework.Extensions;
 using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer
-{
-    public class MainInitializer : DropCreateDatabaseIfModelChanges<MainDbContext>//CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
+{//DropCreateDatabaseIfModelChanges<MainDbContext>
+    public class MainInitializer : CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
     {
         private MainDbContext mContext;
         private DataAccessLayer mDal;
@@ -611,7 +611,13 @@ namespace PandaDataAccessLayer
                         {
                                 Attrib = mDal.Get<Attrib>("Интересы"),
                                 Value = "Книги, библиотека, бумага,вышивание"
+                         }),
+                         mDal.Create<AttribValue>(new AttribValue
+                        {
+                                Attrib = mDal.Get<Attrib>(Constants.SalaryCode),
+                                Value = mDal.Get<DictValue>("SALARY_450").Code
                          })
+
                 });
 
 #endregion
@@ -683,61 +689,61 @@ namespace PandaDataAccessLayer
 
             #endregion
         }
-        
+
         private void addUser2()
         {
             var user = mDal.Create(new EmployerUser()
-            {
-                LastName = "ООО 'Рога и копытца'",
-                City = "Тюмень",
-                Email = "petrov@gmail.com",
-                Phone = "+9823424",
-                Password = "123"
-            });
+                {
+                    LastName = "ООО 'Рога и копытца'",
+                    City = "Тюмень",
+                    Email = "petrov@gmail.com",
+                    Phone = "+9823424",
+                    Password = "123"
+                });
 
 
             mDal.DbContext.SaveChanges();
 
 
             mDal.Create<Session>(new Session()
-            {
-                LastHit = DateTime.UtcNow,
-                User = user
-            });
+                {
+                    LastHit = DateTime.UtcNow,
+                    User = user
+                });
 
-            var entityList = mDal.Create<EntityList>(new EntityList() { });
+            var entityList = mDal.Create<EntityList>(new EntityList() {});
             mDal.DbContext.SaveChanges();
 
             mDal.Create<Vacancy>(new Vacancy
-            {
-                EntityList = entityList,
-                Work = mDal.Get<DictValue>("MERC"),
-                StartTime = DateTime.UtcNow,
-                EndTime = DateTime.UtcNow,
-                CostOfHours = mDal.Get<DictValue>("SALARY_650").Code,
-                WorkDescription = "Добросовестно работать"
-            });
-            
-         
-            mDal.Create<Vacancy>(new Vacancy
-            {
-                EntityList = entityList,
-                Work = mDal.Get<DictValue>("COURIER"),
-                StartTime = DateTime.UtcNow,
-                EndTime = DateTime.MaxValue,
-                CostOfHours = mDal.Get<DictValue>("SALARY_250").Code,
-                WorkDescription = "Работа по ночам"
-            });
+                {
+                    EntityList = entityList,
+                    Work = mDal.Get<DictValue>("MERC"),
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.UtcNow,
+                    CostOfHours = mDal.Get<DictValue>("SALARY_650").Code,
+                    WorkDescription = "Добросовестно работать"
+                });
+
 
             mDal.Create<Vacancy>(new Vacancy
-            {
-                EntityList = entityList,
-                Work = mDal.Get<DictValue>("BUYER"),
-                StartTime = DateTime.UtcNow,
-                EndTime = DateTime.MaxValue,
-                CostOfHours = mDal.Get<DictValue>("SALARY_700").Code,
-                WorkDescription = "ненормированный график работы"
-            });
+                {
+                    EntityList = entityList,
+                    Work = mDal.Get<DictValue>("COURIER"),
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.MaxValue,
+                    CostOfHours = mDal.Get<DictValue>("SALARY_450").Code,
+                    WorkDescription = "Работа по ночам"
+                });
+
+            mDal.Create<Vacancy>(new Vacancy
+                {
+                    EntityList = entityList,
+                    Work = mDal.Get<DictValue>("BUYER"),
+                    StartTime = DateTime.UtcNow,
+                    EndTime = DateTime.MaxValue,
+                    CostOfHours = mDal.Get<DictValue>("SALARY_700").Code,
+                    WorkDescription = "ненормированный график работы"
+                });
             /*
             mDal.Create<DesiredWork>(new DesiredWork
             {
@@ -745,7 +751,7 @@ namespace PandaDataAccessLayer
                 Work = mDal.Get<DictValue>("SUPER"),
             });
             */
-            
+
             mDal.Create(user, new List<AttribValue>
                 {
                     mDal.Create<AttribValue>(new AttribValue
@@ -759,27 +765,27 @@ namespace PandaDataAccessLayer
                             Value = "Ивана Доброго 153 корпус 5"
                         }),
                     mDal.Create<AttribValue>(new AttribValue
-                    {
-                        Attrib = mDal.Constants.CompanyName,
-                        Value = "ООО 'Рога и копытца'"
-                    }),
+                        {
+                            Attrib = mDal.Constants.CompanyName,
+                            Value = "ООО 'Рога и копытца'"
+                        }),
                     mDal.Create<AttribValue>(new AttribValue
-                    {
-                        Attrib = mDal.Constants.Vacancy,
-                        Value = entityList.Id.ToString()
-                    })
+                        {
+                            Attrib = mDal.Constants.Vacancy,
+                            Value = entityList.Id.ToString()
+                        })
                 });
-            
+
             mDal.DbContext.SaveChanges();
-            
+
             #region add album
 
             var albomFirst = mDal.Create<Album>(new Album()
-            {
-                Id = new Guid(),
-                Name = "Работа",
-                User = user
-            });
+                {
+                    Id = new Guid(),
+                    Name = "Работа",
+                    User = user
+                });
             /*
             var avatar = mDal.Create<Photo>(new Photo()
             {
@@ -791,39 +797,43 @@ namespace PandaDataAccessLayer
             for (int i = 0; i < 10; i++)
             {
                 mDal.Create<Photo>(new Photo()
-                {
-                    Id = new Guid(),
-                    Album = albomFirst,
-                    SourceUrl = "http://t2.gstatic.com/images?q=tbn:ANd9GcQG4W7WLhXnnZdVaQypIqIC1YQIjdnpyF3muXyhaFNAEbUxEGt2qg"
-                });
+                    {
+                        Id = new Guid(),
+                        Album = albomFirst,
+                        SourceUrl =
+                            "http://t2.gstatic.com/images?q=tbn:ANd9GcQG4W7WLhXnnZdVaQypIqIC1YQIjdnpyF3muXyhaFNAEbUxEGt2qg"
+                    });
             }
 
-            mDal.DbContext.SaveChanges();
-            
-           // mDal.UpdateById<UserBase>(user.Id, x => x.Avatar = avatar);
+
+            // mDal.UpdateById<UserBase>(user.Id, x => x.Avatar = avatar);
 
             #endregion
 
             #region review
+
+
             mDal.Create<Review>(new Review()
-            {
-                CreationDate = DateTime.UtcNow,
-                ModifyDate = DateTime.UtcNow,
-                Rating = 5,
-                Text = "Все просто супер",
-                Title = "Отлично",
-                Users = new List<UserBase>() { user }
-            });
+                {
+                    CreationDate = DateTime.UtcNow,
+                    ModifyDate = DateTime.UtcNow,
+                    Rating = 5,
+                    Text = "Все просто супер",
+                    Title = "Отлично",
+                    Users = new List<UserBase>() {user}
+                });
             mDal.Create<Review>(new Review()
-            {
-                CreationDate = DateTime.UtcNow,
-                ModifyDate = DateTime.UtcNow,
-                Rating = 2,
-                Text = "Работа сделана не очень качественно",
-                Title = "Удовлетворительно",
-                Users = new List<UserBase>() { user }
-            });
+                {
+                    CreationDate = DateTime.UtcNow,
+                    ModifyDate = DateTime.UtcNow,
+                    Rating = 2,
+                    Text = "Работа сделана не очень качественно",
+                    Title = "Удовлетворительно",
+                    Users = new List<UserBase>() {user}
+                });
+
             #endregion
+
         }
 
         private void addStaticPages()
