@@ -1,4 +1,6 @@
 ﻿using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.FormModels;
@@ -34,6 +36,14 @@ namespace PandaWebApp.Engine.Editors
             checklist.AttrbuteValues.Clear();
         }
 
+        private string savePhoto(HttpPostedFileBase file)
+        {
+            var sourcePath = HttpContext.Current.Server.MapPath("/Content/img/");
+            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+            file.SaveAs(Path.Combine(sourcePath, fileName));
+            return "/Content/img/" + fileName;
+        }
+
         public void Edit(PromouterForm source, PromouterUser dest)
         {
             var checklist = dest.Checklist;
@@ -46,6 +56,17 @@ namespace PandaWebApp.Engine.Editors
                 return;
 #endif
             }
+
+            var mainAlbum = dest.Albums.First();
+            foreach (var photo in source.NewPhotos)
+            {
+                DataAccessLayer.Create(new Photo
+                {
+                    Album = DataAccessLayer.GetById<Album>(mainAlbum.Id),
+                    SourceUrl = savePhoto(photo)
+                });
+            }
+            
 
             clearChecklist(checklist);
 

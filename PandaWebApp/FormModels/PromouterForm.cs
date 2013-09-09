@@ -1,15 +1,12 @@
 ﻿using System.Globalization;
-using System.Web.UI.WebControls;
+using System.Web;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine.Binders;
-using PandaWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using PandaWebApp.Engine;
 
 namespace PandaWebApp.FormModels
 {
@@ -63,6 +60,13 @@ namespace PandaWebApp.FormModels
             public int Hours { get; set; }
         }
 
+        public class AlbumUnit
+        {
+            public Guid Id { get; set; }
+            public string Title { get; set; }
+            public IList<Photo> Photos { get; set; }
+        }
+
         public Guid UserId { get; set; }
 
         public string Icon { get; set; }
@@ -95,6 +99,9 @@ namespace PandaWebApp.FormModels
         public bool WinterSkates { get; set; }
         public DateTime BirthDate { get; set; }
 
+        public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
+
+        public IList<AlbumUnit> Albums { get; set; }
 
         public IList<DesiredWorkTimeUnit> DesiredWorkTime { get; set; }
         public IList<WorkExperienceUnit> WorkExperience { get; set; }
@@ -123,6 +130,8 @@ namespace PandaWebApp.FormModels
                 });
             }
         }
+
+        
 
         public static PromouterForm Bind(DataAccessLayer dataAccessLayer, Guid userId)
         {

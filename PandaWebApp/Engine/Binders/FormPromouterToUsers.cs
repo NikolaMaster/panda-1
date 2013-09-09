@@ -32,6 +32,15 @@ namespace PandaWebApp.Engine.Binders
             dest.Email = source.Email;
             dest.Photo = source.Avatar.SourceUrl;
 
+            dest.Albums =  DataAccessLayer.Get<Album>(x => x.User.Id == source.Id)
+                .Select(x => new PromouterForm.AlbumUnit
+                {
+                    Id = x.Id,
+                    Photos = x.Photos.ToList(),
+                    Title = x.Name,
+                })
+                .ToList();
+
             var counter = 0;
             
             var checklist = source.Checklists.FirstOrDefault();

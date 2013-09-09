@@ -1,6 +1,6 @@
 ﻿@model PandaWebApp.FormModels.PromouterForm.WorkExperienceUnit
 
-<div id ="@Model.Id">
+<div id ="workExperience_@Model.Id">
     <div>Название компании @Html.EditorFor(x => x.Title) </div>    
     <div>Раота @Html.EditorFor(x => x.WorkName) </div>    
     <div>Начало @Html.EditorFor(x => x.StartTime) </div>    
@@ -8,7 +8,7 @@
     <div>Часы @Html.EditorFor(x => x.Hours) </div> 
     <div>  
         @Ajax.ActionLink("Удалить", "Delete", "WorkExperience", new {workExperienceId = Model.Id},
-            new AjaxOptions {UpdateTargetId = Model.Id.ToString()})     
+            new AjaxOptions {UpdateTargetId = "workExperience_" + Model.Id})     
     </div>
           
     <hr />

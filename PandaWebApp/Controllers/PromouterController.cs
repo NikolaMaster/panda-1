@@ -91,10 +91,11 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(PromouterForm model)
+        public ActionResult Edit(PromouterForm model, IEnumerable<HttpPostedFileBase> photos)
         {
             if (ModelState.IsValid)
             {
+                model.NewPhotos = photos;
                 var user = DataAccessLayer.GetById<PromouterUser>(model.UserId);
                 var editor = new PromouterEditor(DataAccessLayer);
                 editor.Edit(model, user);

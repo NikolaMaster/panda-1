@@ -1,17 +1,25 @@
 ﻿@using PandaDataAccessLayer.DAL
 @model PandaWebApp.FormModels.PromouterForm
 @{
-    ViewBag.Title = "Редактирование карточки пользователя";
+    ViewBag.Title = "Редактирование информации о пользователе";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>Edit</h2>
-@using (Html.BeginForm())
+<h2>Редактирование информации о пользователе</h2>
+@using (Html.BeginForm("Edit", "Promouter", FormMethod.Post, new { enctype = "multipart/form-data" }))
 { 
     @Html.HiddenFor(x => x.UserId)
     <script>
         $(function () {
             $('#editPromouterTabs').tabs();
+            $('#uploadPhotoButton').click(function () {
+                var count = $(this).data('-file-uploader-count') + 1;
+                $(this).data('-file-uploader-count', count);
+                $('#fileUploaders').append($('<input>')
+                    .attr('id', count)
+                    .attr('name', 'photos')
+                    .attr('type', 'file'));
+            });
         });
     </script> 
 
@@ -36,7 +44,11 @@
             <div>Образование</div> @Html.DropDownListFor(x => x.Education, Model.EducationValues)
         </div>
         <div id="photoTab">
-            @Html.
+            <div>@{ Html.RenderAction("Index", "Album", new { userId = Model.UserId }); }</div>
+            <div>
+                <div id="fileUploaders"></div>
+                <button type="button" id="uploadPhotoButton"  data-file-uploader-count="0">Добавить фото</button>
+            </div>
         </div>
         <div id="attribTab">
             <h3>Внешние данные</h3>

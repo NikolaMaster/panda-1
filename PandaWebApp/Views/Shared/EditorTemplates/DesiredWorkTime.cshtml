@@ -1,11 +1,11 @@
 ﻿@model PandaWebApp.FormModels.PromouterForm.DesiredWorkTimeUnit
-<div id ="@Model.Id">
+<div id ="desiredWork_@Model.Id">
     <div>День недели @Html.DropDownListFor(x => x.DayOfWeek, PandaWebApp.FormModels.PromouterForm.DesiredWorkTimeUnit.WorkDaysValues) </div>    
     <div>Начало @Html.EditorFor(x => x.StartTime) </div>    
     <div>Конец @Html.EditorFor(x => x.EndTime) </div>    
     <div>  
         @Ajax.ActionLink("Удалить", "Delete", "DesiredWorkTime", new { desireWorkTimeId = Model.Id},
-            new AjaxOptions {UpdateTargetId = Model.Id.ToString()})     
+            new AjaxOptions {UpdateTargetId = "desiredWork_" + Model.Id })     
     </div>          
     <hr />
 </div>

@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\DesiredWorkTimeController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
@@ -309,6 +310,7 @@
     <Content Include="Views\Home\MainView.cshtml" />
     <Content Include="Views\Employer\TopEmployers.cshtml" />
     <Content Include="Views\Promouter\TopPromouters.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -328,8 +330,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4392</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:4392/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
