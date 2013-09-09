@@ -79,7 +79,7 @@ namespace PandaWebApp.Engine.Binders
                 switch (attrib.Attrib.Code)
                 {
                     case Constants.GenderCode:
-                        dest.Gender = attrib.Value;
+                        dest.Gender = dictValue;
                         break;
                     case "Фамилия":
                         dest.LastName = attrib.Value;

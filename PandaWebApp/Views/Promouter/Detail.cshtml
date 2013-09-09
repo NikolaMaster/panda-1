@@ -58,8 +58,15 @@
                 {
                     <div class="row">нет</div>
                 }
-
-                <div class="row">@Model.Car</div>
+                
+                @if (Model.Car)
+                {
+                    <div class="row">есть</div>
+                }
+                else
+                {
+                    <div class="row">нет</div>
+                }
                     
                 <div class="row gap"></div>
                 <div class="row"><a href="#" class="open">открыть</a></div>
@@ -77,21 +84,21 @@
             <ul class="horiz">
                 @{
                     var index = 0;
-                    foreach(var item in Model.Album)
+                    foreach (var item in Model.Album)
                     {
                         <li class="@(index == 0 ? "first" : "")">
-                            <img src="@item" />
+                            <img src="@ImageCreator.Create(item, 128, 128)" />
                         </li>
-                    
+
                         if (index == 4)
                         {
                             index = 0;
                         }
                         else
                         {
-                        index++;
+                            index++;
+                        }
                     }
-                }
                 }
             </ul>
         </div>

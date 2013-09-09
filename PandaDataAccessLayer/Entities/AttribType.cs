@@ -15,6 +15,6 @@ namespace PandaDataAccessLayer.Entities
         public Guid Id { get; set; }
         public string Type { get; set; }
 
-        public DictGroup DictGroup { get; set; }
+        public virtual DictGroup DictGroup { get; set; }
     }
 }

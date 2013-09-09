@@ -17,7 +17,7 @@
             <div class="clear"></div>
         </div>					
         <div class="photo left">
-            <img src="@Model.Photo" />
+            <img src="@ImageCreator.Create(Model.Photo, 128, 128)" />
         </div>
 
         <div class="info right">
@@ -74,7 +74,7 @@
                             foreach(var item in Model.Album)
                             {
                                 <li class="@(index == 0 ? "first" : "")">
-                                    <img src="@item" />
+                                    <img src="@ImageCreator.Create(item, 128, 128)" />
                                 </li>
                     
                         if (index == 4)
