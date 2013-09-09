@@ -4,8 +4,11 @@
 <ul class="album horiz">
     @foreach (var promouter in Model)
     {
-        <li class="rounded-borders-4"><img src="@promouter.Photo" /></li>
-    }
+        <li class="rounded-borders-4">
+            <a href="@Url.Action("Detail", "Promouter", new { id = promouter.UserId })">
+                <img src="@ImageCreator.Create(promouter.Photo, 128, 128)" />
+            </a>
+        </li>}
 </ul>
 
 <p class="right-aligned clear"><a href="#">начать поиск по исполнителям</a></p>

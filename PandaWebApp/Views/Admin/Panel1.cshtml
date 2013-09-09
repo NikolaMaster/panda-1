@@ -14,7 +14,10 @@
     <div class="label">Code:</div>
     <div class="editor">@Html.TextAreaFor(model => model.Code)</div>
     <div class="label">Content:</div>
-    <div class="editor">@Html.TextAreaFor(model => model.Content)</div>
+    @Html.TextAreaFor(model => model.Content, new Dictionary<string, object>()
+        {
+            {"class", "ckeditor"}, {"name", "editor1"}
+        })
     
     
      <input type="submit" value="Применить" />

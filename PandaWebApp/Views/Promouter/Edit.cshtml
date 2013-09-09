@@ -70,7 +70,13 @@
             <div>Интересы</div> @Html.TextAreaFor(m => m.Hobbies)
         </div>
         <div id="aboutTab">
-            <div>О себе</div> @Html.TextAreaFor(m => m.About)
+            <div>О себе</div> 
+            @Html.TextAreaFor(m => m.About, new Dictionary<string, object>()
+        {
+            {"class", "ckeditor"}, {"name", "editor1"}
+        })
+            
+
         </div>
         <div id="workExpirienceTab">
            <div>@{ Html.RenderAction("Index", "WorkExperience", new { userId = Model.UserId }); }</div>

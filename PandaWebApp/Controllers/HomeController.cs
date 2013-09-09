@@ -106,9 +106,7 @@ namespace PandaWebApp.Controllers
                                 {
                                     foreach (var vacancy in vacancies)
                                     {
-                                        averageCostEmployer += 0;
-                                        //TODO: fix that
-                                        //  Convert.ToInt32(DataAccessLayer.Get<DictValue>(vacancy.CostOfHours).Description);
+                                        averageCostEmployer += int.Parse(vacancy.CostOfHours.Description);
                                     }
                                     averageCostEmployer /= vacancies.Count();
                                 }

@@ -4,7 +4,11 @@
 <ul class="album horiz">
     @foreach (var employer in Model)
     {
-        <li class="rounded-borders-4"><img src="@employer.Photo" /></li>
+        <li class="rounded-borders-4">
+            <a href="@Url.Action("Detail", "Employer", new { id = employer.UserId })">
+                <img src="@ImageCreator.Create(employer.Photo, 128, 128)" />
+            </a>
+        </li>
     }
 </ul>
 <p class="right-aligned clear"><a href="#">начать поиск по компаниям</a></p>

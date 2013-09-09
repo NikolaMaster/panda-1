@@ -27,7 +27,11 @@
     </div>
 
     <div id="aboutTab">
-        <div>О компании</div> @Html.TextAreaFor(m => m.About)
+        <div>О компании</div> 
+        @Html.TextAreaFor(m => m.About, new Dictionary<string, object>()
+        {
+            {"class", "ckeditor"}, {"name", "editor1"}
+        })
     </div>
     
 </div>

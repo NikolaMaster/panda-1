@@ -45,6 +45,8 @@ namespace PandaWebApp.Controllers
             return View();
         }
         
+        //TODO: replace, because very dangerous =)
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult Create(Blog.Entry model)
         {
