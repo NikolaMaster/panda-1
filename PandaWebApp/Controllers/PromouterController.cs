@@ -91,6 +91,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(PromouterForm model, IEnumerable<HttpPostedFileBase> photos)
         {
             if (ModelState.IsValid)
@@ -107,7 +108,7 @@ namespace PandaWebApp.Controllers
                 {
                 }
                 
-                return View(model);
+                return new RedirectResult(string.Format("/Promouter/Edit/{0}", model.UserId));
             }
             
 #if DEBUG

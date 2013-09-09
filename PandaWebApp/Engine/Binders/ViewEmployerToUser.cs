@@ -97,13 +97,12 @@ namespace PandaWebApp.Engine.Binders
                     (
                     new Employer.VacancyUnit()
                         {
-                            //Title = vacancy.Work.Description,
+                            Title = vacancy.Work.Description,
                             StartTime = vacancy.StartTime.ToPandaString(),
                             EndTime = vacancy.EndTime.ToPandaString(),
                             FullDescription = vacancy.WorkDescription,
-                            //TODO: fix that
-                            //CostOfHours = int.Parse(DataAccessLayer.Get<DictValue>(vacancy.CostOfHours).Description),
-                            //WorkName = vacancy.Work.Description
+                            CostOfHours = int.Parse(vacancy.CostOfHours.Description),
+                            WorkName = vacancy.Work.Description
                         }
                     );
             }

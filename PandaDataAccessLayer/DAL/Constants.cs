@@ -43,7 +43,13 @@ namespace PandaDataAccessLayer.DAL
         public const string AboutCode = "ABOUT";
         public const string AddressCode = "ADDRESS";
         public const string DesiredWorkTimeCode = "DESIRED_WORK_TIME";
+        public const string FirstNameCode = "FIRST_NAME";
+        public const string LastNameCode = "LAST_NAME";
+        public const string MiddleNameCode = "MIDDLE_NAME";
+        public const string ReadyForWorkCode = "READY_FOR_WORK";
 
+        public const string MaleCode = "MALE";
+        public const string FemaleCode = "FEMALE";
 
         public static readonly string[] EducationValues =
         {
@@ -70,6 +76,18 @@ namespace PandaDataAccessLayer.DAL
         public static readonly string[] SalaryValuesCode = SalaryValues
             .Select(x => SalaryCode + "_" + x.ToString(CultureInfo.InvariantCulture))
             .ToArray();
+
+        public static readonly string[] GenderValues =
+        {
+            "Мужской",
+            "Женский"
+        };
+
+        public static readonly string[] GenderValuesCode =
+        {
+            MaleCode,
+            FemaleCode
+        };
 
         public DataAccessLayer DataAccessLayer { get;private set; }
 
@@ -234,6 +252,26 @@ namespace PandaDataAccessLayer.DAL
         public Attrib DesiredWorkTime
         {
             get { return DataAccessLayer.Get<Attrib>(DesiredWorkTimeCode); }
+        }
+
+        public Attrib FirstName
+        {
+            get { return DataAccessLayer.Get<Attrib>(FirstNameCode); }
+        }
+
+        public Attrib LastName
+        {
+            get { return DataAccessLayer.Get<Attrib>(LastNameCode); }
+        }
+
+        public Attrib MiddleName
+        {
+            get { return DataAccessLayer.Get<Attrib>(MiddleNameCode); }
+        }
+
+        public Attrib ReadyForWork
+        {
+            get {return DataAccessLayer.Get<Attrib>(ReadyForWorkCode); }
         }
     }
 }

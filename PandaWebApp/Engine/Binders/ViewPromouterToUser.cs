@@ -70,7 +70,7 @@ namespace PandaWebApp.Engine.Binders
                 DateTime.TryParse(stringValue, out dateTimeValue);
                 int.TryParse(stringValue, out intValue);
                 bool.TryParse(stringValue, out boolValue);
-                if (attrib.Attrib.AttribType.DictGroup != null)
+                if (attrib.Attrib.AttribType.DictGroup != null && attrib.Value != null)
                 {
                     dictValue = DataAccessLayer.Get<DictValue>(attrib.Value).Description;
                 }
@@ -79,15 +79,15 @@ namespace PandaWebApp.Engine.Binders
                 switch (attrib.Attrib.Code)
                 {
                     case Constants.GenderCode:
-                        dest.Gender = attrib.Value;
+                        dest.Gender = dictValue;
                         break;
-                    case "Фамилия":
+                    case Constants.LastNameCode:
                         dest.LastName = attrib.Value;
                         break;
-                    case "Имя":
+                    case Constants.FirstNameCode:
                         dest.FirstName = attrib.Value;
                         break;
-                    case "Отчество":
+                    case Constants.MiddleNameCode:
                         dest.MiddleName = attrib.Value;
                         break;
                     case Constants.DateOfBirthCode:
@@ -99,7 +99,7 @@ namespace PandaWebApp.Engine.Binders
                     case Constants.CarCode:
                         dest.Car = boolValue;
                         break;
-                    case "Готов работать сейчас":
+                    case Constants.ReadyForWorkCode:
                         dest.Status = attrib.Value;
                         break;
                     case Constants.MobilePhoneCode:

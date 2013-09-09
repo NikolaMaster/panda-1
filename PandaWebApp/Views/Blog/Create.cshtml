@@ -6,13 +6,17 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary()
-    
-    
+
+
     <div class="label">Тема</div>
     <div class="editor">@Html.TextBoxFor(model => model.Title)</div>
-
     <div class="label">Описание</div>
-    <div class="editor">@Html.TextAreaFor(model => model.FullText)</div>
+    @Html.TextAreaFor(model => model.FullText, new Dictionary<string, object>()
+        {
+            {"class", "ckeditor"}, {"name", "editor1"}
+        })
 
-    <input type="submit" value="Создать" />
+    
+     <input type="submit" value="Создать" />
+
 }

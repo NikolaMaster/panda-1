@@ -97,6 +97,7 @@ namespace PandaWebApp.FormModels
         public bool Car { get; set; }
         public bool RollerSkates { get; set; }
         public bool WinterSkates { get; set; }
+        public bool ReadyForWork { get; set; }
         public DateTime BirthDate { get; set; }
 
         public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
@@ -127,6 +128,18 @@ namespace PandaWebApp.FormModels
                 {
                     Value = x,
                     Text = Constants.SalaryValues[i].ToString(CultureInfo.InvariantCulture)
+                });
+            }
+        }
+
+        public IEnumerable<SelectListItem> GenderValues
+        {
+            get
+            {
+                return Constants.GenderValuesCode.Select((x, i) => new SelectListItem
+                {
+                    Value = x,
+                    Text = Constants.GenderValues[i].ToString(CultureInfo.InvariantCulture)
                 });
             }
         }

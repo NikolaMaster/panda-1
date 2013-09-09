@@ -18,7 +18,7 @@ namespace PandaDataAccessLayer.Entities
         public string Salt { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Number { get; set; }
-
+        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string City { get; set; }

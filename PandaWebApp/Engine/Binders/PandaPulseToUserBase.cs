@@ -36,17 +36,16 @@ namespace PandaWebApp.Engine.Binders
                 var checklist = (source as PromouterUser).Checklist;
                 var gender = DataAccessLayer.GetAttributeValue(checklist.Id, Constants.GenderCode);
 
-                var male = DataAccessLayer.Get<DictValue>("MALE");
-                var feemale = DataAccessLayer.Get<DictValue>("FEMALE");
+
                 if (gender == null)
                 { 
                     dest.Image = UnknownGenderImage;
                 }
                 else
                 {
-                    if (gender.Value == male.Code)
+                    if (gender.Value == Constants.MaleCode)
                         dest.Image = MaleImage;
-                    else if (gender.Value == feemale.Code)
+                    else if (gender.Value == Constants.FemaleCode)
                         dest.Image = FeemaleImage;
                     else
                         dest.Image = UnknownGenderImage;

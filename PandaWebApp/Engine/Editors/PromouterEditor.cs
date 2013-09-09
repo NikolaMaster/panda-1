@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.FormModels;
@@ -58,15 +59,18 @@ namespace PandaWebApp.Engine.Editors
             }
 
             var mainAlbum = dest.Albums.First();
-            foreach (var photo in source.NewPhotos)
+            if (source.NewPhotos != null)
             {
-                DataAccessLayer.Create(new Photo
+                foreach (var photo in source.NewPhotos)
                 {
-                    Album = DataAccessLayer.GetById<Album>(mainAlbum.Id),
-                    SourceUrl = savePhoto(photo)
-                });
+                    DataAccessLayer.Create(new Photo
+                    {
+                        Album = DataAccessLayer.GetById<Album>(mainAlbum.Id),
+                        SourceUrl = savePhoto(photo)
+                    });
+                }
             }
-            
+
 
             clearChecklist(checklist);
 
@@ -81,17 +85,20 @@ namespace PandaWebApp.Engine.Editors
                 #region Big switch [TODO by code field]
                 switch (attribute.Code)
                 {
-                    case "Фамилия":
-                        //TODO
+                    case Constants.LastNameCode:
+                        attributeValue.Value = source.LastName;
+                        dest.LastName = source.LastName;
                         break;
-                    case "Имя":
+                    case Constants.FirstNameCode:
                         attributeValue.Value = source.FirstName;
+                        dest.FirstName = source.FirstName;
                         break;
-                    case "Отчество":
-                        //TODO
+                    case Constants.MiddleNameCode:
+                        attributeValue.Value = source.MiddleName;
+                        //dest.MiddleName = source.MiddleName;
                         break;
                     case Constants.GenderCode:
-                        //TODO
+                        attributeValue.Value = source.Gender;
                         break;
                     case Constants.DateOfBirthCode:
                         attributeValue.Value = source.BirthDate.ToPandaString();
@@ -102,8 +109,8 @@ namespace PandaWebApp.Engine.Editors
                     case Constants.CarCode:
                         attributeValue.Value = source.Car.ToString();
                         break;
-                    case "Готов работать сейчас":
-                        //TODO
+                    case Constants.ReadyForWorkCode:
+                        attributeValue.Value = source.ReadyForWork.ToString();
                         break;
                     case Constants.MobilePhoneCode:
                         attributeValue.Value = source.MobilePhone;

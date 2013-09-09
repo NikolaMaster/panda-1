@@ -12,7 +12,10 @@
     <div class="editor">@Html.TextBoxFor(model => model.Title)</div>
 
     <div class="label">Описание</div>
-    <div class="editor">@Html.TextAreaFor(model => model.FullText)</div>
+     @Html.TextAreaFor(model => model.FullText, new Dictionary<string, object>()
+        {
+            {"class", "ckeditor"}, {"name", "editor1"}
+        })
 
     <input type="submit" value="Применить" />
     <a href="./Posts">Просмотреть все посты</a>

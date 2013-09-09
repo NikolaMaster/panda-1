@@ -4,7 +4,8 @@
     <div class="header">
         Участники проекта (@Model.TotalPromouters): <span class="inner">Средняя цена 1ого часа:@Model.AveragePromouterCost р</span>
     </div>
-     @{ Html.RenderAction("TopPromouters", "Promouter", new { count = 12 }); }
+    @{ Html.RenderAction("TopPromouters", "Promouter", new { count = 12 }); }
+
 </div>
 
 <div class="simple-delimiter"></div>

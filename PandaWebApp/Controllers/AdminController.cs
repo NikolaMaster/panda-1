@@ -22,6 +22,7 @@ namespace PandaWebApp.Controllers
             return View(entry);
         }
 
+        //TODO: replace, because very dangerous =)
         [ValidateInput(false)]
         [HttpPost]
         public ActionResult Panel1(StaticPageUnit page)

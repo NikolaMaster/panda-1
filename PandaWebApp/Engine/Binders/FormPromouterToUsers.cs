@@ -76,13 +76,13 @@ namespace PandaWebApp.Engine.Binders
                     case Constants.GenderCode:
                         dest.Gender = attrib.Value;
                         break;
-                    case "Фамилия":
+                    case Constants.LastNameCode:
                         dest.LastName = attrib.Value;
                         break;
-                    case "Имя":
+                    case Constants.FirstNameCode:
                         dest.FirstName = attrib.Value;
                         break;
-                    case "Отчество":
+                    case Constants.MiddleNameCode:
                         dest.MiddleName = attrib.Value;
                         break;
                     case Constants.DateOfBirthCode:
@@ -94,7 +94,7 @@ namespace PandaWebApp.Engine.Binders
                     case Constants.CarCode:
                         dest.Car = boolValue;
                         break;
-                    case "Готов работать сейчас":
+                    case Constants.ReadyForWorkCode:
                         dest.Status = attrib.Value;
                         break;
                     case Constants.MobilePhoneCode:
