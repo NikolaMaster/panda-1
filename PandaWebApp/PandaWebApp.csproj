@@ -53,9 +53,6 @@
       <HintPath>..\packages\EntityFramework.Extended.5.0.0.73\lib\net45\EntityFramework.Extended.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PandaDataAccessLayer">
-      <HintPath>..\PandaDataAccessLayer\bin\Debug\PandaDataAccessLayer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -283,6 +280,7 @@
     <Content Include="Views\Home\PandaPulse.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\beta-deployment.pubxml" />
     <None Include="Properties\PublishProfiles\filesystem.pubxml" />
     <None Include="Properties\PublishProfiles\ftp.pubxml" />
     <Content Include="Views\Home\OnlineUsers.cshtml" />
@@ -309,6 +307,12 @@
     <Content Include="Views\Home\MainView.cshtml" />
     <Content Include="Views\Employer\TopEmployers.cshtml" />
     <Content Include="Views\Promouter\TopPromouters.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">
+      <Project>{7940d2c5-4e88-4eb3-abab-fcb008e19bd9}</Project>
+      <Name>PandaDataAccessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
