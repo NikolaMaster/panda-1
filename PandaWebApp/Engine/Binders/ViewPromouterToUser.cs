@@ -34,10 +34,10 @@ namespace PandaWebApp.Engine.Binders
             dest.DesiredWorkTime = new List<Promouter.TimeOfWorkUnit>();
             dest.DaysOnSite = DateTime.UtcNow.Day - source.CreationDate.Day;
 
-            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id);
+            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id).ToList();
             if (session.Any())
             {
-                var lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes,0);
+                var lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes, 0);
                 dest.Status = Equals(lastHit, 0) ? "Онлайн" : string.Format("Был на сайте {0} минут назад",lastHit);
             }
             else
@@ -51,7 +51,7 @@ namespace PandaWebApp.Engine.Binders
             if (firstOrDefault != null)
                 dest.Album = firstOrDefault.Photos.Select(x => x.SourceUrl);
 
-            var checklist = source.Checklists.FirstOrDefault();
+            var checklist = source.MainChecklist;
             if (checklist == null)
             {
 #if DEBUG
@@ -117,9 +117,6 @@ namespace PandaWebApp.Engine.Binders
                     case Constants.EducationCode:
                         dest.Education = stringValue;
                         break;
-                    case Constants.WorkExperienceCode:
-                        getWorkExperience(stringValue, dest);
-                        break;
                     case Constants.HeightCode:
                         dest.Height = intValue;
                         break;
@@ -161,6 +158,9 @@ namespace PandaWebApp.Engine.Binders
                         break;
                     case Constants.HobbiesCode:
                         dest.Hobbies = stringValue;
+                        break;
+                    case Constants.WorkExperienceCode:
+                        getWorkExperience(stringValue, dest);
                         break;
                     case Constants.DesiredWorkCode:
                         getDesiredWork(stringValue, dest);

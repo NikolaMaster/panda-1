@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace PandaDataAccessLayer.Entities
 {
     public class PromouterUser : UserBase
     {
-        public Checklist Checklist 
+        public override Checklist MainChecklist
         {
             get { return Checklists.First(); }
-        }
-
-        public PromouterUser()
-        {
-            Id = Guid.NewGuid();
         }
     }
 }

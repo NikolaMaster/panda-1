@@ -47,7 +47,7 @@ namespace PandaWebApp.Engine.Editors
 
         public void Edit(PromouterForm source, PromouterUser dest)
         {
-            var checklist = dest.Checklist;
+            var checklist = dest.MainChecklist;
             if (checklist == null)
             {
 #if DEBUG

@@ -416,31 +416,35 @@ namespace PandaDataAccessLayer
         {
             #region Promouter
             var promouter = new []{
-                mDal.Constants.FirstName,
+                mDal.Constants.Gender,
                 mDal.Constants.LastName,
+                mDal.Constants.FirstName,
                 mDal.Constants.MiddleName,
                 mDal.Constants.DateOfBirth,
                 mDal.Constants.MedicalBook,
                 mDal.Constants.Car,
+                mDal.Constants.ReadyForWork,
                 mDal.Constants.MobilePhone,
                 mDal.Constants.Salary,
                 mDal.Constants.City,
                 mDal.Constants.Education,
-                mDal.Constants.DesiredWork,
-                mDal.Constants.Gender,
                 mDal.Constants.Height,
                 mDal.Constants.Build,
-                mDal.Constants.EyeColor,
+                mDal.Constants.Weight,
                 mDal.Constants.SkinType,
+                mDal.Constants.EyeColor,
                 mDal.Constants.HairColor,
                 mDal.Constants.HairLength,
                 mDal.Constants.SizeClothes,
                 mDal.Constants.SizeShoes,
                 mDal.Constants.SizeChest,
+                mDal.Constants.RollerSkates,
+                mDal.Constants.WinterSkates,
                 mDal.Constants.Hobbies,
                 mDal.Constants.About,
-                mDal.Constants.DesiredWorkTime,
                 mDal.Constants.WorkExperience,
+                mDal.Constants.DesiredWork,
+                mDal.Constants.DesiredWorkTime,
             };
 
             foreach (var attrib2Checklist in promouter.Select(x => new Attrib2ChecklistType 
@@ -454,10 +458,11 @@ namespace PandaDataAccessLayer
             
             #region Employer main checklist
             var employerMain = new[]{
+                mDal.Constants.About,
                 mDal.Constants.EmployerName,
+                mDal.Constants.Address,
                 mDal.Constants.MobilePhone,
                 mDal.Constants.City,
-                mDal.Constants.About
             };
 
             foreach (var attrib2Checklist in employerMain.Select(x => new Attrib2ChecklistType
@@ -571,7 +576,7 @@ namespace PandaDataAccessLayer
             #endregion
 
             #region create attributes
-            mDal.Update(user.Checklist, new List<AttribValue>
+            mDal.Update(user.MainChecklist, new List<AttribValue>
             {
                 new AttribValue
                 {

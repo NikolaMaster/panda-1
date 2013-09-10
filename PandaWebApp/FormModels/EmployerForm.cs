@@ -7,7 +7,7 @@ using System.Web;
 
 namespace PandaWebApp.FormModels
 {
-    public class EmployerForm : Employer
+    public class EmployerForm
     {
         public Guid UserId { get; set; }
         public string Icon { get; set; }
@@ -17,7 +17,6 @@ namespace PandaWebApp.FormModels
         public string MobilePhone { get; set; }
         public string Email { get; set; }
         public string City { get; set; }
-        public string Hobbies { get; set; }
         public string About { get; set; }
         public string Address { get; set; }
         public int Number { get; set; }

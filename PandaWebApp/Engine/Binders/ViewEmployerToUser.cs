@@ -46,7 +46,7 @@ namespace PandaWebApp.Engine.Binders
                 dest.Status = "Оффлайн";
             }
 
-            var checklist = source.Checklists.FirstOrDefault();
+            var checklist = source.MainChecklist;
 
             foreach (var attrib in checklist.AttrbuteValues)
             {

@@ -1,11 +1,7 @@
-﻿using PandaDataAccessLayer.DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.Entities
 {
@@ -27,9 +23,15 @@ namespace PandaDataAccessLayer.Entities
         public virtual ICollection<Session> Sessions { get; set; }
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
-     
-        public UserBase() 
+
+        public abstract Checklist MainChecklist
         {
+            get;
+        }
+
+        protected UserBase() 
+        {
+            Id = Guid.NewGuid();
             if (Checklists == null)
                 Checklists = new List<Checklist>();
             if (Sessions == null)
