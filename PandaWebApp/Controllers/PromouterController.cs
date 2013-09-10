@@ -1,15 +1,12 @@
-﻿using System.Data.Entity;
-using PandaWebApp.Engine;
+﻿using PandaWebApp.Engine;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 
 using PandaWebApp.Engine.Binders;
 using PandaDataAccessLayer.Entities;
-using PandaDataAccessLayer.DAL;
 using PandaWebApp.ViewModels;
 using PandaWebApp.Engine.Editors;
 using PandaWebApp.FormModels;
@@ -100,14 +97,7 @@ namespace PandaWebApp.Controllers
                 var user = DataAccessLayer.GetById<PromouterUser>(model.UserId);
                 var editor = new PromouterEditor(DataAccessLayer);
                 editor.Edit(model, user);
-                try
-                {
-                    DataAccessLayer.DbContext.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                }
-                
+                DataAccessLayer.DbContext.SaveChanges();
                 return new RedirectResult(string.Format("/Promouter/Edit/{0}", model.UserId));
             }
             

@@ -154,6 +154,7 @@
     <Compile Include="Engine\Logic\Searcher.cs" />
     <Compile Include="Engine\ModelCareController.cs" />
     <Compile Include="Engine\Password.cs" />
+    <Compile Include="FormModels\AlbumUnit.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
     <Compile Include="FormModels\PromouterForm.cs" />
     <Compile Include="FormModels\Register.cs" />

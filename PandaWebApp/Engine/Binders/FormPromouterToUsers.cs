@@ -36,7 +36,7 @@ namespace PandaWebApp.Engine.Binders
             dest.DesiredWork = new List<PromouterForm.DesiredWorkUnit>();
 
             dest.Albums =  DataAccessLayer.Get<Album>(x => x.User.Id == source.Id)
-                .Select(x => new PromouterForm.AlbumUnit
+                .Select(x => new AlbumUnit
                 {
                     Id = x.Id,
                     Photos = x.Photos.ToList(),

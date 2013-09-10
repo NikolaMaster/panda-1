@@ -80,5 +80,26 @@ namespace PandaWebApp.Controllers
             binder.InverseLoad(user, model);
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Edit(EmployerForm model, IEnumerable<HttpPostedFileBase> photos)
+        {
+            if (ModelState.IsValid)
+            {
+                model.NewPhotos = photos.Where(x => x != null);
+                var user = DataAccessLayer.GetById<EmployerUser>(model.UserId);
+                var editor = new EmployerEditor(DataAccessLayer);
+                editor.Edit(model, user);
+                DataAccessLayer.DbContext.SaveChanges();
+                return new RedirectResult(string.Format("/Employer/Edit/{0}", model.UserId));
+            }
+
+#if DEBUG
+            throw new Exception("ModelState is invalid");
+#else
+            return new EmptyResult();
+#endif
+        }
     }
 }

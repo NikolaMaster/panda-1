@@ -1,4 +1,6 @@
 ﻿using PandaDataAccessLayer.DAL;
+using PandaDataAccessLayer.Entities;
+using PandaWebApp.Engine.Binders;
 using PandaWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,5 +24,18 @@ namespace PandaWebApp.FormModels
         public int Number { get; set; }
         public int DaysOnSite { get; set; }
         public bool AccountConfirmed { get; set; }
+
+        public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
+
+        public IList<AlbumUnit> Albums { get; set; }
+
+        public static EmployerForm Bind(DataAccessLayer dataAccessLayer, Guid userId)
+        {
+            var binder = new FormEmployerToUser(dataAccessLayer);
+            var user = dataAccessLayer.GetById<EmployerUser>(userId);
+            var model = new EmployerForm();
+            binder.InverseLoad(user, model);
+            return model;
+        }
     }
 }

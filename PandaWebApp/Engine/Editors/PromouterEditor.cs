@@ -20,31 +20,6 @@ namespace PandaWebApp.Engine.Editors
         {
         }
 
-        private void clearChecklist(Checklist checklist)
-        {
-            foreach (var attrbuteValue in checklist.AttrbuteValues)
-            {
-                if (attrbuteValue.Attrib.AttribType.Type == typeof (EntityList).FullName)
-                {
-                    var entityListId = Guid.Parse(attrbuteValue.Value);
-                    var entityList = DataAccessLayer.GetById<EntityList>(entityListId);
-                    entityList.DesiredWork.Clear();
-                    entityList.DesiredWorkTime.Clear();
-                    entityList.WorkExpirience.Clear();
-                    DataAccessLayer.Delete(entityList);
-                }
-            }   
-            checklist.AttrbuteValues.Clear();
-        }
-
-        private string savePhoto(HttpPostedFileBase file)
-        {
-            var sourcePath = HttpContext.Current.Server.MapPath("/Content/img/");
-            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-            file.SaveAs(Path.Combine(sourcePath, fileName));
-            return "/Content/img/" + fileName;
-        }
-
         public void Edit(PromouterForm source, PromouterUser dest)
         {
             var checklist = dest.MainChecklist;
@@ -66,13 +41,12 @@ namespace PandaWebApp.Engine.Editors
                     DataAccessLayer.Create(new Photo
                     {
                         Album = DataAccessLayer.GetById<Album>(mainAlbum.Id),
-                        SourceUrl = savePhoto(photo)
+                        SourceUrl = ImageCreator.SavePhoto(photo)
                     });
                 }
             }
 
-
-            clearChecklist(checklist);
+            DataAccessLayer.ClearChecklist(checklist);
 
             foreach (var attribute in DataAccessLayer.GetAttributes(DataAccessLayer.Constants.PromouterChecklistType.Id))
             {

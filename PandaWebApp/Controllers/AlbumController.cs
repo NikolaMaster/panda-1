@@ -16,7 +16,15 @@ namespace PandaWebApp.Controllers
 
         public ActionResult Index(Guid userId)
         {
-            return PartialView("Index", PromouterForm.Bind(DataAccessLayer, userId).Albums.First());
+            var user = DataAccessLayer.GetById<UserBase>(userId);
+            AlbumUnit albumUnit;
+            if (user is PromouterUser)
+                albumUnit = PromouterForm.Bind(DataAccessLayer, userId).Albums.First();
+            else if (user is EmployerUser)
+                albumUnit = EmployerForm.Bind(DataAccessLayer, userId).Albums.First();
+            else 
+                throw new Exception("Incorrect user type");
+            return PartialView("Index", albumUnit);
         }
 
         public ActionResult Delete(Guid photoId)

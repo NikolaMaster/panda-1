@@ -1,38 +1,58 @@
 ﻿@model PandaWebApp.FormModels.EmployerForm
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактирование информации о компании";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Редактирование информации о компании</h2>
 <script>
     $(function () {
         $('#editEmployerTabs').tabs();
+        $('#uploadPhotoButton').click(function () {
+            var count = $(this).data('-file-uploader-count') + 1;
+            $(this).data('-file-uploader-count', count);
+            $('#fileUploaders').append($('<input>')
+                .attr('id', count)
+                .attr('name', 'photos')
+                .attr('type', 'file'));
+        });
     });
 </script> 
-<div id="editEmployerTabs">
-    <ul>
-        <li><a href="#mainTab">Основное</a></li>
-        <li><a href="#photoTab">Фото</a></li>
-        <li><a href="#aboutTab">О компании</a></li>
-    </ul>
-    <div id="mainTab">
-        <div>Город</div> @Html.EditorFor(m => m.City)
-        <div>Мед книжка</div> @Html.EditorFor(m => m.Address)
-        <div>Телефон</div> @Html.EditorFor(m => m.MobilePhone)
-        <div>Email</div> @Html.EditorFor(m => m.Email)
-    </div>
-    <div id="photoTab">
-        <input type="file" id ="#fileupload"/>
-    </div>
 
-    <div id="aboutTab">
-        <div>О компании</div> 
-        @Html.TextAreaFor(m => m.About, new Dictionary<string, object>()
-        {
-            {"class", "ckeditor"}, {"name", "editor1"}
-        })
+@using (Html.BeginForm("Edit", "Employer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+    @Html.HiddenFor(x => x.UserId)
+    <div id="editEmployerTabs">
+        <ul>
+            <li><a href="#mainTab">Основное</a></li>
+            <li><a href="#photoTab">Фото</a></li>
+            <li><a href="#aboutTab">О компании</a></li>
+        </ul>
+        <div id="mainTab">
+            <div>Название компании</div> @Html.EditorFor(m => m.EmployerName)
+            <div>Город</div> @Html.EditorFor(m => m.City)
+            <div>Адрес</div> @Html.EditorFor(m => m.Address)
+            <div>Телефон</div> @Html.EditorFor(m => m.MobilePhone)
+            <div>Email</div> @Html.EditorFor(m => m.Email)
+        </div>
+        <div id="photoTab">
+            <div>@{ Html.RenderAction("Index", "Album", new { userId = Model.UserId }); }</div>
+            <div>
+                <div id="fileUploaders"></div>
+                <button type="button" id="uploadPhotoButton" data-file-uploader-count="0">Добавить фото</button>
+            </div>
+        </div>
+        <div id="aboutTab">
+            <div>О компании</div> 
+            @Html.TextAreaFor(m => m.About, new Dictionary<string, object>()
+            {
+                {"class", "ckeditor"}, {"name", "editor1"}
+            })
+        </div>
     </div>
     
-</div>
+    <input id="submit" name="submit" type="submit" value="Сохранить" />
+}
+    
+
    

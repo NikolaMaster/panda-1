@@ -9,7 +9,7 @@ namespace PandaDataAccessLayer.DAL
 {
     public partial class DataAccessLayer : DataAccessLayerBase<MainDbContext>
     {
-        private void FillAttrib(Checklist checklist, IEnumerable<AttribValue> attributeValues)
+        public void FillAttrib(Checklist checklist, IEnumerable<AttribValue> attributeValues)
         {
             checklist.AttrbuteValues = new List<AttribValue>(GetAttributes(checklist.ChecklistType.Id)
                 .Select(x => new AttribValue
@@ -19,6 +19,23 @@ namespace PandaDataAccessLayer.DAL
                     Value = null
                 }));
             Update(checklist, attributeValues);
+        }
+
+
+        public void ClearChecklist(Checklist checklist)
+        {
+            foreach (var attrbuteValue in checklist.AttrbuteValues)
+            {
+                if (attrbuteValue.Attrib.AttribType.Type != typeof (EntityList).FullName) 
+                    continue;
+                var entityListId = Guid.Parse(attrbuteValue.Value);
+                var entityList = GetById<EntityList>(entityListId);
+                entityList.DesiredWork.Clear();
+                entityList.DesiredWorkTime.Clear();
+                entityList.WorkExpirience.Clear();
+                Delete(entityList);
+            }
+            checklist.AttrbuteValues.Clear();
         }
 
         public Checklist Create(PromouterUser user, IEnumerable<AttribValue> attributeValues)

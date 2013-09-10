@@ -11,6 +11,7 @@ namespace PandaWebApp.Engine
     public class ImageCreator
     {
         private const string CachePath = "/Content/img/cache/";
+        private const string ImgPath = "/Content/img/";
 
         private static string generatePath(string srcImagePath, int width, int height)
         {
@@ -43,6 +44,14 @@ namespace PandaWebApp.Engine
                     return imagePath;
                 }
             }
+        }
+
+        public static string SavePhoto(HttpPostedFileBase file)
+        {
+            var sourcePath = HttpContext.Current.Server.MapPath(ImgPath);
+            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+            file.SaveAs(Path.Combine(sourcePath, fileName));
+            return ImgPath + fileName;
         }
     }
 }
