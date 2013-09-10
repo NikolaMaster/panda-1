@@ -44,9 +44,8 @@ namespace PandaWebApp.Engine.Binders
                 })
                 .ToList();
 
-            var counter = 0;
-
-            if (source.Checklist == null)
+            var checklist = source.MainChecklist;
+            if (source.MainChecklist == null)
             {
 #if DEBUG
                 throw new HttpException(404, "Checklist not found");
@@ -56,7 +55,7 @@ namespace PandaWebApp.Engine.Binders
 #endif
             }
 
-            foreach (var attrib in source.Checklist.AttrbuteValues)
+            foreach (var attrib in checklist.AttrbuteValues)
             {
                 var dateTimeValue = DateTime.UtcNow;
                 var stringValue = attrib.Value;

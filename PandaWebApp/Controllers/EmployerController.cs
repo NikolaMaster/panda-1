@@ -74,7 +74,7 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            var binder = new ViewEmployerToUser(DataAccessLayer);
+            var binder = new FormEmployerToUser(DataAccessLayer);
             var user = DataAccessLayer.GetById<EmployerUser>(id);
             var model = new EmployerForm();
             binder.InverseLoad(user, model);

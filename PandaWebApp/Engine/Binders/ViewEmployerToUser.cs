@@ -46,8 +46,11 @@ namespace PandaWebApp.Engine.Binders
                 dest.Status = "Оффлайн";
             }
 
+
             foreach (var attrib in source.MainChecklist.AttrbuteValues)
             {
+                var checklist = source.MainChecklist;
+
                 var dateTimeValue = DateTime.UtcNow;
                 var stringValue = attrib.Value;
                 var intValue = 0;
@@ -119,44 +122,31 @@ namespace PandaWebApp.Engine.Binders
                         case Constants.AboutCode:
                             eVacancyUnit.FullDescription = stringValue;
                             break;
+                        case Constants.StartWorkCode:
+                            eVacancyUnit.StartTime = dateTimeValue;
+                            break;
+                        case Constants.EndWorkCode:
+                            eVacancyUnit.EndTime = dateTimeValue;
+                            break;
+                        case Constants.CityCode:
+                            eVacancyUnit.City = stringValue;
+                            break;
                     }
 
                     #endregion
                 }
+
+                vacancyList.Add(eVacancyUnit);
             }
+
+
+            dest.Vacancies = vacancyList;
         }
 
         public override void InverseLoad(EmployerUser source, Employer dest)
         {
             inverseMainParam(source,dest);
             inverseVacancy(source, dest);
-        }
-
-        private void getVacancy(Guid id,Employer dest)
-        {
-            
-            var vacancies = DataAccessLayer.Get<Vacancy>(
-                x => x.EntityList.Id == id);
-            var vacancyList = new List<Employer.VacancyUnit>();
-
-            
-            foreach (var vacancy in vacancies)
-            {
-                vacancyList.Add
-                    (
-                    new Employer.VacancyUnit()
-                        {
-                            Title = vacancy.Work.Description,
-                            StartTime = vacancy.StartTime.ToPandaString(),
-                            EndTime = vacancy.EndTime.ToPandaString(),
-                            FullDescription = vacancy.WorkDescription,
-                            Salary = int.Parse(vacancy.CostOfHours.Description),
-                            JobTitle = vacancy.Work.Description
-                        }
-                    );
-            }
-
-            dest.Vacancies = vacancyList;
         }
     }
 }

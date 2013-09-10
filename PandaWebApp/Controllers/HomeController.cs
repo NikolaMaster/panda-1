@@ -92,47 +92,43 @@ namespace PandaWebApp.Controllers
             homeView.TotalEmployers = totalEmployersUserBase.Count();
             if (totalEmployersUserBase.Any())
             {
-                double totalAverageCostEmployer = 0;
+                double totalAverageCostEmployers = 0;
+
                 foreach (var employerUser in totalEmployersUserBase)
                 {
-                    var checklist = employerUser.Checklists.FirstOrDefault();
-                    double averageCostEmployer = 0;
-                    bool flag = false;
-                    foreach (var attrib in checklist.AttrbuteValues)
-                    {
-                        var stringValue = attrib.Value;
+                    string dictValue = null;
+                    double totalAverageCostEmployer = 0;
 
-                        switch (attrib.Attrib.Code)
+                    var checklistEmpl =
+                        employerUser.Checklists.Where(
+                            x => x.ChecklistType == DataAccessLayer.Constants.EmployerChecklistType);
+
+                    if (checklistEmpl.Any())
+                    {
+                        foreach (var checklist in checklistEmpl)
                         {
-                            case Constants.VacancyCode:
-                                var vacancies = DataAccessLayer.Get<Vacancy>(x => x.EntityList.Id == new Guid(stringValue));
-                                if (vacancies.Any())
+                            foreach (var attrib in checklist.AttrbuteValues)
+                            {
+                                if (attrib.Attrib.AttribType.DictGroup != null && attrib.Value != null &&
+                                    attrib.Attrib.Code == Constants.SalaryCode)
                                 {
-                                    foreach (var vacancy in vacancies)
-                                    {
-                                        averageCostEmployer += int.Parse(vacancy.CostOfHours.Description);
-                                    }
-                                    averageCostEmployer /= vacancies.Count();
+                                    dictValue = DataAccessLayer.Get<DictValue>(attrib.Value).Description;
+                                    totalAverageCostEmployer += Convert.ToInt32(dictValue);
+                                    break;
                                 }
-                                flag = true;
-                                break;
+                            }
                         }
+                        totalAverageCostEmployer /= checklistEmpl.Count();
                     }
 
-                    if (flag)
-                    {
-                        totalAverageCostEmployer += averageCostEmployer;
-                        break;
-                    }
+                    totalAverageCostEmployers += totalAverageCostEmployer;
                 }
-                totalAverageCostEmployer /= totalEmployersUserBase.Count();
-                homeView.AverageEmployerCost = Math.Round(totalAverageCostEmployer,0);
+                totalAverageCostEmployers /= totalEmployersUserBase.Count();
+                homeView.AverageEmployerCost = Math.Round(totalAverageCostEmployers, 0);
             }
 
             return PartialView(homeView);
         }
-        
-
 
         public ActionResult OnlineUsers()
         {

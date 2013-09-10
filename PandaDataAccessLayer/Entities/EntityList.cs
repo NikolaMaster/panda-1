@@ -16,7 +16,6 @@ namespace PandaDataAccessLayer.Entities
         public virtual ICollection<WorkExpirience> WorkExpirience { get; set; }
         public virtual ICollection<DesiredWork> DesiredWork { get; set; }
         public virtual ICollection<DesiredWorkTime> DesiredWorkTime { get; set; }
-        public virtual ICollection<Vacancy> Vacation { get; set; }
 
         public EntityList() 
         {
@@ -27,8 +26,6 @@ namespace PandaDataAccessLayer.Entities
                 DesiredWork = new List<DesiredWork>();
             if (DesiredWorkTime == null)
                 DesiredWorkTime = new List<DesiredWorkTime>();
-            if (Vacation == null)
-                Vacation = new List<Vacancy>();
         }
     }
 }

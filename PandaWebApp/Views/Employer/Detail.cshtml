@@ -98,12 +98,12 @@
                 foreach (var vacancy in Model.Vacancies)
                 {
                     <div>Наименование работы: @vacancy.JobTitle</div>
-                    <div>Заголовок: @vacancy.Title</div>
                     <div>Описание работы: @vacancy.FullDescription</div>
                     <div>С: @vacancy.StartTime</div>
                     <div>До: @vacancy.EndTime</div>
                     <div>Цена за час: @vacancy.Salary</div>
                     <div>На сайте: @vacancy.DaysOnSite</div>
+                    <div>Город: @vacancy.City</div>
                 }
             }
             <div class="clear"></div>
@@ -115,6 +115,6 @@
         <div class="header">
             Другие компании
         </div>
-         @{ Html.RenderAction("TopEmployers", "Employer", new { count = 6 }); }
+    @{ Html.RenderAction("TopEmployers", "Employer", new { count = 6 }); }
     </div>
 </div>

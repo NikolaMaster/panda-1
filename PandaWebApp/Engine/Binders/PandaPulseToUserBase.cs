@@ -40,7 +40,7 @@ namespace PandaWebApp.Engine.Binders
 
             if (promouterUser != null)
             {
-                var gender = DataAccessLayer.GetAttributeValue(promouterUser.Checklist.Id, Constants.GenderCode);
+                var gender = DataAccessLayer.GetAttributeValue(promouterUser.MainChecklist.Id, Constants.GenderCode);
                 if (gender == null)
                 { 
                     dest.Image = UnknownGenderImage;

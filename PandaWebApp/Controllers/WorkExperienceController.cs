@@ -25,7 +25,7 @@ namespace PandaWebApp.Controllers
         public ActionResult Create(Guid userId)
         {
             var user = DataAccessLayer.GetById<PromouterUser>(userId);
-            var attribValue = DataAccessLayer.GetAttributeValue(user.Checklist.Id, Constants.WorkExperienceCode);
+            var attribValue = DataAccessLayer.GetAttributeValue(user.MainChecklist.Id, Constants.WorkExperienceCode);
             Guid entityListId;
             var entityList = Guid.TryParse(attribValue.Value, out entityListId) 
                 ? DataAccessLayer.GetById<EntityList>(entityListId) 

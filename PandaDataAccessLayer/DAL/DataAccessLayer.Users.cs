@@ -77,9 +77,9 @@ namespace PandaDataAccessLayer.DAL
 
             if (promouter != null)
             {
-                var lastName = GetAttributeValue(promouter.Checklist.Id, Constants.LastNameCode);
-                var firstName = GetAttributeValue(promouter.Checklist.Id, Constants.FirstNameCode);
-                var middleName = GetAttributeValue(promouter.Checklist.Id, Constants.MiddleNameCode);
+                var lastName = GetAttributeValue(promouter.MainChecklist.Id, Constants.LastNameCode);
+                var firstName = GetAttributeValue(promouter.MainChecklist.Id, Constants.FirstNameCode);
+                var middleName = GetAttributeValue(promouter.MainChecklist.Id, Constants.MiddleNameCode);
                 return string.Format("{0} {1} {2}", lastName.Value, firstName.Value, middleName.Value);
             }
 

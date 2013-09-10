@@ -83,7 +83,6 @@
     <Compile Include="Entities\Session.cs" />
     <Compile Include="Entities\StaticPageUnit.cs" />
     <Compile Include="Entities\UserBase.cs" />
-    <Compile Include="Entities\Vacancy.cs" />
     <Compile Include="Entities\WorkExpirience.cs" />
     <Compile Include="MainDbContext.cs" />
     <Compile Include="MainInitializer.cs" />

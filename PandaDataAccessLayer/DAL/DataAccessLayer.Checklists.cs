@@ -24,7 +24,7 @@ namespace PandaDataAccessLayer.DAL
         public Checklist Create(PromouterUser user, IEnumerable<AttribValue> attributeValues)
         {
             if (user.Checklists.Count > 0)
-                Delete(user.Checklist);
+                Delete(user.MainChecklist);
             var checkList = Create(new Checklist 
                 {
                     ChecklistType = Constants.PromouterChecklistType,

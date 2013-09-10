@@ -52,6 +52,9 @@ namespace PandaDataAccessLayer.DAL
         public const string MaleCode = "MALE";
         public const string FemaleCode = "FEMALE";
 
+        public const string StartWorkCode = "START_WORK";
+        public const string EndWorkCode = "END_WORK";
+      
         public static readonly string[] EducationValues =
         {
             "Среднее",
@@ -277,6 +280,16 @@ namespace PandaDataAccessLayer.DAL
         public Attrib ReadyForWork
         {
             get {return DataAccessLayer.Get<Attrib>(ReadyForWorkCode); }
+        }
+
+        public Attrib StartWork
+        {
+            get { return DataAccessLayer.Get<Attrib>(StartWorkCode); }
+        }
+
+        public Attrib EndWork
+        {
+            get { return DataAccessLayer.Get<Attrib>(EndWorkCode); }
         }
     }
 }
