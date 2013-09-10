@@ -97,12 +97,12 @@
             @{
                 foreach (var vacancy in Model.Vacancies)
                 {
-                    <div>Наименование работы: @vacancy.WorkName</div>
+                    <div>Наименование работы: @vacancy.JobTitle</div>
                     <div>Заголовок: @vacancy.Title</div>
                     <div>Описание работы: @vacancy.FullDescription</div>
                     <div>С: @vacancy.StartTime</div>
                     <div>До: @vacancy.EndTime</div>
-                    <div>Цена за час: @vacancy.CostOfHours</div>
+                    <div>Цена за час: @vacancy.Salary</div>
                     <div>На сайте: @vacancy.DaysOnSite</div>
                 }
             }

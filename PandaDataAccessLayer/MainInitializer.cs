@@ -82,7 +82,7 @@ namespace PandaDataAccessLayer
             var educationGroup = new DictGroup
             {
                 Code = Constants.EducationCode,
-                Description = "Образование"
+                Description = Constants.MiddleNameCode
             };
             var educationValues = Constants.EducationValues.Select((t, i) => new DictValue
                 {

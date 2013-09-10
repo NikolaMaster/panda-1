@@ -13,9 +13,9 @@ namespace PandaWebApp.ViewModels
             public string Title;
             public string StartTime;
             public string EndTime;
-            public string WorkName;
-            public int CostOfHours;
-            public int DaysOnSite;
+            public string JobTitle;
+            public string Salary;
+            public string DaysOnSite;
             public string FullDescription;
         }
 
