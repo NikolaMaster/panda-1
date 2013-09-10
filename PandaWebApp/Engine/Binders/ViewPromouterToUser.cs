@@ -102,9 +102,9 @@ namespace PandaWebApp.Engine.Binders
                     case Constants.CarCode:
                         dest.Car = boolValue;
                         break;
-                    //case Constants.ReadyForWorkCode:
-                    //    dest.Status = attrib.Value;
-                    //    break;
+                    case Constants.ReadyForWorkCode:
+                        dest.Status = attrib.Value;
+                        break;
                     case Constants.MobilePhoneCode:
                         dest.MobilePhone = stringValue;
                         break;
