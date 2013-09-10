@@ -82,7 +82,7 @@ namespace PandaDataAccessLayer
             var educationGroup = new DictGroup
             {
                 Code = Constants.EducationCode,
-                Description = Constants.MiddleNameCode
+                Description = "Образование"
             };
             var educationValues = Constants.EducationValues.Select((t, i) => new DictValue
                 {
@@ -642,7 +642,12 @@ namespace PandaDataAccessLayer
                     {
                         Attrib = mDal.Get<Attrib>(Constants.SalaryCode),
                         Value = mDal.Get<DictValue>("SALARY_600").Code
-                    }
+                    },
+                new AttribValue
+                {
+                    Attrib = mDal.Get<Attrib>(Constants.EducationCode),
+                    Value = mDal.Constants.Height.Code
+                }
 
             });
 
@@ -743,7 +748,7 @@ namespace PandaDataAccessLayer
                     {
                         Attrib = mDal.Get<Attrib>(Constants.EmployerNameCode),
                         Value = "ООО 'Рога и копытца'"
-                    },
+                    }
                 });
             mDal.DbContext.SaveChanges();
 
