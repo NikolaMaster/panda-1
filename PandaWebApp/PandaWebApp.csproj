@@ -124,6 +124,7 @@
     <Compile Include="Controllers\DesiredWorkTimeController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Engine\Binders\FormEmployerToUser.cs" />
     <Compile Include="Engine\Binders\FormPromouterToUsers.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromouterController.cs" />

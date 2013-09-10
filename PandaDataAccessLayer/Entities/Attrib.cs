@@ -10,11 +10,15 @@ namespace PandaDataAccessLayer.Entities
 {
     public class Attrib : IGuidIdentifiable, ICodeIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [Required]
         public string Code { get; set; }
         public int Weight { get; set; }
         public virtual AttribType AttribType { get; set; }
+
+        public Attrib()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

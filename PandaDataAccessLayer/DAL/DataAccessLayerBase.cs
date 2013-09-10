@@ -121,7 +121,7 @@ namespace PandaDataAccessLayer.DAL
         public IEnumerable<TEntity> TopRandom<TEntity>(int count)
             where TEntity : class, IGuidIdentifiable
         {
-            return DbContext.Set<TEntity>().OrderBy(x => new Guid()).Take(count).ToList();
+            return DbContext.Set<TEntity>().OrderBy(x => Guid.NewGuid()).Take(count).ToList();
         }
 
         public int Count<TEntity>()

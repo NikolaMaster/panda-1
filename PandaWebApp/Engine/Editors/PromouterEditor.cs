@@ -87,15 +87,12 @@ namespace PandaWebApp.Engine.Editors
                 {
                     case Constants.LastNameCode:
                         attributeValue.Value = source.LastName;
-                        dest.LastName = source.LastName;
                         break;
                     case Constants.FirstNameCode:
                         attributeValue.Value = source.FirstName;
-                        dest.FirstName = source.FirstName;
                         break;
                     case Constants.MiddleNameCode:
                         attributeValue.Value = source.MiddleName;
-                        //dest.MiddleName = source.MiddleName;
                         break;
                     case Constants.GenderCode:
                         attributeValue.Value = source.Gender;

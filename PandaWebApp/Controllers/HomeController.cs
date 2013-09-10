@@ -59,12 +59,16 @@ namespace PandaWebApp.Controllers
                         int.TryParse(stringValue, out intValue);
                         bool.TryParse(stringValue, out boolValue);
 
-
+                        
                         switch (attrib.Attrib.Code)
                         {
                             case Constants.SalaryCode:
-                                var costForHour = double.Parse(DataAccessLayer.Get<DictValue>(stringValue).Description);
-                                promoutersCostSum += costForHour;
+                                if (!string.IsNullOrEmpty(stringValue))
+                                {
+                                    var salary = DataAccessLayer.Get<DictValue>(stringValue);
+                                    var costForHour = double.Parse(salary.Description);
+                                    promoutersCostSum += costForHour;
+                                }
                                 break;
                         }
                     }

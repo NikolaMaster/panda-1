@@ -29,6 +29,9 @@ namespace PandaWebApp.Engine.Binders
             dest.Number = source.Number;
             dest.DesiredWork1 = new List<string>();
             dest.DesiredWork2 = new List<string>();
+            dest.WorkExperience1 = new List<Promouter.WorkExperienceUnit>();
+            dest.WorkExperience2 = new List<Promouter.WorkExperienceUnit>();
+            dest.DesiredWorkTime = new List<Promouter.TimeOfWorkUnit>();
             dest.DaysOnSite = DateTime.UtcNow.Day - source.CreationDate.Day;
 
             var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id);
@@ -115,7 +118,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.Education = stringValue;
                         break;
                     case Constants.WorkExperienceCode:
-                        getWorkExperience(new Guid(stringValue), dest);
+                        getWorkExperience(stringValue, dest);
                         break;
                     case Constants.HeightCode:
                         dest.Height = intValue;
@@ -160,149 +163,157 @@ namespace PandaWebApp.Engine.Binders
                         dest.Hobbies = stringValue;
                         break;
                     case Constants.DesiredWorkCode:
-                       getDesiredWork(new Guid(stringValue),dest );
-                       break;
+                        getDesiredWork(stringValue, dest);
+                        break;
                     case Constants.DesiredWorkTimeCode:
-                       getDesiredTimeOfWork(new Guid(stringValue), dest);
+                        getDesiredTimeOfWork(stringValue, dest);
                         break;
                 }
                 #endregion
             }
-
-           
-            
         }
 
-        private void getDesiredWork(Guid entityId, Promouter dest)
+        private void getDesiredWork(string value, Promouter dest)
         {
-            var desiredWorks = DataAccessLayer.Get<DesiredWork>(
-                x => x.EntityList.Id == entityId);
-
-            var listWorks = new List<string>();
-            foreach (var desiredWork in desiredWorks)
+            if (!string.IsNullOrEmpty(value))
             {
-                listWorks.Add(desiredWork.Work.Description);
+                var entityId = Guid.Parse(value);
+                var desiredWorks = DataAccessLayer.Get<DesiredWork>(
+                    x => x.EntityList.Id == entityId);
+
+                var listWorks = new List<string>();
+                foreach (var desiredWork in desiredWorks)
+                {
+                    listWorks.Add(desiredWork.Work.Description);
+                }
+                dest.DesiredWork1 = listWorks;
+                dest.DesiredWork2 = new List<string>();
             }
-            dest.DesiredWork1 = listWorks;
+
         }
 
-        private void getDesiredTimeOfWork(Guid entityId, Promouter dest)
+        private void getDesiredTimeOfWork(string value, Promouter dest)
         {
-            var desiredWorkTimes = DataAccessLayer.Get<DesiredWorkTime>(x => x.EntityList.Id == entityId);
-            var sortedDictionary = new SortedDictionary<int, List<string>>();
-
-            foreach (var desiredWorkTime in desiredWorkTimes)
+            if (!string.IsNullOrEmpty(value))
             {
-                //TODO: fix this code
-                /*
+                var entityId = Guid.Parse(value);
+                var desiredWorkTimes = DataAccessLayer.Get<DesiredWorkTime>(x => x.EntityList.Id == entityId);
+                var sortedDictionary = new SortedDictionary<int, List<string>>();
+
+                foreach (var desiredWorkTime in desiredWorkTimes)
+                {
+                    //TODO: fix this code
+                    /*
                 var time = string.Format("с {0}:{1} до {2}:{3}", desiredWorkTime.StartTime.TimeOfDay.Hours,desiredWorkTime.StartTime.TimeOfDay.Minutes,
                                          desiredWorkTime.EndTime.TimeOfDay.Hours, desiredWorkTime.EndTime.TimeOfDay.Minutes);
                  *      */
-                var time = string.Format("с {0} по {1}", desiredWorkTime.StartTime.ToPandaString(),
-                                                         desiredWorkTime.EndTime.ToPandaString());
-           
-                if (!sortedDictionary.ContainsKey(desiredWorkTime.DayOfWeek))
-                {
-                    sortedDictionary.Add(desiredWorkTime.DayOfWeek, new List<string>() { time });
-                }
-                else
-                {
-                    sortedDictionary[desiredWorkTime.DayOfWeek].Add(time);
-                }
-            }
+                    var time = string.Format("с {0} по {1}", desiredWorkTime.StartTime.ToPandaString(),
+                        desiredWorkTime.EndTime.ToPandaString());
 
-            var timeOfWorkUnits = new List<Promouter.TimeOfWorkUnit>();
-            foreach (var iter in sortedDictionary)
-            {
-                switch (iter.Key)
-                {
-                    case 0:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
-                        {
-                            Day = "Понедельник",
-                            Time = iter.Value
-                        });
-                        break;
-                    case 1:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
-                        {
-                            Day = "Вторник",
-                            Time = iter.Value
-                        });
-                        break;
-                    case 2:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
-                        {
-                            Day = "Среда",
-                            Time = iter.Value
-                        });
-                        break;
-                    case 3:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
-                        {
-                            Day = "Четверг",
-                            Time = iter.Value
-                        });
-                        break;
-                    case 4:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
-                        {
-                            Day = "Пятница",
-                            Time = iter.Value
-                        });
-                        break;
-                    case 5:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
-                        {
-                            Day = "Суббота",
-                            Time = iter.Value
-                        });
-                        break;
-                    case 6:
-                        timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
-                        {
-                            Day = "Воскресенье",
-                            Time = iter.Value
-                        });
-                        break;
+                    if (!sortedDictionary.ContainsKey(desiredWorkTime.DayOfWeek))
+                    {
+                        sortedDictionary.Add(desiredWorkTime.DayOfWeek, new List<string>() {time});
+                    }
+                    else
+                    {
+                        sortedDictionary[desiredWorkTime.DayOfWeek].Add(time);
+                    }
                 }
-            }
 
-            dest.DesiredWorkTime = timeOfWorkUnits;
+                var timeOfWorkUnits = new List<Promouter.TimeOfWorkUnit>();
+                foreach (var iter in sortedDictionary)
+                {
+                    switch (iter.Key)
+                    {
+                        case 0:
+                            timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
+                            {
+                                Day = "Понедельник",
+                                Time = iter.Value
+                            });
+                            break;
+                        case 1:
+                            timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
+                            {
+                                Day = "Вторник",
+                                Time = iter.Value
+                            });
+                            break;
+                        case 2:
+                            timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
+                            {
+                                Day = "Среда",
+                                Time = iter.Value
+                            });
+                            break;
+                        case 3:
+                            timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
+                            {
+                                Day = "Четверг",
+                                Time = iter.Value
+                            });
+                            break;
+                        case 4:
+                            timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
+                            {
+                                Day = "Пятница",
+                                Time = iter.Value
+                            });
+                            break;
+                        case 5:
+                            timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
+                            {
+                                Day = "Суббота",
+                                Time = iter.Value
+                            });
+                            break;
+                        case 6:
+                            timeOfWorkUnits.Add(new Promouter.TimeOfWorkUnit
+                            {
+                                Day = "Воскресенье",
+                                Time = iter.Value
+                            });
+                            break;
+                    }
+                }
+                dest.DesiredWorkTime = timeOfWorkUnits;
+            }
         }
 
-        private void getWorkExperience(Guid entityId, Promouter dest)
+        private void getWorkExperience(string value, Promouter dest)
         {
-            var experienceUnits1 = new List<Promouter.WorkExperienceUnit>();
-            var experienceUnits2 = new List<Promouter.WorkExperienceUnit>();
-            var allWorkExperience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId)
-                .Select(x => new Promouter.WorkExperienceUnit
-                {
-                    Title = x.Title,
-                    StartTime = x.Start.HasValue ? x.Start.Value.ToPandaString() : null,
-                    EndTime = x.End.HasValue ? x.End.Value.ToPandaString() : null,
-                    Hours = x.Hours,// (expirience.Start - expirience.End).Hours,
-                    WorkName = x.WorkName,
-                }).ToList();
 
-            var countExperience = 0;
-
-            foreach (var expirience in allWorkExperience)
-                {
-                if (countExperience >= allWorkExperience.Count() / 2)
+            if (!string.IsNullOrEmpty(value))
+            {
+                var entityId = Guid.Parse(value);
+                var allWorkExperience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId)
+                    .Select(x => new Promouter.WorkExperienceUnit
                     {
-                    experienceUnits1.Add(expirience);
-                }
-                else
+                        Title = x.Title,
+                        StartTime = x.Start.HasValue ? x.Start.Value.ToPandaString() : null,
+                        EndTime = x.End.HasValue ? x.End.Value.ToPandaString() : null,
+                        Hours = x.Hours, // (expirience.Start - expirience.End).Hours,
+                        WorkName = x.WorkName,
+                    }).ToList();
+
+                var countExperience = 0;
+                var experienceUnits1 = new List<Promouter.WorkExperienceUnit>();
+                var experienceUnits2 = new List<Promouter.WorkExperienceUnit>();
+                foreach (var expirience in allWorkExperience)
                 {
-                    experienceUnits2.Add(expirience);
+                    if (countExperience >= allWorkExperience.Count()/2)
+                    {
+                        experienceUnits1.Add(expirience);
+                    }
+                    else
+                    {
+                        experienceUnits2.Add(expirience);
+                    }
+                    countExperience++;
                 }
-                countExperience++;
+                dest.WorkExperience1 = experienceUnits1;
+                dest.WorkExperience2 = experienceUnits2;
             }
-
-            dest.WorkExperience1 = experienceUnits1;
-            dest.WorkExperience2 = experienceUnits2;
-
         }
     }
 }

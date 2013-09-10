@@ -10,8 +10,12 @@ namespace PandaDataAccessLayer.Entities
 {
     public class ChecklistType : IGuidIdentifiable, ICodeIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Code { get; set; }
+
+        public ChecklistType()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

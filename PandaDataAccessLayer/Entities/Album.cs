@@ -11,7 +11,6 @@ namespace PandaDataAccessLayer.Entities
 {
     public class Album : IGuidIdentifiable, IEnumerable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public string Name { get; set; }
@@ -19,8 +18,9 @@ namespace PandaDataAccessLayer.Entities
         public virtual UserBase User { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
 
-        public Album() 
+        public Album()
         {
+            Id = Guid.NewGuid();
             if (Photos == null)
                 Photos = new List<Photo>();
         }

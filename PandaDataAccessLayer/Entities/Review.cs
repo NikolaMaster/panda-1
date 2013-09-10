@@ -10,7 +10,6 @@ namespace PandaDataAccessLayer.Entities
 {
     public class Review : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public string Title { get; set; }
@@ -23,6 +22,7 @@ namespace PandaDataAccessLayer.Entities
 
         public Review() 
         {
+            Id = Guid.NewGuid();
             if (Users == null)
                 Users = new List<UserBase>();
         }

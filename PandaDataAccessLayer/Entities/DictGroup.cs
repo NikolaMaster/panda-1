@@ -10,15 +10,15 @@ namespace PandaDataAccessLayer.Entities
 {
     public class DictGroup : IGuidIdentifiable, ICodeIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
 
         public virtual ICollection<DictValue> DictValues { get; set; }
 
-        public DictGroup() 
+        public DictGroup()
         {
+            Id = Guid.NewGuid();
             if (DictValues == null)
                 DictValues = new List<DictValue>();
         }

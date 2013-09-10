@@ -10,7 +10,6 @@ namespace PandaDataAccessLayer.Entities
 {
     public class SeoEntry : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -19,8 +18,9 @@ namespace PandaDataAccessLayer.Entities
         public virtual ICollection<MvcAction> MvcActions { get; set; }
         public virtual ICollection<UserBase> Users { get; set; }
 
-        public SeoEntry() 
+        public SeoEntry()
         {
+            Id = Guid.NewGuid();
             if (MvcActions == null)
                 MvcActions = new List<MvcAction>();
             if (Users == null)

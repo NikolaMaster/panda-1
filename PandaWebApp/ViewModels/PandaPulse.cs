@@ -10,9 +10,9 @@ namespace PandaWebApp.ViewModels
     {
         public class Entry
         {
-            public string Image;
-            public string Name;
-            public UserBase User;
+            public string Image { get; set; }
+            public string Name { get; set; }
+            public UserBase User { get; set; }
         }
 
         public int Online { get; set; }

@@ -29,13 +29,15 @@ namespace PandaWebApp.Controllers
         {
             var user = DataAccessLayer.GetById<PromouterUser>(userId);
             var attribValue = DataAccessLayer.GetAttributeValue(user.Checklist.Id, Constants.DesiredWorkTimeCode);
-            var entityListId = Guid.Parse(attribValue.Value);
-            var desiredWorkTime = DataAccessLayer.Create(new DesiredWorkTime
+            Guid entityListId;
+            var entityList = Guid.TryParse(attribValue.Value, out entityListId)
+                ? DataAccessLayer.GetById<EntityList>(entityListId)
+                : DataAccessLayer.Create(new EntityList());
+            DataAccessLayer.Create(new DesiredWorkTime
             {
-                EntityList = DataAccessLayer.GetById<EntityList>(entityListId)
+                EntityList = entityList
             });
             DataAccessLayer.DbContext.SaveChanges();
-            ViewBag.DesiredWorkTimeId = desiredWorkTime.Id;
             return Index(userId);
         }
 

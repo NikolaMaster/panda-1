@@ -13,6 +13,7 @@ namespace PandaDataAccessLayer.DAL
     {
         public const string PromouterChecklistTypeCode = "Promouter";
         public const string EmployerChecklistTypeCode = "Employer";
+        public const string EmployerMainChecklistTypeCode = "EmployerMain";
         public const string DefaultAvatarImage = "motorcycle.jpeg";
 
         public const string DesiredWorkCode = "DESIRED_WORK";
@@ -113,7 +114,11 @@ namespace PandaDataAccessLayer.DAL
             get { return DataAccessLayer.Get<ChecklistType>(EmployerChecklistTypeCode); }
         }
 
-        
+        public ChecklistType EmployerMainChecklistType
+        {
+            get { return DataAccessLayer.Get<ChecklistType>(EmployerMainChecklistTypeCode); }
+        }
+
         public Attrib DesiredWork 
         {
             get { return DataAccessLayer.Get<Attrib>(DesiredWorkCode); }

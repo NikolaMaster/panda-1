@@ -31,6 +31,9 @@ namespace PandaWebApp.Engine.Binders
             dest.UserId = source.Id;
             dest.Email = source.Email;
             dest.Photo = source.Avatar.SourceUrl;
+            dest.WorkExperience = new List<PromouterForm.WorkExperienceUnit>();
+            dest.DesiredWorkTime = new List<PromouterForm.DesiredWorkTimeUnit>();
+            dest.DesiredWork = new List<PromouterForm.DesiredWorkUnit>();
 
             dest.Albums =  DataAccessLayer.Get<Album>(x => x.User.Id == source.Id)
                 .Select(x => new PromouterForm.AlbumUnit
@@ -42,9 +45,8 @@ namespace PandaWebApp.Engine.Binders
                 .ToList();
 
             var counter = 0;
-            
-            var checklist = source.Checklists.FirstOrDefault();
-            if (checklist == null)
+
+            if (source.Checklist == null)
             {
 #if DEBUG
                 throw new HttpException(404, "Checklist not found");
@@ -54,7 +56,7 @@ namespace PandaWebApp.Engine.Binders
 #endif
             }
 
-            foreach (var attrib in checklist.AttrbuteValues)
+            foreach (var attrib in source.Checklist.AttrbuteValues)
             {
                 var dateTimeValue = DateTime.UtcNow;
                 var stringValue = attrib.Value;
@@ -110,7 +112,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.Education = stringValue;
                         break;
                     case Constants.WorkExperienceCode:
-                        getWorkExperience(new Guid(stringValue), dest);
+                        getWorkExperience(stringValue, dest);
                         break;
                     case Constants.HeightCode:
                         dest.Height = intValue;
@@ -155,59 +157,74 @@ namespace PandaWebApp.Engine.Binders
                         dest.Hobbies = stringValue;
                         break;
                     case Constants.DesiredWorkCode:
-                        getDesiredWork(new Guid(stringValue), dest);
+                        getDesiredWork(stringValue, dest);
                         break;
                     case Constants.DesiredWorkTimeCode:
-                        getDesiredTimeOfWork(new Guid(stringValue), dest);
+                        getDesiredTimeOfWork(stringValue, dest);
                         break;
                 }
                 #endregion
             }  
         }
 
-        private void getWorkExperience(Guid entityId, PromouterForm dest)
+        private void getWorkExperience(string value, PromouterForm dest)
         {
-            dest.WorkExperience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId)
-                .OrderBy(x => x.Start.HasValue ? x.Start.Value.Ticks : long.MaxValue)
-                .Select(x => new PromouterForm.WorkExperienceUnit
-                {
-                    Title = x.Title,
-                    StartTime = x.Start,
-                    EndTime = x.End,
-                    Hours = x.Hours,
-                    WorkName = x.WorkName,
-                    Id = x.Id
-                })
-                
-                .ToList();
+            if (!string.IsNullOrEmpty(value))
+            {
+                var entityId = Guid.Parse(value);
+
+                dest.WorkExperience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId)
+                    .OrderBy(x => x.Start.HasValue ? x.Start.Value.Ticks : long.MaxValue)
+                    .Select(x => new PromouterForm.WorkExperienceUnit
+                    {
+                        Title = x.Title,
+                        StartTime = x.Start,
+                        EndTime = x.End,
+                        Hours = x.Hours,
+                        WorkName = x.WorkName,
+                        Id = x.Id
+                    })
+                    .ToList();
+            }
         }
 
-        private void getDesiredTimeOfWork(Guid entityId, PromouterForm dest)
+        private void getDesiredTimeOfWork(string value, PromouterForm dest)
         {
-            dest.DesiredWorkTime = DataAccessLayer.Get<DesiredWorkTime>(x => x.EntityList.Id == entityId)
-                .OrderBy(x => x.StartTime.HasValue ? x.StartTime.Value.Ticks : long.MaxValue)
-                .Select(x => new PromouterForm.DesiredWorkTimeUnit
-                {
-                    Id = x.Id,
-                    DayOfWeek = x.DayOfWeek.ToPandaString(),
-                    StartTime = x.StartTime,
-                    EndTime = x.EndTime
-                })
-                .ToList();
+            if (!string.IsNullOrEmpty(value))
+            {
+                var entityId = Guid.Parse(value);
 
+                dest.DesiredWorkTime = DataAccessLayer.Get<DesiredWorkTime>(x => x.EntityList.Id == entityId)
+                    .OrderBy(x => x.StartTime.HasValue ? x.StartTime.Value.Ticks : long.MaxValue)
+                    .Select(x => new PromouterForm.DesiredWorkTimeUnit
+                    {
+                        Id = x.Id,
+                        DayOfWeek = x.DayOfWeek.ToPandaString(),
+                        StartTime = x.StartTime,
+                        EndTime = x.EndTime
+                    })
+                    .ToList();
+            }
         }
 
-        private void getDesiredWork(Guid entityId, PromouterForm dest)
+        private void getDesiredWork(string value, PromouterForm dest)
         {
-            dest.DesiredWork = DataAccessLayer.Get<DictGroup>(Constants.DesiredWorkCode)
-                .DictValues
-                .Select(x => new PromouterForm.DesiredWorkUnit
-                {
-                    Code = x.Code,
-                    Title = x.Description,
-                    Value = DataAccessLayer.Get<DesiredWork>(y => y.EntityList.Id == entityId && y.Work != null && y.Work.Id == x.Id).Any()
-                })
-                .ToList();
+            if (!string.IsNullOrEmpty(value))
+            {
+                var entityId = Guid.Parse(value);
+
+                dest.DesiredWork = DataAccessLayer.Get<DictGroup>(Constants.DesiredWorkCode)
+                    .DictValues
+                    .Select(x => new PromouterForm.DesiredWorkUnit
+                    {
+                        Code = x.Code,
+                        Title = x.Description,
+                        Value =
+                            DataAccessLayer.Get<DesiredWork>(
+                                y => y.EntityList.Id == entityId && y.Work != null && y.Work.Id == x.Id).Any()
+                    })
+                    .ToList();
+            }
         }
     }
 }

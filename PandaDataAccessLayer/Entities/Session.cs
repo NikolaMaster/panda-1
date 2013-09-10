@@ -10,11 +10,15 @@ namespace PandaDataAccessLayer.Entities
 {
     public class Session : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get;set; }
 
         public DateTime LastHit { get; set; }
 
         public virtual UserBase User { get; set; }
+
+        public Session()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

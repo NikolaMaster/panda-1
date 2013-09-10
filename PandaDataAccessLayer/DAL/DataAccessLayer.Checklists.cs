@@ -9,34 +9,56 @@ namespace PandaDataAccessLayer.DAL
 {
     public partial class DataAccessLayer : DataAccessLayerBase<MainDbContext>
     {
+        private void FillAttrib(Checklist checklist, IEnumerable<AttribValue> attributeValues)
+        {
+            checklist.AttrbuteValues = new List<AttribValue>(GetAttributes(checklist.ChecklistType.Id)
+                .Select(x => new AttribValue
+                {
+                    AttribId = x.Id,
+                    ChecklistId = checklist.Id,
+                    Value = null
+                }));
+            Update(checklist, attributeValues);
+        }
+
         public Checklist Create(PromouterUser user, IEnumerable<AttribValue> attributeValues)
         {
             if (user.Checklists.Count > 0)
-                Delete<Checklist>(user.Checklist);
-            var checkList = Create<Checklist>(new Checklist 
-                { 
+                Delete(user.Checklist);
+            var checkList = Create(new Checklist 
+                {
                     ChecklistType = Constants.PromouterChecklistType,
                     User = user,
                 });
-            checkList.AttrbuteValues = new List<AttribValue>(attributeValues.Select(x => {
-                x.Checklist = checkList;
-                return x;
-            }));
+            FillAttrib(checkList, attributeValues);
             return checkList;
         }
 
         public Checklist Create(EmployerUser user, IEnumerable<AttribValue> attributeValues)
         {
-            var checkList = Create<Checklist>(new Checklist 
-                {
-                    ChecklistType = Constants.EmployerChecklistType,
-                    User = user,
-                });
-            checkList.AttrbuteValues = new List<AttribValue>(attributeValues.Select(x => {
-                x.Checklist = checkList;
-                return x;
-            }));
+            return Create(user, Constants.EmployerChecklistType, attributeValues);
+        }
+
+        public Checklist Create(EmployerUser user, ChecklistType checklistType, IEnumerable<AttribValue> attributeValues)
+        {
+            var checkList = Create(new Checklist
+            {
+                ChecklistType = checklistType,
+                User = user,
+            });
+            FillAttrib(checkList, attributeValues);
             return checkList;
+        }
+
+        public void Update(Checklist checklist, IEnumerable<AttribValue> attributeValues)
+        {
+            var attrbuteValues = attributeValues as AttribValue[] ?? attributeValues.ToArray();
+            foreach (var attrbuteValue in attrbuteValues)
+            {
+                var value = checklist.AttrbuteValues.FirstOrDefault(x => x.AttribId == attrbuteValue.Attrib.Id);
+                if (value != null)
+                    value.Value = attrbuteValue.Value;
+            }
         }
 
         public IEnumerable<Attrib> GetAttributes(Checklist checklist)
@@ -77,7 +99,11 @@ namespace PandaDataAccessLayer.DAL
 
         public IEnumerable<Attrib> GetAttributes(Guid checklistTypeId)
         {
-            return DbContext.Attribs.Where(x => DbContext.Attrib2ChecklistType.Any(y => y.ChecklistType.Id == checklistTypeId)).ToList();
+            return DbContext
+                .Attribs
+                .Where(x => DbContext
+                        .Attrib2ChecklistType
+                        .Any(y => y.ChecklistType.Id == checklistTypeId && y.Attribute.Id == x.Id)).ToList();
         }
 
         public IEnumerable<AttribValue> GetAttributeValues(Guid checklistId)

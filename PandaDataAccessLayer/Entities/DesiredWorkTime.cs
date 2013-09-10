@@ -10,15 +10,17 @@ namespace PandaDataAccessLayer.Entities
 {
     public class DesiredWorkTime : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-
         public int DayOfWeek { get; set; }
 
-        public virtual EntityList EntityList { get; set; } 
+        public virtual EntityList EntityList { get; set; }
 
+        public DesiredWorkTime()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

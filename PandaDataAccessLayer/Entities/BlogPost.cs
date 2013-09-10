@@ -10,7 +10,6 @@ namespace PandaDataAccessLayer.Entities
 {
     public class BlogPost : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public string Title { get; set; }
@@ -21,5 +20,10 @@ namespace PandaDataAccessLayer.Entities
         
         public virtual Photo Picture { get; set; }
         public virtual SeoEntry SeoEntry { get; set; }
+
+        public BlogPost()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

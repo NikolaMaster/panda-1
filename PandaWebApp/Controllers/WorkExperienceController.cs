@@ -26,13 +26,15 @@ namespace PandaWebApp.Controllers
         {
             var user = DataAccessLayer.GetById<PromouterUser>(userId);
             var attribValue = DataAccessLayer.GetAttributeValue(user.Checklist.Id, Constants.WorkExperienceCode);
-            var entityListId = Guid.Parse(attribValue.Value);
-            var workExperience = DataAccessLayer.Create(new WorkExpirience
+            Guid entityListId;
+            var entityList = Guid.TryParse(attribValue.Value, out entityListId) 
+                ? DataAccessLayer.GetById<EntityList>(entityListId) 
+                : DataAccessLayer.Create(new EntityList());
+            DataAccessLayer.Create(new WorkExpirience
             {
-                EntityList = DataAccessLayer.GetById<EntityList>(entityListId)
+                EntityList = entityList,
             });
             DataAccessLayer.DbContext.SaveChanges();
-            ViewBag.WorkExperienceId = workExperience.Id;
             return Index(userId);
         }
     }

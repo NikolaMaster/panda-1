@@ -29,14 +29,18 @@ namespace PandaWebApp.Engine.Binders
         public override void InverseLoad(UserBase source, PandaPulse.Entry dest)
         {
             dest.User = source;
-            if (source is PromouterUser)
+            dest.Name = DataAccessLayer.GetUserName(source) ?? string.Empty;
+             
+            var promouterUser = source as PromouterUser;
+            var employerUser = source as EmployerUser;
+            if (promouterUser == null && employerUser == null)
             {
-                dest.Name = source.LastName + " " + source.FirstName;
+                throw  new Exception("Incorrect user type");
+            }
 
-                var checklist = (source as PromouterUser).Checklist;
-                var gender = DataAccessLayer.GetAttributeValue(checklist.Id, Constants.GenderCode);
-
-
+            if (promouterUser != null)
+            {
+                var gender = DataAccessLayer.GetAttributeValue(promouterUser.Checklist.Id, Constants.GenderCode);
                 if (gender == null)
                 { 
                     dest.Image = UnknownGenderImage;
@@ -50,12 +54,10 @@ namespace PandaWebApp.Engine.Binders
                     else
                         dest.Image = UnknownGenderImage;
                 }
-                    
             }
             else
             {
                 dest.Image = EmployerImage;
-                dest.Name = source.LastName;
             }
         }
     }

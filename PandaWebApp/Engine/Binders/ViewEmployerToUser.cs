@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
@@ -28,9 +29,7 @@ namespace PandaWebApp.Engine.Binders
             dest.Email  = source.Email;
             dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl; 
             dest.Number = source.Number;
-            dest.City = source.City;
             dest.DaysOnSite = DateTime.UtcNow.Day - source.CreationDate.Day;
-            dest.MobilePhone = source.Phone;
 
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
@@ -63,9 +62,6 @@ namespace PandaWebApp.Engine.Binders
                 #region Big switch [TODO by code field]
                 switch (attrib.Attrib.Code)
                 {
-                    case Constants.MobilePhoneCode:
-                        dest.MobilePhone = stringValue;
-                        break;
                     case Constants.AboutCode:
                         dest.About = stringValue;
                         break;
@@ -77,6 +73,12 @@ namespace PandaWebApp.Engine.Binders
                         break;
                     case Constants.VacancyCode:
                         getVacancy(new Guid(stringValue), dest);
+                        break;
+                    case Constants.MobilePhoneCode:
+                        dest.MobilePhone = stringValue;
+                        break;
+                    case Constants.CityCode:
+                        dest.City = stringValue;
                         break;
                 }
                 #endregion

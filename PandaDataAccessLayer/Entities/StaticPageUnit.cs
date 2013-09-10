@@ -11,9 +11,13 @@ namespace PandaDataAccessLayer.Entities
 {
     public class StaticPageUnit : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Code { get; set; }
         public string Content { get; set; }
+
+        public StaticPageUnit()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

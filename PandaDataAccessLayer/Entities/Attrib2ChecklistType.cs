@@ -10,10 +10,14 @@ namespace PandaDataAccessLayer.Entities
 {
     public class Attrib2ChecklistType : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public Attrib Attribute { get; set; }
         public ChecklistType ChecklistType { get; set; }
+
+        public Attrib2ChecklistType()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

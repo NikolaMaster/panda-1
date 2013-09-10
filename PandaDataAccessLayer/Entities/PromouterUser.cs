@@ -13,5 +13,10 @@ namespace PandaDataAccessLayer.Entities
         {
             get { return Checklists.First(); }
         }
+
+        public PromouterUser()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

@@ -11,10 +11,14 @@ namespace PandaDataAccessLayer.Entities
 {
     public class AttribType : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Type { get; set; }
 
         public virtual DictGroup DictGroup { get; set; }
+
+        public AttribType()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

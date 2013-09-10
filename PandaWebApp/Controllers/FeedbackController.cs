@@ -18,7 +18,7 @@ namespace PandaWebApp.Controllers
 
         private Feedback prepareFeedbacks(IEnumerable<Review> feedbacks, int count = 0)
         {
-            var binder = new FeedbackToReview();
+            var binder = new FeedbackToReview(DataAccessLayer);
             var collection = count > 0 ? feedbacks.Take(count) : feedbacks;
             return new Feedback
             {

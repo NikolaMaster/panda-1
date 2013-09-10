@@ -76,7 +76,7 @@ namespace PandaWebApp.Controllers
         {
             var binder = new ViewEmployerToUser(DataAccessLayer);
             var user = DataAccessLayer.GetById<EmployerUser>(id);
-            var model = new EmployerForm(DataAccessLayer);
+            var model = new EmployerForm();
             binder.InverseLoad(user, model);
             return View(model);
         }

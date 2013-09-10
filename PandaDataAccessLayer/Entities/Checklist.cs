@@ -1,4 +1,5 @@
-﻿using PandaDataAccessLayer.DAL;
+﻿using System.Collections.ObjectModel;
+using PandaDataAccessLayer.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,11 +12,15 @@ namespace PandaDataAccessLayer.Entities
 {
     public class Checklist : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public virtual UserBase User { get; set; }
         public virtual ChecklistType ChecklistType { get; set; }
         public virtual ICollection<AttribValue> AttrbuteValues { get; set; }
+
+        public Checklist()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

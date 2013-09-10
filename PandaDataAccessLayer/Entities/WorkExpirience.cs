@@ -10,7 +10,6 @@ namespace PandaDataAccessLayer.Entities
 {
     public class WorkExpirience : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public DateTime? Start { get; set; }
@@ -21,6 +20,11 @@ namespace PandaDataAccessLayer.Entities
         public string WorkName { get; set; }
 
         public virtual EntityList EntityList { get; set; }
+
+        public WorkExpirience()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 
 }
