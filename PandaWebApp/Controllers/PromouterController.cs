@@ -1,4 +1,5 @@
-﻿using PandaWebApp.Engine;
+﻿using System.Linq;
+using PandaWebApp.Engine;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -93,7 +94,7 @@ namespace PandaWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.NewPhotos = photos;
+                model.NewPhotos = photos == null ? new List<HttpPostedFileBase>() : photos.Where(x => x != null);
                 var user = DataAccessLayer.GetById<PromouterUser>(model.UserId);
                 var editor = new PromouterEditor(DataAccessLayer);
                 editor.Edit(model, user);

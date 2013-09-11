@@ -92,15 +92,9 @@ namespace PandaWebApp.Engine
         #endregion
 
         #region DataAccessLayer
-        public static IEnumerable<SelectListItem> ListItemsFromDict(this DataAccessLayer dataAccessLayer, string groupCode, bool empty = true)
+        public static IList<SelectListItem> ListItemsFromDict(this DataAccessLayer dataAccessLayer, string groupCode)
         {
             var result = new List<SelectListItem>();
-            if (empty)
-            {
-                result.Add(new SelectListItem
-                {
-                });
-            }
             result.AddRange(dataAccessLayer.Get<DictGroup>(groupCode)
                 .DictValues
                 .Select(x => new SelectListItem
@@ -109,7 +103,7 @@ namespace PandaWebApp.Engine
                     Text = x.Description,
                     Value = x.Code,
                 }));
-            return result;
+            return result.ToList();
         }
         #endregion
 

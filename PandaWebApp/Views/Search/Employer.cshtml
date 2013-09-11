@@ -32,8 +32,8 @@
     </div>
     <hr />
     <div>Город @Html.TextBoxFor(x => x.City)</div>
-    <div>Пол @Html.DropDownListFor(x => x.Gender, Model.GenderValues)</div>
-    <div>Цена за час @Html.DropDownListFor(x => x.Salary, Model.SalaryValues)</div>
+    <div>Пол @Html.DropDownListFor(x => x.Gender, Model.GenderValues, string.Empty)</div>
+    <div>Цена за час @Html.DropDownListFor(x => x.Salary, Model.SalaryValues, string.Empty)</div>
     <hr />
 }
 

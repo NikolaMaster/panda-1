@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine.Binders;
@@ -18,7 +19,7 @@ namespace PandaWebApp.Engine.Editors
         {
         }
 
-        public void Edit(EmployerForm source, EmployerUser dest)
+        private void editMainParam(EmployerForm source, EmployerUser dest)
         {
             var checklist = dest.MainChecklist;
             if (checklist == null)
@@ -77,6 +78,64 @@ namespace PandaWebApp.Engine.Editors
 
                 checklist.AttrbuteValues.Add(attributeValue);
             }
+        }
+
+        private void editChecklists(EmployerForm source, EmployerUser dest)
+        {
+            foreach (var vacancy in source.Vacancies)
+            {
+                var checklist = DataAccessLayer.GetById<Checklist>(vacancy.Id);
+                if (checklist == null)
+                {
+#if DEBUG
+                    throw new HttpException(404, "Checklist not found");
+#endif
+#if RELEASE
+                return;
+#endif
+                }
+
+                DataAccessLayer.ClearChecklist(checklist);
+
+                foreach (var attribute in DataAccessLayer.GetAttributes(DataAccessLayer.Constants.EmployerChecklistType.Id))
+                {
+                    var attributeValue = new AttribValue
+                    {
+                        AttribId = attribute.Id,
+                        ChecklistId = checklist.Id
+                    };
+                    switch (attribute.Code)
+                    {
+                        case Constants.SalaryCode:
+                            attributeValue.Value = vacancy.Salary;
+                            break;
+                        case Constants.WorkCode:
+                            attributeValue.Value = vacancy.Work;
+                            break;
+                        case Constants.AboutCode:
+                            attributeValue.Value = vacancy.FullDescription;
+                            break;
+                        case Constants.StartWorkCode:
+                            attributeValue.Value = vacancy.StartTime.ToPandaString();
+                            break;
+                        case Constants.EndWorkCode:
+                            attributeValue.Value = vacancy.EndTime.ToPandaString();
+                            break;
+                        case Constants.CityCode:
+                            attributeValue.Value = vacancy.City;
+                            break;
+                    }
+
+                    checklist.AttrbuteValues.Add(attributeValue);
+                }
+             
+            }
+        }
+
+        public void Edit(EmployerForm source, EmployerUser dest)
+        {
+            editMainParam(source, dest);
+            editChecklists(source, dest);
         }
     }
 }

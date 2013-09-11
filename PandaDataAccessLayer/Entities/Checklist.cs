@@ -14,6 +14,8 @@ namespace PandaDataAccessLayer.Entities
     {
         public Guid Id { get; set; }
 
+        public DateTime CreationDate { get; set; }
+
         public virtual UserBase User { get; set; }
         public virtual ChecklistType ChecklistType { get; set; }
         public virtual ICollection<AttribValue> AttrbuteValues { get; set; }
@@ -21,6 +23,7 @@ namespace PandaDataAccessLayer.Entities
         public Checklist()
         {
             Id = Guid.NewGuid();
+            CreationDate = DateTime.UtcNow;
         }
     }
 }

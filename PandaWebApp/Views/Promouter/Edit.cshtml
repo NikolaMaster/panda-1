@@ -39,14 +39,14 @@
             <div>Имя</div> @Html.EditorFor(m => m.FirstName)
             <div>Фамилия</div> @Html.EditorFor(m => m.LastName)
             <div>Отчество</div> @Html.EditorFor(m => m.MiddleName)
-            <div>Пол</div> @Html.DropDownListFor(m => m.Gender,  Model.GenderValues)
+            <div>Пол</div> @Html.DropDownListFor(m => m.Gender,  Model.GenderValues, string.Empty)
             <div>Дата рождения</div> @Html.EditorFor(m => m.BirthDate)
             <div>Мед книжка</div> @Html.EditorFor(m => m.MedicalBook)
             <div>Автомобиль</div> @Html.EditorFor(m => m.Car)
             <div>Мобильный телефон</div> @Html.EditorFor(m => m.MobilePhone)
             <div>Email</div> @Html.EditorFor(m => m.Email)
-            <div>Желаемая цена за час работы</div>@Html.DropDownListFor(x => x.Salary, Model.SalaryValues)
-            <div>Образование</div> @Html.DropDownListFor(x => x.Education, Model.EducationValues)
+            <div>Желаемая цена за час работы</div>@Html.DropDownListFor(x => x.Salary, Model.SalaryValues, string.Empty)
+            <div>Образование</div> @Html.DropDownListFor(x => x.Education, Model.EducationValues, string.Empty)
             <div>Готов работать сейчас</div> @Html.EditorFor(m => m.ReadyForWork)
         </div>
         <div id="photoTab">

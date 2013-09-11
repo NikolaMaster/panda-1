@@ -1,0 +1,12 @@
+﻿@model PandaWebApp.FormModels.EmployerForm
+
+<div id ="vacancy">
+    @for (var i = 0;i<Model.Vacancies.Count;i++)
+    {
+        @Html.EditorFor(x => x.Vacancies[i], "Vacancy")
+    }
+
+    <br/>
+    @Ajax.ActionLink("Добавить", "Create", new { userId = Model.UserId }, new AjaxOptions {UpdateTargetId = "vacancy"})
+</div>
+

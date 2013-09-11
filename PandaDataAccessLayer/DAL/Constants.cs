@@ -49,12 +49,16 @@ namespace PandaDataAccessLayer.DAL
         public const string MiddleNameCode = "MIDDLE_NAME";
         public const string ReadyForWorkCode = "READY_FOR_WORK";
 
-        public const string MaleCode = "MALE";
-        public const string FemaleCode = "FEMALE";
-
         public const string StartWorkCode = "START_WORK";
         public const string EndWorkCode = "END_WORK";
-      
+        public const string WorkCode = "WORK_CODE";
+
+
+
+        #region DESIRED_WORK
+        #endregion
+
+        #region EDUCATION
         public static readonly string[] EducationValues =
         {
             "Среднее",
@@ -69,8 +73,9 @@ namespace PandaDataAccessLayer.DAL
             "INCOMPLETE_HEIGHT",
             "HEIGHT"
         };
+        #endregion
 
-
+        #region SALARY
         public static readonly int[] SalaryValues =
         {
             150, 170, 180, 200, 220, 240, 250,
@@ -80,6 +85,11 @@ namespace PandaDataAccessLayer.DAL
         public static readonly string[] SalaryValuesCode = SalaryValues
             .Select(x => SalaryCode + "_" + x.ToString(CultureInfo.InvariantCulture))
             .ToArray();
+        #endregion
+
+        #region GENDER
+        public const string MaleCode = "MALE";
+        public const string FemaleCode = "FEMALE";
 
         public static readonly string[] GenderValues =
         {
@@ -92,6 +102,7 @@ namespace PandaDataAccessLayer.DAL
             MaleCode,
             FemaleCode
         };
+        #endregion
 
         public DataAccessLayer DataAccessLayer { get;private set; }
 
@@ -290,6 +301,11 @@ namespace PandaDataAccessLayer.DAL
         public Attrib EndWork
         {
             get { return DataAccessLayer.Get<Attrib>(EndWorkCode); }
+        }
+
+        public Attrib Work
+        {
+            get { return DataAccessLayer.Get<Attrib>(WorkCode); }
         }
     }
 }

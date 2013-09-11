@@ -21,7 +21,7 @@ namespace PandaWebApp.Engine.Logic
             DefaultComparer = new DynamicToPandaStringComparer(DataAccessLayer);
             Comparers = new Dictionary<Attrib, ComparerBase>()
                 {
-                    { DataAccessLayer.Constants.DesiredWork, new DesiredWorkComparer(DataAccessLayer) },
+                    { DataAccessLayer.Constants.Work, new DictManyValueComparer(DataAccessLayer) },
                     { DataAccessLayer.Constants.City, new DynamicToPandaStringComparer(DataAccessLayer) },
                     { DataAccessLayer.Constants.Gender, new DictValueComparer(DataAccessLayer) },
                     { DataAccessLayer.Constants.Salary, new DictValueComparer(DataAccessLayer) }
@@ -115,6 +115,28 @@ namespace PandaWebApp.Engine.Logic
         }
     }
 
+    public class DictManyValueComparer : ComparerBase
+    {
+        public DictManyValueComparer(DataAccessLayer dataAccessLayer)
+            : base(dataAccessLayer)
+        {
+        }
+
+        public override bool Compare(AttribValue storedValue, object value)
+        {
+            var castedValue = (IEnumerable<DictValue>)value;
+            if (storedValue != null)
+            {
+
+                return castedValue.Any(x => x.Code == storedValue.Value);
+            }
+            else
+            {
+                return castedValue == null;
+            }
+        }
+    }
+
     public class DictValueComparer : ComparerBase 
     {
         public DictValueComparer(DataAccessLayer dataAccessLayer)
@@ -152,6 +174,8 @@ namespace PandaWebApp.Engine.Logic
             var fullStr = string.Empty;
             foreach (var i in checklist.AttrbuteValues)
             {
+                if (i.Value == null)
+                    continue;
                 var strValue = i.Value.ToString();
                 if (i.Attrib.AttribType.Type == typeof(DictGroup).FullName)
                 {

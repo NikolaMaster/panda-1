@@ -124,6 +124,7 @@
     <Compile Include="Controllers\DesiredWorkTimeController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Engine\Binders\FormEmployerToUser.cs" />
     <Compile Include="Engine\Binders\FormPromouterToUsers.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -580,6 +581,8 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Blog\Posts.cshtml" />
     <Content Include="Views\Feedback\TopUserFeedback.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Vacancy.cshtml" />
+    <Content Include="Views\Vacancy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

@@ -10,8 +10,8 @@ namespace PandaWebApp.ViewModels
     {
         public struct VacancyUnit
         {
-            public DateTime StartTime;
-            public DateTime EndTime;
+            public DateTime? StartTime;
+            public DateTime? EndTime;
             public string JobTitle;
             public string Salary;
             public string DaysOnSite;

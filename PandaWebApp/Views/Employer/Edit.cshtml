@@ -27,6 +27,7 @@
             <li><a href="#mainTab">Основное</a></li>
             <li><a href="#photoTab">Фото</a></li>
             <li><a href="#aboutTab">О компании</a></li>
+            <li><a href="#vacancyTab">Вакансии</a></li>
         </ul>
         <div id="mainTab">
             <div>Название компании</div> @Html.EditorFor(m => m.EmployerName)
@@ -48,6 +49,9 @@
             {
                 {"class", "ckeditor"}, {"name", "editor1"}
             })
+        </div>
+        <div id="vacancyTab">
+            <div>@{ Html.RenderAction("Index", "Vacancy", new { userId = Model.UserId }); }</div>
         </div>
     </div>
     
