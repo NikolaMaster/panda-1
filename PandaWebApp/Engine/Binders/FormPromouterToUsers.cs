@@ -34,6 +34,10 @@ namespace PandaWebApp.Engine.Binders
             dest.WorkExperience = new List<PromouterForm.WorkExperienceUnit>();
             dest.DesiredWorkTime = new List<PromouterForm.DesiredWorkTimeUnit>();
             dest.DesiredWork = new List<PromouterForm.DesiredWorkUnit>();
+            dest.SalaryValues = DataAccessLayer.ListItemsFromDict(Constants.SalaryCode).OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
+                .ToList();
+            dest.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
+            dest.GenderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode);
 
             dest.Albums =  DataAccessLayer.Get<Album>(x => x.User.Id == source.Id)
                 .Select(x => new AlbumUnit
@@ -75,16 +79,16 @@ namespace PandaWebApp.Engine.Binders
                 switch (attrib.Attrib.Code)
                 {
                     case Constants.GenderCode:
-                        dest.Gender = attrib.Value;
+                        dest.Gender = stringValue;
                         break;
                     case Constants.LastNameCode:
-                        dest.LastName = attrib.Value;
+                        dest.LastName = stringValue;
                         break;
                     case Constants.FirstNameCode:
-                        dest.FirstName = attrib.Value;
+                        dest.FirstName = stringValue;
                         break;
                     case Constants.MiddleNameCode:
-                        dest.MiddleName = attrib.Value;
+                        dest.MiddleName = stringValue;
                         break;
                     case Constants.DateOfBirthCode:
                         dest.BirthDate = dateTimeValue;
@@ -96,13 +100,13 @@ namespace PandaWebApp.Engine.Binders
                         dest.Car = boolValue;
                         break;
                     case Constants.ReadyForWorkCode:
-                        dest.Status = attrib.Value;
+                        dest.Status = stringValue;
                         break;
                     case Constants.MobilePhoneCode:
                         dest.MobilePhone = stringValue;
                         break;
                     case Constants.SalaryCode:
-                        dest.Salary = dictValue;
+                        dest.Salary = stringValue;
                         break;
                     case Constants.CityCode:
                         dest.City = stringValue;

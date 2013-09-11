@@ -101,41 +101,9 @@ namespace PandaWebApp.FormModels
         public IList<WorkExperienceUnit> WorkExperience { get; set; }
         public IList<DesiredWorkUnit> DesiredWork { get; set; }
 
-        public IEnumerable<SelectListItem> EducationValues 
-        {
-            get 
-            { 
-                return Constants.EducationValuesCode.Select((x, i) => new SelectListItem
-                {
-                    Value = x,
-                    Text = Constants.EducationValues[i]
-                }); 
-            }
-        }
-
-        public IEnumerable<SelectListItem> SalaryValues
-        {
-            get
-            {
-                return Constants.SalaryValuesCode.Select((x, i) => new SelectListItem
-                {
-                    Value = x,
-                    Text = Constants.SalaryValues[i].ToString(CultureInfo.InvariantCulture)
-                });
-            }
-        }
-
-        public IEnumerable<SelectListItem> GenderValues
-        {
-            get
-            {
-                return Constants.GenderValuesCode.Select((x, i) => new SelectListItem
-                {
-                    Value = x,
-                    Text = Constants.GenderValues[i].ToString(CultureInfo.InvariantCulture)
-                });
-            }
-        }
+        public IList<SelectListItem> SalaryValues { get; set; }
+        public IList<SelectListItem> EducationValues { get; set; }
+        public IList<SelectListItem> GenderValues { get; set; }
 
         public static PromouterForm Bind(DataAccessLayer dataAccessLayer, Guid userId)
         {

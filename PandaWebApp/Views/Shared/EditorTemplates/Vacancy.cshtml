@@ -1,0 +1,16 @@
+﻿@model PandaWebApp.FormModels.EmployerForm.VacancyUnit
+
+<div id ="vacancy_@Model.Id">
+    @Html.HiddenFor(x => x.Id)
+    <div>Наименование работы: @Html.DropDownListFor(x => x.Work, Model.WorkValues, string.Empty) </div>    
+    <div>Описание работы: @Html.EditorFor(x => x.FullDescription) </div>    
+    <div>С: @Html.EditorFor(x => x.StartTime) </div>    
+    <div>По: @Html.EditorFor(x => x.EndTime) </div>    
+    <div>Цена за час: @Html.DropDownListFor(x => x.Salary, Model.SalaryValues, string.Empty) </div> 
+    <div>Город: @Html.EditorFor(x => x.City)</div>
+    <div>  
+        @Ajax.ActionLink("Удалить", "Delete", "Vacancy", new {vacancyId = Model.Id},
+            new AjaxOptions {UpdateTargetId = "vacancy_" + Model.Id})     
+    </div>
+    <hr />
+</div>

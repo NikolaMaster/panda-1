@@ -109,89 +109,89 @@ namespace PandaDataAccessLayer
             };
             var workValues = new List<DictValue>() 
                 {
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "MERC",
                         Description = "Мерчендайзер",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "SUPER",
                         Description = "Супервайзер",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "COURIER",
                         Description = "Курьер",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "AUDITOR",
                         Description = "Аудитор/Чекер",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "BUYER",
                         Description = "Тайный покупатель",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "PROMOUTER",
                         Description = "Промоутер",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "ANIMATOR",
                         Description = "Аниматор",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "PROMO_MODEL",
                         Description = "Промо-модель",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "MASCOT",
                         Description = "Ростовая кукла",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "INTERVIEWER",
                         Description = "Интервьюер",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "MODEL",
                         Description = "Модель",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "WORKER",
                         Description = "Разнорабочий",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "BARMEN",
                         Description = "Бармен",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "WAITER",
                         Description = "Официант",
                     }),
-                    mDal.Create<DictValue>(new DictValue
+                    mDal.Create(new DictValue
                     {
                         Code = "HOSTESS",
                         Description = "Хостес",
                     }),
                 };
             workGroup = mDal.Create(workGroup, workValues).Key;
-            mDal.Create<AttribType>(new AttribType
+            mDal.Create(new AttribType
             {
                 DictGroup = workGroup,
                 Type = typeof(DictGroup).FullName,
             });
-            
+
             #endregion
 
             mContext.SaveChanges();
@@ -395,7 +395,7 @@ namespace PandaDataAccessLayer
                     Code = Constants.VacancyCode
                 },
 
-#region added attr for vacancy
+                #region added attr for vacancy
                 new Attrib
                 {
                     AttribType = mDal.GetAttribType(typeof(DateTime)),
@@ -405,9 +405,13 @@ namespace PandaDataAccessLayer
                 {
                     AttribType = mDal.GetAttribType(typeof(DateTime)),
                     Code = Constants.EndWorkCode
+                },
+                new Attrib
+                {
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.DesiredWorkCode),
+                    Code = Constants.WorkCode
                 }
-#endregion
-                
+                #endregion
             };
             foreach (var attrib in attribs)
                 mDal.Create(attrib);
@@ -491,7 +495,7 @@ namespace PandaDataAccessLayer
             #region Employer  checklist
             var employer = new[]{
                 mDal.Constants.Salary,
-                mDal.Constants.DesiredWork,
+                mDal.Constants.Work,
                 mDal.Constants.StartWork,
                 mDal.Constants.EndWork,
                 mDal.Constants.About,

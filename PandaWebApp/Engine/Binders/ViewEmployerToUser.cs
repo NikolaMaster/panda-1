@@ -92,16 +92,18 @@ namespace PandaWebApp.Engine.Binders
 
             foreach (var checklist in checklists)
             {
-                Employer.VacancyUnit eVacancyUnit = new Employer.VacancyUnit();
+                var vacancyUnit = new Employer.VacancyUnit();
                 foreach (var attrib in checklist.AttrbuteValues)
                 {
-                    var dateTimeValue = DateTime.UtcNow;
+                    DateTime? dateTimeValue = null;
                     var stringValue = attrib.Value;
                     var intValue = 0;
                     var boolValue = true;
                     string dictValue = null;
 
-                    DateTime.TryParse(stringValue, out dateTimeValue);
+                    DateTime dateTimeTmpValue;
+                    if (DateTime.TryParse(stringValue, out dateTimeTmpValue))
+                        dateTimeValue = dateTimeTmpValue;
                     int.TryParse(stringValue, out intValue);
                     bool.TryParse(stringValue, out boolValue);
 
@@ -114,29 +116,29 @@ namespace PandaWebApp.Engine.Binders
                     switch (attrib.Attrib.Code)
                     {
                         case Constants.SalaryCode:
-                            eVacancyUnit.Salary = dictValue;
+                            vacancyUnit.Salary = dictValue;
                             break;
-                        case Constants.DesiredWorkCode:
-                            eVacancyUnit.JobTitle = dictValue;
+                        case Constants.WorkCode:
+                            vacancyUnit.JobTitle = dictValue;
                             break;
                         case Constants.AboutCode:
-                            eVacancyUnit.FullDescription = stringValue;
+                            vacancyUnit.FullDescription = stringValue;
                             break;
                         case Constants.StartWorkCode:
-                            eVacancyUnit.StartTime = dateTimeValue;
+                            vacancyUnit.StartTime = dateTimeValue;
                             break;
                         case Constants.EndWorkCode:
-                            eVacancyUnit.EndTime = dateTimeValue;
+                            vacancyUnit.EndTime = dateTimeValue;
                             break;
                         case Constants.CityCode:
-                            eVacancyUnit.City = stringValue;
+                            vacancyUnit.City = stringValue;
                             break;
                     }
 
                     #endregion
                 }
 
-                vacancyList.Add(eVacancyUnit);
+                vacancyList.Add(vacancyUnit);
             }
 
 

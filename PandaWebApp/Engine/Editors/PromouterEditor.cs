@@ -96,7 +96,7 @@ namespace PandaWebApp.Engine.Editors
                         attributeValue.Value = source.Education;
                         break;
                     case Constants.WorkExperienceCode:
-                        attributeValue.Value =  editWorkExperience(source);
+                        attributeValue.Value = editWorkExperience(source);
                         break;
                     case Constants.HeightCode:
                         attributeValue.Value = source.Height.ToPandaString();

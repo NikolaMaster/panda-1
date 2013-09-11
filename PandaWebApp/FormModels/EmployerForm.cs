@@ -1,4 +1,6 @@
-﻿using PandaDataAccessLayer.DAL;
+﻿using System.Globalization;
+using System.Web.Mvc;
+using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine.Binders;
 using PandaWebApp.ViewModels;
@@ -11,6 +13,22 @@ namespace PandaWebApp.FormModels
 {
     public class EmployerForm
     {
+        public struct VacancyUnit
+        {
+            public Guid Id { get; set; }
+            public DateTime? StartTime { get; set; }
+            public DateTime? EndTime { get; set; }
+            public string Work { get; set; }
+            public string Salary { get; set; }
+            public string DaysOnSite { get; set; }
+            public string FullDescription { get; set; }
+            public string City { get; set; }
+            public DateTime CreationDate { get;set; }
+
+            public IEnumerable<SelectListItem> SalaryValues { get; set; }
+            public IEnumerable<SelectListItem> WorkValues { get; set; }
+        }
+
         public Guid UserId { get; set; }
         public string Icon { get; set; }
         public string EmployerName { get; set; }
@@ -28,6 +46,7 @@ namespace PandaWebApp.FormModels
         public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
 
         public IList<AlbumUnit> Albums { get; set; }
+        public IList<VacancyUnit> Vacancies { get; set; }
 
         public static EmployerForm Bind(DataAccessLayer dataAccessLayer, Guid userId)
         {

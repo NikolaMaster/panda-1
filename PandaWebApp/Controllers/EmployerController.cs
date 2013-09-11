@@ -87,7 +87,7 @@ namespace PandaWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.NewPhotos = photos.Where(x => x != null);
+                model.NewPhotos = photos == null ? new List<HttpPostedFileBase>() : photos.Where(x => x != null);
                 var user = DataAccessLayer.GetById<EmployerUser>(model.UserId);
                 var editor = new EmployerEditor(DataAccessLayer);
                 editor.Edit(model, user);
