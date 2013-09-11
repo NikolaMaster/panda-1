@@ -3,20 +3,19 @@
     ViewBag.Title = "Создание поста";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary()
-
-
-    <div class="label">Тема</div>
-    <div class="editor">@Html.TextBoxFor(model => model.Title)</div>
-    <div class="label">Описание</div>
-    @Html.TextAreaFor(model => model.FullText, new Dictionary<string, object>()
-        {
-            {"class", "ckeditor"}, {"name", "editor1"}
-        })
-
+<div class="blog">
+    <div class="header">Создание поста</div>
+    @using (Html.BeginForm("Create", "Blog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    { 
+        @Html.ValidationSummary()
+        <div class="label">Тема</div>
+        <div class="editor">@Html.TextBoxFor(model => model.Title)</div>
+        <div class="label">Описание</div>
+        <div class="editor">@Html.TextAreaFor(model => model.FullText)</div>
+        <input type="file" name="photo" value="Загрузить фотографию" />
+        
+        <div><input type="submit" value="Создать" /></div>
+    }
     
-     <input type="submit" value="Создать" />
+</div>
 
-}

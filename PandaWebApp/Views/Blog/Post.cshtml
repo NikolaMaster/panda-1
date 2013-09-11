@@ -1,0 +1,19 @@
+﻿@model PandaWebApp.ViewModels.Blog.Entry
+
+<li>
+    <div class="header">@Model.Title
+        <div class="date">@Model.CreatedDate</div>
+    </div>
+    <div class="left picture"><img src="@ImageCreator.Create(Model.Image, 128, 128)" /></div>
+    <div class="right short-description">
+        <p>@Html.Raw(Model.ShortText)</p>
+        <div class="link">
+            <p class="right-aligned">
+                <a href="@Url.Action("Detail","Blog",new { id = Model.Id})">посмотреть всю статью</a>
+            </p>
+        </div>
+        <a href="@Url.Action("Edit","Blog",new { id = Model.Id})">Редактировать</a>
+        <a href="@Url.Action("Delete","Blog",new { id = Model.Id})">Удалить</a>
+    </div>
+    <div class="clear"></div>
+</li>

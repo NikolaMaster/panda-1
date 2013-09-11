@@ -5,16 +5,41 @@
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 
-<h2>Отзывы (@Model.Count):</h2>
 
-@foreach (var entry in Model.Entries)
-{
-    <div class="feedback">
-        <h3>@entry.UserName</h3>
-        <h2>@entry.SendDate.ToPandaString()</h2>
-        <img src="@ImageCreator.Create(entry.UserPhoto, 128, 128)" />
-        <h3>@entry.Title</h3>
-        <p>@entry.Text</p>
-        <div>Rating: @entry.Rating.ToPandaString()</div>
+<div class="full-info">
+    <div class="feedbacks">
+        <div class="header">Отзывы (@Model.Count):</div>
+        <ul>
+            @foreach (var entry in Model.Entries)
+            {
+                <li>
+                    <div class="table-2 feedback">
+                        <div class="column">
+                            <img src="@ImageCreator.Create(entry.UserPhoto, 128, 128)" />
+                        </div>
+                        <div class="column">
+                            <div class="table-2">
+                                <div class="column user-name">@entry.UserName</div>
+                                <div class="column stars"><p class="right-aligned">@entry.SendDate.ToPandaString()</p></div>
+                                <div class="clear"></div>
+                            </div>
+                            <p class="feedback-body">
+                                @entry.Text
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+                @*<h3>@entry.UserName</h3>
+                <h2>@entry.SendDate.ToPandaString()</h2>
+                <img src="@ImageCreator.Create(entry.UserPhoto, 128, 128)" />
+                <h3>@entry.Title</h3>
+                <p class="feedback-body">@entry.Text</p>
+                <div>Rating: @entry.Rating.ToPandaString()</div>
+            *@
+            }
+        </ul>
     </div>
-}
+</div>
+
+

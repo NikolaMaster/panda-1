@@ -1,6 +1,7 @@
 ﻿@using PandaDataAccessLayer.DAL
 @model PandaWebApp.ViewModels.Feedback
-<div class="feedbacks">
+
+    <div class="feedbacks">
     
         @if (@Model.User is PandaDataAccessLayer.Entities.EmployerUser)
         {
@@ -12,29 +13,30 @@
         }
         
    
-    <ul>
-        @foreach (var entry in Model.Entries)
-        {
-            <li>
-                <div class="table-2 feedback">
-                    <div class="column">
-                        <img src="@ImageCreator.Create(entry.UserPhoto, 128, 128)" />
-                    </div>
-                    <div class="column">
-                        <div class="table-2">
-                            <div class="column user-name">@entry.UserName</div>
-                            <div class="column stars"><p class="right-aligned">@entry.SendDate.ToPandaString()</p></div>
-                            <div class="clear"></div>
+        <ul>
+            @foreach (var entry in Model.Entries)
+            {
+                <li>
+                    <div class="table-2 feedback">
+                        <div class="column">
+                            <img src="@ImageCreator.Create(entry.UserPhoto, 128, 128)" />
                         </div>
-                        <p class="feedback-body">
-                            @entry.Text
-                        </p>
+                        <div class="column">
+                            <div class="table-2">
+                                <div class="column user-name">@entry.UserName</div>
+                                <div class="column stars"><p class="right-aligned">@entry.SendDate.ToPandaString()</p></div>
+                                <div class="clear"></div>
+                            </div>
+                            <p class="feedback-body">
+                                @entry.Text
+                            </p>
+                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="clear"></div>
-                </div>
-            </li>
-        }
-    </ul>
-    <div class="more"><p>@Html.ActionLink("Больше мнений", "IndexById", "Feedback", new { userId = Model.User.Id }, null)</p></div>
-</div>
+                </li>
+            }
+        </ul>
+        <div class="more"><p>@Html.ActionLink("Больше мнений", "IndexById", "Feedback", new { userId = Model.User.Id }, null)</p></div>
+    </div>
+
 
