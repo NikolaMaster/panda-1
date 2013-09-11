@@ -9,15 +9,12 @@
 @using (Html.BeginForm())
 {
     <div class="editor">@Html.HiddenFor(model => model.Id)</div>
-    <div class="label">Code:</div>
-    <div class="editor">@Html.TextAreaFor(model => model.Code)</div>
+    <div class="editor">@Html.HiddenFor(model => model.Code)</div>
     <div class="label">Content:</div>
     @Html.TextAreaFor(model => model.Content, new Dictionary<string, object>()
         {
             {"class", "ckeditor"}, {"name", "editor1"}
         })
-    
-    
      <input type="submit" value="Применить" />
 }
 

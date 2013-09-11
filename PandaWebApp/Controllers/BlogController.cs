@@ -18,7 +18,7 @@ namespace PandaWebApp.Controllers
         public const int BlogsCount = 3;
 
         [HttpGet]
-        public ActionResult Posts()
+        public ActionResult TopPosts()
         {
             var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(BlogsCount);
             if (listOfPosts == null)
@@ -30,13 +30,35 @@ namespace PandaWebApp.Controllers
 
             foreach (var blogPost in listOfPosts)
             {
-                var binder = new BlogToBlogPost();
+                var binder = new BlogToBlogPost(DataAccessLayer);
                 var entry = new Blog.Entry();
                 binder.InverseLoad(blogPost, entry);
                 blog.Posts.Add(entry);
             }
 
             return PartialView(blog);
+        }
+
+        [HttpGet]
+        public ActionResult Posts()
+        {
+            var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(BlogsCount);
+            if (listOfPosts == null)
+            {
+                return HttpNotFound("Posts not found");
+            }
+
+            var blog = new Blog { Posts = new List<Blog.Entry>() };
+
+            foreach (var blogPost in listOfPosts)
+            {
+                var binder = new BlogToBlogPost(DataAccessLayer);
+                var entry = new Blog.Entry();
+                binder.InverseLoad(blogPost, entry);
+                blog.Posts.Add(entry);
+            }
+
+            return View(blog);
         }
 
         [HttpGet]
@@ -48,14 +70,33 @@ namespace PandaWebApp.Controllers
         //TODO: replace, because very dangerous =)
         [ValidateInput(false)]
         [HttpPost]
-        public ActionResult Create(Blog.Entry model)
+        public ActionResult Create(Blog.Entry model,HttpPostedFileBase photo)
         {
             if (ModelState.IsValid)
             {
                 model.CreatedDate = DateTime.UtcNow;
                 model.ModifyDate = DateTime.UtcNow;
+                
 
-                var binder = new BlogToBlogPost();
+                //if user not selected a photo , we'll using default photo
+                //sorry for spike boys
+                if (photo != null)
+                {
+                    var pict = new Photo
+                    {
+                        SourceUrl = ImageCreator.SavePhoto(photo)
+                    };
+                    DataAccessLayer.Create(pict);
+                    DataAccessLayer.Refresh(pict);
+
+                    model.Image = pict.SourceUrl;
+                }
+                else
+                {
+                    model.Image = "~/Content/img/del-1.png";
+                }
+
+                var binder = new BlogToBlogPost(DataAccessLayer);
                 var entry = new BlogPost();
                 binder.Load(model, entry);
                 DataAccessLayer.Create<BlogPost>(entry);
@@ -74,7 +115,7 @@ namespace PandaWebApp.Controllers
                 return HttpNotFound("Post not found");
             }
 
-            var binder = new BlogToBlogPost();
+            var binder = new BlogToBlogPost(DataAccessLayer);
             var entry = new Blog.Entry();
             binder.InverseLoad(post, entry);
 
@@ -89,7 +130,21 @@ namespace PandaWebApp.Controllers
             {
                 return HttpNotFound("Post not found");
             }
-            var binder = new BlogToBlogPost();
+            var binder = new BlogToBlogPost(DataAccessLayer);
+            var entry = new Blog.Entry();
+            binder.InverseLoad(post, entry);
+            return View(entry);
+        }
+
+        [HttpGet]
+        public ActionResult Post(Guid id)
+        {
+            var post = DataAccessLayer.GetById<BlogPost>(id);
+            if (post == null)
+            {
+                return HttpNotFound("Post not found");
+            }
+            var binder = new BlogToBlogPost(DataAccessLayer);
             var entry = new Blog.Entry();
             binder.InverseLoad(post, entry);
             return PartialView(entry);

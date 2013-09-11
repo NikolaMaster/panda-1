@@ -23,7 +23,7 @@
         <div class="info right">
         <div class="table-2">
             <div class="column">
-                <div class="row on-site">На сайте <span class="days">@Model.DaysOnSite</span></div>
+                <div class="row on-site">На сайте <span class="days">@Model.DaysOnSite</span> дней</div>
                 <div class="row">Город</div>
                 <div class="row">Адрес офиса</div> 
                 <div class="row"><img src="~/Content/img/phone.png" />Телефон</div>
@@ -59,7 +59,7 @@
             }
             else
             {
-                <p class="nothing">@Model.About</p>
+                <p class="nothing">@Html.Raw(Model.About)</p>
             }
         </div>
         </div>
@@ -109,7 +109,7 @@
             <div class="clear"></div>
 
 
-   @{ Html.RenderAction("UserFeedback", "Feedback", new { userId = Model.UserId }); }
+   @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
    
     <div class="promouter-top">
         <div class="header">

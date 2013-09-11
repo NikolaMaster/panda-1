@@ -236,7 +236,7 @@
             }
             else
             {
-                <p class="nothing">@Model.Hobbies</p>
+                <p class="nothing">@Html.Raw(Model.Hobbies)</p>
             }
         </div>
     </div>
@@ -250,7 +250,7 @@
             }
             else
             {
-                <p class="nothing">@Model.About</p>
+                <p class="nothing">@Html.Raw(Model.About)</p>
             }
         </div>
     </div>
@@ -288,7 +288,7 @@
         </div>
     </div>
     <div class="simple-delimiter"></div>
-        @{ Html.RenderAction("UserFeedback", "Feedback", new { userId = Model.UserId }); }
+        @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
     
     <div class="promouter-top">
         <div class="header">

@@ -1,0 +1,11 @@
+﻿@model PandaWebApp.ViewModels.Blog
+
+<div class="blog">
+    <div class="header">Уютный бложечек нашей компании <span class="count">(@Model.Posts.Count)</span></div>
+    <ul class="messages">
+        @foreach (var iter in Model.Posts)
+        {
+             Html.RenderAction("Post", "Blog", new { id = iter.Id }); 
+        }
+    </ul>
+</div>

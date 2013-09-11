@@ -61,5 +61,14 @@ namespace PandaWebApp.Controllers
             feedback.User = user;
             return PartialView(feedback);
         }
+
+        public ActionResult TopUserFeedback(Guid userId)
+        {
+            var user = DataAccessLayer.GetById<UserBase>(userId);
+            var feedback = prepareFeedbacks(user.Reviews, UserFeedbacksCount);
+            var type = user as EmployerUser;
+            feedback.User = user;
+            return PartialView(feedback);
+        }
     }
 }

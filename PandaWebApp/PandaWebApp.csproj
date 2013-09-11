@@ -524,7 +524,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Blog\Posts.cshtml">
+    <Content Include="Views\Blog\TopPosts.cshtml">
       <BrowseToURL>~/Blog/Posts</BrowseToURL>
     </Content>
   </ItemGroup>
@@ -577,6 +577,9 @@
     <Content Include="Views\Employer\TopEmployers.cshtml" />
     <Content Include="Views\Promouter\TopPromouters.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Blog\Post.cshtml" />
+    <Content Include="Views\Blog\Posts.cshtml" />
+    <Content Include="Views\Feedback\TopUserFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">
