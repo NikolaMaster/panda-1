@@ -459,6 +459,7 @@ namespace PandaDataAccessLayer
                 mDal.Constants.WinterSkates,
                 mDal.Constants.Hobbies,
                 mDal.Constants.About,
+                mDal.Constants.ReadyForWork,
                 mDal.Constants.WorkExperience,
                 mDal.Constants.DesiredWork,
                 mDal.Constants.DesiredWorkTime,
@@ -755,10 +756,9 @@ namespace PandaDataAccessLayer
                     }
                 });
             mDal.DbContext.SaveChanges();
-
-            var checklist = mDal.Create(user, new List<AttribValue>());
-            mDal.Refresh(checklist);
-            mDal.Update(checklist, new List<AttribValue>
+            
+            mDal.Create(user, 
+                new List<AttribValue>
                 {
                     new AttribValue
                     {
@@ -783,18 +783,17 @@ namespace PandaDataAccessLayer
                     new AttribValue
                     {
                         Attrib = mDal.Get<Attrib>(Constants.DesiredWorkCode),
-                        Value = mDal.Constants.DesiredWork.Code
+                        Value = Constants.DesiredWorkCode
                     },
                     new AttribValue
                     {
                         Attrib = mDal.Get<Attrib>(Constants.SalaryCode),
-                        Value = mDal.Get<DictValue>("SALARY_250").Code
+                        Value = "SALARY_250"
                     }
                 });
 
-            var checklist2 = mDal.Create(user, new List<AttribValue>());
-            mDal.Refresh(checklist2);
-            mDal.Update(checklist2, new List<AttribValue>
+            mDal.Create(user, 
+                new List<AttribValue>
                 {
                     new AttribValue
                         {
@@ -819,18 +818,20 @@ namespace PandaDataAccessLayer
                     new AttribValue
                         {
                             Attrib = mDal.Get<Attrib>(Constants.DesiredWorkCode),
-                            Value = mDal.Constants.DesiredWork.Code
+                            Value = Constants.DesiredWorkCode
                         },
                     new AttribValue
                         {
                             Attrib = mDal.Get<Attrib>(Constants.SalaryCode),
-                            Value = mDal.Get<DictValue>("SALARY_600").Code
+                            Value = "SALARY_600"
                         }
                 });
+            mDal.DbContext.SaveChanges();
+
 
             #region add album
 
-            var albomFirst = mDal.Create<Album>(new Album()
+            var albomFirst = mDal.Create(new Album()
             {
                     Name = "Работа",
                     User = user
@@ -838,7 +839,7 @@ namespace PandaDataAccessLayer
 
             for (int i = 0; i < 10; i++)
             {
-                mDal.Create<Photo>(new Photo()
+                mDal.Create(new Photo()
                     {
                         Album = albomFirst,
                         SourceUrl =
@@ -847,7 +848,7 @@ namespace PandaDataAccessLayer
             }
 
 
-            var avatar = mDal.Create<Photo>(new Photo()
+            var avatar = mDal.Create(new Photo()
             {
                 Album = albomFirst,
                 SourceUrl = "~/Content/img/company_avatar.jpg"
@@ -856,7 +857,7 @@ namespace PandaDataAccessLayer
             mDal.UpdateById<UserBase>(user.Id, x => x.Avatar = avatar);
 
             #endregion
-
+            /*
             #region review
 
 
@@ -879,8 +880,10 @@ namespace PandaDataAccessLayer
                     Users = new List<UserBase>() {user}
             });
 
+            mDal.DbContext.SaveChanges();
+           
             #endregion
-
+              * */
         }
 
         private void addStaticPages()

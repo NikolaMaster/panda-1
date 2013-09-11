@@ -82,6 +82,7 @@ namespace PandaWebApp.ViewModels
         public bool Car { get; set; }
         public bool RollerSkates { get; set; }
         public bool WinterSkates { get; set; }
+        public bool ReadyForWork { get; set; }
 
         public DateTime BirthDate { get; set; }
 

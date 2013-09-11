@@ -7,7 +7,6 @@ namespace PandaDataAccessLayer.Entities
 {
     public abstract class UserBase : IGuidIdentifiable
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -15,6 +14,8 @@ namespace PandaDataAccessLayer.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Number { get; set; }
         
+
+        public bool IsAdmin { get; set; }
         public DateTime CreationDate { get; set; }
         public virtual SeoEntry SeoEntry { get; set; }
         public virtual Photo Avatar { get; set; }
@@ -32,6 +33,7 @@ namespace PandaDataAccessLayer.Entities
         protected UserBase() 
         {
             Id = Guid.NewGuid();
+            IsAdmin = false; 
             if (Checklists == null)
                 Checklists = new List<Checklist>();
             if (Sessions == null)

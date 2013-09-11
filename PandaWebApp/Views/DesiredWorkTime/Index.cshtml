@@ -6,7 +6,11 @@
         @Html.EditorFor(x => Model.DesiredWorkTime[i], "DesiredWorkTime")
     }
     <br/>
-    @Ajax.ActionLink("Добавить", "Create", new { userId = Model.UserId }, new AjaxOptions {UpdateTargetId = "desireWorkTime"})
+    @Ajax.ActionLink("Добавить", "Create", new { userId = Model.UserId }, new AjaxOptions
+    {
+        UpdateTargetId = "desireWorkTime", 
+        OnSuccess = "initializeDateTime"
+    })
 </div>
 
     

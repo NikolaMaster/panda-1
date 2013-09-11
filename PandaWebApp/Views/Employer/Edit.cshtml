@@ -35,6 +35,7 @@
             <div>Адрес</div> @Html.EditorFor(m => m.Address)
             <div>Телефон</div> @Html.EditorFor(m => m.MobilePhone)
             <div>Email</div> @Html.EditorFor(m => m.Email)
+            <div>Администратор</div> @Html.CheckBoxFor(m => m.IsAdmin)
         </div>
         <div id="photoTab">
             <div>@{ Html.RenderAction("Index", "Album", new { userId = Model.UserId }); }</div>
@@ -45,10 +46,7 @@
         </div>
         <div id="aboutTab">
             <div>О компании</div> 
-            @Html.TextAreaFor(m => m.About, new Dictionary<string, object>()
-            {
-                {"class", "ckeditor"}, {"name", "editor1"}
-            })
+            @Html.EditorFor(m => m.About, "Wysiwyg")
         </div>
         <div id="vacancyTab">
             <div>@{ Html.RenderAction("Index", "Vacancy", new { userId = Model.UserId }); }</div>

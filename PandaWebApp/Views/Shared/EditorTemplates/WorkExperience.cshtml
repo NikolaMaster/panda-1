@@ -2,9 +2,9 @@
 
 <div id ="workExperience_@Model.Id">
     <div>Название компании @Html.EditorFor(x => x.Title) </div>    
-    <div>Раота @Html.EditorFor(x => x.WorkName) </div>    
-    <div>Начало @Html.EditorFor(x => x.StartTime) </div>    
-    <div>Конец @Html.EditorFor(x => x.EndTime) </div>    
+    <div>Работа @Html.EditorFor(x => x.WorkName) </div>    
+    <div>Начало @Html.EditorFor(x => x.StartTime, "Date") </div>    
+    <div>Конец @Html.EditorFor(x => x.EndTime, "Date") </div>    
     <div>Часы @Html.EditorFor(x => x.Hours) </div> 
     <div>  
         @Ajax.ActionLink("Удалить", "Delete", "WorkExperience", new {workExperienceId = Model.Id},

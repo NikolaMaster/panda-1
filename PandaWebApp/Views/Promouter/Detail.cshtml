@@ -19,7 +19,9 @@
 					
     <div class="photo left">
         <img src="@ImageCreator.Create(Model.Photo, 128, 128)" />
-        <span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
+        @if (Model.ReadyForWork)
+        {<span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
+            }
     </div>
     <div class="info right">
         <div class="table-2">
@@ -236,7 +238,7 @@
             }
             else
             {
-                <p class="nothing">@Model.Hobbies</p>
+                <p class="nothing">@Html.Raw(@Model.Hobbies)</p>
             }
         </div>
     </div>
@@ -250,7 +252,7 @@
             }
             else
             {
-                <p class="nothing">@Model.About</p>
+                <p class="nothing">@Html.Raw(@Model.About)</p>
             }
         </div>
     </div>

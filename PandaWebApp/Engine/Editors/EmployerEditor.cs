@@ -21,6 +21,8 @@ namespace PandaWebApp.Engine.Editors
 
         private void editMainParam(EmployerForm source, EmployerUser dest)
         {
+            dest.Email = source.Email;
+            dest.IsAdmin = source.IsAdmin;
             var checklist = dest.MainChecklist;
             if (checklist == null)
             {

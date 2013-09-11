@@ -31,6 +31,7 @@ namespace PandaWebApp.Engine.Binders
             dest.UserId = source.Id;
             dest.Email = source.Email;
             dest.Photo = source.Avatar.SourceUrl;
+            dest.IsAdmin = source.IsAdmin;
             dest.WorkExperience = new List<PromouterForm.WorkExperienceUnit>();
             dest.DesiredWorkTime = new List<PromouterForm.DesiredWorkTimeUnit>();
             dest.DesiredWork = new List<PromouterForm.DesiredWorkUnit>();
@@ -100,7 +101,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.Car = boolValue;
                         break;
                     case Constants.ReadyForWorkCode:
-                        dest.Status = stringValue;
+                        dest.ReadyForWork = boolValue;
                         break;
                     case Constants.MobilePhoneCode:
                         dest.MobilePhone = stringValue;

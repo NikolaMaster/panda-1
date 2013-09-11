@@ -6,13 +6,24 @@
         <meta name="keywords" value="@ViewBag.Keywords" />
         <meta name="description" value="@ViewBag.Description" />
         <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/south-street/jquery-ui-1.10.3.custom.min.css")" />
+        <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/south-street/jquery.ui.timepicker.css")" />
         <link rel="stylesheet" href="@Url.Content("~/Content/css/style.css")" />
         <!-- include scripts there -->
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-1.9.1.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-ui-1.10.3.custom.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.unobtrusive-ajax.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.ui.timepicker.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/custom/inplace-editor.js")"></script>
         <script src="~/Content/ckeditor/ckeditor.js"></script>
+        <script>
+            function initializeDateTime() {
+                $(".date").datepicker({ dateFormat: "dd.mm.yy" });
+                $(".time").timepicker();
+            }
+            $(function () {
+                initializeDateTime();
+            });
+        </script>
     </head>
 
 	

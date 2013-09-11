@@ -7,6 +7,10 @@
     }
 
     <br/>
-    @Ajax.ActionLink("Добавить", "Create", new {userId = Model.UserId}, new AjaxOptions {UpdateTargetId = "workExperience"})
+    @Ajax.ActionLink("Добавить", "Create", new {userId = Model.UserId}, new AjaxOptions
+    {
+        UpdateTargetId = "workExperience",
+        OnSuccess = "initializeDateTime"
+    })
 </div>
 

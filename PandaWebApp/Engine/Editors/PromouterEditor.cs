@@ -22,6 +22,8 @@ namespace PandaWebApp.Engine.Editors
 
         public void Edit(PromouterForm source, PromouterUser dest)
         {
+            dest.Email = source.Email;
+            dest.IsAdmin = source.IsAdmin;
             var checklist = dest.MainChecklist;
             if (checklist == null)
             {

@@ -41,6 +41,7 @@ namespace PandaWebApp.FormModels
         public string Address { get; set; }
         public int Number { get; set; }
         public int DaysOnSite { get; set; }
+        public bool IsAdmin { get; set; }
         public bool AccountConfirmed { get; set; }
 
         public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }

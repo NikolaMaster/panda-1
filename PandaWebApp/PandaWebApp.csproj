@@ -493,6 +493,8 @@
     <Content Include="Content\js\frameworks\jquery\jquery-1.9.1.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Content\css\frameworks\jquery\south-street\jquery.ui.timepicker.css" />
+    <Content Include="Content\js\frameworks\jquery\jquery.ui.timepicker.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.min.js" />
@@ -580,6 +582,9 @@
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Vacancy.cshtml" />
     <Content Include="Views\Vacancy\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Wysiwyg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

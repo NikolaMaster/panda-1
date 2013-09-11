@@ -40,7 +40,7 @@
             <div>Фамилия</div> @Html.EditorFor(m => m.LastName)
             <div>Отчество</div> @Html.EditorFor(m => m.MiddleName)
             <div>Пол</div> @Html.DropDownListFor(m => m.Gender,  Model.GenderValues, string.Empty)
-            <div>Дата рождения</div> @Html.EditorFor(m => m.BirthDate)
+            <div>Дата рождения</div> @Html.EditorFor(x => x.BirthDate, "Date")
             <div>Мед книжка</div> @Html.EditorFor(m => m.MedicalBook)
             <div>Автомобиль</div> @Html.EditorFor(m => m.Car)
             <div>Мобильный телефон</div> @Html.EditorFor(m => m.MobilePhone)
@@ -48,6 +48,7 @@
             <div>Желаемая цена за час работы</div>@Html.DropDownListFor(x => x.Salary, Model.SalaryValues, string.Empty)
             <div>Образование</div> @Html.DropDownListFor(x => x.Education, Model.EducationValues, string.Empty)
             <div>Готов работать сейчас</div> @Html.EditorFor(m => m.ReadyForWork)
+            <div>Администратор</div> @Html.CheckBoxFor(m => m.IsAdmin)
         </div>
         <div id="photoTab">
             <div>@{ Html.RenderAction("Index", "Album", new { userId = Model.UserId }); }</div>
@@ -85,16 +86,12 @@
            <div>@{ Html.RenderAction("Index", "DesiredWorkTime", new { userId = Model.UserId }); }</div>
         </div>
         <div id="hobbiesTab">
-            <div>Интересы</div> @Html.TextAreaFor(m => m.Hobbies)
+            <div>Интересы</div> 
+            @Html.EditorFor(m => m.Hobbies, "Wysiwyg")
         </div>
         <div id="aboutTab">
             <div>О себе</div> 
-            @Html.TextAreaFor(m => m.About, new Dictionary<string, object>()
-        {
-            {"class", "ckeditor"}, {"name", "editor1"}
-        })
-            
-
+            @Html.EditorFor(m => m.About, "Wysiwyg")
         </div>
         <div id="workExpirienceTab">
            <div>@{ Html.RenderAction("Index", "WorkExperience", new { userId = Model.UserId }); }</div>

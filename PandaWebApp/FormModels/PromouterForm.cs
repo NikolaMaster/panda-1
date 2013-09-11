@@ -91,6 +91,7 @@ namespace PandaWebApp.FormModels
         public bool RollerSkates { get; set; }
         public bool WinterSkates { get; set; }
         public bool ReadyForWork { get; set; }
+        public bool IsAdmin { get; set; }
         public DateTime BirthDate { get; set; }
 
         public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
