@@ -17,8 +17,8 @@
         <script src="~/Content/ckeditor/ckeditor.js"></script>
         <script>
             function initializeDateTime() {
-                $(".date").datepicker({ dateFormat: "dd.mm.yy" });
-                $(".time").timepicker();
+                $(".datePicker").datepicker({ dateFormat: "dd.mm.yy" });
+                $(".timePicker").timepicker();
             }
             $(function () {
                 initializeDateTime();
@@ -87,7 +87,7 @@
             @if (ViewBag.Title!=null && ViewBag.Title.Equals("Главная"))
             {
                 <div class="full-width-content content-width">
-                    @{ Html.RenderAction("Index", "StaticPage", new {code = "FiveReasons"}); }
+                    @{ Html.RenderAction("IndexStaticPage", "StaticPage", new { code = "FiveReasons" }); }
 
                     <div class="all-feedbacks">
                         <div class="header">Отзывы <span class="count">(#COUNT#)</span></div>
@@ -174,22 +174,22 @@
 				<div class="table-4">
 					<div class="column">
 						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></div>
-						<div class="row"><a href="#">Реклама на сайте</a></div>
-						<div class="row"><a href="#">Условия пользования сайтом</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Commercial"})">Реклама на сайте</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "SiteTerms"})">Условия пользования сайтом</a></div>
 					</div>
 					<div class="column">
-						<div class="row"><a href="#">Работодателям</a></div>
-						<div class="row"><a href="#">Правила сайта</a></div>
-						<div class="row"><a href="#">Платные услуги</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "ToWorker"})">Работодателям</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Regulations"})">Правила сайта</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></div>
 					</div>
 					<div class="column">
-						<div class="row"><a href="#">Соискателям</a></div>
-						<div class="row"><a href="#">Советы новичкам</a></div>
-						<div class="row"><a href="#">Полезные статьи</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Applicants"})">Соискателям</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Tips for Newcomers"})">Советы новичкам</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Useful Articles"})">Полезные статьи</a></div>
 					</div>
 					<div class="column">
-						<div class="row"><a href="#">Помощь</a></div>
-						<div class="row"><a href="#">Промо-словарь</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Help"})">Помощь</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Промо-словарь</a></div>
 						<div class="row"><a href="#">Написать в службу поддержки</a></div>
 					</div>
 					<div class="clear"></div>

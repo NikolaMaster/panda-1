@@ -29,7 +29,7 @@ namespace PandaWebApp.Engine.Binders
         public override void InverseLoad(UserBase source, PandaPulse.Entry dest)
         {
             dest.User = source;
-            dest.Name = DataAccessLayer.GetUserName(source) ?? string.Empty;
+            dest.Name = DataAccessLayer.GetPulseUserName(source) ?? string.Empty;
              
             var promouterUser = source as PromouterUser;
             var employerUser = source as EmployerUser;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
+using System.Web.Mvc;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.FormModels;
@@ -11,9 +12,12 @@ namespace PandaWebApp.Engine.Binders
 {
     public class FormEmployerToUser : BaseDataAccessLayerBinder<EmployerForm, EmployerUser>
     {
+        private IList<SelectListItem> mCityValues;
+ 
         public FormEmployerToUser(DataAccessLayer dataAccessLayer)
             : base(dataAccessLayer)
-        {  
+        {
+            mCityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
         }
 
 
@@ -28,6 +32,7 @@ namespace PandaWebApp.Engine.Binders
             dest.Email = source.Email;
             dest.Photo = source.Avatar.SourceUrl;
             dest.IsAdmin = source.IsAdmin;
+            dest.CityValues = mCityValues;
 
             dest.Albums = DataAccessLayer.Get<Album>(x => x.User.Id == source.Id)
                 .Select(x => new AlbumUnit
@@ -78,7 +83,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.Address = stringValue;
                         break;
                     case Constants.ReadyForWorkCode:
-                        dest.Status = attrib.Value;
+                        dest.Status = stringValue;
                         break;
                     case Constants.MobilePhoneCode:
                         dest.MobilePhone = stringValue;
@@ -100,7 +105,7 @@ namespace PandaWebApp.Engine.Binders
                 .OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
                 .ToList();
             var workValues = DataAccessLayer.ListItemsFromDict(Constants.DesiredWorkCode);
-
+            
             foreach (var checklist in checklists)
             {
                 var vacancyUnit = new EmployerForm.VacancyUnit
@@ -108,6 +113,7 @@ namespace PandaWebApp.Engine.Binders
                     Id = checklist.Id,
                     SalaryValues = salaryValues,
                     WorkValues = workValues,
+                    CityValues = mCityValues,
                     CreationDate = checklist.CreationDate,
                 };
                 foreach (var attrib in checklist.AttrbuteValues)
@@ -150,6 +156,9 @@ namespace PandaWebApp.Engine.Binders
                             break;
                         case Constants.CityCode:
                             vacancyUnit.City = stringValue;
+                            break;
+                        case Constants.GenderCode:
+                            vacancyUnit.Gender = stringValue;
                             break;
                     }
 

@@ -113,7 +113,8 @@ namespace PandaWebApp.Engine
                     Selected = false,
                     Text = x.Description,
                     Value = x.Code,
-                }));
+                })
+                .OrderBy(x => x.Text));
             return result.ToList();
         }
         #endregion

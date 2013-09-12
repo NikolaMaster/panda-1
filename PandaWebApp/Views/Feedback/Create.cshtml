@@ -1,0 +1,18 @@
+﻿@model PandaWebApp.FormModels.FeedbackForm
+
+@using (Html.BeginForm("Create"))
+{
+    <div class="label">Загаловок</div>
+    <div class="editor">@Html.TextBoxFor(m => m.Title)</div>
+    
+    <div class="label">Рейтинг</div>
+    <div class="editor">@Html.EditorFor(m => m.Rating)</div>
+    
+    <div class="label">Отзыв</div>
+    <div class="editor">@Html.TextAreaFor(m => m.Text)</div>
+
+    @Html.HiddenFor(x => x.AuthorId)
+    @Html.HiddenFor(x => x.RecieverId)
+
+    <input type="submit" value="Отправить" />
+}

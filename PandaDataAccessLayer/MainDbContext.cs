@@ -50,29 +50,18 @@ namespace PandaDataAccessLayer
             modelBuilder.Entity<UserBase>().ToTable("UserBase");
             modelBuilder.Entity<EmployerUser>().ToTable("EmployerUser");
             modelBuilder.Entity<PromouterUser>().ToTable("PromouterUser");
-        /*
-            //users mapping
-            modelBuilder.Entity<CompanyMember>().Map(m =>
-            {
-                m.MapInheritedProperties();
-                m.ToTable("CompanyMember");
-            });
-            modelBuilder.Entity<PrivateEmployer>().Map(m =>
-            {
-                m.MapInheritedProperties();
-                m.ToTable("PrivateEmployer");
-            });
-            modelBuilder.Entity<PrivateRecruiter>().Map(m =>
-            {
-                m.MapInheritedProperties();
-                m.ToTable("PrivateRecruiter");
-            });
-            modelBuilder.Entity<PromouterUser>().Map(m =>
-            {
-                m.MapInheritedProperties();
-                m.ToTable("PromouterUser");
-            });*/
-            //checklist mapping
+           
+            modelBuilder.Entity<Review>()
+                        .HasRequired(a => a.Reciever)
+                        .WithMany()
+                        .HasForeignKey(u => u.RecieverId)
+                        .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Review>()
+                        .HasRequired(a => a.Author)
+                        .WithMany()
+                        .HasForeignKey(u => u.AuthorId)
+                        .WillCascadeOnDelete(false);
         }
 
         protected override void Dispose(bool disposing)

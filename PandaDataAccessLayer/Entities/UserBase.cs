@@ -23,7 +23,6 @@ namespace PandaDataAccessLayer.Entities
         public virtual ICollection<Checklist> Checklists { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }
         public virtual ICollection<Album> Albums { get; set; }
-        public virtual ICollection<Review> Reviews { get; set; }
 
         public abstract Checklist MainChecklist
         {
@@ -40,8 +39,6 @@ namespace PandaDataAccessLayer.Entities
                 Sessions = new List<Session>();
             if (Albums == null)
                 Albums = new List<Album>();
-            if (Reviews == null)
-                Reviews = new List<Review>();
 
             CreationDate = DateTime.UtcNow;
         }

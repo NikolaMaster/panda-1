@@ -1,4 +1,4 @@
-﻿@model PandaWebApp.FormModels.SearchForm
+﻿@model PandaWebApp.FormModels.EmployerSearchForm
 @{
     ViewBag.Title = "Поиск вакансий";
     Layout = "~/Views/Shared/Layout.cshtml";
@@ -31,11 +31,11 @@
         }
     </div>
     <hr />
-    <div>Город @Html.TextBoxFor(x => x.City)</div>
-    <div>Пол @Html.DropDownListFor(x => x.Gender, Model.GenderValues, string.Empty)</div>
-    <div>Цена за час @Html.DropDownListFor(x => x.Salary, Model.SalaryValues, string.Empty)</div>
+    <div>Город @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.CityValues, string.Empty)</div>
+    <div>Пол @Html.DropDownListFor(x => x.Gender, (IEnumerable<SelectListItem>)ViewBag.GenderValues, string.Empty)</div>
+    <div>Цена за час @Html.DropDownListFor(x => x.Salary, (IEnumerable<SelectListItem>)ViewBag.SalaryValues, string.Empty)</div>
     <hr />
 }
 
-@Html.Partial("EmployerSearchResult", new List<PandaWebApp.ViewModels.SearchView>())
+@Html.Partial("EmployerSearchResult", new List<PandaWebApp.ViewModels.EmployerSearchView>())
 </div>

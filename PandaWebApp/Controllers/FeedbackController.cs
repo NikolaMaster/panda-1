@@ -1,6 +1,7 @@
 ﻿using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
+using PandaWebApp.FormModels;
 using PandaWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -40,10 +41,9 @@ namespace PandaWebApp.Controllers
         }
 
         [ActionName("IndexById")]
-        public ActionResult Index(Guid userid)
+        public ActionResult Index(Guid userId)
         {
-            var user = DataAccessLayer.GetById<UserBase>(userid);
-            var feedback = prepareFeedbacks(user.Reviews);
+            var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId));
             return View("Index", feedback);
         }
 
@@ -56,7 +56,7 @@ namespace PandaWebApp.Controllers
         public ActionResult UserFeedback(Guid userId)
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
-            var feedback = prepareFeedbacks(user.Reviews, UserFeedbacksCount);
+            var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId), UserFeedbacksCount);
             var type = user as EmployerUser;
             feedback.User = user;
             return PartialView(feedback);
@@ -65,10 +65,38 @@ namespace PandaWebApp.Controllers
         public ActionResult TopUserFeedback(Guid userId)
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
-            var feedback = prepareFeedbacks(user.Reviews, UserFeedbacksCount);
+            var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId), UserFeedbacksCount);
             var type = user as EmployerUser;
             feedback.User = user;
             return PartialView(feedback);
+        }
+
+        [HttpGet]
+        public ActionResult Create(Guid authorId, Guid recieverId)
+        {
+            return PartialView(new FeedbackForm
+            {
+                AuthorId = authorId,
+                RecieverId = recieverId,
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Create(FeedbackForm model)
+        {
+            var reciever = DataAccessLayer.GetById<UserBase>(model.RecieverId);
+            DataAccessLayer.Create(new Review
+            {
+                AuthorId = model.AuthorId,
+                RecieverId = model.RecieverId,
+                Rating = model.Rating,
+                CreationDate = DateTime.UtcNow,
+                ModifyDate = DateTime.UtcNow,
+                Text = model.Text,
+                Title = model.Title
+            });
+            DataAccessLayer.DbContext.SaveChanges();
+            return new RedirectResult(string.Format("/{0}/Detail/{1}", reciever.ControllerNameByUser(), reciever.Id));
         }
     }
 }

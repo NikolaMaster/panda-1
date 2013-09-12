@@ -1,10 +1,10 @@
-﻿@model Tuple<Guid,int>
+﻿@model PandaWebApp.ViewModels.Promouter
 
 
 @using (Html.BeginForm())
 {
-    Html.HiddenFor(model => model.Item1);
+    Html.HiddenFor(model => model.UserId);
     <div>Количество монеток:</div>
-    @Html.EditorFor(model => model.Item2)
+    @Html.EditorFor(model => model.Coins)
     <input type="submit" value="Применить" />
 }

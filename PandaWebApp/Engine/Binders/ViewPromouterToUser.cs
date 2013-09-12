@@ -78,7 +78,7 @@ namespace PandaWebApp.Engine.Binders
                     unit = ch > 4 && ch != 0 ? days[1] : days[0];
                 }
 
-                status = lastHit > 5 ? "Онлайн" : string.Format("Был на сайте {0} {1} назад", lastHit, unit);
+                status = lastHit < 5 ? "Онлайн" : string.Format("Был на сайте {0} {1} назад", lastHit, unit);
             }
             else
             {
@@ -99,7 +99,7 @@ namespace PandaWebApp.Engine.Binders
             dest.WorkExperience1 = new List<Promouter.WorkExperienceUnit>();
             dest.WorkExperience2 = new List<Promouter.WorkExperienceUnit>();
             dest.DesiredWorkTime = new List<Promouter.TimeOfWorkUnit>();
-
+            dest.IsAdmin = source.IsAdmin;
             dest.DaysOnSite = getDaysOnSite(source.CreationDate);
             dest.Status = getStatus(source);
 
@@ -170,7 +170,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.Salary = dictValue;
                         break;
                     case Constants.CityCode:
-                        dest.City = stringValue;
+                        dest.City = dictValue;
                         break;
                     case Constants.EducationCode:
                         dest.Education = dictValue;
@@ -240,12 +240,23 @@ namespace PandaWebApp.Engine.Binders
                     x => x.EntityList.Id == entityId);
 
                 var listWorks = new List<string>();
+                var listWorks2 = new List<string>();
+
+                int count = 0;
                 foreach (var desiredWork in desiredWorks)
                 {
-                    listWorks.Add(desiredWork.Work.Description);
+                    if (count/2 < desiredWorks.Count())
+                    {
+                        listWorks.Add(desiredWork.Work.Description);
+                    }
+                    else
+                    {
+                        listWorks2.Add(desiredWork.Work.Description);
+                    }
+                    count++;
                 }
                 dest.DesiredWork1 = listWorks;
-                dest.DesiredWork2 = new List<string>();
+                dest.DesiredWork2 = listWorks2;
             }
 
         }

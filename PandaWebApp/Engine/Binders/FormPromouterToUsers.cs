@@ -39,6 +39,7 @@ namespace PandaWebApp.Engine.Binders
                 .ToList();
             dest.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
             dest.GenderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode);
+            dest.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
 
             dest.Albums =  DataAccessLayer.Get<Album>(x => x.User.Id == source.Id)
                 .Select(x => new AlbumUnit

@@ -11,7 +11,7 @@ using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer
 {//DropCreateDatabaseIfModelChanges<MainDbContext>
-    public class MainInitializer : CreateDatabaseIfNotExists<MainDbContext>////DropCreateDatabaseIfModelChanges<MainDbContext>
+    public class MainInitializer : DropCreateDatabaseIfModelChanges<MainDbContext>
 {
         private MainDbContext mContext;
         private DataAccessLayer mDal;
@@ -96,6 +96,29 @@ namespace PandaDataAccessLayer
             mDal.Create(new AttribType
             {
                 DictGroup = educationGroup,
+                Type = typeof(DictGroup).FullName,
+            });
+
+            #endregion
+
+            #region city
+
+            var cityGroup = new DictGroup
+            {
+                Code = Constants.CityCode,
+                Description = "Город"
+            };
+            var cityValues = Constants.CityValues.Select(x => new DictValue
+            {
+                Code = x,
+                Description = x
+            })
+            .ToList();
+
+            educationGroup = mDal.Create(cityGroup, cityValues).Key;
+            mDal.Create(new AttribType
+            {
+                DictGroup = cityGroup,
                 Type = typeof(DictGroup).FullName,
             });
 
@@ -287,7 +310,7 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib
                 {
-                    AttribType = mDal.GetAttribType(typeof(string)),
+                    AttribType = mDal.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.CityCode),
                     Code = Constants.CityCode
                 },
                 new Attrib 
@@ -501,7 +524,8 @@ namespace PandaDataAccessLayer
                 mDal.Constants.StartWork,
                 mDal.Constants.EndWork,
                 mDal.Constants.About,
-                mDal.Constants.City
+                mDal.Constants.City,
+                mDal.Constants.Gender
             };
 
             foreach (var attrib2Checklist in employer.Select(x => new Attrib2ChecklistType
@@ -694,29 +718,6 @@ namespace PandaDataAccessLayer
 
 
             #endregion
-
-            #region review
-
-            mDal.Create(new Review()
-                {
-                    CreationDate = DateTime.Now,
-                    ModifyDate = DateTime.Now,
-                    Rating = 5,
-                    Text = "Работу вополняет на отлично",
-                    Title = "Отлично",
-                    Users = new List<UserBase>() {user}
-                });
-            mDal.Create(new Review()
-                {
-                    CreationDate = DateTime.Now,
-                    ModifyDate = DateTime.Now,
-                    Rating = 2,
-                    Text = "Работу всегда вополняет на отлично",
-                    Title = "Отлично",
-                    Users = new List<UserBase>() {user}
-                });
-
-            #endregion
         }
 
         private void addUser2()
@@ -858,7 +859,7 @@ namespace PandaDataAccessLayer
             mDal.UpdateById<UserBase>(user.Id, x => x.Avatar = avatar);
 
             #endregion
-            /*
+ 
             #region review
 
 
@@ -867,24 +868,26 @@ namespace PandaDataAccessLayer
                 CreationDate = DateTime.UtcNow,
                 ModifyDate = DateTime.UtcNow,
                 Rating = 5,
-                    Text = "Все просто супер",
-                    Title = "Отлично",
-                    Users = new List<UserBase>() {user}
+                Text = "Все просто супер",
+                Title = "Отлично",
+                AuthorId = user.Id,
+                RecieverId = mDal.TopRandom<UserBase>(1).First().Id
             });
             mDal.Create(new Review()
             {
                 CreationDate = DateTime.UtcNow,
                 ModifyDate = DateTime.UtcNow,
                 Rating = 2,
-                    Text = "Работа сделана не очень качественно",
-                    Title = "Удовлетворительно",
-                    Users = new List<UserBase>() {user}
+                Text = "Работа сделана не очень качественно",
+                Title = "Удовлетворительно",
+                AuthorId = user.Id,
+                RecieverId = mDal.TopRandom<UserBase>(1).First().Id
             });
 
             mDal.DbContext.SaveChanges();
            
             #endregion
-              * */
+              
         }
 
         private void addStaticPages()
@@ -893,31 +896,79 @@ namespace PandaDataAccessLayer
             mDal.Create(new StaticPageUnit()
             {
                 Code = "About",
-                Content = "Первая статичная панда-страница"
+                Content = "О проекте"
             });
 
             mDal.Create(new StaticPageUnit()
             {
                 Code = "Dictionary",
-                Content = "Вторая статичная панда-страница"
+                Content = "Словарь"
             });
 
             mDal.Create(new StaticPageUnit()
             {
                 Code = "FAQ",
-                Content = "Третяя статичная панда-страница"
+                Content = "Вопрос-Ответ"
             });
 
             mDal.Create(new StaticPageUnit()
             {
                 Code = "Contacts",
-                Content = "Четвертая статичная панда-страница"
+                Content = "Контакты"
             });
 
             mDal.Create(new StaticPageUnit()
             {
                 Code = "PaidServices",
-                Content = "Пятая статичная панда-страница"
+                Content = "Платные услуги"
+            });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "Commercial",
+                Content = "Реклама на сайте"
+            });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "SiteTerms",
+                Content = "Условия пользования сайтом"
+            });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "ToWorker",
+                Content = "Работодателям"
+            });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "Regulations",
+                Content = "Правила сайта"
+            });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "Applicants",
+                Content = "Соискателям"
+            });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "Tips for Newcomers",
+                Content = "Советы новичкам"
+            });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "Useful Articles",
+                Content = "Полезные статьи"
+            });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "Help",
+                Content = "Помощь"
             });
 
             mDal.Create(new StaticPageUnit()

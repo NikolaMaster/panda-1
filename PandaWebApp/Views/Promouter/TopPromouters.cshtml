@@ -5,12 +5,12 @@
     @foreach (var promouter in Model)
     {
         <li class="rounded-borders-4">
-            <a href="@Url.Action("Detail", "Promouter", new { id = promouter.UserId })">
-                <img src="@ImageCreator.Create(promouter.Photo, 128, 128)" />
-            </a>
-        </li>}
+            <img src="@ImageCreator.Create(promouter.Photo, 128, 128)" />
+        </li>
+    }
 </ul>
 
-<p class="right-aligned clear"><a href="#">начать поиск по исполнителям</a></p>
+<p class="right-aligned clear">@Html.ActionLink("начать поиск по исполнителям", "Promouter", "Search")</p>
+
 
 

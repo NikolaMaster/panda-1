@@ -51,6 +51,7 @@ namespace PandaWebApp.Engine.Binders
             return string.Format("{0} {1}", h, unit);
         }
 
+        //i'm wrote this is very fast, so this method work is bad , sorry
         private string getStatus(EmployerUser source)
         {
             string status = string.Empty;
@@ -93,13 +94,12 @@ namespace PandaWebApp.Engine.Binders
 
         private void inverseMainParam(EmployerUser source, Employer dest)
         {
-
             dest.UserId = source.Id;
             dest.Email = source.Email;
             dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl;
             dest.Number = source.Number;
             dest.DaysOnSite = getDaysOnSite(source.CreationDate);
-
+            dest.IsAdmin = source.IsAdmin;
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 
@@ -115,10 +115,15 @@ namespace PandaWebApp.Engine.Binders
                 var stringValue = attrib.Value;
                 var intValue = 0;
                 var boolValue = true;
+                string dictValue = null;
 
                 DateTime.TryParse(stringValue, out dateTimeValue);
                 int.TryParse(stringValue, out intValue);
                 bool.TryParse(stringValue, out boolValue);
+                if (attrib.Attrib.AttribType.DictGroup != null && attrib.Value != null)
+                {
+                    dictValue = DataAccessLayer.Get<DictValue>(attrib.Value).Description;
+                }
 
                 #region Big switch [TODO by code field]
 
@@ -137,7 +142,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.MobilePhone = stringValue;
                         break;
                     case Constants.CityCode:
-                        dest.City = stringValue;
+                        dest.City = dictValue;
                         break;
                 }
                 #endregion
@@ -191,7 +196,7 @@ namespace PandaWebApp.Engine.Binders
                             vacancyUnit.EndTime = dateTimeValue;
                             break;
                         case Constants.CityCode:
-                            vacancyUnit.City = stringValue;
+                            vacancyUnit.City = dictValue;
                             break;
                     }
 

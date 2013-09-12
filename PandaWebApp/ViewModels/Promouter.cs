@@ -27,7 +27,7 @@ namespace PandaWebApp.ViewModels
         }
 
         public Guid UserId { get; set; }
-
+        public bool IsAdmin { get; set; }
         public string Icon { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

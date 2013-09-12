@@ -17,14 +17,19 @@ namespace PandaDataAccessLayer.Entities
         public int Rating { get; set; }
         public DateTime ModifyDate { get; set; }
         public DateTime CreationDate { get; set; }
+        public Guid RecieverId { get; set; }
+        public Guid AuthorId { get; set; }
 
-        public virtual ICollection<UserBase> Users { get; set; }
+        //public virtual ICollection<UserBase> Users { get; set; }
+        [ForeignKey("RecieverId")]
+        public virtual UserBase Reciever { get; set; }
+        [ForeignKey("AuthorId")]
+        public virtual UserBase Author { get; set; }
 
         public Review() 
         {
             Id = Guid.NewGuid();
-            if (Users == null)
-                Users = new List<UserBase>();
+            CreationDate = DateTime.UtcNow;
         }
     }
 }

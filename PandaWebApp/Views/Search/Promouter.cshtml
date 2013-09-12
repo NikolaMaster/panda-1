@@ -1,0 +1,26 @@
+﻿@model PandaWebApp.FormModels.PromouterSearchForm
+@{
+    ViewBag.Title = "Поиск по исполнителям";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h2>Поиск вакансий</h2>
+
+<div>
+@using (Ajax.BeginForm("PromouterSearchResult", new AjaxOptions
+    {
+        UpdateTargetId = "promouterSearchResult",
+        HttpMethod = "POST"
+    }))
+{
+    <h3>Поиск</h3>
+    <div>@Html.TextBoxFor(x => x.Query) <input type="submit" value="Поиск" /></div>
+    <hr />
+    <div>Город @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.CityValues, string.Empty)</div>
+    <div>Пол @Html.DropDownListFor(x => x.Gender, (IEnumerable<SelectListItem>)ViewBag.GenderValues, string.Empty)</div>
+    <div>Цена за час @Html.DropDownListFor(x => x.Salary, (IEnumerable<SelectListItem>)ViewBag.SalaryValues, string.Empty)</div>
+    <hr />
+}
+
+@Html.Partial("PromouterSearchResult", new List<PandaWebApp.ViewModels.PromouterSearchView>())
+</div>

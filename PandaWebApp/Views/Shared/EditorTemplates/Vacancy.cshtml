@@ -7,7 +7,7 @@
     <div>С: @Html.EditorFor(x => x.StartTime, "Date") </div>    
     <div>По: @Html.EditorFor(x => x.EndTime, "Date") </div>    
     <div>Цена за час: @Html.DropDownListFor(x => x.Salary, Model.SalaryValues, string.Empty) </div> 
-    <div>Город: @Html.EditorFor(x => x.City)</div>
+    <div>Город: @Html.DropDownListFor(x => x.City, Model.CityValues, string.Empty)</div>
     <div>  
         @Ajax.ActionLink("Удалить", "Delete", "Vacancy", new {vacancyId = Model.Id},
             new AjaxOptions {UpdateTargetId = "vacancy_" + Model.Id})     

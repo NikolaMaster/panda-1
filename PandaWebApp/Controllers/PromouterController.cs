@@ -109,5 +109,24 @@ namespace PandaWebApp.Controllers
 #endif
         }
 
+        public ActionResult EditCoins(Guid userId)
+        {
+            var userBase = DataAccessLayer.GetById<UserBase>(userId);
+            var promouter = new Promouter()
+            {
+                UserId = userId,
+                Coins = userBase.Coins
+            };
+            return View(promouter);
+        }
+
+        [HttpPost]
+        public ActionResult EditCoins(Promouter promouter)
+        {
+            DataAccessLayer.UpdateById<UserBase>(promouter.UserId, x => x.Coins = promouter.Coins);
+            DataAccessLayer.DbContext.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

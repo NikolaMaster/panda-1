@@ -1,22 +1,33 @@
 ﻿@model PandaWebApp.ViewModels.Blog.Entry
-      
-<div class="blog">
-    <div class="header">@Model.Title</div>
-    <div class="date">@Model.CreatedDate</div>
-    
-    <div class="left picture"><img src="@ImageCreator.Create(Model.Image, 128, 128)" /></div>
-    <div class="right short-description">
-        <p>@Html.Raw(Model.FullText)</p>
-    </div>
-    <div class="clear"></div>
-</div>
 
+
+<div class="full-width-content content-width">	
+    <div class="blog">
+        <div class="header">@Model.Title</div>
+        <ul class="messages">
+            <li>
+                <div class="header">
+                    <div class="date">@Model.CreatedDate</div>
+                </div>
+        
+                <div class="left picture"><img src="@ImageCreator.Create(Model.Image, 128, 128)" /></div>
+                
+                <div class="right short-description">
+                    <p>@Html.Raw(Model.FullText)</p>
+                </div>
+                
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    </div>
+
+
+<a href="@Url.Action("Edit","Blog",new { id = Model.Id})">Редактировать</a>
+<a href="@Url.Action("Delete","Blog",new { id = Model.Id})">Удалить</a>
+   
  
 
 
-
-
-
-   
 
 

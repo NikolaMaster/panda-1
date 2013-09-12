@@ -101,5 +101,27 @@ namespace PandaWebApp.Controllers
             return new EmptyResult();
 #endif
         }
+
+
+
+        public ActionResult EditCoins(Guid userId)
+        {
+            var userBase = DataAccessLayer.GetById<UserBase>(userId);
+            var employer = new Employer()
+                {
+                    UserId = userId,
+                    Coins = userBase.Coins
+                };
+            return View(employer);
+        }
+
+        [HttpPost]
+        public ActionResult EditCoins(Employer employer)
+        {
+            DataAccessLayer.UpdateById<UserBase>(employer.UserId, x => x.Coins = employer.Coins);
+            DataAccessLayer.DbContext.SaveChanges();
+            return RedirectToAction("Detail", "Employer", new {userId = employer.UserId});
+        }
+
     }
 }
