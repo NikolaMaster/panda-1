@@ -101,7 +101,7 @@ namespace PandaWebApp.Engine.Binders
             dest.DesiredWorkTime = new List<Promouter.TimeOfWorkUnit>();
             dest.DaysOnSite = getDaysOnSite(source.CreationDate);
             dest.Status = getStatus(source);
-            
+            dest.Coins = source.Coins;
 
             //get main album
             var firstOrDefault = source.Albums.FirstOrDefault(x => x.Name == "Основной альбом");

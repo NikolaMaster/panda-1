@@ -37,10 +37,9 @@
                 <div class="row">Желаемая цена за час работы</div>
                 <div class="row">Город</div>
                 <div class="row">Образование</div>
-                @if (Model.IsAdmin)
-                {
-                    <div class="row">Количество монеток: @Model.Coins</div>
-                }
+               
+                 <div class="row">Количество монеток: @Model.Coins</div>
+                
             </div>
             <div class="column">
                 @if (Model.AccountConfirmed)
@@ -79,11 +78,10 @@
                 <div class="row">@Model.Salary</div>
                 <div class="row">@Model.City</div>
                 <div class="row">@Model.Education</div>
-                 @if (Model.IsAdmin)
-                {
-                    <div class="row"><a href="@Url.Action("EditCoins", "Promouter", new {userId = Model.UserId})" >редактировать</a></div>
-                    <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Promouter", new {id = Model.UserId}, new {})</div>
-                }
+                
+                <div class="row"><a href="@Url.Action("EditCoins", "Promouter", new {userId = Model.UserId})" >редактировать</a></div>
+                <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Promouter", new {id = Model.UserId}, new {})</div>
+                
             </div>
             <div class="clear"></div>
         </div>
@@ -308,10 +306,9 @@
     <div class="simple-delimiter"></div>
     @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
     
-    @if (Model.IsAdmin)
-    {
-        Url.Action("Create", "Feedback", new {authorId = Model.UserId, recieverId = Model.UserId,});
-    }
+    
+    @Url.Action("Create", "Feedback", new {authorId = Model.UserId, recieverId = Model.UserId,});
+    
     <div class="promouter-top">
         <div class="header">
             Еще промоутеры
