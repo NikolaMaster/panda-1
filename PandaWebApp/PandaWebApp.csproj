@@ -588,6 +588,7 @@
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Wysiwyg.cshtml" />
+    <Content Include="Views\Album\Album.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

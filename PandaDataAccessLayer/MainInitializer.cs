@@ -20,6 +20,7 @@ namespace PandaDataAccessLayer
         {
             mDal = new DataAccessLayer(context);
             mContext = context;
+//            mContext.Configuration.LazyLoadingEnabled = false;
 
             addDefaultAttribTypes();
             addDefaultChecklistTypes();

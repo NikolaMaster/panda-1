@@ -23,7 +23,7 @@
         <div class="info right">
         <div class="table-2">
             <div class="column">
-                <div class="row on-site">На сайте <span class="days">@Model.DaysOnSite</span> дней</div>
+                <div class="row on-site"><span class="days">@Model.DaysOnSite</span></div>
                 <div class="row">Город</div>
                 <div class="row">Адрес офиса</div> 
                 <div class="row"><img src="~/Content/img/phone.png" />Телефон</div>
@@ -71,26 +71,33 @@
                     <ul class="horiz">
                         @{
                             var index = 0;
-                            foreach(var item in Model.Album)
+                            int topCount = 10;
+                            foreach (var item in Model.Album)
                             {
+                                if (topCount.Equals(0))
+                                {
+                                    break;
+                                }
+                                
                                 <li class="@(index == 0 ? "first" : "")">
                                     <img src="@ImageCreator.Create(item, 128, 128)" />
                                 </li>
-                    
-                        if (index == 4)
-                        {
-                            index = 0;
-                        }
-                        else
-                        {
-                                index++;
+
+                                if (index == 4)
+                                {
+                                    index = 0;
+                                }
+                                else
+                                {
+                                    index++;
+                                }
+                                topCount--;
                             }
                         }
-                }
                     </ul>
                 </div>
                 <div class="clear"></div>
-                <div class="more"><p>Просмотреть все фотоотчеты</p></div>
+                <div class="more"><p>@Html.ActionLink("Просмотреть все фотоотчеты","Album","Album",new {userId = Model.UserId},null)</p></div>
             </div>
         
             <div class="header">Открытые вакансии</div>
