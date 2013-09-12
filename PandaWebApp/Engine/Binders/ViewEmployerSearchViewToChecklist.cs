@@ -32,7 +32,7 @@ namespace PandaWebApp.Engine.Binders
             dest.Salary = salaryAttribute.Value != null ? DataAccessLayer.Get<DictValue>(salaryAttribute.Value).Description : null;
             dest.Work = workAttribute.Value != null ? DataAccessLayer.Get<DictValue>(workAttribute.Value).Description : null;
             dest.EmployerName = companyNameAttribute != null ? companyNameAttribute.Value : null;
-            dest.Gender = genderAttribute != null ? genderAttribute.Value : null;
+            dest.Gender = genderAttribute.Value != null ? DataAccessLayer.Get<DictValue>(genderAttribute.Value).Description : null;
             dest.Checklist = source;
         }
     }

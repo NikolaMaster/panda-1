@@ -30,6 +30,7 @@ namespace PandaDataAccessLayer.Entities
         {
             Id = Guid.NewGuid();
             CreationDate = DateTime.UtcNow;
+            ModifyDate = DateTime.UtcNow;
         }
     }
 }

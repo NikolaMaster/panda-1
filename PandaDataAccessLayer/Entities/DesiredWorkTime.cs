@@ -17,10 +17,12 @@ namespace PandaDataAccessLayer.Entities
         public int DayOfWeek { get; set; }
 
         public virtual EntityList EntityList { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public DesiredWorkTime()
         {
             Id = Guid.NewGuid();
+            CreationDate = DateTime.UtcNow;
         }
     }
 }
