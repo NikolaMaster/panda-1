@@ -14,6 +14,14 @@ namespace PandaWebApp.Controllers
     {
         public ActionResult Index(Guid userId)
         {
+            ViewBag.SalaryValues = DataAccessLayer
+                .ListItemsFromDict(Constants.SalaryCode)
+                .OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
+                .ToList();
+            ViewBag.WorkValues = DataAccessLayer.ListItemsFromDict(Constants.DesiredWorkCode);
+            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode).
+                OrderBy(x => x.Text)
+                .ToList();
             return PartialView("Index", EmployerForm.Bind(DataAccessLayer, userId));
         }
 

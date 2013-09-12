@@ -3,12 +3,32 @@
 <div id ="vacancy_@Model.Id">
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.CreationDate)
-    <div>Наименование работы: @Html.DropDownListFor(x => x.Work, Model.WorkValues, string.Empty) </div>    
+    @{
+        var work = (IEnumerable<SelectListItem>) (ViewBag.WorkValues);
+        work = work.Select(x =>
+        {
+            x.Selected = false;
+            return x;
+        });
+        var salary = (IEnumerable<SelectListItem>) (ViewBag.SalaryValues);
+        salary = salary.Select(x =>
+        {
+            x.Selected = false;
+            return x;
+        });
+        var city = (IEnumerable<SelectListItem>) (ViewBag.CityValues);
+        city = city.Select(x =>
+        {
+            x.Selected = false;
+            return x;
+        });
+        }
+    <div>Наименование работы: @Html.DropDownListFor(x => x.Work, work, string.Empty) </div>    
     <div>Описание работы: @Html.EditorFor(x => x.FullDescription) </div>    
     <div>С: @Html.EditorFor(x => x.StartTime, "Date") </div>    
     <div>По: @Html.EditorFor(x => x.EndTime, "Date") </div>    
-    <div>Цена за час: @Html.DropDownListFor(x => x.Salary, Model.SalaryValues, string.Empty) </div> 
-    <div>Город: @Html.DropDownListFor(x => x.City, Model.CityValues, string.Empty)</div>
+    <div>Цена за час: @Html.DropDownListFor(x => x.Salary, salary, string.Empty) </div> 
+    <div>Город: @Html.DropDownListFor(x => x.City, city, string.Empty)</div>
     <div>  
         @Ajax.ActionLink("Удалить", "Delete", "Vacancy", new {vacancyId = Model.Id},
             new AjaxOptions {UpdateTargetId = "vacancy_" + Model.Id})     

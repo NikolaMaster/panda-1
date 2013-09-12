@@ -25,10 +25,6 @@ namespace PandaWebApp.FormModels
             public string City { get; set; }
             public string Gender { get; set; }
             public DateTime CreationDate { get;set; }
-
-            public IEnumerable<SelectListItem> SalaryValues { get; set; }
-            public IEnumerable<SelectListItem> WorkValues { get; set; }
-            public IList<SelectListItem> CityValues { get; set; }
         }
 
         public Guid UserId { get; set; }
@@ -50,7 +46,6 @@ namespace PandaWebApp.FormModels
 
         public IList<AlbumUnit> Albums { get; set; }
         public IList<VacancyUnit> Vacancies { get; set; }
-        public IList<SelectListItem> CityValues { get; set; }
 
         public static EmployerForm Bind(DataAccessLayer dataAccessLayer, Guid userId)
         {
