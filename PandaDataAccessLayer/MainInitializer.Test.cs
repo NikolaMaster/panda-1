@@ -35,33 +35,103 @@ namespace PandaDataAccessLayer
             DataAccessLayer.Create(new StaticPageUnit()
             {
                 Code = "About",
-                Content = "Первая статичная панда-страница"
+                Content = "О проекте"
             });
 
             DataAccessLayer.Create(new StaticPageUnit()
             {
                 Code = "Dictionary",
-                Content = "Вторая статичная панда-страница"
+                Content = "Словарь"
             });
 
             DataAccessLayer.Create(new StaticPageUnit()
             {
                 Code = "FAQ",
-                Content = "Третяя статичная панда-страница"
+                Content = "Вопрос-Ответ"
             });
 
             DataAccessLayer.Create(new StaticPageUnit()
             {
                 Code = "Contacts",
-                Content = "Четвертая статичная панда-страница"
+                Content = "Контакты"
             });
 
             DataAccessLayer.Create(new StaticPageUnit()
             {
                 Code = "PaidServices",
-                Content = "Пятая статичная панда-страница"
+                Content = "Платные услуги"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "Commercial",
+                Content = "Реклама на сайте"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "SiteTerms",
+                Content = "Условия пользования сайтом"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "ToWorker",
+                Content = "Работодателям"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "Regulations",
+                Content = "Правила сайта"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "Applicants",
+                Content = "Соискателям"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "Tips for Newcomers",
+                Content = "Советы новичкам"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "Useful Articles",
+                Content = "Полезные статьи"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "Help",
+                Content = "Помощь"
+            });
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                Code = "FiveReasons",
+                Content = "<div class=\"five-reasons\">" +
+                        "<div class=\"simple-delimiter\"></div>" +
+                        "<div class=\"simple-bg\"></div>" +
+                        "<div class=\"reasons left\">" +
+                            "<h1>5 причин, по которым стоит заказать услуги у нас</h1>" +
+                            "<ul>" +
+                                "<li>Только проверенные участники проходят отбор</li>" +
+                                "<li>Вы сами выбираете исполнителя</li>" +
+                                "<li>0% комиссии для заказчиков</li>" +
+                                "<li>Оперативный подход</li>" +
+                                "<li>Простой и понятный интерфейс</li>" +
+                            "</ul>" +
+                        "</div>" +
+                        "<div class=\"reasons-image right\"><img src=\"/Content/img/five-resons.png\" /></div>" +
+                        "<div class=\"clear\"></div>" +
+                    "</div>"
             });
         }
+
 
         public void addBlog()
         {

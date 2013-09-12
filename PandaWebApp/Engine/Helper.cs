@@ -10,6 +10,18 @@ namespace PandaWebApp.Engine
 {
     public class Helper
     {
+        #region Exceptions
 
+        public static void HttpUnauthorized(string message = "Unauthorized")
+        {
+            throw new HttpException(401, message);
+        }
+
+        public static void HttpForbidden(string message = "Forbidden")
+        {
+            throw new HttpException(403, message);
+        }
+
+        #endregion
     }
 }

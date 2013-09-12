@@ -35,11 +35,11 @@ namespace PandaWebApp.Controllers
                     });
                 DataAccessLayer.DbContext.SaveChanges();
              
-                return RedirectToAction("IndexStaticPage", "StaticPage", new { code = page.Code });
+                return RedirectToAction("Index", "StaticPage", new { code = page.Code });
             }
 
             return View();
         }
-
+        
     }
 }

@@ -73,8 +73,8 @@ namespace PandaWebApp.Controllers
                         }
                     }
                 }
-
-                homeView.AveragePromouterCost = promoutersCostSum/homeView.TotalPromouters;
+                
+                homeView.AveragePromouterCost = Math.Round(promoutersCostSum/homeView.TotalPromouters, 0);
             }
 
             var topEmployersUserBase = DataAccessLayer.TopRandom<EmployerUser>(TopEmployersCount);

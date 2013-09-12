@@ -33,25 +33,18 @@
 		
 		<div class="body layer one">
 			<div class="header">
-				<div class="top-links content-width">
-					<a href="#" class="first left middle">Выберите город</a>
-					<a href="#" class="second right middle-img"><img src="~/Content/img/enter-button.png" /></a>
-					<a href="@Url.Action("Create","Promouter")" class="third right middle">Зарегистрироваться на сайте</a>
-					
-					<div class="clear"></div>
-				</div>
-				
+                @Html.Partial("_AuthPanel")
 				<div class="content-width">
-					<div class="logo left"><img src="~/Content/img/logo.png" /></div>
+					<div class="logo left"><a href="@Url.Action("Index","Home")"><img src="~/Content/img/logo.png" /></a></div>
 					<div class="right">
 						<div class="banner-top"></div>
 						<ul class="main-menu horiz">
-							<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "About"})">О проекте</a></li>
-							<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "Dictionary"})">Словарь</a></li>
+							<li><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></li>
+							<li><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Словарь</a></li>
 							<li><a href="@Url.Action("Posts","Blog")">Блог</a></li>
-							<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "FAQ"})">Вопрос-Ответ</a></li>
-							<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "Contacts"})">Контакты</a></li>
-							<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "PaidServices"})">Платные услуги</a></li>
+							<li><a href="@Url.Action("Index","StaticPage",new { code = "FAQ"})">Вопрос-Ответ</a></li>
+							<li><a href="@Url.Action("Index","StaticPage",new { code = "Contacts"})">Контакты</a></li>
+							<li><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></li>
 						</ul>
 					</div>
 					<div class="clear"></div>
@@ -87,24 +80,7 @@
             @if (ViewBag.Title!=null && ViewBag.Title.Equals("Главная"))
             {
                 <div class="full-width-content content-width">
-                    <div class="five-reasons">
-                        <div class="simple-delimiter"></div>
-                        <div class="simple-bg"></div>
-                        <div class="reasons left">
-                            <h1>5 причин, по которым стоит заказать услуги у нас</h1>
-                            <ul>
-                                <li>Только проверенные участники проходят отбор</li>
-                                <li>Вы сами выбираете исполнителя</li>
-                                <li>0% комиссии для заказчиков</li>
-                                <li>Оперативный подход</li>
-                                <li>Простой и понятный интерфейс</li>
-                            </ul>
-                        </div>
-
-                        <div class="reasons-image right"><img src="~/Content/img/five-resons.png" /></div>
-
-                        <div class="clear"></div>
-                    </div>
+                    @{ Html.RenderAction("IndexStaticPage", "StaticPage", new { code = "FiveReasons" }); }
 
                     <div class="all-feedbacks">
                         <div class="header">Отзывы <span class="count">(#COUNT#)</span></div>
@@ -178,35 +154,35 @@
 
 		<div class="footer content-width">
 			<ul class="main-menu horiz">
-				<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "About"})">О проекте</a></li>
-				<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "Dictionary"})">Словарь</a></li>
+				<li><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></li>
+				<li><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Словарь</a></li>
 				<li><a href="@Url.Action("Posts","Blog")">Блог</a></li>
-				<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "FAQ"})">Вопрос-Ответ</a></li>
-				<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "Contacts"})">Контакты</a></li>
-				<li><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "PaidServices"})">Платные услуги</a></li>
+				<li><a href="@Url.Action("Index","StaticPage",new { code = "FAQ"})">Вопрос-Ответ</a></li>
+				<li><a href="@Url.Action("Index","StaticPage",new { code = "Contacts"})">Контакты</a></li>
+				<li><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></li>
 			</ul>
 			<div class="clear"></div>
 
 			<div class="links">
 				<div class="table-4">
 					<div class="column">
-						<div class="row"><a href="@Url.Action("IndexStaticPage","StaticPage",new { code = "About"})">О проекте</a></div>
-						<div class="row"><a href="#">Реклама на сайте</a></div>
-						<div class="row"><a href="#">Условия пользования сайтом</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Commercial"})">Реклама на сайте</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "SiteTerms"})">Условия пользования сайтом</a></div>
 					</div>
 					<div class="column">
-						<div class="row"><a href="#">Работодателям</a></div>
-						<div class="row"><a href="#">Правила сайта</a></div>
-						<div class="row"><a href="#">Платные услуги</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "ToWorker"})">Работодателям</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Regulations"})">Правила сайта</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></div>
 					</div>
 					<div class="column">
-						<div class="row"><a href="#">Соискателям</a></div>
-						<div class="row"><a href="#">Советы новичкам</a></div>
-						<div class="row"><a href="#">Полезные статьи</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Applicants"})">Соискателям</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Tips for Newcomers"})">Советы новичкам</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Useful Articles"})">Полезные статьи</a></div>
 					</div>
 					<div class="column">
-						<div class="row"><a href="#">Помощь</a></div>
-						<div class="row"><a href="#">Промо-словарь</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Help"})">Помощь</a></div>
+						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Промо-словарь</a></div>
 						<div class="row"><a href="#">Написать в службу поддержки</a></div>
 					</div>
 					<div class="clear"></div>

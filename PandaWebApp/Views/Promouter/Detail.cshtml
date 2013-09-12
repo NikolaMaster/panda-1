@@ -26,7 +26,7 @@
     <div class="info right">
         <div class="table-2">
             <div class="column">
-                <div class="row on-site"><span class="days">@Model.DaysOnSite</span></div>
+                <div class="row on-site">На сайте <span class="days">@Model.DaysOnSite</span></div>
                 <div class="row">Дата рождения</div>
                 <div class="row">Количество полных лет</div>
                 <div class="row"><div class="icon left"><img src="~/Content/img/medical-book.png" /></div>Мед. Книжка</div>
@@ -37,7 +37,10 @@
                 <div class="row">Желаемая цена за час работы</div>
                 <div class="row">Город</div>
                 <div class="row">Образование</div>
-
+                @if (Model.IsAdmin)
+                {
+                    <div class="row">Количество монеток: @Model.Coins</div>
+                }
             </div>
             <div class="column">
                 @if (Model.AccountConfirmed)
@@ -50,7 +53,7 @@
                 }
 
                     
-                <div class="row">@Model.BirthDate</div>
+                <div class="row">@Model.BirthDateString</div>
                 <div class="row">@Model.FullYears</div>
                 @if (@Model.MedicalBook)
                 {
@@ -76,6 +79,11 @@
                 <div class="row">@Model.Salary</div>
                 <div class="row">@Model.City</div>
                 <div class="row">@Model.Education</div>
+                 @if (Model.IsAdmin)
+                {
+                    <div class="row"><a href="@Url.Action("EditCoins", "Promouter", new {userId = Model.UserId})" >редактировать</a></div>
+                    <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Promouter", new {id = Model.UserId}, new {})</div>
+                }
             </div>
             <div class="clear"></div>
         </div>
@@ -298,8 +306,12 @@
         </div>
     </div>
     <div class="simple-delimiter"></div>
-        @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
-        @{ Html.RenderAction("Create", "Feedback", new { authorId = Model.UserId, recieverId = Model.UserId, }); }
+    @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
+    
+    @if (Model.IsAdmin)
+    {
+        Url.Action("Create", "Feedback", new {authorId = Model.UserId, recieverId = Model.UserId,});
+    }
     <div class="promouter-top">
         <div class="header">
             Еще промоутеры

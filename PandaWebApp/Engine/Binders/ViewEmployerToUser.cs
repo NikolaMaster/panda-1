@@ -48,9 +48,10 @@ namespace PandaWebApp.Engine.Binders
                 unit = days[0];
             }
 
-            return string.Format("На сайте {0} {1}", h, unit);
+            return string.Format("{0} {1}", h, unit);
         }
 
+        //i'm wrote this is very fast, so this method work is bad , sorry
         private string getStatus(EmployerUser source)
         {
             string status = string.Empty;
@@ -61,15 +62,15 @@ namespace PandaWebApp.Engine.Binders
                 var hours = new string[] { "часа", "часов" };
                 var days = new string[] { "дня", "дней" };
 
-                string lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes, 0).ToString();
+                int lastHit = Convert.ToInt32(Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes, 0));
                 string unit = string.Empty;
-                int ch = int.Parse(lastHit.Last().ToString());
+                int ch = int.Parse(lastHit.ToString().Last().ToString());
 
-                if (int.Parse(lastHit) < 61)
+                if (lastHit < 61)
                 {
                     unit = ch > 4 && ch != 0 ? minutes[0] : minutes[1];
                 }
-                else if (int.Parse(lastHit) > 60 && int.Parse(lastHit) < 1440)
+                else if (lastHit > 60 && lastHit < 1440)
                 {
                     unit = ch > 4 && ch != 0 ? hours[1] : hours[0];
                 }
@@ -80,7 +81,7 @@ namespace PandaWebApp.Engine.Binders
                     unit = ch > 4 && ch != 0 ? days[1] : days[0];
                 }
 
-                status = Equals(lastHit, 0) ? "Онлайн" : string.Format("Был на сайте {0} {1} назад", lastHit, unit);
+                status = lastHit < 5 ? "Онлайн" : string.Format("Был на сайте {0} {1} назад", lastHit, unit);
             }
             else
             {
@@ -93,13 +94,12 @@ namespace PandaWebApp.Engine.Binders
 
         private void inverseMainParam(EmployerUser source, Employer dest)
         {
-
             dest.UserId = source.Id;
             dest.Email = source.Email;
             dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl;
             dest.Number = source.Number;
             dest.DaysOnSite = getDaysOnSite(source.CreationDate);
-
+            dest.IsAdmin = source.IsAdmin;
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 

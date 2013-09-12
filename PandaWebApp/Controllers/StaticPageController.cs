@@ -12,7 +12,7 @@ namespace PandaWebApp.Controllers
 {
     public class StaticPageController : ModelCareController
     {
-        public ActionResult IndexStaticPage(string code)
+        public ActionResult Index(string code)
         {
             var staticPage = DataAccessLayer.Get<StaticPageUnit>(x => x.Code == code);
             if (staticPage.Count().Equals(0))
@@ -24,6 +24,20 @@ namespace PandaWebApp.Controllers
             var entry = new StaticPage();
             binder.InverseLoad(staticPage.First(), entry);
             return View(entry);
+        }
+
+        public ActionResult IndexStaticPage(string code)
+        {
+            var staticPage = DataAccessLayer.Get<StaticPageUnit>(x => x.Code == code);
+            if (staticPage.Count().Equals(0))
+            {
+                return HttpNotFound("Page not found");
+            }
+
+            var binder = new StaticPageToStaticPageUnit();
+            var entry = new StaticPage();
+            binder.InverseLoad(staticPage.First(), entry);
+            return PartialView(entry);
         }
     }
 }

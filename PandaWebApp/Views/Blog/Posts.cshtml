@@ -1,6 +1,8 @@
 ﻿@model PandaWebApp.ViewModels.Blog
 
-        <div class="blog">
+
+<div class="full-width-content content-width">
+           <div class="blog">
             <div class="header">Уютный бложечек нашей компании <span class="count">(@Model.Posts.Count)</span></div>
             <ul class="messages">
                 @foreach (var iter in Model.Posts)
@@ -9,6 +11,10 @@
                 }
             </ul>
         </div>
+    </div>
+
+
+
 
 @Html.ActionLink("Создать пост", "Create", "Blog") 
 

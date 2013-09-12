@@ -46,7 +46,7 @@ namespace PandaWebApp.Engine.Binders
                 unit = days[0];
             }
 
-            return string.Format("На сайте {0} {1}", h, unit);
+            return string.Format("{0} {1}", h, unit);
         }
 
         private string getStatus(PromouterUser source)
@@ -59,15 +59,15 @@ namespace PandaWebApp.Engine.Binders
                var hours = new string[] { "часа", "часов" };
                var days = new string[] { "дня", "дней" };
 
-               string lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes, 0).ToString();
+               int lastHit = Convert.ToInt32(Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes, 0));
                string unit = string.Empty;
-               int ch = int.Parse(lastHit.Last().ToString());
+               int ch = int.Parse(lastHit.ToString().Last().ToString());
 
-                if (int.Parse(lastHit) < 61)
+                if (lastHit < 61)
                 {
                     unit = ch > 4 && ch != 0 ? minutes[0] : minutes[1];
                 }
-                else if (int.Parse(lastHit) > 60 && int.Parse(lastHit) <1440)
+                else if (lastHit > 60 && lastHit < 1440)
                 {
                     unit = ch > 4 && ch != 0 ? hours[1] : hours[0];
                 }
@@ -78,7 +78,7 @@ namespace PandaWebApp.Engine.Binders
                     unit = ch > 4 && ch != 0 ? days[1] : days[0];
                 }
 
-                status = Equals(lastHit, 0) ? "Онлайн" : string.Format("Был на сайте {0} {1} назад", lastHit, unit);
+                status = lastHit < 5 ? "Онлайн" : string.Format("Был на сайте {0} {1} назад", lastHit, unit);
             }
             else
             {
@@ -99,10 +99,10 @@ namespace PandaWebApp.Engine.Binders
             dest.WorkExperience1 = new List<Promouter.WorkExperienceUnit>();
             dest.WorkExperience2 = new List<Promouter.WorkExperienceUnit>();
             dest.DesiredWorkTime = new List<Promouter.TimeOfWorkUnit>();
-
+            dest.IsAdmin = source.IsAdmin;
             dest.DaysOnSite = getDaysOnSite(source.CreationDate);
             dest.Status = getStatus(source);
-
+            
 
             //get main album
             var firstOrDefault = source.Albums.FirstOrDefault(x => x.Name == "Основной альбом");
@@ -152,6 +152,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.MiddleName = stringValue;
                         break;
                     case Constants.DateOfBirthCode:
+                        dest.BirthDateString = dateTimeValue.ToPandaString();
                         dest.BirthDate = dateTimeValue;
                         break;
                     case Constants.MedicalBookCode:
@@ -240,12 +241,23 @@ namespace PandaWebApp.Engine.Binders
                     x => x.EntityList.Id == entityId);
 
                 var listWorks = new List<string>();
+                var listWorks2 = new List<string>();
+
+                int count = 0;
                 foreach (var desiredWork in desiredWorks)
                 {
-                    listWorks.Add(desiredWork.Work.Description);
+                    if (count/2 < desiredWorks.Count())
+                    {
+                        listWorks.Add(desiredWork.Work.Description);
+                    }
+                    else
+                    {
+                        listWorks2.Add(desiredWork.Work.Description);
+                    }
+                    count++;
                 }
                 dest.DesiredWork1 = listWorks;
-                dest.DesiredWork2 = new List<string>();
+                dest.DesiredWork2 = listWorks2;
             }
 
         }
@@ -260,13 +272,8 @@ namespace PandaWebApp.Engine.Binders
 
                 foreach (var desiredWorkTime in desiredWorkTimes)
                 {
-                    //TODO: fix this code
-                    /*
-                var time = string.Format("с {0}:{1} до {2}:{3}", desiredWorkTime.StartTime.TimeOfDay.Hours,desiredWorkTime.StartTime.TimeOfDay.Minutes,
-                                         desiredWorkTime.EndTime.TimeOfDay.Hours, desiredWorkTime.EndTime.TimeOfDay.Minutes);
-                 *      */
-                    var time = string.Format("с {0} по {1}", desiredWorkTime.StartTime.ToPandaString(),
-                        desiredWorkTime.EndTime.ToPandaString());
+                    var time = string.Format("с {0} по {1}", desiredWorkTime.StartTime.ToPandaTime(),
+                        desiredWorkTime.EndTime.ToPandaTime());
 
                     if (!sortedDictionary.ContainsKey(desiredWorkTime.DayOfWeek))
                     {

@@ -1,0 +1,30 @@
+﻿@{
+    var core = AuthorizationCore.StaticCreate();
+    var isGuest = core.IsGuest;
+    var user = core.User;
+}    
+
+<div class="top-links content-width">
+@if (isGuest)
+{
+	<a href="#" class="first left middle">Выберите город</a>
+	<a href="@Url.Action(WebConstants.LoginActionName, WebConstants.AuthorizationControllerName)" class="second right middle-img"><img src="~/Content/img/enter-button.png" /></a>
+    @* TODO - why only promouter ??? *@
+	<a href="@Url.Action("Create","Promouter")" class="third right middle">Зарегистрироваться на сайте</a>
+}
+else 
+{
+    
+    <div class="first left middle"><a href="#">##Тюмень##</a></div>
+    <div class="left"><span class="prompt">Здравствуйте</span><span class="name">##USERNAME##</span></div>
+	<div class="left">
+        <a href="#" class="little">Предложения для вас</a> |
+        <a href="#" class="little">Выбранные вакансии</a> |
+        <a href="#" class="little">Вашу анкету смотрели</a>
+	</div>
+    <div class="left">##COINS##</div>
+    <div class="left"><a href="#">##TOUSER##</a></div>
+}
+
+    <div class="clear"></div>
+</div>

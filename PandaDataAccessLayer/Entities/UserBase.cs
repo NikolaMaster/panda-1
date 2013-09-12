@@ -13,8 +13,8 @@ namespace PandaDataAccessLayer.Entities
         public string Salt { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Number { get; set; }
-        
 
+        public int Coins { get; set; }
         public bool IsAdmin { get; set; }
         public DateTime CreationDate { get; set; }
         public virtual SeoEntry SeoEntry { get; set; }

@@ -5,9 +5,8 @@
     @foreach (var employer in Model)
     {
         <li class="rounded-borders-4">
-            <a href="@Url.Action("Detail", "Employer", new { id = employer.UserId })">
-                <img src="@ImageCreator.Create(employer.Photo, 128, 128)" />
-            </a>
+            <img src="@ImageCreator.Create(employer.Photo, 128, 128)" />
+            <p class="center-aligned"><a class="name" href="@Url.Action("Detail", "Employer", new { id = employer.UserId })">@employer.EmployerName</a></p>
         </li>
     }
 </ul>

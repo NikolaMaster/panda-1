@@ -455,92 +455,99 @@ namespace PandaDataAccessLayer
         }
 
 
-        private void addAttrib2ChecklistType() 
+        private void addAttrib2ChecklistType()
         {
             #region Promouter
-            var promouter = new []{
-                DataAccessLayer.Constants.Gender,
-                DataAccessLayer.Constants.LastName,
-                DataAccessLayer.Constants.FirstName,
-                DataAccessLayer.Constants.MiddleName,
-                DataAccessLayer.Constants.DateOfBirth,
-                DataAccessLayer.Constants.MedicalBook,
-                DataAccessLayer.Constants.Car,
-                DataAccessLayer.Constants.ReadyForWork,
-                DataAccessLayer.Constants.MobilePhone,
-                DataAccessLayer.Constants.Salary,
-                DataAccessLayer.Constants.City,
-                DataAccessLayer.Constants.Education,
-                DataAccessLayer.Constants.Height,
-                DataAccessLayer.Constants.Build,
-                DataAccessLayer.Constants.Weight,
-                DataAccessLayer.Constants.SkinType,
-                DataAccessLayer.Constants.EyeColor,
-                DataAccessLayer.Constants.HairColor,
-                DataAccessLayer.Constants.HairLength,
-                DataAccessLayer.Constants.SizeClothes,
-                DataAccessLayer.Constants.SizeShoes,
-                DataAccessLayer.Constants.SizeChest,
-                DataAccessLayer.Constants.RollerSkates,
-                DataAccessLayer.Constants.WinterSkates,
-                DataAccessLayer.Constants.Hobbies,
-                DataAccessLayer.Constants.About,
-                DataAccessLayer.Constants.ReadyForWork,
-                DataAccessLayer.Constants.WorkExperience,
-                DataAccessLayer.Constants.DesiredWork,
-                DataAccessLayer.Constants.DesiredWorkTime,
-            };
 
-            foreach (var attrib2Checklist in promouter.Select(x => new Attrib2ChecklistType 
+            var promouter = new[]
                 {
-                    Attribute = x, ChecklistType = DataAccessLayer.Constants.PromouterChecklistType 
+                    DataAccessLayer.Constants.Gender,
+                    DataAccessLayer.Constants.LastName,
+                    DataAccessLayer.Constants.FirstName,
+                    DataAccessLayer.Constants.MiddleName,
+                    DataAccessLayer.Constants.DateOfBirth,
+                    DataAccessLayer.Constants.MedicalBook,
+                    DataAccessLayer.Constants.Car,
+                    DataAccessLayer.Constants.ReadyForWork,
+                    DataAccessLayer.Constants.MobilePhone,
+                    DataAccessLayer.Constants.Salary,
+                    DataAccessLayer.Constants.City,
+                    DataAccessLayer.Constants.Education,
+                    DataAccessLayer.Constants.Height,
+                    DataAccessLayer.Constants.Build,
+                    DataAccessLayer.Constants.Weight,
+                    DataAccessLayer.Constants.SkinType,
+                    DataAccessLayer.Constants.EyeColor,
+                    DataAccessLayer.Constants.HairColor,
+                    DataAccessLayer.Constants.HairLength,
+                    DataAccessLayer.Constants.SizeClothes,
+                    DataAccessLayer.Constants.SizeShoes,
+                    DataAccessLayer.Constants.SizeChest,
+                    DataAccessLayer.Constants.RollerSkates,
+                    DataAccessLayer.Constants.WinterSkates,
+                    DataAccessLayer.Constants.Hobbies,
+                    DataAccessLayer.Constants.About,
+                    DataAccessLayer.Constants.ReadyForWork,
+                    DataAccessLayer.Constants.WorkExperience,
+                    DataAccessLayer.Constants.DesiredWork,
+                    DataAccessLayer.Constants.DesiredWorkTime,
+                };
+
+            foreach (var attrib2Checklist in promouter.Select(x => new Attrib2ChecklistType
+                {
+                    Attribute = x,
+                    ChecklistType = DataAccessLayer.Constants.PromouterChecklistType
                 }))
             {
                 DataAccessLayer.Create(attrib2Checklist);
             }
+
             #endregion
-            
+
             #region Employer main checklist
-            var employerMain = new[]{
-                DataAccessLayer.Constants.About,
-                DataAccessLayer.Constants.EmployerName,
-                DataAccessLayer.Constants.Address,
-                DataAccessLayer.Constants.MobilePhone,
-                DataAccessLayer.Constants.City,
-            };
+
+            var employerMain = new[]
+                {
+                    DataAccessLayer.Constants.About,
+                    DataAccessLayer.Constants.EmployerName,
+                    DataAccessLayer.Constants.Address,
+                    DataAccessLayer.Constants.MobilePhone,
+                    DataAccessLayer.Constants.City,
+                };
 
             foreach (var attrib2Checklist in employerMain.Select(x => new Attrib2ChecklistType
-            {
-                Attribute = x,
-                ChecklistType = DataAccessLayer.Constants.EmployerMainChecklistType
-            }))
+                {
+                    Attribute = x,
+                    ChecklistType = DataAccessLayer.Constants.EmployerMainChecklistType
+                }))
             {
                 DataAccessLayer.Create(attrib2Checklist);
             }
+
             #endregion
 
-            #region Employer  checklist
-            var employer = new[]{
-                DataAccessLayer.Constants.Salary,
-                DataAccessLayer.Constants.Work,
-                DataAccessLayer.Constants.StartWork,
-                DataAccessLayer.Constants.EndWork,
-                DataAccessLayer.Constants.About,
-                DataAccessLayer.Constants.City,
-                DataAccessLayer.Constants.Gender
-            };
+
+            var employer = new[]
+                {
+                    DataAccessLayer.Constants.Salary,
+                    DataAccessLayer.Constants.Work,
+                    DataAccessLayer.Constants.StartWork,
+                    DataAccessLayer.Constants.EndWork,
+                    DataAccessLayer.Constants.About,
+                    DataAccessLayer.Constants.City,
+                    DataAccessLayer.Constants.Gender
+                };
 
             foreach (var attrib2Checklist in employer.Select(x => new Attrib2ChecklistType
-            {
-                Attribute = x,
-                ChecklistType = DataAccessLayer.Constants.EmployerChecklistType
-            }))
+                {
+                    Attribute = x,
+                    ChecklistType = DataAccessLayer.Constants.EmployerChecklistType
+                }))
             {
                 DataAccessLayer.Create(attrib2Checklist);
             }
-            #endregion
-            
-            DbContext.SaveChanges();
+
         }
+
     }
 }

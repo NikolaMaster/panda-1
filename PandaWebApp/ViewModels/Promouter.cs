@@ -27,7 +27,7 @@ namespace PandaWebApp.ViewModels
         }
 
         public Guid UserId { get; set; }
-
+        public bool IsAdmin { get; set; }
         public string Icon { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -53,6 +53,7 @@ namespace PandaWebApp.ViewModels
         public int Number { get; set; }
         public string DaysOnSite { get; set; }
         public int Height { get; set; }
+        public int Coins { get; set; }
         public int FullYears 
         {
             get
@@ -85,6 +86,7 @@ namespace PandaWebApp.ViewModels
         public bool ReadyForWork { get; set; }
 
         public DateTime BirthDate { get; set; }
+        public string BirthDateString { get; set; }
 
         public string Salary { get; set; }
 

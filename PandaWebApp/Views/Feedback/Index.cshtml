@@ -6,9 +6,21 @@
 }
 
 
-<div class="full-info">
+<div class="user">
     <div class="feedbacks">
-        <div class="header">Отзывы (@Model.Count):</div>
+        @if (Model.User == null)
+        {
+            <div class="header">Отзывы: (@Model.Count):</div>
+        }
+        else if (Model.User is PandaDataAccessLayer.Entities.EmployerUser)
+        {
+            <div class="header">Мнение о компании (@Model.Count):</div>
+        }
+        else
+        {
+            <div class="header">Мнение о промоутере (@Model.Count):</div>
+        }
+        
         <ul>
             @foreach (var entry in Model.Entries)
             {
@@ -30,13 +42,6 @@
                         <div class="clear"></div>
                     </div>
                 </li>
-                @*<h3>@entry.UserName</h3>
-                <h2>@entry.SendDate.ToPandaString()</h2>
-                <img src="@ImageCreator.Create(entry.UserPhoto, 128, 128)" />
-                <h3>@entry.Title</h3>
-                <p class="feedback-body">@entry.Text</p>
-                <div>Rating: @entry.Rating.ToPandaString()</div>
-            *@
             }
         </ul>
     </div>

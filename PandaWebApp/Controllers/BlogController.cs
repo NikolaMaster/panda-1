@@ -150,6 +150,7 @@ namespace PandaWebApp.Controllers
             return PartialView(entry);
         }
 
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult Edit(Blog.Entry model)
         {

@@ -1,0 +1,10 @@
+﻿@model PandaWebApp.ViewModels.Promouter
+
+
+@using (Html.BeginForm())
+{
+    Html.HiddenFor(model => model.UserId);
+    <div>Количество монеток:</div>
+    @Html.EditorFor(model => model.Coins)
+    <input type="submit" value="Применить" />
+}
