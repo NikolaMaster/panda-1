@@ -11,7 +11,7 @@ using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer
 {//DropCreateDatabaseIfModelChanges<MainDbContext>
-    public partial class MainInitializer : DropCreateDatabaseAlways<MainDbContext>
+    public partial class MainInitializer : DropCreateDatabaseIfModelChanges<MainDbContext>
     {
         public MainDbContext DbContext { get; protected set; }
         public DataAccessLayer DataAccessLayer { get; protected set; }

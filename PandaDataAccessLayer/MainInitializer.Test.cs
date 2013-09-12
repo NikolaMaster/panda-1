@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
+using PandaDataAccessLayer.Helpers;
 
 namespace PandaDataAccessLayer
 {
@@ -306,12 +307,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.DateOfBirthCode),
-                    Value = new DateTime(1985, 12, 02).ToString()
+                    Value = new DateTime(1985, 12, 02).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MedicalBookCode),
-                    Value = true.ToString()
+                    Value = true.ToPandaString()
                 },
                 new AttribValue
                 {
@@ -590,12 +591,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.DateOfBirthCode),
-                    Value = new DateTime(1992, 5, 5).ToString()
+                    Value = new DateTime(1992, 5, 5).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MedicalBookCode),
-                    Value = false.ToString()
+                    Value = false.ToPandaString()
                 },
                 new AttribValue
                 {
@@ -925,12 +926,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.DateOfBirthCode),
-                    Value = new DateTime(1992, 5, 5).ToString()
+                    Value = new DateTime(1992, 5, 5).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MedicalBookCode),
-                    Value = false.ToString()
+                    Value = false.ToPandaString()
                 },
                 new AttribValue
                 {
@@ -1259,12 +1260,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.DateOfBirthCode),
-                    Value = new DateTime(1992, 5, 5).ToString()
+                    Value = new DateTime(1992, 5, 5).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MedicalBookCode),
-                    Value = false.ToString()
+                    Value = false.ToPandaString()
                 },
                 new AttribValue
                 {
@@ -1596,12 +1597,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.DateOfBirthCode),
-                    Value = new DateTime(1992, 5, 5).ToString()
+                    Value = new DateTime(1992, 5, 5).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MedicalBookCode),
-                    Value = false.ToString()
+                    Value = false.ToPandaString()
                 },
                 new AttribValue
                 {
@@ -1928,12 +1929,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.DateOfBirthCode),
-                    Value = new DateTime(1992, 5, 5).ToString()
+                    Value = new DateTime(1992, 5, 5).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MedicalBookCode),
-                    Value = false.ToString()
+                    Value = false.ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2213,12 +2214,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2013, 1,1).ToString()
+                    Value =  new DateTime(2013, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 9, 29).ToString()
+                    Value =  new DateTime(2013, 9, 29).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2252,12 +2253,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2291,12 +2292,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2325,12 +2326,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2472,12 +2473,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2013, 1,1).ToString()
+                    Value =  new DateTime(2013, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 9, 29).ToString()
+                    Value =  new DateTime(2013, 9, 29).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2511,12 +2512,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2550,12 +2551,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2584,12 +2585,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2735,12 +2736,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2013, 1,1).ToString()
+                    Value =  new DateTime(2013, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 9, 29).ToString()
+                    Value =  new DateTime(2013, 9, 29).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2774,12 +2775,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2813,12 +2814,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2847,12 +2848,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -2993,12 +2994,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2013, 1,1).ToString()
+                    Value =  new DateTime(2013, 1, 1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 9, 29).ToString()
+                    Value =  new DateTime(2013, 9, 29).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3032,12 +3033,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3071,12 +3072,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3105,12 +3106,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3251,12 +3252,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2013, 1,1).ToString()
+                    Value =  new DateTime(2013, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 9, 29).ToString()
+                    Value =  new DateTime(2013, 9, 29).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3290,12 +3291,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3329,12 +3330,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3363,12 +3364,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3510,12 +3511,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2013, 1,1).ToString()
+                    Value =  new DateTime(2013, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 9, 29).ToString()
+                    Value =  new DateTime(2013, 9, 29).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3549,12 +3550,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3588,12 +3589,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {
@@ -3622,12 +3623,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.StartWorkCode),
-                    Value =  new DateTime(2012, 1,1).ToString()
+                    Value =  new DateTime(2012, 1,1).ToPandaString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EndWorkCode),
-                    Value =  new DateTime(2013, 4, 5).ToString()
+                    Value =  new DateTime(2013, 4, 5).ToPandaString()
                 },
                 new AttribValue
                 {

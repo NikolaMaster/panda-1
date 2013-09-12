@@ -147,17 +147,14 @@
     <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Binders\ViewEmployerSearchViewToChecklist.cs" />
-    <Compile Include="Engine\Crypt.cs" />
     <Compile Include="Engine\Editors\BaseEditor.cs" />
     <Compile Include="Engine\Editors\EmployerEditor.cs" />
     <Compile Include="Engine\Editors\PromouterEditor.cs" />
-    <Compile Include="Engine\Encodings.cs" />
     <Compile Include="Engine\Extensions.cs" />
     <Compile Include="Engine\Helper.cs" />
     <Compile Include="Engine\ImageCreator.cs" />
     <Compile Include="Engine\Logic\Searcher.cs" />
     <Compile Include="Engine\ModelCareController.cs" />
-    <Compile Include="Engine\Password.cs" />
     <Compile Include="FormModels\AlbumUnit.cs" />
     <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />

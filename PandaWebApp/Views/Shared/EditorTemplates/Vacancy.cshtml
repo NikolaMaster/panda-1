@@ -2,6 +2,7 @@
 
 <div id ="vacancy_@Model.Id">
     @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.CreationDate)
     <div>Наименование работы: @Html.DropDownListFor(x => x.Work, Model.WorkValues, string.Empty) </div>    
     <div>Описание работы: @Html.EditorFor(x => x.FullDescription) </div>    
     <div>С: @Html.EditorFor(x => x.StartTime, "Date") </div>    

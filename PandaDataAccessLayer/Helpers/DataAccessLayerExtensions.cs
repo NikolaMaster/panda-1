@@ -1,15 +1,12 @@
-﻿using PandaDataAccessLayer.DAL;
-using PandaDataAccessLayer.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using PandaDataAccessLayer.Helpers;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace PandaWebApp.Engine
+namespace PandaDataAccessLayer.Helpers
 {
-    public static class Extensions
+    public static class DataAccessLayerExtensions
     {
         #region Boolean
 
@@ -29,7 +26,7 @@ namespace PandaWebApp.Engine
 
         public static string Shorten(this string src, int newLength)
         {
-            return src.Length > newLength 
+            return src.Length > newLength
                 ? src.Substring(0, newLength - 3) + "..."
                 : src;
         }
@@ -44,7 +41,7 @@ namespace PandaWebApp.Engine
             return Encodings.GetBytes(str);
         }
 
-        public static string ToPandaString(this string str) 
+        public static string ToPandaString(this string str)
         {
             return str;
         }
@@ -103,35 +100,5 @@ namespace PandaWebApp.Engine
 
         #endregion
 
-        #region DataAccessLayer
-        public static IList<SelectListItem> ListItemsFromDict(this DataAccessLayer dataAccessLayer, string groupCode)
-        {
-            var result = new List<SelectListItem>();
-            result.AddRange(dataAccessLayer.Get<DictGroup>(groupCode)
-                .DictValues
-                .Select(x => new SelectListItem
-                {
-                    Selected = false,
-                    Text = x.Description,
-                    Value = x.Code,
-                })
-                .OrderBy(x => x.Text));
-            return result.ToList();
-        }
-        #endregion
-
-        #region user
-        public static string ControllerNameByUser(this UserBase user)
-        {
-            var promouterUser = user as PromouterUser;
-            var employerUser = user as EmployerUser;
-            if (promouterUser != null)
-                return "Promouter";
-            else if (employerUser != null)
-                return "Employer";
-            else
-                throw new Exception("Incorrect user type");
-        }
-        #endregion
     }
 }

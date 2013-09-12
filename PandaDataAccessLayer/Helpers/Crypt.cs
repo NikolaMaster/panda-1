@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 
-namespace PandaWebApp.Engine
+namespace PandaDataAccessLayer.Helpers
 {
     public class Crypt
     {

@@ -19,6 +19,7 @@ namespace PandaWebApp.FormModels
             public DateTime? StartTime { get; set; }
             public DateTime? EndTime { get; set; }
             public string DayOfWeek { get; set; }
+            public DateTime CreationDate { get; set; }
 
             public static IEnumerable<SelectListItem> WorkDaysValues {
                 get
@@ -58,6 +59,7 @@ namespace PandaWebApp.FormModels
             public DateTime? EndTime { get; set; }
             public string WorkName { get; set; }
             public int Hours { get; set; }
+            public DateTime CreationDate { get; set; }
         }
 
         public Guid UserId { get; set; }

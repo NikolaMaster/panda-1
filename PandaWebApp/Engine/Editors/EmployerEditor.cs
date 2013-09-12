@@ -84,7 +84,7 @@ namespace PandaWebApp.Engine.Editors
 
         private void editChecklists(EmployerForm source, EmployerUser dest)
         {
-            foreach (var vacancy in source.Vacancies)
+            foreach (var vacancy in source.Vacancies.OrderBy(x => x.CreationDate))
             {
                 var checklist = DataAccessLayer.GetById<Checklist>(vacancy.Id);
                 if (checklist == null)
