@@ -76,7 +76,7 @@ namespace PandaWebApp.Controllers
         {
             return PartialView(new FeedbackForm
             {
-                AuthorId = authorId,
+                AuthorId = DataAccessLayer.Get<UserBase>().First().Id,
                 RecieverId = recieverId,
             });
         }
