@@ -24,6 +24,8 @@ namespace PandaDataAccessLayer.Entities
         public BlogPost()
         {
             Id = Guid.NewGuid();
+            CreationDate = DateTime.UtcNow;
+            ModifyDate = DateTime.UtcNow;
         }
     }
 }

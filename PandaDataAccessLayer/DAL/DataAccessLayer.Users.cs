@@ -25,11 +25,11 @@ namespace PandaDataAccessLayer.DAL
             }
             if (user.Albums.Count == 0)
             {
-                user.Albums.Add(Create(new Album()
+                Create(new Album()
                 {
                     Name = MainAlbumName,
                     User = user,
-                }));
+                });
             }
             if (user.Avatar == null)
             {

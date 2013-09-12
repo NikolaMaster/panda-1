@@ -86,6 +86,7 @@ namespace PandaWebApp.ViewModels
         public bool ReadyForWork { get; set; }
 
         public DateTime BirthDate { get; set; }
+        public string BirthDateString { get; set; }
 
         public string Salary { get; set; }
 

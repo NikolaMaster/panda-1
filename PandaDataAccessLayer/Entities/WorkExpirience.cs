@@ -18,12 +18,14 @@ namespace PandaDataAccessLayer.Entities
         public string Title { get; set; }
         public int Hours { get; set; }
         public string WorkName { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public virtual EntityList EntityList { get; set; }
 
         public WorkExpirience()
         {
             Id = Guid.NewGuid();
+            CreationDate = DateTime.UtcNow;
         }
     }
 

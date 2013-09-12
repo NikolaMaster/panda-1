@@ -102,7 +102,7 @@ namespace PandaWebApp.Engine.Binders
             dest.IsAdmin = source.IsAdmin;
             dest.DaysOnSite = getDaysOnSite(source.CreationDate);
             dest.Status = getStatus(source);
-
+            
 
             //get main album
             var firstOrDefault = source.Albums.FirstOrDefault(x => x.Name == "Основной альбом");
@@ -152,6 +152,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.MiddleName = stringValue;
                         break;
                     case Constants.DateOfBirthCode:
+                        dest.BirthDateString = dateTimeValue.ToPandaString();
                         dest.BirthDate = dateTimeValue;
                         break;
                     case Constants.MedicalBookCode:
