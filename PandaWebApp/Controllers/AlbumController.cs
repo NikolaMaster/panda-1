@@ -34,5 +34,18 @@ namespace PandaWebApp.Controllers
             DataAccessLayer.DbContext.SaveChanges();
             return Index(userId);
         }
+
+        public ActionResult Album(Guid userId)
+        {
+            var user = DataAccessLayer.GetById<UserBase>(userId);
+            AlbumUnit albumUnit;
+            if (user is PromouterUser)
+                albumUnit = PromouterForm.Bind(DataAccessLayer, userId).Albums.First();
+            else if (user is EmployerUser)
+                albumUnit = EmployerForm.Bind(DataAccessLayer, userId).Albums.First();
+            else
+                throw new Exception("Incorrect user type");
+            return View(albumUnit);
+        }
     }
 }

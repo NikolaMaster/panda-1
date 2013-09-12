@@ -597,6 +597,7 @@
     <Content Include="Views\Feedback\Create.cshtml" />
     <Content Include="Views\Search\Promouter.cshtml" />
     <Content Include="Views\Search\PromouterSearchResult.cshtml" />
+    <Content Include="Views\Album\Album.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

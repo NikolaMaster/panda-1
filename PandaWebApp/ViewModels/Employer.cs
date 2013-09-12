@@ -31,7 +31,7 @@ namespace PandaWebApp.ViewModels
         public string About { get; set; }
         public string Address { get; set; }
         public int Number { get; set; }
-        public int DaysOnSite { get; set; }
+        public string DaysOnSite { get; set; }
         public bool AccountConfirmed { get; set; }
         public IEnumerable<string> Album { get; set; }
         public IEnumerable<Feedback> Reviews { get; set; }

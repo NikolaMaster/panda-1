@@ -51,7 +51,7 @@ namespace PandaWebApp.ViewModels
         public string About { get; set; }
         public int Weight { get; set; }
         public int Number { get; set; }
-        public int DaysOnSite { get; set; }
+        public string DaysOnSite { get; set; }
         public int Height { get; set; }
         public int FullYears 
         {

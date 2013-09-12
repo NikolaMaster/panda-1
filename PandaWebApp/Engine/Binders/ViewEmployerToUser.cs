@@ -23,6 +23,74 @@ namespace PandaWebApp.Engine.Binders
             throw new Exception("Only view bind allowed");
         }
 
+        private string getDaysOnSite(DateTime dateCreation)
+        {
+            int h = (DateTime.UtcNow - dateCreation).Days;
+
+            if (h == 0)
+            {
+                h++;
+            }
+            var days = new string[] { "дня", "дней", "день" };
+            var ch = int.Parse(h.ToString().Last().ToString());
+            string unit = string.Empty;
+
+            if (ch == 1)
+            {
+                unit = days[2];
+            }
+            else if (ch > 4 && ch != 0)
+            {
+                unit = days[1];
+            }
+            else
+            {
+                unit = days[0];
+            }
+
+            return string.Format("На сайте {0} {1}", h, unit);
+        }
+
+        private string getStatus(EmployerUser source)
+        {
+            string status = string.Empty;
+            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id).ToList();
+            if (session.Any())
+            {
+                var minutes = new string[] { "минут", "минуты" };
+                var hours = new string[] { "часа", "часов" };
+                var days = new string[] { "дня", "дней" };
+
+                string lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes, 0).ToString();
+                string unit = string.Empty;
+                int ch = int.Parse(lastHit.Last().ToString());
+
+                if (int.Parse(lastHit) < 61)
+                {
+                    unit = ch > 4 && ch != 0 ? minutes[0] : minutes[1];
+                }
+                else if (int.Parse(lastHit) > 60 && int.Parse(lastHit) < 1440)
+                {
+                    unit = ch > 4 && ch != 0 ? hours[1] : hours[0];
+                }
+                else
+                {
+                    var h = (DateTime.UtcNow - session.First().LastHit).Days.ToString();
+                    ch = int.Parse(h.Last().ToString());
+                    unit = ch > 4 && ch != 0 ? days[1] : days[0];
+                }
+
+                status = Equals(lastHit, 0) ? "Онлайн" : string.Format("Был на сайте {0} {1} назад", lastHit, unit);
+            }
+            else
+            {
+                status = "Оффлайн";
+            }
+
+            return status;
+        }
+
+
         private void inverseMainParam(EmployerUser source, Employer dest)
         {
 
@@ -30,21 +98,13 @@ namespace PandaWebApp.Engine.Binders
             dest.Email = source.Email;
             dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl;
             dest.Number = source.Number;
-            dest.DaysOnSite = DateTime.UtcNow.Day - source.CreationDate.Day;
+            dest.DaysOnSite = getDaysOnSite(source.CreationDate);
 
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 
-            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id);
-            if (session.Any())
-            {
-                var lastHit = Math.Round((DateTime.UtcNow - session.First().LastHit).TotalMinutes, 0);
-                dest.Status = Equals(lastHit, 0) ? "Онлайн" : string.Format("Был на сайте {0} минут назад", lastHit);
-            }
-            else
-            {
-                dest.Status = "Оффлайн";
-            }
+            dest.Status = getStatus(source);
+            
 
 
             foreach (var attrib in source.MainChecklist.AttrbuteValues)
