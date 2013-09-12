@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
+using PandaDataAccessLayer.Helpers;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
 using PandaWebApp.Engine.Editors;
@@ -74,6 +75,9 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
+            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode).
+                OrderBy(x => x.Text)
+                .ToList();
             var binder = new FormEmployerToUser(DataAccessLayer);
             var user = DataAccessLayer.GetById<EmployerUser>(id);
             var model = new EmployerForm();

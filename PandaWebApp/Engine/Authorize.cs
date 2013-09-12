@@ -9,6 +9,11 @@ namespace PandaWebApp.Engine
 {
     public class AuthorizationCore
     {
+
+        public AuthorizationCore()
+        {
+        }
+
         private const string SessionKey = "PandaAuthorizationCoreSessionKey";
 
         public Guid SessionId
@@ -26,6 +31,9 @@ namespace PandaWebApp.Engine
 
         private UserBase _mCachedUser;
         private Session _mCachedSession;
+
+        public string UserName { get; set; }
+        public string City { get; set; }
 
         public UserBase User 
         { 
@@ -50,6 +58,9 @@ namespace PandaWebApp.Engine
                             }
                             //set current user
                             _mCachedUser = _mCachedSession.User;
+                            UserName = dal.GetUserName(_mCachedUser);
+                            var cityAttr = dal.GetAttributeValue(_mCachedUser.MainChecklist.Id, Constants.CityCode);
+                            City = cityAttr.Value != null ? cityAttr.Value.ToString() : string.Empty;
                             //update last hit field
                             dal.UpdateById<Session>(_mCachedSession.Id, x => x.LastHit = DateTime.UtcNow);
                             dal.DbContext.SaveChanges();

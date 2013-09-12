@@ -31,7 +31,7 @@
         </ul>
         <div id="mainTab">
             <div>Название компании</div> @Html.EditorFor(m => m.EmployerName)
-            <div>Город</div> @Html.DropDownListFor(m => m.City, Model.CityValues, string.Empty)
+            <div>Город</div> @Html.DropDownListFor(m => m.City, (IEnumerable<SelectListItem>)ViewBag.CityValues, string.Empty)
             <div>Адрес</div> @Html.EditorFor(m => m.Address)
             <div>Телефон</div> @Html.EditorFor(m => m.MobilePhone)
             <div>Email</div> @Html.EditorFor(m => m.Email)

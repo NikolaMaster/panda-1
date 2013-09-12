@@ -1,6 +1,7 @@
 ﻿@model PandaWebApp.FormModels.PromouterForm.WorkExperienceUnit
 
 <div id ="workExperience_@Model.Id">
+    @Html.HiddenFor(x => x.CreationDate)
     <div>Название компании @Html.EditorFor(x => x.Title) </div>    
     <div>Работа @Html.EditorFor(x => x.WorkName) </div>    
     <div>Начало @Html.EditorFor(x => x.StartTime, "Date") </div>    

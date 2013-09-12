@@ -179,7 +179,7 @@ namespace PandaWebApp.Engine.Binders
                 var entityId = Guid.Parse(value);
 
                 dest.WorkExperience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId)
-                    .OrderBy(x => x.Start.HasValue ? x.Start.Value.Ticks : long.MaxValue)
+                    .OrderBy(x => x.CreationDate)
                     .Select(x => new PromouterForm.WorkExperienceUnit
                     {
                         Title = x.Title,
@@ -187,7 +187,8 @@ namespace PandaWebApp.Engine.Binders
                         EndTime = x.End,
                         Hours = x.Hours,
                         WorkName = x.WorkName,
-                        Id = x.Id
+                        Id = x.Id,
+                        CreationDate = x.CreationDate
                     })
                     .ToList();
             }
@@ -200,13 +201,14 @@ namespace PandaWebApp.Engine.Binders
                 var entityId = Guid.Parse(value);
 
                 dest.DesiredWorkTime = DataAccessLayer.Get<DesiredWorkTime>(x => x.EntityList.Id == entityId)
-                    .OrderBy(x => x.StartTime.HasValue ? x.StartTime.Value.Ticks : long.MaxValue)
+                    .OrderBy(x => x.CreationDate)
                     .Select(x => new PromouterForm.DesiredWorkTimeUnit
                     {
                         Id = x.Id,
                         DayOfWeek = x.DayOfWeek.ToPandaString(),
                         StartTime = x.StartTime,
-                        EndTime = x.EndTime
+                        EndTime = x.EndTime,
+                        CreationDate = x.CreationDate
                     })
                     .ToList();
             }

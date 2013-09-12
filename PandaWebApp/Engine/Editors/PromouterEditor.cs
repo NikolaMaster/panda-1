@@ -160,7 +160,7 @@ namespace PandaWebApp.Engine.Editors
             var entityList = DataAccessLayer.Create(new EntityList { });
             if (source.WorkExperience != null)
             {
-                foreach (var item in source.WorkExperience)
+                foreach (var item in source.WorkExperience.OrderBy(x => x.CreationDate))
                 {
                     DataAccessLayer.Create(new WorkExpirience
                     {

@@ -1,5 +1,6 @@
 ﻿@model PandaWebApp.FormModels.PromouterForm.DesiredWorkTimeUnit
 <div id ="desiredWork_@Model.Id">
+    @Html.HiddenFor(x => x.CreationDate)
     <div>День недели @Html.DropDownListFor(x => x.DayOfWeek, PandaWebApp.FormModels.PromouterForm.DesiredWorkTimeUnit.WorkDaysValues) </div>    
     <div>Начало @Html.EditorFor(x => x.StartTime, "Time") </div>    
     <div>Конец @Html.EditorFor(x => x.EndTime, "Time") </div>    
