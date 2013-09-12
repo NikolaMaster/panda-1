@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PandaWebApp.Engine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,24 @@ namespace PandaWebApp
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                WebConstants.LoginRouteName, 
+                WebConstants.LoginUrl, 
+                new 
+                { 
+                    controller = WebConstants.AuthorizationControllerName, 
+                    action = WebConstants.LoginActionName,
+                    returnUrl = UrlParameter.Optional
+                });
+            routes.MapRoute(
+                WebConstants.MainPageRouteName,
+                WebConstants.MainPageUrl,
+                new
+                {
+                    controller = WebConstants.MainPageControllerName,
+                    action = WebConstants.MainPageActionName
+                });
 
             routes.MapRoute(
                 name: "Default",
