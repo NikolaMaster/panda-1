@@ -1,4 +1,5 @@
-﻿using PandaDataAccessLayer.Entities;
+﻿using System.Collections.ObjectModel;
+using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
 using PandaWebApp.FormModels;
@@ -60,6 +61,43 @@ namespace PandaWebApp.Controllers
             var type = user as EmployerUser;
             feedback.User = user;
             return PartialView(feedback);
+        }
+
+
+        public ActionResult TopDialogFeedback()
+        {
+
+            var list = new List<Feedback.Entry>();
+            int counter = 0;
+            while (true)
+            {
+                var user = DataAccessLayer.TopRandom<PromouterUser>(3);
+                foreach (var promouterUser in user)
+                {
+                    var review = DataAccessLayer.Get<Review>(x => x.AuthorId == promouterUser.Id);
+                    if (review.Any())
+                    {
+                        var binder = new FeedbackToReview(DataAccessLayer);
+                        var entry = new Feedback.Entry();
+                        binder.InverseLoad(review.First(), entry);
+
+                        list.Add(entry);
+                        if (list.Count == 3)
+                            break;
+                    }
+                }
+
+                if (list.Count == 3)
+                    break;
+
+                counter++;
+
+                if (counter > 1000)
+                    break;
+
+            }
+            return PartialView(list);
+
         }
 
         public ActionResult TopUserFeedback(Guid userId)

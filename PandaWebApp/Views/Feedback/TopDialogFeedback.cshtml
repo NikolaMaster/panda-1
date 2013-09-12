@@ -1,0 +1,30 @@
+﻿@model ICollection<PandaWebApp.ViewModels.Feedback.Entry>
+
+<div class="all-feedbacks">
+    <div class="header">Отзывы <span class="count">(@Model.Count)</span></div>
+    <div class="feedbacks-content">
+        <ul class="horiz">
+            @foreach (var feedback in Model)
+            {
+                <li>
+                    <div class="left icon-container">
+                        <div class="icon"><img src="@ImageCreator.Create(feedback.AuthorPhoto, 128, 128)" /></div>
+                        <div class="name">
+                            <p>@feedback.AuthorName</p>
+                        </div>
+                    </div>
+                    <div class="right enhanced-feedback-body">
+                        <div class="mark"></div>
+                        <p>
+                            @feedback.Text
+                        </p>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="link"><p class="right-aligned"><a href="#">посмотреть все отзывы</a></p></div>
+</div>
+

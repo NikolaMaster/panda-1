@@ -99,7 +99,6 @@ namespace PandaWebApp.Engine.Binders
             dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl;
             dest.Number = source.Number;
             dest.DaysOnSite = getDaysOnSite(source.CreationDate);
-            dest.IsAdmin = source.IsAdmin;
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 

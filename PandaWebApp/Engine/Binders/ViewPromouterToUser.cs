@@ -99,7 +99,6 @@ namespace PandaWebApp.Engine.Binders
             dest.WorkExperience1 = new List<Promouter.WorkExperienceUnit>();
             dest.WorkExperience2 = new List<Promouter.WorkExperienceUnit>();
             dest.DesiredWorkTime = new List<Promouter.TimeOfWorkUnit>();
-            dest.IsAdmin = source.IsAdmin;
             dest.DaysOnSite = getDaysOnSite(source.CreationDate);
             dest.Status = getStatus(source);
             

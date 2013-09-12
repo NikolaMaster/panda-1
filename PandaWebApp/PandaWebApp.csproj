@@ -609,6 +609,7 @@
     <Content Include="Views\Promouter\EditCoins.cshtml" />
     <Content Include="Views\Shared\_AuthPanel.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
+    <Content Include="Views\Feedback\TopDialogFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

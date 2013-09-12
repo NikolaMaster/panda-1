@@ -28,10 +28,8 @@
                 <div class="row">Адрес офиса</div> 
                 <div class="row"><img src="~/Content/img/phone.png" />Телефон</div>
                 <div class="row"><img src="~/Content/img/mail.png" />e-mail</div>
-                @if (Model.IsAdmin)
-                {
-                    <div class="row">Количество монеток: @Model.Coins</div>
-                }
+                <div class="row">Количество монеток: @Model.Coins</div>
+                
             </div>
 
             <div class="column">
@@ -47,11 +45,10 @@
                 <div class="row">@Model.Address</div>
                 <div class="row"><a href="#" class="open">открыть</a></div>
                 <div class="row"><a href="#" class="open">открыть</a></div>
-                @if (Model.IsAdmin)
-                {
-                    <div class="row"><a href="@Url.Action("EditCoins", "Employer", new {userId = Model.UserId})" >редактировать</a></div>
-                    <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Employer", new {id = Model.UserId}, new {})</div>
-                }
+               
+                <div class="row"><a href="@Url.Action("EditCoins", "Employer", new {userId = Model.UserId})" >редактировать</a></div>
+                <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Employer", new {id = Model.UserId}, new {})</div>
+                
             </div>
             <div class="clear"></div>
         </div>
@@ -127,10 +124,9 @@
 
 
     @{ Html.RenderAction("TopUserFeedback", "Feedback", new {userId = Model.UserId}); }
-    @if (Model.IsAdmin)
-    {
-        Url.Action("Create", "Feedback", new {authorId = Model.UserId, recieverId = Model.UserId,});
-    }
+    
+    @Url.Action("Create", "Feedback", new {authorId = Model.UserId, recieverId = Model.UserId,});
+    
     <div class="promouter-top">
         <div class="header">
             Другие компании

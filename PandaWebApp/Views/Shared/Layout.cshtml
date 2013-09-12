@@ -82,67 +82,9 @@
                 <div class="full-width-content content-width">
                     @{ Html.RenderAction("IndexStaticPage", "StaticPage", new { code = "FiveReasons" }); }
 
-                    <div class="all-feedbacks">
-                        <div class="header">Отзывы <span class="count">(#COUNT#)</span></div>
-                        <div class="feedbacks-content">
-                            <ul class="horiz">
-                                <li>
-                                    <div class="left icon-container">
-                                        <div class="icon"><img src="~/Content/img/del-2-0.png" /></div>
-                                        <div class="name">
-                                            <p>Фамилия</p>
-                                            <p>Имя</p>
-                                            <p>Отчество</p>
-                                        </div>
-                                    </div>
-                                    <div class="right enhanced-feedback-body">
-                                        <div class="mark"></div>
-                                        <p>
-                                            текст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст тексттексттекст текст 
-                                        </p>
-                                    </div>
-                                    <div class="clear"></div>
-                                </li>
-                                <li>
-                                    <div class="left">
-                                        <div class="icon"><img src="~/Content/img/del-2-0.png" /></div>
-                                        <div class="name">
-                                            <p>Фамилия</p>
-                                            <p>Имя</p>
-                                            <p>Отчество</p>
-                                        </div>
-                                    </div>
-                                    <div class="right enhanced-feedback-body">
-                                        <div class="mark"></div>
-                                        <p>
-                                            текст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст тексттексттекст текст 
-                                        </p>
-                                    </div>
-                                    <div class="clear"></div>
-                                </li>
-                                <li class="last">
-                                    <div class="left">
-                                        <div class="icon"><img src="~/Content/img/del-2-0.png" /></div>
-                                        <div class="name">
-                                            <p>Фамилия</p>
-                                            <p>Имя</p>
-                                            <p>Отчество</p>
-                                        </div>
-                                    </div>
-                                    <div class="right enhanced-feedback-body">
-                                        <div class="mark"></div>
-                                        <p>
-                                            текст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст текст тексттекст текст тексттексттекст текст 
-                                        </p>
-                                    </div>
-                                    <div class="clear"></div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="clear"></div>
-                        <div class="link"><p class="right-aligned"><a href="#">посмотреть все отзывы</a></p></div>
-                    </div>
                     
+                    @{Html.RenderAction("TopDialogFeedback","Feedback");}
+
                     <div class="simple-delimiter"></div>
 
                     @{ Html.RenderAction("TopPosts", "Blog"); }

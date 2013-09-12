@@ -18,7 +18,7 @@ namespace PandaWebApp.ViewModels
             public string FullDescription;
             public string City;
         }
-        public bool IsAdmin { get; set; }
+       
         public Guid UserId { get; set; }
         public string Icon { get; set; }
         public string EmployerName { get; set; }
