@@ -120,11 +120,13 @@
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\DesiredWorkTimeController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
+    <Compile Include="Engine\Authorize.cs" />
     <Compile Include="Engine\Binders\ViewPromouterSearchViewToChecklist.cs" />
     <Compile Include="Engine\Binders\FormPromouterSearchToSearchValues.cs" />
     <Compile Include="Engine\Binders\FormEmployerToUser.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Binders\ViewEmployerSearchViewToChecklist.cs" />
+    <Compile Include="Engine\WebConstants.cs" />
     <Compile Include="Engine\Crypt.cs" />
     <Compile Include="Engine\Editors\BaseEditor.cs" />
     <Compile Include="Engine\Editors\EmployerEditor.cs" />
@@ -158,7 +161,10 @@
     <Compile Include="Engine\Logic\Searcher.cs" />
     <Compile Include="Engine\ModelCareController.cs" />
     <Compile Include="Engine\Password.cs" />
+    <Compile Include="Filters\AdministratorAuthorizationRequired.cs" />
+    <Compile Include="Filters\BaseAuthorizationReuired.cs" />
     <Compile Include="FormModels\AlbumUnit.cs" />
+    <Compile Include="FormModels\Authorize.cs" />
     <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
     <Compile Include="FormModels\FeedbackForm.cs" />
@@ -601,6 +607,8 @@
     <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
     <Content Include="Views\Employer\EditCoins.cshtml" />
     <Content Include="Views\Promouter\EditCoins.cshtml" />
+    <Content Include="Views\Shared\_AuthPanel.cshtml" />
+    <Content Include="Views\Authorization\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

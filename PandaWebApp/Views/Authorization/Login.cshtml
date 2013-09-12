@@ -1,0 +1,19 @@
+﻿@model PandaWebApp.FormModels.Login
+@{
+    ViewBag.Title = "Авторизация";
+}
+
+<h2>Авторизация</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    @Html.HiddenFor(model => model.ReturnUrl)
+
+    <div class="label">@Html.DisplayNameFor(model => model.Email)</div>
+    <div class="editor">@Html.EditorFor(model => model.Email)</div>
+    
+    <div class="label">@Html.DisplayNameFor(model => model.Password)</div>
+    <div class="editor">@Html.EditorFor(model => model.Password)</div>
+    
+    <input type="submit" value="Авторизоваться" />
+}

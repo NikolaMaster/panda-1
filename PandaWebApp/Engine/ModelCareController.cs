@@ -1,5 +1,6 @@
 ﻿using PandaDataAccessLayer;
 using PandaDataAccessLayer.DAL;
+using PandaDataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,19 @@ namespace PandaWebApp.Engine
 {
     public class ModelCareController : Controller
     {
+        private UserBase _mCachedUser;
+        protected UserBase CurrentUser
+        {
+            get
+            {
+                if (_mCachedUser == null)
+                {
+                    _mCachedUser = AuthorizationCore.StaticCreate().User;
+                }
+                return _mCachedUser;
+            }
+        }
+
         protected DataAccessLayer DataAccessLayer;
 
         public ModelCareController()
