@@ -1,0 +1,10 @@
+﻿@model Tuple<Guid,int>
+
+
+@using (Html.BeginForm())
+{
+    Html.HiddenFor(model => model.Item1);
+    <div>Количество монеток:</div>
+    @Html.EditorFor(model => model.Item2)
+    <input type="submit" value="Применить" />
+}

@@ -919,6 +919,27 @@ namespace PandaDataAccessLayer
                 Code = "PaidServices",
                 Content = "Пятая статичная панда-страница"
             });
+
+            mDal.Create(new StaticPageUnit()
+            {
+                Code = "FiveReasons",
+                Content = "<div class=\"five-reasons\">" + 
+                        "<div class=\"simple-delimiter\"></div>" +
+                        "<div class=\"simple-bg\"></div>" +
+                        "<div class=\"reasons left\">" +
+                            "<h1>5 причин, по которым стоит заказать услуги у нас</h1>" +
+                            "<ul>" +
+                                "<li>Только проверенные участники проходят отбор</li>" +
+                                "<li>Вы сами выбираете исполнителя</li>" +
+                                "<li>0% комиссии для заказчиков</li>" +
+                                "<li>Оперативный подход</li>" +
+                                "<li>Простой и понятный интерфейс</li>" +
+                            "</ul>" +
+                        "</div>" +
+                        "<div class=\"reasons-image right\"><img src=\"/Content/img/five-resons.png\" /></div>" +
+                        "<div class=\"clear\"></div>" +
+                    "</div>"
+            });
         }
 
         public void addDebugEntities() 

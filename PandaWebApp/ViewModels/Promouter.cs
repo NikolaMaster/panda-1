@@ -53,6 +53,7 @@ namespace PandaWebApp.ViewModels
         public int Number { get; set; }
         public string DaysOnSite { get; set; }
         public int Height { get; set; }
+        public int Coins { get; set; }
         public int FullYears 
         {
             get

@@ -3,52 +3,56 @@
     ViewBag.Title = "Информация о компании";
 }
 
-    <div class="user">
-        <div class="header">
-            <div class="left">
+<div class="user">
+    <div class="header">
+        <div class="left">
             <span class="user-gender-icon"><img src="~/Content/img/company.png" /></span>
             <span class="user-name">@Model.EmployerName</span>
-                <span class="user-number">#@Model.Number</span>
-            </div>
+            <span class="user-number">#@Model.Number</span>
+        </div>
         <div class="right user-status">
             <img src="@(Model.Status == "Онлайн" ? "/Content/img/online.png" : "/Content/img/offline.png")" />
             <span>@Model.Status</span>
         </div>
-            <div class="clear"></div>
-        </div>					
-        <div class="photo left">
-            <img src="@ImageCreator.Create(Model.Photo, 128, 128)" />
-        </div>
+        <div class="clear"></div>
+    </div>					
+    <div class="photo left">
+        <img src="@ImageCreator.Create(Model.Photo, 128, 128)" />
+    </div>
 
-        <div class="info right">
+    <div class="info right">
         <div class="table-2">
             <div class="column">
-                <div class="row on-site"><span class="days">@Model.DaysOnSite</span></div>
+                <div class="row on-site">На сайте <span class="days">@Model.DaysOnSite</span></div>
                 <div class="row">Город</div>
                 <div class="row">Адрес офиса</div> 
                 <div class="row"><img src="~/Content/img/phone.png" />Телефон</div>
                 <div class="row"><img src="~/Content/img/mail.png" />e-mail</div>
+                <div class="row">Количество монеток: @Model.Coins</div>
+
             </div>
 
             <div class="column">
                 @if (Model.AccountConfirmed)
-            {
+                {
                     <div class="row confirmed-true"><p class="right-aligned">Аккаунт подтвержден</p></div>
-            }
-            else
-            {
+                }
+                else
+                {
                     <div class="row confirmed-false"><p class="right-aligned">Аккаунт не подтвержден</p></div>
-            }
+                }
                 <div class="row">@Model.City</div>
                 <div class="row">@Model.Address</div>
                 <div class="row">@Model.MobilePhone</div>
                 <div class="row">@Model.Email</div>
+                <div class="row"><a href="@Url.Action("EditCoins", "Admin", new {userId = Model.UserId})" >редактировать</a></div>
+
             </div>
             <div class="clear"></div>
         </div>
     </div>
          
-            <div class="clear"></div>
+    <div class="clear"></div>
         
     <div class="about">
         <div class="header">О компании:</div>
@@ -62,66 +66,66 @@
                 <p class="nothing">@Html.Raw(Model.About)</p>
             }
         </div>
+    </div>
+    <div class="clear"></div>
+
+    <div class="photo-album clear">
+        <div class="header">Фотоотчеты</div>
+        <div class="album">
+            <ul class="horiz">
+                @{
+                    var index = 0;
+                    int topCount = 10;
+                    foreach (var item in Model.Album)
+                    {
+                        if (topCount.Equals(0))
+                        {
+                            break;
+                        }
+                                
+                        <li class="@(index == 0 ? "first" : "")">
+                            <img src="@ImageCreator.Create(item, 128, 128)" />
+                        </li>
+
+                        if (index == 4)
+                        {
+                            index = 0;
+                        }
+                        else
+                        {
+                            index++;
+                        }
+                        topCount--;
+                    }
+                }
+            </ul>
         </div>
         <div class="clear"></div>
-
-            <div class="photo-album clear">
-        <div class="header">Фото альбом портфолио</div>
-                <div class="album">
-                    <ul class="horiz">
-                        @{
-                            var index = 0;
-                            int topCount = 10;
-                            foreach (var item in Model.Album)
-                            {
-                                if (topCount.Equals(0))
-                                {
-                                    break;
-                                }
-                                
-                                <li class="@(index == 0 ? "first" : "")">
-                                    <img src="@ImageCreator.Create(item, 128, 128)" />
-                                </li>
-
-                                if (index == 4)
-                                {
-                                    index = 0;
-                                }
-                                else
-                                {
-                                    index++;
-                                }
-                                topCount--;
-                            }
-                        }
-                    </ul>
-                </div>
-                <div class="clear"></div>
-                <div class="more"><p>@Html.ActionLink("Просмотреть все фотоотчеты","Album","Album",new {userId = Model.UserId},null)</p></div>
-            </div>
+        <div class="more"><p>@Html.ActionLink("Просмотреть все фотоотчеты","Album","Album",new {userId = Model.UserId},null)</p></div>
+    </div>
         
-            <div class="header">Открытые вакансии</div>
-            @{
-                foreach (var vacancy in Model.Vacancies)
-                {
-                    <div>Наименование работы: @vacancy.JobTitle</div>
-                    <div>Описание работы: @vacancy.FullDescription</div>
-                    <div>С: @vacancy.StartTime</div>
-                    <div>До: @vacancy.EndTime</div>
-                    <div>Цена за час: @vacancy.Salary</div>
-                    <div>На сайте: @vacancy.DaysOnSite</div>
-                    <div>Город: @vacancy.City</div>
-                }
-            }
-            <div class="clear"></div>
+    <div class="header">Открытые вакансии</div>
+    @{
+        foreach (var vacancy in Model.Vacancies)
+        {
+            <div>Наименование работы: @vacancy.JobTitle</div>
+            <div>Описание работы: @vacancy.FullDescription</div>
+            <div>С: @vacancy.StartTime</div>
+            <div>До: @vacancy.EndTime</div>
+            <div>Цена за час: @vacancy.Salary</div>
+            <div>На сайте: @vacancy.DaysOnSite</div>
+            <div>Город: @vacancy.City</div>
+        }
+    }
+    <div class="clear"></div>
 
 
-   @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
+    @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
    
     <div class="promouter-top">
         <div class="header">
             Другие компании
         </div>
-    @{ Html.RenderAction("TopEmployers", "Employer", new { count = 6 }); }
+        @{ Html.RenderAction("TopEmployers", "Employer", new { count = 6 }); }
     </div>
 </div>

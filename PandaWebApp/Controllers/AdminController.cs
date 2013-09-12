@@ -35,11 +35,27 @@ namespace PandaWebApp.Controllers
                     });
                 DataAccessLayer.DbContext.SaveChanges();
              
-                return RedirectToAction("IndexStaticPage", "StaticPage", new { code = page.Code });
+                return RedirectToAction("Index", "StaticPage", new { code = page.Code });
             }
 
             return View();
         }
 
+        public ActionResult EditCoins(Guid userId)
+        {
+            var user = DataAccessLayer.GetById<UserBase>(userId);
+            var pTuple = new Tuple<Guid, int>(userId,user.Coins);
+            return View(pTuple);
+        }
+
+        [HttpPost]
+        public ActionResult EditCoins(Tuple<Guid,int> pTuple)
+        {
+            DataAccessLayer.UpdateById<UserBase>(pTuple.Item1, x => x.Coins = pTuple.Item2);
+            DataAccessLayer.DbContext.SaveChanges();
+            return RedirectToAction("Index","Home");
+        }
+
+        
     }
 }

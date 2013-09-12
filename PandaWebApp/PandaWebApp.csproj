@@ -565,7 +565,7 @@
     <Content Include="Views\Feedback\Index.cshtml" />
     <Content Include="Views\Search\Employer.cshtml" />
     <Content Include="Views\Search\EmployerSearchResult.cshtml" />
-    <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
+    <Content Include="Views\StaticPage\Index.cshtml" />
     <Content Include="Views\Promouter\Detail.cshtml" />
     <Content Include="Views\Shared\Layout.cshtml" />
     <Content Include="Views\Promouter\Edit.cshtml" />
@@ -589,6 +589,8 @@
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Wysiwyg.cshtml" />
     <Content Include="Views\Album\Album.cshtml" />
+    <Content Include="Views\Admin\EditCoins.cshtml" />
+    <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">
