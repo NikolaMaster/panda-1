@@ -105,6 +105,7 @@ namespace PandaWebApp.FormModels
         public IList<SelectListItem> SalaryValues { get; set; }
         public IList<SelectListItem> EducationValues { get; set; }
         public IList<SelectListItem> GenderValues { get; set; }
+        public IList<SelectListItem> CityValues { get; set; }
 
         public static PromouterForm Bind(DataAccessLayer dataAccessLayer, Guid userId)
         {

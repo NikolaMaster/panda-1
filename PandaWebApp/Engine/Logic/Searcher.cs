@@ -22,7 +22,7 @@ namespace PandaWebApp.Engine.Logic
             Comparers = new Dictionary<Attrib, ComparerBase>()
                 {
                     { DataAccessLayer.Constants.Work, new DictManyValueComparer(DataAccessLayer) },
-                    { DataAccessLayer.Constants.City, new DynamicToPandaStringComparer(DataAccessLayer) },
+                    { DataAccessLayer.Constants.City, new DictValueComparer(DataAccessLayer) },
                     { DataAccessLayer.Constants.Gender, new DictValueComparer(DataAccessLayer) },
                     { DataAccessLayer.Constants.Salary, new DictValueComparer(DataAccessLayer) }
                 };
@@ -179,11 +179,17 @@ namespace PandaWebApp.Engine.Logic
                 var strValue = i.Value.ToString();
                 if (i.Attrib.AttribType.Type == typeof(DictGroup).FullName)
                 {
-                    strValue = DataAccessLayer.Get<DictValue>(i.Value.ToString()).Description;   
+                    strValue = DataAccessLayer.Get<DictValue>(i.Value).Description;   
                 }
                 if (i.Attrib.AttribType.Type == typeof(EntityList).FullName)
                     continue;
                 fullStr += strValue + " ";
+            }
+
+            if (checklist.ChecklistType == DataAccessLayer.Constants.EmployerChecklistType)
+            {
+                var employerNameAttrib = DataAccessLayer.GetAttributeValue(checklist.User.MainChecklist.Id, Constants.EmployerNameCode);
+                fullStr += employerNameAttrib.Value;
             }
             return fullStr.Contains(queryStr);
         }

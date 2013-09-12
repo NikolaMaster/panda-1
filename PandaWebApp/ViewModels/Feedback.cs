@@ -11,8 +11,8 @@ namespace PandaWebApp.ViewModels
         public class Entry
         {
             public string Title { get; set; }
-            public string UserPhoto { get; set; }
-            public string UserName { get; set; }
+            public string AuthorPhoto { get; set; }
+            public string AuthorName { get; set; }
             public string Text { get; set; }
             public int Rating { get; set; }
             public DateTime SendDate { get; set; }

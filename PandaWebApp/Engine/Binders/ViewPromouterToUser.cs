@@ -112,7 +112,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.Salary = dictValue;
                         break;
                     case Constants.CityCode:
-                        dest.City = stringValue;
+                        dest.City = dictValue;
                         break;
                     case Constants.EducationCode:
                         dest.Education = dictValue;

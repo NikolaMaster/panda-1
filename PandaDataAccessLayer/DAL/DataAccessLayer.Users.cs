@@ -70,6 +70,27 @@ namespace PandaDataAccessLayer.DAL
             return DbContext.Users.Count(x => x.Sessions.Any(y => EntityFunctions.DiffSeconds(DateTime.UtcNow, y.LastHit) < OnlineTimeout));
         }
 
+        public string GetPulseUserName(UserBase user)
+        {
+            var promouter = user as PromouterUser;
+            var employer = user as EmployerUser;
+
+            if (promouter != null)
+            {
+                var firstName = GetAttributeValue(promouter.MainChecklist.Id, Constants.FirstNameCode);
+                var middleName = GetAttributeValue(promouter.MainChecklist.Id, Constants.MiddleNameCode);
+                return string.Format("{0} {1}", firstName.Value, middleName.Value);
+            }
+
+            if (employer != null)
+            {
+                var employerName = GetAttributeValue(employer.MainChecklist.Id, Constants.EmployerNameCode);
+                return employerName.Value;
+            }
+
+            throw new Exception("Incorrect user type");
+        }
+
         public string GetUserName(UserBase user)
         {
             var promouter = user as PromouterUser;

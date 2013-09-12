@@ -291,7 +291,7 @@
     </div>
     <div class="simple-delimiter"></div>
         @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
-    
+        @{ Html.RenderAction("Create", "Feedback", new { authorId = Model.UserId, recieverId = Model.UserId, }); }
     <div class="promouter-top">
         <div class="header">
             Еще промоутеры

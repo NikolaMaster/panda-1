@@ -125,7 +125,10 @@
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
+    <Compile Include="Engine\Binders\ViewPromouterSearchViewToChecklist.cs" />
+    <Compile Include="Engine\Binders\FormPromouterSearchToSearchValues.cs" />
     <Compile Include="Engine\Binders\FormEmployerToUser.cs" />
+    <Compile Include="Engine\Binders\FormFeedbackToReview.cs" />
     <Compile Include="Engine\Binders\FormPromouterToUsers.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PromouterController.cs" />
@@ -133,7 +136,7 @@
     <Compile Include="Controllers\WorkExperienceController.cs" />
     <Compile Include="Engine\Binders\BaseBinder.cs" />
     <Compile Include="Engine\Binders\BaseDataAccessLayerBinder.cs" />
-    <Compile Include="Engine\Binders\FormSearchToSearchValues.cs" />
+    <Compile Include="Engine\Binders\FormEmployerSearchToSearchValues.cs" />
     <Compile Include="Controllers\StaticPageController.cs" />
     <Compile Include="Engine\Binders\BlogToBlogPost.cs" />
     <Compile Include="Engine\Binders\RegisterEmployerToUsers.cs" />
@@ -143,7 +146,7 @@
     <Compile Include="Engine\Binders\StaticPageToStaticPageUnit.cs" />
     <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
-    <Compile Include="Engine\Binders\ViewSearchToChecklist.cs" />
+    <Compile Include="Engine\Binders\ViewEmployerSearchViewToChecklist.cs" />
     <Compile Include="Engine\Crypt.cs" />
     <Compile Include="Engine\Editors\BaseEditor.cs" />
     <Compile Include="Engine\Editors\EmployerEditor.cs" />
@@ -156,14 +159,17 @@
     <Compile Include="Engine\ModelCareController.cs" />
     <Compile Include="Engine\Password.cs" />
     <Compile Include="FormModels\AlbumUnit.cs" />
+    <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
+    <Compile Include="FormModels\FeedbackForm.cs" />
     <Compile Include="FormModels\PromouterForm.cs" />
     <Compile Include="FormModels\Register.cs" />
-    <Compile Include="FormModels\SearchForm.cs" />
+    <Compile Include="FormModels\EmployerSearchForm.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Admin.cs" />
+    <Compile Include="ViewModels\PromouterSearchView.cs" />
     <Compile Include="ViewModels\Blog.cs" />
     <Compile Include="ViewModels\Employer.cs" />
     <Compile Include="ViewModels\Feedback.cs" />
@@ -172,7 +178,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ProjectParticipants.cs" />
     <Compile Include="ViewModels\Promouter.cs" />
-    <Compile Include="ViewModels\SearchView.cs" />
+    <Compile Include="ViewModels\EmployerSearchView.cs" />
     <Compile Include="ViewModels\StaticPage.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -588,6 +594,9 @@
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Wysiwyg.cshtml" />
+    <Content Include="Views\Feedback\Create.cshtml" />
+    <Content Include="Views\Search\Promouter.cshtml" />
+    <Content Include="Views\Search\PromouterSearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

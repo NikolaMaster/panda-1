@@ -126,6 +126,9 @@ namespace PandaWebApp.Engine.Editors
                         case Constants.CityCode:
                             attributeValue.Value = vacancy.City;
                             break;
+                        case Constants.GenderCode:
+                            attributeValue.Value = vacancy.Gender;
+                            break;
                     }
 
                     checklist.AttrbuteValues.Add(attributeValue);

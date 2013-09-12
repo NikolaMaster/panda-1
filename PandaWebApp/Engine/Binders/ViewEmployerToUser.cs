@@ -55,10 +55,15 @@ namespace PandaWebApp.Engine.Binders
                 var stringValue = attrib.Value;
                 var intValue = 0;
                 var boolValue = true;
+                string dictValue = null;
 
                 DateTime.TryParse(stringValue, out dateTimeValue);
                 int.TryParse(stringValue, out intValue);
                 bool.TryParse(stringValue, out boolValue);
+                if (attrib.Attrib.AttribType.DictGroup != null && attrib.Value != null)
+                {
+                    dictValue = DataAccessLayer.Get<DictValue>(attrib.Value).Description;
+                }
 
                 #region Big switch [TODO by code field]
 
@@ -77,7 +82,7 @@ namespace PandaWebApp.Engine.Binders
                         dest.MobilePhone = stringValue;
                         break;
                     case Constants.CityCode:
-                        dest.City = stringValue;
+                        dest.City = dictValue;
                         break;
                 }
                 #endregion
@@ -131,7 +136,7 @@ namespace PandaWebApp.Engine.Binders
                             vacancyUnit.EndTime = dateTimeValue;
                             break;
                         case Constants.CityCode:
-                            vacancyUnit.City = stringValue;
+                            vacancyUnit.City = dictValue;
                             break;
                     }
 

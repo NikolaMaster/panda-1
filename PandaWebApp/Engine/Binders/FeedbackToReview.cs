@@ -23,13 +23,12 @@ namespace PandaWebApp.Engine.Binders
 
         public override void InverseLoad(Review source, Feedback.Entry dest)
         {
-            var user = source.Users.First();
             dest.Text = source.Text;
             dest.Title = source.Title;
             dest.Rating = source.Rating;
             dest.SendDate = source.CreationDate;
-            dest.UserName = DataAccessLayer.GetUserName(user);
-            dest.UserPhoto = user.Avatar == null ? string.Empty : user.Avatar.SourceUrl;            
+            dest.AuthorName = DataAccessLayer.GetUserName(source.Author);
+            dest.AuthorPhoto = source.Author.Avatar == null ? string.Empty : source.Author.Avatar.SourceUrl;            
         }
     }
 }
