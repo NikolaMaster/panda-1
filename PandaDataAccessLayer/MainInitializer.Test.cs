@@ -137,10 +137,10 @@ namespace PandaDataAccessLayer
         {
             DataAccessLayer.Create(new BlogPost
             {
-                FullText = @"<b>Власти Египта</b> <i>12 сентября</i> продлили действие режима чрезвычайного положения в ряде провинций страны. Об этом сообщает Agence France-Presse.
+                FullText = @"<p><b>Власти Египта</b> <i>12 сентября</i> продлили действие режима чрезвычайного положения в ряде провинций страны. Об этом сообщает Agence France-Presse.
 Режим ЧП, в соответствии с новым постановлением, продлен на два месяца. Причиной этого власти страны указали продолжающиеся сложности с обеспечением безопасности в Египте. Режим чрезвычайного положения действует в Египте с 14 августа; первоначально предполагалось, что он продлится один месяц.
 Дальнейшее продление режима ЧП, в соответствии с ранее подписанным временным президентом Египта Адли Мансуром указом, будет возможно только после одобрения этой меры на всенародном референдуме.
-Чрезвычайное положение в Египте было введено после того, как в стране начались массовые беспорядки, вызванные разгоном сидячих лагерей протеста сторонников отстраненного от власти в начале июля президента Мохаммеда Мурси. В первый же день беспорядков были убиты более тысячи человек.",
+Чрезвычайное положение в Египте было введено после того, как в стране начались массовые беспорядки, вызванные разгоном сидячих лагерей протеста сторонников отстраненного от власти в начале июля президента Мохаммеда Мурси. В первый же день беспорядков были убиты более тысячи человек.</p>",
                 ShortDescription = @"Власти Египта 12 сентября продлили действие режима чрезвычайного положения в ряде провинций страны",
                 Picture = DataAccessLayer.Create(new Photo
                 {
@@ -150,7 +150,7 @@ namespace PandaDataAccessLayer
             });
             DataAccessLayer.Create(new BlogPost
             {
-                FullText = @"Студия Warner Bros. анонсировала серию фильмов по книге Джоан Роулинг «Фантастические звери и места их обитания», сообщает IGN. Сценарий первого фильма серии напишет сама писательница. Эта работа станет ее дебютом в качестве сценариста. Писательница заявила, что, когда Warner Bros. предложили ей экранизировать книгу, она просто не могла представить, что сценаристом станет какой-то другой автор.
+                FullText = @"<p>Студия Warner Bros. анонсировала серию фильмов по книге Джоан Роулинг «Фантастические звери и места их обитания», сообщает IGN. Сценарий первого фильма серии напишет сама писательница. Эта работа станет ее дебютом в качестве сценариста. Писательница заявила, что, когда Warner Bros. предложили ей экранизировать книгу, она просто не могла представить, что сценаристом станет какой-то другой автор.
 
 «Фантастические звери и места их обитания» — одна из книг, написанных Роулинг в дополнение к серии о Гарри Поттере. По учебнику с таким названием обучаются герои поттерианы. Главным героем новых фильмов станет Ньют Скамандер — вымышленный автор учебника.
 
@@ -158,7 +158,7 @@ namespace PandaDataAccessLayer
 
 Также Роулинг заявила, что фильмы о фантастических чудовищах не будут являться ни приквелами, ни сиквелами к «Гарри Поттеру». События в новых картинах, тем не менее, будут разворачиваться в той же магической вселенной. Действие первого фильма, по словам Роулинг, начнется в Нью-Йорке за 70 лет до истории о Гарри Поттере.
 
-Серия фильмов о Гарри Поттере завершилась в 2011 году лентой «Гарри Поттер и Дары Смерти: Часть 2». Всего было снято восемь картин по семи книгам. Экранизацией всей серии занималась компания Warner Bros., Роулинг выступала консультантом при создании всех фильмов. Франшиза стала самой прибыльной киносерией в истории кино, собрав в мировом прокате 7,7 миллиарда долларов.",
+Серия фильмов о Гарри Поттере завершилась в 2011 году лентой «Гарри Поттер и Дары Смерти: Часть 2». Всего было снято восемь картин по семи книгам. Экранизацией всей серии занималась компания Warner Bros., Роулинг выступала консультантом при создании всех фильмов. Франшиза стала самой прибыльной киносерией в истории кино, собрав в мировом прокате 7,7 миллиарда долларов.</p>",
                 ShortDescription = "Студия Warner Bros. анонсировала серию фильмов по книге Джоан Роулинг «Фантастические звери и места их обитания»",
                 Picture = DataAccessLayer.Create(new Photo
                 {
@@ -168,7 +168,7 @@ namespace PandaDataAccessLayer
             });
             DataAccessLayer.Create(new BlogPost
             {
-                FullText = @"Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство, официально сообщили в NASA.
+                FullText = @"<p>Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство, официально сообщили в NASA.
 
 В NASA пояснили, что соответствующие выводы были сделаны на основании анализа последних данных, полученных от аппарата. «Теперь мы определенно можем ответить на вопрос а там ли мы?: да, мы там», - говорится в сообщении агентства. Когда именно аппарат покинул Солнечную систему, в NASA не уточнили.
 
@@ -176,7 +176,7 @@ namespace PandaDataAccessLayer
 
 «Вояджер-1», запущенный в 1977 году, стал первым аппаратом в истории человечества, вышедшим за пределы Солнечной системы. Ранее в том же году NASA запустила «Вояджер-2», однако он до границы Солнечной системы пока не добрался.
 
-В настоящее время «Вояджер-1» находится на расстоянии примерно в 18,4 миллиарда километров от Земли, что составляет 123 астрономические единицы (1 а.е. равна расстоянию от Земли до Солнца). Ожидается, что энергии от радиоизотопных источников, которые питают аппарат, хватит до 2025 года.",
+В настоящее время «Вояджер-1» находится на расстоянии примерно в 18,4 миллиарда километров от Земли, что составляет 123 астрономические единицы (1 а.е. равна расстоянию от Земли до Солнца). Ожидается, что энергии от радиоизотопных источников, которые питают аппарат, хватит до 2025 года.</p>",
                 ShortDescription = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство",
                 Picture = DataAccessLayer.Create(new Photo
                 {
@@ -186,7 +186,7 @@ namespace PandaDataAccessLayer
             });
             DataAccessLayer.Create(new BlogPost
             {
-                FullText = @"Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство, официально сообщили в NASA.
+                FullText = @"<p>Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство, официально сообщили в NASA.
 
 В NASA пояснили, что соответствующие выводы были сделаны на основании анализа последних данных, полученных от аппарата. «Теперь мы определенно можем ответить на вопрос а там ли мы?: да, мы там», - говорится в сообщении агентства. Когда именно аппарат покинул Солнечную систему, в NASA не уточнили.
 
@@ -194,7 +194,7 @@ namespace PandaDataAccessLayer
 
 «Вояджер-1», запущенный в 1977 году, стал первым аппаратом в истории человечества, вышедшим за пределы Солнечной системы. Ранее в том же году NASA запустила «Вояджер-2», однако он до границы Солнечной системы пока не добрался.
 
-В настоящее время «Вояджер-1» находится на расстоянии примерно в 18,4 миллиарда километров от Земли, что составляет 123 астрономические единицы (1 а.е. равна расстоянию от Земли до Солнца). Ожидается, что энергии от радиоизотопных источников, которые питают аппарат, хватит до 2025 года.",
+В настоящее время «Вояджер-1» находится на расстоянии примерно в 18,4 миллиарда километров от Земли, что составляет 123 астрономические единицы (1 а.е. равна расстоянию от Земли до Солнца). Ожидается, что энергии от радиоизотопных источников, которые питают аппарат, хватит до 2025 года.</p>",
                 ShortDescription = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство",
                 Picture = DataAccessLayer.Create(new Photo
                 {
@@ -204,7 +204,7 @@ namespace PandaDataAccessLayer
             });
             DataAccessLayer.Create(new BlogPost
             {
-                FullText = @"Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство, официально сообщили в NASA.
+                FullText = @"<p>Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство, официально сообщили в NASA.
 
 В NASA пояснили, что соответствующие выводы были сделаны на основании анализа последних данных, полученных от аппарата. «Теперь мы определенно можем ответить на вопрос а там ли мы?: да, мы там», - говорится в сообщении агентства. Когда именно аппарат покинул Солнечную систему, в NASA не уточнили.
 
@@ -212,7 +212,7 @@ namespace PandaDataAccessLayer
 
 «Вояджер-1», запущенный в 1977 году, стал первым аппаратом в истории человечества, вышедшим за пределы Солнечной системы. Ранее в том же году NASA запустила «Вояджер-2», однако он до границы Солнечной системы пока не добрался.
 
-В настоящее время «Вояджер-1» находится на расстоянии примерно в 18,4 миллиарда километров от Земли, что составляет 123 астрономические единицы (1 а.е. равна расстоянию от Земли до Солнца). Ожидается, что энергии от радиоизотопных источников, которые питают аппарат, хватит до 2025 года.",
+В настоящее время «Вояджер-1» находится на расстоянии примерно в 18,4 миллиарда километров от Земли, что составляет 123 астрономические единицы (1 а.е. равна расстоянию от Земли до Солнца). Ожидается, что энергии от радиоизотопных источников, которые питают аппарат, хватит до 2025 года.</p>",
                 ShortDescription = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство",
                 Picture = DataAccessLayer.Create(new Photo
                 {
@@ -222,13 +222,13 @@ namespace PandaDataAccessLayer
             });
             DataAccessLayer.Create(new BlogPost
             {
-                FullText = @"Ученые обнаружили необычное поведение ионов при движении внутри углеродных нанотрубок. Оказалось, что его скорость не прямо возрастает с увеличением диаметра последних, но определяет близостью к оптимальному диаметру поры. Исследование опубликовано в журнале Nature Communications.
+                FullText = @"<p>Ученые обнаружили необычное поведение ионов при движении внутри углеродных нанотрубок. Оказалось, что его скорость не прямо возрастает с увеличением диаметра последних, но определяет близостью к оптимальному диаметру поры. Исследование опубликовано в журнале Nature Communications.
 
 Эксперимент проводился на однослойных углеродных нанотрубках с диаметром от 0,6 до 2 нанометров и длиной около одного миллиметра. Наблюдая за тем, как внутри нанотрубок двигаются разные одновалентные катионы (Li+,K+,Cs+, Na+), ученые обнаружили, что скорость этого движения имеет колоколообразную зависимость от диаметра.
 
 Оказалось, что при увеличении диаметра более оптимальных 1,6 нанометров скорость ионов неожиданно падала, а не увеличивалась, как этого можно было ожидать. При оптимальном диаметре она была примерно в пять раз больше, чем при другом в том же диапазоне.
 
-Наблюдение стало неожиданностью для ученых, так как существующие модели не предсказывали такого поведения. По словам исследователей, такое экзотическое поведение может объясняться действием гидратирующей оболочки из молекул воды, которая имеется у каждого иона в растворе. Исследование может иметь важное значение для создания более совершенных элементов питания (где ключевую роль играет транспорт ионов), обессоливания воды или даже секвенирования ДНК методом протаскивания через пору.",
+Наблюдение стало неожиданностью для ученых, так как существующие модели не предсказывали такого поведения. По словам исследователей, такое экзотическое поведение может объясняться действием гидратирующей оболочки из молекул воды, которая имеется у каждого иона в растворе. Исследование может иметь важное значение для создания более совершенных элементов питания (где ключевую роль играет транспорт ионов), обессоливания воды или даже секвенирования ДНК методом протаскивания через пору.</p>",
                 Picture = DataAccessLayer.Create(new Photo
                 {
                     SourceUrl = "~/Content/img/del-3-0.png"
@@ -813,7 +813,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
             DataAccessLayer.Create(new Review
@@ -821,7 +821,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 3
             });
             DataAccessLayer.Create(new Review
@@ -829,7 +829,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 4
             });
             DataAccessLayer.Create(new Review
@@ -837,7 +837,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 2
             });
             DataAccessLayer.Create(new Review
@@ -845,7 +845,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
             DataAccessLayer.DbContext.SaveChanges();
@@ -1148,7 +1148,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
             DataAccessLayer.Create(new Review
@@ -1156,7 +1156,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 3
             });
             DataAccessLayer.Create(new Review
@@ -1164,7 +1164,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 4
             });
             DataAccessLayer.Create(new Review
@@ -1172,7 +1172,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 2
             });
             DataAccessLayer.Create(new Review
@@ -1180,7 +1180,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
             DataAccessLayer.DbContext.SaveChanges();
@@ -1483,7 +1483,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
             DataAccessLayer.Create(new Review
@@ -1491,7 +1491,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 3
             });
             DataAccessLayer.Create(new Review
@@ -1499,7 +1499,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 4
             });
             DataAccessLayer.Create(new Review
@@ -1507,7 +1507,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 2
             });
             DataAccessLayer.Create(new Review
@@ -1515,7 +1515,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -1814,7 +1814,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
             DataAccessLayer.Create(new Review
@@ -1830,7 +1830,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 4
             });
             DataAccessLayer.Create(new Review
@@ -1838,7 +1838,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 2
             });
             DataAccessLayer.Create(new Review
@@ -1846,7 +1846,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+				Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -2146,7 +2146,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
        
@@ -2155,7 +2155,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -2242,7 +2242,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
 
@@ -2251,7 +2251,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 3
             });
 
@@ -2260,7 +2260,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -2269,7 +2269,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -2501,7 +2501,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
 
@@ -2510,7 +2510,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 3
             });
 
@@ -2519,7 +2519,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -2528,7 +2528,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -2764,7 +2764,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
 
@@ -2773,7 +2773,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 3
             });
 
@@ -2782,7 +2782,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -2791,7 +2791,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 1
             });
 
@@ -3022,7 +3022,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 Rating = 5
             });
 
@@ -3031,7 +3031,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 3
             });
 
@@ -3040,7 +3040,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 1
             });
 
@@ -3049,7 +3049,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 1
             });
 
@@ -3280,7 +3280,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 5
             });
 
@@ -3289,7 +3289,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 3
             });
 
@@ -3298,7 +3298,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 1
             });
 
@@ -3307,7 +3307,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 1
             });
 
@@ -3539,7 +3539,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 5
             });
 
@@ -3557,7 +3557,7 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).Last().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
                 Rating = 1
             });
 
@@ -3566,8 +3566,8 @@ namespace PandaDataAccessLayer
                 AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).OrderBy(x => new Guid()).First().Id,
                 RecieverId = user.Id,
                 Title = "Lorem ipsum",
-                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?",
-                Rating = 1
+                Text = "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system.",
+				Rating = 1
             });
 
 
