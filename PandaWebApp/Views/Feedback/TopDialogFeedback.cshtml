@@ -1,14 +1,16 @@
-﻿@model ICollection<PandaWebApp.ViewModels.Feedback.Entry>
+﻿@using PandaWebApp.Engine
+@model ICollection<PandaWebApp.ViewModels.Feedback.Entry>
 
 <div class="all-feedbacks">
     <div class="header">Отзывы <span class="count">(@Model.Count)</span></div>
     <div class="feedbacks-content">
         <ul class="horiz">
+            @{var index = 0;}
             @foreach (var feedback in Model)
             {
-                <li>
+                <li class="@(index == Model.Count() - 1 ? "last" : "")">
                     <div class="left icon-container">
-                        <div class="icon"><img src="@ImageCreator.Create(feedback.AuthorPhoto, 128, 128)" /></div>
+                        <div class="icon"><img src="@ImageCreator.Create(feedback.AuthorPhoto, 128, null)" /></div>
                         <div class="name">
                             <p>@feedback.AuthorName</p>
                         </div>
@@ -16,15 +18,16 @@
                     <div class="right enhanced-feedback-body">
                         <div class="mark"></div>
                         <p>
-                            @feedback.Text
+                            @feedback.Text.Trim(390)
                         </p>
                     </div>
                     <div class="clear"></div>
                 </li>
+                index++;
             }
         </ul>
     </div>
     <div class="clear"></div>
-    <div class="link"><p class="right-aligned"><a href="#">посмотреть все отзывы</a></p></div>
+    <div class="link"><p class="right-aligned"><a href="@Url.Action("Index")">посмотреть все отзывы</a></p></div>
 </div>
 

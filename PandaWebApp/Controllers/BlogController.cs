@@ -20,7 +20,8 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult TopPosts()
         {
-            var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(BlogsCount);
+            //var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(BlogsCount);
+            var listOfPosts = DataAccessLayer.Get<BlogPost>().Take(BlogsCount);
             if (listOfPosts == null)
             {
                 return HttpNotFound("Posts not found");

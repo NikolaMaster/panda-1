@@ -1,4 +1,5 @@
 ﻿@using PandaDataAccessLayer.DAL
+@using PandaWebApp.Engine
 @model PandaWebApp.ViewModels.Feedback
 <div class="feedbacks">
     
@@ -27,7 +28,7 @@
                             <div class="clear"></div>
                         </div>
                         <p class="feedback-body">
-                            @entry.Text
+                            @entry.Text.Trim(740)
                         </p>
                     </div>
                     <div class="clear"></div>

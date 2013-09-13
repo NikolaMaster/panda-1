@@ -2,12 +2,14 @@
 
 
 <ul class="album horiz">
+    @{ var index = 0; }
     @foreach (var employer in Model)
     {
-        <li class="rounded-borders-4">
-            <img src="@ImageCreator.Create(employer.Photo, 128, 128)" />
+        <li class="rounded-borders-4 @(index == 0 ? "first" : "")">
+            <img src="@ImageCreator.Create(employer.Photo, 128, null)" />
             <p class="center-aligned"><a class="name" href="@Url.Action("Detail", "Employer", new { id = employer.UserId })">@employer.EmployerName</a></p>
         </li>
+        index++;
     }
 </ul>
 <p class="right-aligned clear">@Html.ActionLink("начать поиск по компаниям", "Employer", "Search")</p>
