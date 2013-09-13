@@ -12,7 +12,7 @@ using PandaDataAccessLayer.DAL;
 namespace PandaDataAccessLayer
 {//DropCreateDatabaseIfModelChanges<MainDbContext>
 
-    public partial class MainInitializer : DropCreateDatabaseIfModelChanges<MainDbContext>
+    public partial class MainInitializer : CreateDatabaseIfNotExists<MainDbContext>
     {
         public MainDbContext DbContext { get; protected set; }
         public DataAccessLayer DataAccessLayer { get; protected set; }
