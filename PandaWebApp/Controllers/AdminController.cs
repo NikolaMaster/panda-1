@@ -14,7 +14,7 @@ namespace PandaWebApp.Controllers
 {
     public class AdminController : ModelCareController
     {
-        public ActionResult Panel1(Guid pageId)
+        public ActionResult EditStaticPage(Guid pageId)
         {
             var staticPageUnit = DataAccessLayer.Get<StaticPageUnit>(x => x.Id == pageId).First();
 

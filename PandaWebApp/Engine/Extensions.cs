@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
 using System.Web.Mvc.Ajax;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
@@ -140,11 +141,11 @@ namespace PandaWebApp.Engine
 
         private static int getWordEnd(int number)
         {
-            if (Regex.Match(number.ToString(), "1\\d$").Success)
+            if (Regex.Match(number.ToString(CultureInfo.InvariantCulture), "1\\d$").Success)
                 return 2;
-            if (Regex.Match(number.ToString(), "1$").Success)
+            if (Regex.Match(number.ToString(CultureInfo.InvariantCulture), "1$").Success)
                 return 0;
-            if (Regex.Match(number.ToString(), "(2|3|4)$").Success)
+            if (Regex.Match(number.ToString(CultureInfo.InvariantCulture), "(2|3|4)$").Success)
                 return 1;
             return 2;
         }
@@ -158,13 +159,29 @@ namespace PandaWebApp.Engine
                     "дней"
                 };
 
+            var mounth = new string[]
+                {
+                    "месяц",
+                    "месяца",
+                    "месяцев"
+                };
+
             var differenceTime = DateTime.UtcNow - date;
 
             if (Equals(Convert.ToInt32(differenceTime.TotalDays), 0))
                 return string.Format("1 день");
             
-            int timeSpan = Convert.ToInt32(differenceTime.TotalDays);
-            return string.Format("{0} {1}", timeSpan, days[getWordEnd(timeSpan)]);
+            if (Convert.ToInt32(differenceTime.TotalDays) < 31)
+            {
+                int timeSpan = Convert.ToInt32(differenceTime.TotalDays);
+                return string.Format("{0} {1}", timeSpan, days[getWordEnd(timeSpan)]);
+                
+            }
+            else
+            {
+                int timeSpan = Convert.ToInt32(Math.Round(differenceTime.TotalDays/31,0));
+                return string.Format("{0} {1}", timeSpan, mounth[getWordEnd(timeSpan)]);
+            }
         }
 
         public static string GetActivityStatus(DateTime date)
@@ -222,7 +239,5 @@ namespace PandaWebApp.Engine
         }
 
         #endregion
-
-        
     }
 }

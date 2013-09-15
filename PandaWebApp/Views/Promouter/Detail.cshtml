@@ -1,5 +1,5 @@
 ﻿@using PandaWebApp.ViewModels
-@model PandaWebApp.ViewModels.Promouter
+@model Tuple<Promouter, List<string>>
 @{
     ViewBag.Title = "Информация о промоутере";
 }
@@ -17,19 +17,19 @@
     <div class="header">
         <div class="left">
             <img src="~/Content/img/woman.png" />
-            <span class="user-name">@string.Format("{0} {1}",Model.FirstName,Model.LastName)</span>
-            <span class="user-number">#@Model.Number</span>
+            <span class="user-name">@string.Format("{0} {1}",Model.Item1.FirstName,Model.Item1.LastName)</span>
+            <span class="user-number">#@Model.Item1.Number</span>
         </div>
         <div class="right user-status">
-            <img src="@(Model.Status == "Онлайн" ? "/Content/img/online.png" : "/Content/img/offline.png")" />
-            <span>@Model.Status</span>
+            <img src="@(Model.Item1.Status == "Онлайн" ? "/Content/img/online.png" : "/Content/img/offline.png")" />
+            <span>@Model.Item1.Status</span>
         </div>
         <div class="clear"></div>
     </div>
 					
     <div class="photo left">
-        <img src="@ImageCreator.Create(Model.Photo, 128, 128)" />
-        @if (Model.ReadyForWork)
+        <img src="@ImageCreator.Create(Model.Item1.Photo, 128, 128)" />
+        @if (Model.Item1.ReadyForWork)
         {
             <span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
         }
@@ -37,7 +37,7 @@
     <div class="info right">
         <div class="table-2">
             <div class="column">
-                <div class="row on-site">На сайте <span class="days">@Model.DaysOnSite</span></div>
+                <div class="row on-site">На сайте <span class="days">@Model.Item1.DaysOnSite</span></div>
                 <div class="row">Дата рождения</div>
                 <div class="row">Количество полных лет</div>
                 <div class="row"><div class="icon left"><img src="~/Content/img/medical-book.png" /></div>Мед. Книжка</div>
@@ -48,14 +48,14 @@
                 <div class="row">Желаемая цена за час работы</div>
                 <div class="row">Город</div>
                 <div class="row">Образование</div>
-                @if (!isGuest && user.Id == Model.UserId)
+                @if (!isGuest && user.Id == Model.Item1.UserId)
                 {
                     <div class="row">Количество монеток: @user.Coins</div>
                 }
 
             </div>
             <div class="column">
-                @if (Model.AccountConfirmed)
+                @if (Model.Item1.AccountConfirmed)
                 {
                     <div class="row confirmed-true"><p class="right-aligned">Аккаунт подтвержден</p></div>
                 }
@@ -65,15 +65,15 @@
                 }
 
                     
-                <div class="row">@Model.BirthDateString</div>
-                <div class="row">@Model.FullYears</div>
+                <div class="row">@Model.Item1.BirthDateString</div>
+                <div class="row">@Model.Item1.FullYears</div>
                 @{
                     string isExist;
-                    isExist = Model.MedicalBook ? "есть" : "нет";
+                    isExist = Model.Item1.MedicalBook ? "есть" : "нет";
                     <div class="row">@isExist</div>
                     
                     isExist = string.Empty;
-                    isExist = Model.Car ? "есть" : "нет";
+                    isExist = Model.Item1.Car ? "есть" : "нет";
                     <div class="row">@isExist</div>
                 }
                
@@ -81,37 +81,51 @@
                 
                 @if (!isGuest)
                 {
-                     if (Equals(user.Id, Model.UserId))
-                     {
-                        <div class="row">@Model.MobilePhone</div>
-                        <div class="row">@Model.Email</div>
-                     }
-                     else
-                     {
-                         <div class="row" id ="MOBILE_PHONE">
+                    if (Equals(user.Id, Model.Item1.UserId))
+                    {
+                        <div class="row">@Model.Item1.MobilePhone</div>
+                        <div class="row">@Model.Item1.Email</div>
+                    }
+                    else
+                    {
+                        if (Model.Item2.Contains("MOBILE_PHONE"))
+                        {
+                            <div class="row">@Model.Item1.MobilePhone</div>
+                        }
+                        else
+                        {
+                            <div class="row" id ="MOBILE_PHONE">
                              
-                                 @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
-                                                  new {buyerId = user.Id, userId = Model.UserId, attrCode = "MOBILE_PHONE", value = Model.MobilePhone},
-                                                  new AjaxOptions()
-                                                      {
-                                                          HttpMethod = "POST",
-                                                          UpdateTargetId = "MOBILE_PHONE"
-                                                      }, new {@class = "open"})
+                                @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = "MOBILE_PHONE", value = Model.Item1.MobilePhone},
+                                                 new AjaxOptions()
+                                                     {
+                                                         HttpMethod = "POST",
+                                                         UpdateTargetId = "MOBILE_PHONE"
+                                                     }, new {@class = "open"})
                           
-                         </div>
+                            </div>
+                        }
 
-                         <div class="row" id ="EMAIL_CODE">
-                           
-                                 @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
-                                                  new {buyerId = user.Id, userId = Model.UserId, attrCode = "EMAIL_CODE", value = Model.Email},
-                                                  new AjaxOptions()
-                                                      {
-                                                          HttpMethod = "POST",
-                                                          UpdateTargetId = "EMAIL_CODE"
-                                                      }, new {@class = "open"})
+                        if (Model.Item2.Contains("EMAIL_CODE"))
+                        {
+                            <div class="row">@Model.Item1.Email</div>
+                        }
+                        else
+                        {
+                            <div class="row" id ="EMAIL_CODE">
+                            @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = "EMAIL_CODE", value = Model.Item1.Email},
+                                                 new AjaxOptions()
+                                                     {
+                                                         HttpMethod = "POST",
+                                                         UpdateTargetId = "EMAIL_CODE"
+                                                     }, new {@class = "open"})
                              
-                         </div>
-                     }
+                            </div>
+                        }
+                    }
+
                 }
                 else
                 {
@@ -119,13 +133,13 @@
                     <div class="row"><a href="#" class="open">открыть</a></div>
                 }
                 
-                <div class="row">@Model.Salary</div>
-                <div class="row">@Model.City</div>
-                <div class="row">@Model.Education</div>
-                @if (!isGuest && Equals(user.Id, Model.UserId))
+                <div class="row">@Model.Item1.Salary</div>
+                <div class="row">@Model.Item1.City</div>
+                <div class="row">@Model.Item1.Education</div>
+                @if (!isGuest && Equals(user.Id, Model.Item1.UserId))
                 {
-                    <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.UserId})" >редактировать</a></div>
-                    <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Promouter", new {id = Model.UserId}, new {})</div>
+                    <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.Item1.UserId})" >редактировать</a></div>
+                    <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Promouter", new {id = Model.Item1.UserId}, new {})</div>
                 }
             </div>
             <div class="clear"></div>
@@ -138,7 +152,7 @@
                 @{
                     var index = 0;
                     int topCount = 10;
-                    foreach (var item in Model.Album)
+                    foreach (var item in Model.Item1.Album)
                     {
                         if (topCount.Equals(0))
                         {
@@ -163,7 +177,7 @@
             </ul>
         </div>
         <div class="clear"></div>
-        <div class="more"><p>@Html.ActionLink("Больше фотографий", "Album", "Album", new { userId = Model.UserId }, null)</p></div>
+        <div class="more"><p>@Html.ActionLink("Больше фотографий", "Album", "Album", new { userId = Model.Item1.UserId }, null)</p></div>
     </div>
 						
     <div class="full-info">
@@ -188,13 +202,13 @@
                         </div>
 
                         <div class="column">
-                            <div class="row">@Model.Height см.</div>
-                            <div class="row">@Model.Build</div>
-                            <div class="row">@Model.Weight кг.</div>
-                            <div class="row">@Model.SkinType</div>
-                            <div class="row">@Model.EyeColor</div>
-                            <div class="row">@Model.HairColor</div>
-                            <div class="row">@Model.HairLength</div>
+                            <div class="row">@Model.Item1.Height см.</div>
+                            <div class="row">@Model.Item1.Build</div>
+                            <div class="row">@Model.Item1.Weight кг.</div>
+                            <div class="row">@Model.Item1.SkinType</div>
+                            <div class="row">@Model.Item1.EyeColor</div>
+                            <div class="row">@Model.Item1.HairColor</div>
+                            <div class="row">@Model.Item1.HairLength</div>
                         </div>
 
                         <div class="clear"></div>
@@ -214,9 +228,9 @@
                         </div>
 
                         <div class="column">
-                            <div class="row">@Model.SizeClothes (М)</div>
-                            <div class="row">@Model.SizeShoes</div>
-                            <div class="row">@Model.SizeChest</div>
+                            <div class="row">@Model.Item1.SizeClothes (М)</div>
+                            <div class="row">@Model.Item1.SizeShoes</div>
+                            <div class="row">@Model.Item1.SizeChest</div>
                         </div>
 
                         <div class="clear"></div>
@@ -233,7 +247,7 @@
         <div class="table-2 intresting-work">
             <div class="column">
                 <ul class="list-style">
-                    @foreach (var item in Model.DesiredWork1)
+                    @foreach (var item in Model.Item1.DesiredWork1)
                     {
                         <li>@item</li>
                     }
@@ -241,7 +255,7 @@
             </div>
             <div class="column">
                 <ul class="list-style">
-                    @foreach (var item in Model.DesiredWork2)
+                    @foreach (var item in Model.Item1.DesiredWork2)
                     {
                         <li>@item</li>
                     }
@@ -270,7 +284,7 @@
                 {
                     <div class=" @(i % 2 == 0 ? "column even" : "column odd")">
                         <div class="row header"><p class="center-aligned">@days[i]</p></div>
-                        @foreach (var iter in Model.DesiredWorkTime)
+                        @foreach (var iter in Model.Item1.DesiredWorkTime)
                         {
                             if (iter.Day.Equals(days[i]))
                             {
@@ -290,13 +304,13 @@
     <div class="intresting-things">
         <div class="header">Интересы:</div>
         <div class="things">
-            @if (string.IsNullOrEmpty(@Model.Hobbies))
+            @if (string.IsNullOrEmpty(@Model.Item1.Hobbies))
             {
                 <p class="nothing">Пользователь еще не заполнил свои интересы, вы можете <a href="#">попросить его</a> заполнить свои интересы</p>
             }
             else
             {
-                <p class="nothing">@Html.Raw(@Model.Hobbies)</p>
+                <p class="nothing">@Html.Raw(@Model.Item1.Hobbies)</p>
             }
         </div>
     </div>
@@ -304,13 +318,13 @@
     <div class="about">
         <div class="header">О себе:</div>
         <div class="things">
-            @if (string.IsNullOrEmpty(@Model.About))
+            @if (string.IsNullOrEmpty(@Model.Item1.About))
             {
                 <p class="nothing">Пользователь еще не написал о себе, вы можете <a href="#">попросить его</a> рассказать о себе подробнее</p>
             }
             else
             {
-                <p class="nothing">@Html.Raw(@Model.About)</p>
+                <p class="nothing">@Html.Raw(@Model.Item1.About)</p>
             }
         </div>
     </div>
@@ -322,7 +336,7 @@
                 @{
                     <div class="column">
                         @{
-                            var list = Model.WorkExperience as List<Promouter.WorkExperienceUnit>;
+                            var list = Model.Item1.WorkExperience as List<Promouter.WorkExperienceUnit>;
 
                             for (int iter = 0; iter <= list.Count() / 2; iter++)
                             {
@@ -337,7 +351,7 @@
 
                     <div class="column">
                          @{
-                             var list2 = Model.WorkExperience as List<Promouter.WorkExperienceUnit>;
+                             var list2 = Model.Item1.WorkExperience as List<Promouter.WorkExperienceUnit>;
 
                              for (int iter = list2.Count() / 2 + 1; iter < list2.Count(); iter++)
                              {
@@ -356,9 +370,9 @@
         </div>
     </div>
     <div class="simple-delimiter"></div>
-    @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
+    @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.Item1.UserId }); }
 
-    @{ Html.RenderAction("Create", "Feedback", new { authorId = Model.UserId, recieverId = Model.UserId, });}
+    @{ Html.RenderAction("Create", "Feedback", new { authorId = Model.Item1.UserId, recieverId = Model.Item1.UserId, });}
     
     <div class="promouter-top">
         <div class="header">

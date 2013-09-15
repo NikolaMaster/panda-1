@@ -69,7 +69,29 @@ namespace PandaWebApp.Controllers
             var binder = new ViewEmployerToUser(DataAccessLayer);
             binder.InverseLoad(entry, model);
 
-            return View(model);
+            var core = AuthorizationCore.StaticCreate();
+            var listBought = new List<string>();
+
+            var isBought =
+               DataAccessLayer.Get<CoinsInfo>(x => x.BuyUser == core.User.Id && x.UserId == id && x.Code.Code == Constants.MobilePhoneCode)
+                              .FirstOrDefault();
+            if (isBought != null)
+            {
+                listBought.Add(Constants.MobilePhoneCode);
+            }
+
+            isBought =
+               DataAccessLayer.Get<CoinsInfo>(x => x.BuyUser == core.User.Id && x.UserId == id && x.Code.Code == Constants.EmailCode)
+                              .FirstOrDefault();
+
+            if (isBought != null)
+            {
+                listBought.Add(Constants.EmailCode);
+            }
+
+            var pTuple = new Tuple<Employer, List<string>>(model, listBought);
+
+            return View(pTuple);
         }
 
         [HttpGet]

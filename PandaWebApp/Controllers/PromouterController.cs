@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Helpers;
 using PandaWebApp.Engine;
 using System;
@@ -75,8 +76,31 @@ namespace PandaWebApp.Controllers
             var model = new Promouter();
             var binder = new ViewPromouterToUsers(DataAccessLayer);
             binder.InverseLoad(entry, model);
-          
-            return View(model);
+
+
+            var core = AuthorizationCore.StaticCreate();
+            var listBought = new List<string>();
+            
+            var isBought =
+               DataAccessLayer.Get<CoinsInfo>(x => x.BuyUser == core.User.Id && x.UserId == id && x.Code.Code == Constants.MobilePhoneCode)
+                              .FirstOrDefault();
+            if (isBought != null)
+            {
+                listBought.Add(Constants.MobilePhoneCode);
+            }
+
+            isBought =
+               DataAccessLayer.Get<CoinsInfo>(x => x.BuyUser == core.User.Id && x.UserId == id && x.Code.Code == Constants.EmailCode)
+                              .FirstOrDefault();
+
+            if (isBought != null)
+            {
+                listBought.Add(Constants.EmailCode);
+            }
+
+            var pTuple = new Tuple<Promouter, List<string>>(model, listBought);
+
+            return View(pTuple);
         }
 
         [HttpGet]
