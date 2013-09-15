@@ -1,14 +1,14 @@
 ﻿@using PandaWebApp.Engine
-@model ICollection<PandaWebApp.ViewModels.Feedback.Entry>
+@model Tuple<ICollection<PandaWebApp.ViewModels.Feedback.Entry>, int>
 
 <div class="all-feedbacks">
-    <div class="header">Отзывы <span class="count">(@Model.Count)</span></div>
+    <div class="header">Отзывы <span class="count">(@Model.Item2)</span></div>
     <div class="feedbacks-content">
         <ul class="horiz">
             @{var index = 0;}
-            @foreach (var feedback in Model)
+            @foreach (var feedback in Model.Item1)
             {
-                <li class="@(index == Model.Count() - 1 ? "last" : "")">
+                <li class="@(index == Model.Item1.Count() - 1 ? "last" : "")">
                     <div class="left icon-container">
                         <div class="icon"><img src="@ImageCreator.Create(feedback.AuthorPhoto, 128, null)" /></div>
                         <div class="name">

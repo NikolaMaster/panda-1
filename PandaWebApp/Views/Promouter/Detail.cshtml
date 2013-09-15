@@ -1,7 +1,17 @@
-﻿@model PandaWebApp.ViewModels.Promouter
+﻿@using PandaWebApp.ViewModels
+@model PandaWebApp.ViewModels.Promouter
 @{
     ViewBag.Title = "Информация о промоутере";
 }
+
+@{
+    var core = AuthorizationCore.StaticCreate();
+    var isGuest = core.IsGuest;
+    var user = core.User;
+    var username = core.UserName;
+    var city = core.City;
+}   
+
 
 <div class="user">
     <div class="header">
@@ -20,8 +30,9 @@
     <div class="photo left">
         <img src="@ImageCreator.Create(Model.Photo, 128, 128)" />
         @if (Model.ReadyForWork)
-        {<span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
-            }
+        {
+            <span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
+        }
     </div>
     <div class="info right">
         <div class="table-2">
@@ -37,9 +48,11 @@
                 <div class="row">Желаемая цена за час работы</div>
                 <div class="row">Город</div>
                 <div class="row">Образование</div>
-               
-                 <div class="row">Количество монеток: @Model.Coins</div>
-                
+                @if (!isGuest && user.Id == Model.UserId)
+                {
+                    <div class="row">Количество монеток: @user.Coins</div>
+                }
+
             </div>
             <div class="column">
                 @if (Model.AccountConfirmed)
@@ -54,34 +67,66 @@
                     
                 <div class="row">@Model.BirthDateString</div>
                 <div class="row">@Model.FullYears</div>
-                @if (@Model.MedicalBook)
-                {
-                    <div class="row">есть</div>
-                }
-                else
-                {
-                    <div class="row">нет</div>
-                }
-
-                @if (Model.Car)
-                {
-                    <div class="row">есть</div>
-                }
-                else
-                {
-                    <div class="row">нет</div>
-                }
+                @{
+                    string isExist;
+                    isExist = Model.MedicalBook ? "есть" : "нет";
+                    <div class="row">@isExist</div>
                     
-                <div class="row gap"></div>
-                <div class="row"><a href="#" class="open">открыть</a></div>
-                <div class="row"><a href="#" class="open">открыть</a></div>
+                    isExist = string.Empty;
+                    isExist = Model.Car ? "есть" : "нет";
+                    <div class="row">@isExist</div>
+                }
+               
+               <div class="row gap"></div>
+                
+                @if (!isGuest)
+                {
+                     if (Equals(user.Id, Model.UserId))
+                     {
+                        <div class="row">@Model.MobilePhone</div>
+                        <div class="row">@Model.Email</div>
+                     }
+                     else
+                     {
+                         <div class="row" id ="MOBILE_PHONE">
+                             
+                                 @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                                  new {buyerId = user.Id, userId = Model.UserId, attrCode = "MOBILE_PHONE", value = Model.MobilePhone},
+                                                  new AjaxOptions()
+                                                      {
+                                                          HttpMethod = "POST",
+                                                          UpdateTargetId = "MOBILE_PHONE"
+                                                      }, new {@class = "open"})
+                          
+                         </div>
+
+                         <div class="row" id ="EMAIL_CODE">
+                           
+                                 @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                                  new {buyerId = user.Id, userId = Model.UserId, attrCode = "EMAIL_CODE", value = Model.Email},
+                                                  new AjaxOptions()
+                                                      {
+                                                          HttpMethod = "POST",
+                                                          UpdateTargetId = "EMAIL_CODE"
+                                                      }, new {@class = "open"})
+                             
+                         </div>
+                     }
+                }
+                else
+                {
+                    <div class="row"><a href="#" class="open">открыть</a></div>
+                    <div class="row"><a href="#" class="open">открыть</a></div>
+                }
+                
                 <div class="row">@Model.Salary</div>
                 <div class="row">@Model.City</div>
                 <div class="row">@Model.Education</div>
-                
-                <div class="row"><a href="@Url.Action("EditCoins", "Promouter", new {userId = Model.UserId})" >редактировать</a></div>
-                <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Promouter", new {id = Model.UserId}, new {})</div>
-                
+                @if (!isGuest && Equals(user.Id, Model.UserId))
+                {
+                    <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.UserId})" >редактировать</a></div>
+                    <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Promouter", new {id = Model.UserId}, new {})</div>
+                }
             </div>
             <div class="clear"></div>
         </div>
@@ -110,7 +155,6 @@
                         else
                         {
                             index++;
-
                         }
 
                         topCount--;
@@ -119,7 +163,7 @@
             </ul>
         </div>
         <div class="clear"></div>
-        <div class="more"><p>@Html.ActionLink("Больше фотографий","Album","Album",new {userId = Model.UserId},null)</p></div>
+        <div class="more"><p>@Html.ActionLink("Больше фотографий", "Album", "Album", new { userId = Model.UserId }, null)</p></div>
     </div>
 						
     <div class="full-info">
@@ -277,25 +321,33 @@
             <div class="table-2">
                 @{
                     <div class="column">
-                        @foreach (var experience in Model.WorkExperience1)
-                        {
-                            <div class="row">
-                                <p>Место работы @experience.Title</p>
-                                <p>Кем работал @experience.WorkName</p>
-                                <p>Время работы @experience.Hours</p>
-                            </div>
+                        @{
+                            var list = Model.WorkExperience as List<Promouter.WorkExperienceUnit>;
+
+                            for (int iter = 0; iter <= list.Count() / 2; iter++)
+                            {
+                                <div class="row">
+                                    <p>Место работы @list[iter].Title</p>
+                                    <p>Кем работал @list[iter].WorkName</p>
+                                    <p>Время работы @list[iter].Hours</p>
+                                </div>
+                            }
                         }
                     </div>
 
                     <div class="column">
-                        @foreach (var experience in Model.WorkExperience2)
-                        {
-                            <div class="row">
-                                <p>Место работы @experience.Title</p>
-                                <p>Кем работал @experience.WorkName</p>
-                                <p>Время работы @experience.Hours</p>
-                            </div>
-                        }
+                         @{
+                             var list2 = Model.WorkExperience as List<Promouter.WorkExperienceUnit>;
+
+                             for (int iter = list2.Count() / 2 + 1; iter < list2.Count(); iter++)
+                             {
+                                 <div class="row">
+                                     <p>Место работы @list2[iter].Title</p>
+                                     <p>Кем работал @list2[iter].WorkName</p>
+                                     <p>Время работы @list2[iter].Hours</p>
+                                 </div>
+                             }
+                         }
                     </div>
 
                     <div class="clear"></div>
@@ -306,7 +358,7 @@
     <div class="simple-delimiter"></div>
     @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.UserId }); }
 
-    @{ Html.RenderAction("Create", "Feedback", new {authorId = Model.UserId, recieverId = Model.UserId,});}
+    @{ Html.RenderAction("Create", "Feedback", new { authorId = Model.UserId, recieverId = Model.UserId, });}
     
     <div class="promouter-top">
         <div class="header">

@@ -2,6 +2,13 @@
 @{
     ViewBag.Title = "Информация о компании";
 }
+@{
+    var core = AuthorizationCore.StaticCreate();
+    var isGuest = core.IsGuest;
+    var user = core.User;
+    var username = core.UserName;
+    var city = core.City;
+}   
 
 <div class="user">
     <div class="header">
@@ -28,8 +35,10 @@
                 <div class="row">Адрес офиса</div> 
                 <div class="row"><img src="~/Content/img/phone.png" />Телефон</div>
                 <div class="row"><img src="~/Content/img/mail.png" />e-mail</div>
-                <div class="row">Количество монеток: @Model.Coins</div>
-                
+                 @if (!isGuest && user.Id == Model.UserId)
+                 {
+                     <div class="row">Количество монеток: @user.Coins</div>
+                 }
             </div>
 
             <div class="column">
@@ -43,12 +52,48 @@
                 }
                 <div class="row">@Model.City</div>
                 <div class="row">@Model.Address</div>
-                <div class="row"><a href="#" class="open">открыть</a></div>
-                <div class="row"><a href="#" class="open">открыть</a></div>
-               
-                <div class="row"><a href="@Url.Action("EditCoins", "Employer", new {userId = Model.UserId})" >редактировать</a></div>
-                <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Employer", new {id = Model.UserId}, new {})</div>
                 
+                @if (!isGuest)
+                {
+                    if (Equals(user.Id, Model.UserId))
+                    {
+                        <div class="row">@Model.MobilePhone</div>
+                        <div class="row">@Model.Email</div>
+                    }
+                    else
+                    {
+                        <div class="row" id ="MOBILE_PHONE">
+                            @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                             new {buyerId = user.Id, userId = Model.UserId, attrCode = "MOBILE_PHONE", value = Model.MobilePhone},
+                                             new AjaxOptions()
+                                                 {
+                                                     HttpMethod = "POST",
+                                                     UpdateTargetId = "MOBILE_PHONE"
+                                                 }, new {@class = "open"})
+                        </div>
+
+                        <div class="row" id ="EMAIL_CODE">
+                            @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                             new {buyerId = user.Id, userId = Model.UserId, attrCode = "EMAIL_CODE", value = Model.Email},
+                                             new AjaxOptions()
+                                                 {
+                                                     HttpMethod = "POST",
+                                                     UpdateTargetId = "EMAIL_CODE"
+                                                 }, new {@class = "open"})
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="row"><a href="#" class="open">открыть</a></div>
+                    <div class="row"><a href="#" class="open">открыть</a></div>
+                }
+
+                @if (!isGuest && Equals(user.Id, Model.UserId))
+                {
+                    <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.UserId})" >редактировать</a></div>
+                    <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Employer", new {id = Model.UserId}, new {})</div>
+                }
             </div>
             <div class="clear"></div>
         </div>
@@ -59,7 +104,7 @@
     <div class="about">
         <div class="header">О компании:</div>
         <div class="things">
-            @if (string.IsNullOrEmpty(@Model.About))
+            @if (string.IsNullOrEmpty(Model.About))
             {
                 <p class="nothing">Пользователь еще не написал о себе, вы можете <a href="#">попросить его</a> рассказать о себе подробнее</p>
             }

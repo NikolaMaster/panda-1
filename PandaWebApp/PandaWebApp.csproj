@@ -162,6 +162,7 @@
     <Compile Include="Filters\BaseAuthorizationReuired.cs" />
     <Compile Include="FormModels\AlbumUnit.cs" />
     <Compile Include="FormModels\Authorize.cs" />
+    <Compile Include="FormModels\EditCoinsForm.cs" />
     <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
     <Compile Include="FormModels\FeedbackForm.cs" />
@@ -602,11 +603,11 @@
     <Content Include="Views\Search\PromouterSearchResult.cshtml" />
     <Content Include="Views\Album\Album.cshtml" />
     <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
-    <Content Include="Views\Employer\EditCoins.cshtml" />
-    <Content Include="Views\Promouter\EditCoins.cshtml" />
     <Content Include="Views\Shared\_AuthPanel.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
     <Content Include="Views\Feedback\TopDialogFeedback.cshtml" />
+    <Content Include="Views\Admin\_editCoinsPartial.cshtml" />
+    <Content Include="Views\Admin\EditUserCoins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

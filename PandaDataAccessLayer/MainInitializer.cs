@@ -21,7 +21,6 @@ namespace PandaDataAccessLayer
         {
             DataAccessLayer = new DataAccessLayer(context);
             DbContext = context;
-//            mContext.Configuration.LazyLoadingEnabled = false;
 
             addDefaultAttribTypes();
             addDefaultChecklistTypes();
@@ -437,8 +436,14 @@ namespace PandaDataAccessLayer
                 {
                     AttribType = DataAccessLayer.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.DesiredWorkCode),
                     Code = Constants.WorkCode
-                }
+                },
                 #endregion
+
+                new Attrib
+                {
+                    AttribType = DataAccessLayer.GetAttribType(typeof(EntityList)),
+                    Code = Constants.EmailCode
+                }
             };
             foreach (var attrib in attribs)
                 DataAccessLayer.Create(attrib);

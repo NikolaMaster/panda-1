@@ -94,7 +94,6 @@ namespace PandaWebApp.ViewModels
         public IEnumerable<string> DesiredWork2 { get; set; }
         public IEnumerable<TimeOfWorkUnit> DesiredWorkTime { get; set; }
         public IEnumerable<Feedback> Reviews { get; set; }
-        public IEnumerable<WorkExperienceUnit> WorkExperience1 { get; set; }
-        public IEnumerable<WorkExperienceUnit> WorkExperience2 { get; set; }
+        public IEnumerable<WorkExperienceUnit> WorkExperience { get; set; }
     }
 }

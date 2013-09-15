@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CoinsInfo.cs" />
     <Compile Include="Helpers\Crypt.cs" />
     <Compile Include="Helpers\Encodings.cs" />
     <Compile Include="DAL\Constants.cs" />
