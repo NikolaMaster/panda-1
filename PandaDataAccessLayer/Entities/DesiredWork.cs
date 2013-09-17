@@ -10,8 +10,8 @@ namespace PandaDataAccessLayer.Entities
 {
     public class DesiredWork : IGuidIdentifiable
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
-
         public virtual DictValue Work { get; set; }
         public virtual EntityList EntityList { get; set; }
 

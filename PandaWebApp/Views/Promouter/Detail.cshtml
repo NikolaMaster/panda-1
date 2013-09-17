@@ -29,11 +29,13 @@
     </div>
 					
     <div class="photo left">
-        <img src="@ImageCreator.Create(Model.Item1.Photo, 128, 128)" />
+        <a id="one_photo" href="@ImageCreator.Create(Model.Item1.Photo, 256, 256)">
+            <img src="@ImageCreator.Create(Model.Item1.Photo, 128, 128)" alt="one_photo" />
+        </a>
         @if (Model.Item1.ReadyForWork)
         {
             <span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
-            }
+        }
     </div>
     <div class="info right">
         <div class="table-2">
@@ -72,7 +74,7 @@
                     string isExist;
                     isExist = Model.Item1.MedicalBook ? "есть" : "нет";
                     <div class="row">@isExist</div>
-                    <div class="row">Model.Item1.Car</div>
+                    <div class="row">@Model.Item1.Car</div>
                 }
                
                <div class="row gap"></div>
@@ -81,31 +83,33 @@
                 {
                     if (Equals(user.Id, Model.Item1.UserId))
                     {
-                        <div class="row">@Model.Item1.Phone</div>
+                        string fullphone = string.Format("{0} {1} {2}", Model.Item1.Phone.CountryCode, Model.Item1.Phone.Code, Model.Item1.Phone.Number);
+                        <div class="row">@fullphone</div>
                         <div class="row">@Model.Item1.Email</div>
                 }
                 else
                 {
-                        if (Model.Item2.Contains(Constants.MobilePhoneCode))
-                        {
-                            <div class="row">@Model.Item1.Phone</div>
-                }
-                        else
-                        {
-                            <div class="row" id ="MOBILE_PHONE">
+                    if (Model.Item2.Contains(Constants.MobilePhoneCode))
+                    {
+                        <div class="row">@Model.Item1.Phone</div>
+                    }
+                    else
+                    {
+                        string fullphone = string.Format("{0} {1} {2}", Model.Item1.Phone.CountryCode, Model.Item1.Phone.Code, Model.Item1.Phone.Number);
+                        <div class="row" id ="MOBILE_PHONE">
 
-                                @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
-                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.MobilePhoneCode, value = Model.Item1.Phone},
-                                                 new AjaxOptions()
-                                                     {
-                                                         HttpMethod = "POST",
-                                                         UpdateTargetId = Constants.MobilePhoneCode
-                                                     }, new {@class = "open"})
+                            @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                             new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.MobilePhoneCode, value = fullphone},
+                                             new AjaxOptions()
+                                                 {
+                                                     HttpMethod = "POST",
+                                                     UpdateTargetId = Constants.MobilePhoneCode
+                                                 }, new {@class = "open"})
                           
-                            </div>
-                        }
+                        </div>
+                    }
 
-                        if (Model.Item2.Contains("EMAIL_CODE"))
+                    if (Model.Item2.Contains("EMAIL_CODE"))
                         {
                             <div class="row">@Model.Item1.Email</div>
                         }
@@ -157,7 +161,9 @@
                             break;
                         }
                         <li class="@(index == 0 ? "first" : "")">
-                            <img src="@ImageCreator.Create(item, 128, 128)" />
+                            <a rel="group_photo" href="@ImageCreator.Create(item, 256, 256)">
+                                <img src="@ImageCreator.Create(item, 128, 128)"/>
+                            </a>
                         </li>
 
                         if (index == 4)
@@ -245,17 +251,17 @@
         <div class="table-2 intresting-work">
             <div class="column">
                 <ul class="list-style">
-                    @foreach (var item in Model.Item1.DesiredWork1)
+                    @foreach (var item in Model.Item1.DesiredWork)
                     {
-                        <li>@item</li>
+                        <li>@item.Title</li>
                     }
                 </ul>
             </div>
             <div class="column">
                 <ul class="list-style">
-                    @foreach (var item in Model.Item1.DesiredWork2)
+                    @foreach (var item in Model.Item1.DesiredWork)
                     {
-                        <li>@item</li>
+                        <li>@item.Title</li>
                     }
                 </ul>
             </div>

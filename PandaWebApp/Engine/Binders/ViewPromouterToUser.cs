@@ -1,5 +1,6 @@
 ﻿using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
+using PandaWebApp.FormModels;
 using PandaWebApp.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace PandaWebApp.Engine.Binders
             dest.Status = session.Any() ? Extensions.GetActivityStatus(session.First().LastHit) : "Оффлайн";
             dest.Coins = source.Coins;
             dest.Phone = new PhoneUnit();
-
+            dest.DesiredWork = new List<PromouterForm.DesiredWorkUnit>();
             //get main album
             var firstOrDefault = source.Albums.FirstOrDefault(x => x.Name == "Основной альбом");
             if (firstOrDefault != null)
@@ -46,7 +47,7 @@ namespace PandaWebApp.Engine.Binders
                     case Constants.WorkExperienceCode:
                         getWorkExperience(attrib.Value, dest);
                         break;
-                    case Constants.WorkCode:
+                    case Constants.DesiredWorkCode:
                         getDesiredWork(attrib.Value, dest);
                         break;
                     case Constants.DesiredWorkTimeCode:
@@ -59,13 +60,34 @@ namespace PandaWebApp.Engine.Binders
                             dest.Phone = DataAccessLayer.GetPhone(entityListId);    
                         }
                         break;
+                    case Constants.CarCode:
+                        dest.Car = attrib.Value;
+                        break;
                 }
             }
         }
 
         private void getDesiredWork(string value, Promouter dest)
         {
-            if (string.IsNullOrEmpty(value)) 
+            if (string.IsNullOrEmpty(value))
+                return;
+
+            var entityId = Guid.Parse(value);
+
+            dest.DesiredWork = DataAccessLayer.Get<DictGroup>(Constants.WorkCode)
+                .DictValues
+                .Select(x => new PromouterForm.DesiredWorkUnit
+                {
+                    Code = x.Code,
+                    Title = x.Description,
+                    Value =
+                        DataAccessLayer.Get<DesiredWork>(
+                            y => y.EntityList.Id == entityId && y.Work != null && y.Work.Id == x.Id).Any()
+                })
+                .ToList();
+
+
+            /*if (string.IsNullOrEmpty(value)) 
                 return;
             
                 var entityId = Guid.Parse(value);
@@ -90,7 +112,7 @@ namespace PandaWebApp.Engine.Binders
                     count++;
                 }
                 dest.DesiredWork1 = listWorks;
-                dest.DesiredWork2 = listWorks2;
+                dest.DesiredWork2 = listWorks2;*/
             }
 
         private void getDesiredTimeOfWork(string value, Promouter dest)

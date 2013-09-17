@@ -1372,7 +1372,10 @@ namespace PandaDataAccessLayer.DAL
 
         public Attrib MobilePhone
         {
-            get { return DataAccessLayer.Get<Attrib>(MobilePhoneCode); }
+            get
+            {
+                return DataAccessLayer.Get<Attrib>(MobilePhoneCode);
+            }
         }
 
         public Attrib Height

@@ -6,6 +6,7 @@ using PandaDataAccessLayer.DAL;
 using PandaWebApp.Engine;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine.Binders;
+using PandaWebApp.FormModels;
 
 namespace PandaWebApp.ViewModels
 {
@@ -117,8 +118,9 @@ namespace PandaWebApp.ViewModels
 
         public PhoneUnit Phone { get; set; }
         public IEnumerable<string> Album { get; set; }
-        public IEnumerable<string> DesiredWork1 { get; set; }
-        public IEnumerable<string> DesiredWork2 { get; set; }
+        //public IEnumerable<string> DesiredWork1 { get; set; }
+        //public IEnumerable<string> DesiredWork2 { get; set; }
+        public IList<PromouterForm.DesiredWorkUnit> DesiredWork { get; set; }
         public IEnumerable<TimeOfWorkUnit> DesiredWorkTime { get; set; }
         public IEnumerable<Feedback> Reviews { get; set; }
         public IEnumerable<WorkExperienceUnit> WorkExperience { get; set; }
