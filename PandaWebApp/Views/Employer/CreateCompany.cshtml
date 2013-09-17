@@ -1,29 +1,111 @@
-﻿@model PandaWebApp.FormModels.CompanyRegister
+﻿@using PandaDataAccessLayer.DAL
+@model PandaWebApp.FormModels.CompanyRegister
 @{
-    var companySubTypeValues = (IEnumerable<SelectListItem>) ViewBag.CompanySubTypeValues;
+    var companySubTypeValues = (IEnumerable<SelectListItem>)ViewBag.CompanySubTypeValues;
     var cityValues = (IEnumerable<SelectListItem>) ViewBag.CityValues;
 }
 
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(x =>x.EmployerName, "Название компании")
-    @Html.TextBoxFor(x => x.EmployerName)
+    <script>
+        $(function () {
+            $('[id=CompanyType]').change(function () {
+                var checked = $('[id=CompanyType]:checked');
+                if (checked.val() == "@Constants.RecroutingCompany") {
+                    $('#companySubTypePlace').hide();
+                } else {
+                    $('#companySubTypePlace').show();
+                }
+            });
+        });
+    </script>
     
-    @Html.LabelFor(x =>x.CompanySubType, "Тип компании")
-    @Html.DropDownListFor(x => x.CompanySubType, companySubTypeValues)
+    <div class="editor-label">
+        @Html.LabelFor(x =>x.EmployerName)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(x => x.EmployerName)
+        <br/>
+        <label>@Html.RadioButtonFor(x => x.CompanyType, Constants.DirectEmployer, new { @checked = "checked" }) @Constants.DirectEmployer</label>
+        <label>@Html.RadioButtonFor(x => x.CompanyType, Constants.RecroutingCompany) @Constants.RecroutingCompany</label>
+        @Html.ValidationMessageFor(x => x.EmployerName)
+    </div>
+    
+    <div id="companySubTypePlace">
+        <div class="editor-label">
+            @Html.LabelFor(x =>x.CompanySubType)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.CompanySubType, companySubTypeValues, string.Empty)
+            @Html.ValidationMessageFor(x => x.CompanySubType)
+        </div>
+    </div>
+    <div class="editor-label">
+        @Html.LabelFor(x =>x.City)
+    </div>
+    <div class="editor-field">
+        @Html.DropDownListFor(x => x.City, cityValues, string.Empty)
+        @Html.ValidationMessageFor(x => x.City)
+    </div>
 
-    @Html.LabelFor(x =>x.City, "Город")
-    @Html.DropDownListFor(x => x.City, cityValues)
+    <div class="editor-label">
+        @Html.LabelFor(x =>x.FirstName)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(x => x.FirstName)
+        @Html.ValidationMessageFor(x => x.FirstName)
+    </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(x =>x.LastName)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(x => x.LastName)
+        @Html.ValidationMessageFor(x => x.LastName)
+    </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(x =>x.JobTitle)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(x => x.JobTitle)
+        @Html.ValidationMessageFor(x => x.JobTitle)
+    </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(x =>x.Phone)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(x => x.Phone, "Phone")
+        @Html.ValidationMessageFor(x => x.Phone)
+    </div>
+    
+    
+    <div class="editor-label">
+        @Html.LabelFor(x =>x.Email)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(x => x.Email)
+        @Html.ValidationMessageFor(x => x.Email)
+    </div>
+    
+    <div class="editor-label">
+        @Html.LabelFor(x =>x.Password)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(x => x.Password)
+        @Html.ValidationMessageFor(x => x.Password)
+    </div>
+    
+        <div class="editor-label">
+        @Html.LabelFor(x =>x.PasswordConfirmation)
+    </div>
+    <div class="editor-field">
+        @Html.TextBoxFor(x => x.PasswordConfirmation)
+        @Html.ValidationMessageFor(x => x.PasswordConfirmation)
+    </div>
+    
+    @Html.HiddenFor(x => x.EmployerType)
 
-    @Html.LabelFor(x =>x.FirstName, "Имя")
-    @Html.TextBoxFor(x => x.FirstName)
-
-    @Html.LabelFor(x =>x.LastName, "Фамилия")
-    @Html.TextBoxFor(x => x.LastName)
-
-    @Html.LabelFor(x =>x.JobTitle, "Должность")
-    @Html.TextBoxFor(x => x.JobTitle)
-
-    @Html.LabelFor(x =>x.Phone, "Телефон")
-    @Html.TextBoxFor(x => x.Phone, "Phone")
+    <button type="submit">Отправить</button>
 }

@@ -54,6 +54,11 @@ namespace PandaDataAccessLayer.DAL
         public const string WorkCode = "WORK_CODE";
         public const string EmailCode = "EMAIL_CODE";
 
+        public const string EmployerTypeCode = "EMPLOYER_TYPE";
+        public const string CompanyTypeCode = "COMPANY_TYPE";
+        public const string CompanySubTypeCode = "COMPANY_SUB_TYPE";
+        public const string JobTitleCode = "JOB_TITLE";
+
         #region Education
 
         public static readonly string[] EducationValues =
@@ -1239,6 +1244,48 @@ namespace PandaDataAccessLayer.DAL
 
         #endregion
 
+        #region Company type
+
+        public const string DirectEmployer = "Прямой работодатель";
+        public const string RecroutingCompany = "Рекрутинговая компания";
+
+        public static readonly string[] CompanyTypeValues =
+        {
+            DirectEmployer,
+            RecroutingCompany ,
+        };
+
+        #endregion
+
+        #region Company sub type
+
+        public static readonly string[] CompanySubTypeValues =
+        {
+            "Модельное агенство",
+            "Рекламное агентство",
+            "Маркетинговое агентство",
+            "Ивент агентство",
+            "Прямой заказчик"
+        };
+
+        #endregion
+
+        #region Employer type
+
+        public const string CompanyRepresenter = "Представитель компании";
+        public const string PrivateEmployer = "Частный работодатель";
+        public const string PrivateRecruiter = "Частный рекрутер";
+
+        public static readonly string[] EmployerTypeValues =
+        {
+            CompanyRepresenter,
+            PrivateEmployer,
+            PrivateRecruiter
+        };
+
+        #endregion
+        
+
         public DataAccessLayer DataAccessLayer { get;private set; }
 
         private Constants() { }
@@ -1446,6 +1493,26 @@ namespace PandaDataAccessLayer.DAL
         public Attrib Email
         {
             get { return DataAccessLayer.Get<Attrib>(EmailCode); }
+        }
+
+        public Attrib CompanySubType
+        {
+            get { return DataAccessLayer.Get<Attrib>(CompanySubTypeCode); }
+        }
+
+        public Attrib JobTitle
+        {
+            get { return DataAccessLayer.Get<Attrib>(JobTitleCode); }
+        }
+
+        public Attrib EmployerType
+        {
+            get { return DataAccessLayer.Get<Attrib>(EmployerTypeCode); }
+        }
+
+        public Attrib CompanyType
+        {
+            get { return DataAccessLayer.Get<Attrib>(CompanyTypeCode); }
         }
     }
 }

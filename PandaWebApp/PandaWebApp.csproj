@@ -127,6 +127,7 @@
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Engine\Authorize.cs" />
+    <Compile Include="Engine\Binders\EmployerRegisterToEmployerUser.cs" />
     <Compile Include="Engine\Binders\ValueFromAttribute.cs" />
     <Compile Include="Engine\Binders\ViewPromouterSearchViewToChecklist.cs" />
     <Compile Include="Engine\Binders\FormPromouterSearchToSearchValues.cs" />

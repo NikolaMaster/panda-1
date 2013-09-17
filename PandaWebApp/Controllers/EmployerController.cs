@@ -97,16 +97,7 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            ViewBag.SalaryValues = DataAccessLayer
-                .ListItemsFromDict(Constants.SalaryCode)
-                .OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
-                .ToList();
-            ViewBag.WorkValues = DataAccessLayer.ListItemsFromDict(Constants.WorkCode);
-            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
-            ViewBag.GenderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode);
-            ViewBag.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
-            ViewBag.CountryCodeValues = DataAccessLayer.ListItemsFromDict(Constants.MobilePhoneCode);
-
+            prepareViewBag();
             var binder = new FormEmployerToUser(DataAccessLayer);
             var user = DataAccessLayer.GetById<EmployerUser>(id);
             var model = new EmployerForm();
@@ -133,6 +124,44 @@ namespace PandaWebApp.Controllers
 #else
             return new EmptyResult();
 #endif
+        }
+
+
+        private void prepareViewBag()
+        {
+            ViewBag.SalaryValues = DataAccessLayer
+                .ListItemsFromDict(Constants.SalaryCode)
+                .OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
+                .ToList();
+            ViewBag.WorkValues = DataAccessLayer.ListItemsFromDict(Constants.WorkCode);
+            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
+            ViewBag.GenderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode);
+            ViewBag.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
+            ViewBag.CountryCodeValues = DataAccessLayer.ListItemsFromDict(Constants.MobilePhoneCode);
+            ViewBag.CompanySubTypeValues = DataAccessLayer.ListItemsFromDict(Constants.CompanySubTypeCode);
+        }
+
+        [HttpGet]
+        public ActionResult CreateCompany()
+        {
+            prepareViewBag();
+            var model = new CompanyRegister();
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public ActionResult CreateCompany(CompanyRegister model)
+        {
+            prepareViewBag();
+            if (ModelState.IsValid)
+            {
+                var binder = new EmployerRegisterToEmployerUser(DataAccessLayer);
+                var user = new EmployerUser();
+                binder.Load(model, user);
+                DataAccessLayer.DbContext.SaveChanges();
+                return PartialView(model);
+            }
+            return PartialView(model);
         }
     }
 }

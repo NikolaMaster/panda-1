@@ -61,6 +61,10 @@ namespace PandaDataAccessLayer
             addDictAttrib(Constants.WorkCode, "Работа", Constants.WorkValues);
             addDictAttrib(Constants.MobilePhoneCode, "Телефон", Constants.MobilePhoneValues);
             addDictAttrib(Constants.EducationCode, "Образование", Constants.EducationValues);
+            addDictAttrib(Constants.EmployerTypeCode, "Тип работодателя", Constants.EmployerTypeValues);
+            addDictAttrib(Constants.CompanyTypeCode, "Тип компании", Constants.CompanyTypeValues);
+            addDictAttrib(Constants.CompanySubTypeCode, "Подтип компании", Constants.CompanySubTypeValues);
+            
 
             DbContext.SaveChanges();
         }
@@ -100,6 +104,10 @@ namespace PandaDataAccessLayer
 
         private void addDefaulAttributes() 
         {
+            try
+            {
+
+
             var attribs = new[] {
                 new Attrib 
                 {
@@ -262,6 +270,26 @@ namespace PandaDataAccessLayer
                     AttribType = DataAccessLayer.GetAttribType(typeof(string)),
                     Code = Constants.VacancyCode
                 },
+                new Attrib
+                {
+                    AttribType = DataAccessLayer.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.EmployerTypeCode),
+                    Code = Constants.EmployerTypeCode 
+                },
+                new Attrib
+                {
+                    AttribType = DataAccessLayer.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.CompanySubTypeCode),
+                    Code = Constants.CompanySubTypeCode 
+                },
+                new Attrib
+                {
+                    AttribType = DataAccessLayer.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.CompanyTypeCode),
+                    Code = Constants.CompanyTypeCode 
+                },
+                new Attrib
+                {
+                    AttribType = DataAccessLayer.GetAttribType(typeof(string)),
+                    Code = Constants.JobTitleCode 
+                },
 
                 #region added attr for vacancy
                 new Attrib
@@ -287,9 +315,16 @@ namespace PandaDataAccessLayer
                     Code = Constants.EmailCode
                 }
             };
+
             foreach (var attrib in attribs)
                 DataAccessLayer.Create(attrib);
-           DbContext.SaveChanges();
+            DbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
@@ -361,6 +396,13 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Constants.Address,
                     DataAccessLayer.Constants.MobilePhone,
                     DataAccessLayer.Constants.City,
+                    DataAccessLayer.Constants.CompanyType,
+                    DataAccessLayer.Constants.EmployerType,
+                    DataAccessLayer.Constants.CompanySubType,
+                    DataAccessLayer.Constants.LastName,
+                    DataAccessLayer.Constants.FirstName,
+                    DataAccessLayer.Constants.JobTitle,
+                    DataAccessLayer.Constants.Email
                 };
 
             foreach (var attrib2Checklist in employerMain.Select(x => new Attrib2ChecklistType
