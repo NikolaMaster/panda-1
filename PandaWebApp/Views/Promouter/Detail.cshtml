@@ -113,11 +113,11 @@
                         {
                             <div class="row" id ="EMAIL_CODE">
                             @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
-                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = "EMAIL_CODE", value = Model.Item1.Email},
+                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.EmailCode, value = Model.Item1.Email},
                                                  new AjaxOptions()
                                                      {
                                                          HttpMethod = "POST",
-                                                         UpdateTargetId = "EMAIL_CODE"
+                                                         UpdateTargetId = Constants.EmailCode
                                                      }, new {@class = "open"})
                              
                             </div>
