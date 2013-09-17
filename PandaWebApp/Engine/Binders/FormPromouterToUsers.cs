@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Web;
-using System.Web.Mvc;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
-using PandaWebApp.Engine;
-using PandaWebApp.Engine.Binders;
 using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Engine.Binders
@@ -23,7 +17,7 @@ namespace PandaWebApp.Engine.Binders
 
         public override void Load(PromouterForm source, PromouterUser dest)
         {
-            throw new NotImplementedException();
+            throw new Exception("Only view bind allowed");
         }
 
         public override void InverseLoad(PromouterUser source, PromouterForm dest)
@@ -35,11 +29,6 @@ namespace PandaWebApp.Engine.Binders
             dest.WorkExperience = new List<PromouterForm.WorkExperienceUnit>();
             dest.DesiredWorkTime = new List<PromouterForm.DesiredWorkTimeUnit>();
             dest.DesiredWork = new List<PromouterForm.DesiredWorkUnit>();
-            dest.SalaryValues = DataAccessLayer.ListItemsFromDict(Constants.SalaryCode).OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
-                .ToList();
-            dest.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
-            dest.GenderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode);
-            dest.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
 
             dest.Albums =  DataAccessLayer.Get<Album>(x => x.User.Id == source.Id)
                 .Select(x => new AlbumUnit
@@ -61,177 +50,92 @@ namespace PandaWebApp.Engine.Binders
 #endif
             }
 
+            ValueFromAttributeConverter.ModelFromAttributes(dest, checklist.AttrbuteValues, DataAccessLayer);
             foreach (var attrib in checklist.AttrbuteValues)
             {
-                var dateTimeValue = DateTime.UtcNow;
                 var stringValue = attrib.Value;
-                var intValue = 0;
-                var boolValue = true;
-                string dictValue = null;
-
-                DateTime.TryParse(stringValue, out dateTimeValue);
-                int.TryParse(stringValue, out intValue);
-                bool.TryParse(stringValue, out boolValue);
-                if (attrib.Attrib.AttribType.DictGroup != null && attrib.Value != null)
-                {
-                    dictValue = DataAccessLayer.Get<DictValue>(attrib.Value).Description;
-                }
-
-                #region Big switch [TODO by code field]
                 switch (attrib.Attrib.Code)
                 {
-                    case Constants.GenderCode:
-                        dest.Gender = stringValue;
-                        break;
-                    case Constants.LastNameCode:
-                        dest.LastName = stringValue;
-                        break;
-                    case Constants.FirstNameCode:
-                        dest.FirstName = stringValue;
-                        break;
-                    case Constants.MiddleNameCode:
-                        dest.MiddleName = stringValue;
-                        break;
-                    case Constants.DateOfBirthCode:
-                        dest.BirthDate = dateTimeValue;
-                        break;
-                    case Constants.MedicalBookCode:
-                        dest.MedicalBook = boolValue;
-                        break;
-                    case Constants.CarCode:
-                        dest.Car = boolValue;
-                        break;
-                    case Constants.ReadyForWorkCode:
-                        dest.ReadyForWork = boolValue;
-                        break;
-                    case Constants.MobilePhoneCode:
-                        dest.MobilePhone = stringValue;
-                        break;
-                    case Constants.SalaryCode:
-                        dest.Salary = stringValue;
-                        break;
-                    case Constants.CityCode:
-                        dest.City = stringValue;
-                        break;
-                    case Constants.EducationCode:
-                        dest.Education = stringValue;
-                        break;
                     case Constants.WorkExperienceCode:
                         getWorkExperience(stringValue, dest);
                         break;
-                    case Constants.HeightCode:
-                        dest.Height = intValue;
-                        break;
-                    case Constants.BuildCode:
-                        dest.Build = stringValue;
-                        break;
-                    case Constants.WeightCode:
-                        dest.Weight = intValue;
-                        break;
-                    case Constants.SkinTypeCode:
-                        dest.SkinType = stringValue;
-                        break;
-                    case Constants.EyeColorCode:
-                        dest.EyeColor = stringValue;
-                        break;
-                    case Constants.HairColorCode:
-                        dest.HairColor = stringValue;
-                        break;
-                    case Constants.HairLengthCode:
-                        dest.HairLength = stringValue;
-                        break;
-                    case Constants.SizeClothesCode:
-                        dest.SizeClothes = stringValue;
-                        break;
-                    case Constants.SizeShoesCode:
-                        dest.SizeShoes = stringValue;
-                        break;
-                    case Constants.SizeChestCode:
-                        dest.SizeChest = stringValue;
-                        break;
-                    case Constants.RollerSkatesCode:
-                        dest.RollerSkates = boolValue;
-                        break;
-                    case Constants.WinterSkatesCode:
-                        dest.WinterSkates = boolValue;
-                        break;
-                    case Constants.AboutCode:
-                        dest.About = stringValue;
-                        break;
-                    case Constants.HobbiesCode:
-                        dest.Hobbies = stringValue;
-                        break;
-                    case Constants.DesiredWorkCode:
+                    case Constants.WorkCode:
                         getDesiredWork(stringValue, dest);
                         break;
                     case Constants.DesiredWorkTimeCode:
                         getDesiredTimeOfWork(stringValue, dest);
                         break;
+                    case Constants.MobilePhoneCode:
+                        Guid entityListId;
+                        if (Guid.TryParse(attrib.Value, out entityListId))
+                        {
+                            dest.Phone = DataAccessLayer.GetPhone(entityListId);
+                        }
+                        break;
                 }
-                #endregion
             }  
         }
 
         private void getWorkExperience(string value, PromouterForm dest)
         {
-            if (!string.IsNullOrEmpty(value))
-            {
-                var entityId = Guid.Parse(value);
+            if (string.IsNullOrEmpty(value)) 
+                return;
 
-                dest.WorkExperience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId)
-                    .OrderBy(x => x.CreationDate)
-                    .Select(x => new PromouterForm.WorkExperienceUnit
-                    {
-                        Title = x.Title,
-                        StartTime = x.Start,
-                        EndTime = x.End,
-                        Hours = x.Hours,
-                        WorkName = x.WorkName,
-                        Id = x.Id,
-                        CreationDate = x.CreationDate
-                    })
-                    .ToList();
-            }
+            var entityId = Guid.Parse(value);
+
+            dest.WorkExperience = DataAccessLayer.Get<WorkExpirience>(x => x.EntityList.Id == entityId)
+                .OrderBy(x => x.CreationDate)
+                .Select(x => new PromouterForm.WorkExperienceUnit
+                {
+                    Title = x.Title,
+                    StartTime = x.Start,
+                    EndTime = x.End,
+                    Hours = x.Hours,
+                    WorkName = x.WorkName,
+                    Id = x.Id,
+                    CreationDate = x.CreationDate
+                })
+                .ToList();
         }
 
         private void getDesiredTimeOfWork(string value, PromouterForm dest)
         {
-            if (!string.IsNullOrEmpty(value))
-            {
-                var entityId = Guid.Parse(value);
+            if (string.IsNullOrEmpty(value)) 
+                return;
 
-                dest.DesiredWorkTime = DataAccessLayer.Get<DesiredWorkTime>(x => x.EntityList.Id == entityId)
-                    .OrderBy(x => x.CreationDate)
-                    .Select(x => new PromouterForm.DesiredWorkTimeUnit
-                    {
-                        Id = x.Id,
-                        DayOfWeek = x.DayOfWeek.ToPandaString(),
-                        StartTime = x.StartTime,
-                        EndTime = x.EndTime,
-                        CreationDate = x.CreationDate
-                    })
-                    .ToList();
-            }
+            var entityId = Guid.Parse(value);
+
+            dest.DesiredWorkTime = DataAccessLayer.Get<DesiredWorkTime>(x => x.EntityList.Id == entityId)
+                .OrderBy(x => x.CreationDate)
+                .Select(x => new PromouterForm.DesiredWorkTimeUnit
+                {
+                    Id = x.Id,
+                    DayOfWeek = x.DayOfWeek.ToPandaString(),
+                    StartTime = x.StartTime,
+                    EndTime = x.EndTime,
+                    CreationDate = x.CreationDate
+                })
+                .ToList();
         }
 
         private void getDesiredWork(string value, PromouterForm dest)
         {
-            if (!string.IsNullOrEmpty(value))
-            {
-                var entityId = Guid.Parse(value);
+            if (string.IsNullOrEmpty(value)) 
+                return;
 
-                dest.DesiredWork = DataAccessLayer.Get<DictGroup>(Constants.DesiredWorkCode)
-                    .DictValues
-                    .Select(x => new PromouterForm.DesiredWorkUnit
-                    {
-                        Code = x.Code,
-                        Title = x.Description,
-                        Value =
-                            DataAccessLayer.Get<DesiredWork>(
-                                y => y.EntityList.Id == entityId && y.Work != null && y.Work.Id == x.Id).Any()
-                    })
-                    .ToList();
-            }
+            var entityId = Guid.Parse(value);
+
+            dest.DesiredWork = DataAccessLayer.Get<DictGroup>(Constants.WorkCode)
+                .DictValues
+                .Select(x => new PromouterForm.DesiredWorkUnit
+                {
+                    Code = x.Code,
+                    Title = x.Description,
+                    Value =
+                        DataAccessLayer.Get<DesiredWork>(
+                            y => y.EntityList.Id == entityId && y.Work != null && y.Work.Id == x.Id).Any()
+                })
+                .ToList();
         }
     }
 }

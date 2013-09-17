@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,15 @@ namespace PandaWebApp.Controllers
     {
         public ActionResult Index(Guid userId)
         {
+            ViewBag.SalaryValues = DataAccessLayer
+                .ListItemsFromDict(Constants.SalaryCode)
+                .OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
+                .ToList();
+            ViewBag.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
+            ViewBag.GenderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode);
+            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
+            ViewBag.CountryCodeValues = DataAccessLayer.ListItemsFromDict(Constants.MobilePhoneCode);
+
             return PartialView("Index", PromouterForm.Bind(DataAccessLayer, userId));
         }
 

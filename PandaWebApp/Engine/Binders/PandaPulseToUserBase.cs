@@ -1,11 +1,7 @@
-﻿using PandaDataAccessLayer;
-using PandaDataAccessLayer.Entities;
+﻿using PandaDataAccessLayer.Entities;
 using PandaWebApp.ViewModels;
 using PandaDataAccessLayer.DAL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace PandaWebApp.Engine.Binders
 {
@@ -23,7 +19,7 @@ namespace PandaWebApp.Engine.Binders
 
         public override void Load(PandaPulse.Entry source, UserBase dest)
         {
-            throw new NotImplementedException();
+            throw new Exception("Only view bind allowed");
         }
 
         public override void InverseLoad(UserBase source, PandaPulse.Entry dest)
@@ -47,12 +43,18 @@ namespace PandaWebApp.Engine.Binders
                 }
                 else
                 {
-                    if (gender.Value == Constants.MaleCode)
-                        dest.Image = MaleImage;
-                    else if (gender.Value == Constants.FemaleCode)
-                        dest.Image = FeemaleImage;
-                    else
-                        dest.Image = UnknownGenderImage;
+                    switch (gender.Value)
+                    {
+                        case Constants.MaleCode:
+                            dest.Image = MaleImage;
+                            break;
+                        case Constants.FemaleCode:
+                            dest.Image = FeemaleImage;
+                            break;
+                        default:
+                            dest.Image = UnknownGenderImage;
+                            break;
+                    }
                 }
             }
             else

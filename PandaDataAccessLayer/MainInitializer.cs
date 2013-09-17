@@ -21,7 +21,6 @@ namespace PandaDataAccessLayer
         {
             DataAccessLayer = new DataAccessLayer(context);
             DbContext = context;
-//            mContext.Configuration.LazyLoadingEnabled = false;
 
             addDefaultAttribTypes();
             addDefaultChecklistTypes();
@@ -30,196 +29,38 @@ namespace PandaDataAccessLayer
             addDefaultImages();
 
             addTestData();
-            //    addDebugEntities();
+        }
+
+        private void addDictAttrib(string dictGroupCode, string dictGroupDescription, IEnumerable<object> values)
+        {
+            var dictGroup = new DictGroup
+            {
+                Code = dictGroupCode,
+                Description = dictGroupDescription
+            };
+            var dictValues = values.Distinct().Select(t => new DictValue
+            {
+                Code = t.ToString(),
+                Description = t.ToString()
+            })
+            .ToList();
+
+            dictGroup = DataAccessLayer.Create(dictGroup, dictValues).Key;
+            DataAccessLayer.Create(new AttribType
+            {
+                DictGroup = dictGroup,
+                Type = typeof(DictGroup).FullName,
+            });
         }
 
         private void addDefaultDictAttribTypes()
         {
-            #region gender
-
-            var genderGroup = new DictGroup
-            {
-                Code = Constants.GenderCode,
-                Description = "Пол"
-            }; 
-            var genderValues = Constants.GenderValues.Select((t, i) => new DictValue
-            {
-                Code = Constants.GenderValuesCode[i],
-                Description = t.ToString(CultureInfo.InvariantCulture)
-            })
-            .ToList();
-
-            genderGroup = DataAccessLayer.Create(genderGroup, genderValues).Key;
-            DataAccessLayer.Create(new AttribType
-                {
-                    DictGroup = genderGroup,
-                    Type = typeof(DictGroup).FullName,
-                });
-
-            #endregion
-
-            #region cost
-
-            var costGroup = new DictGroup
-            {
-                Code = Constants.SalaryCode,
-                Description = "Заработная плата за час"
-            };
-            var costValues = Constants.SalaryValues.Select((t, i) => new DictValue
-                    {
-                Code = Constants.SalaryValuesCode[i], 
-                Description = t.ToString(CultureInfo.InvariantCulture)
-            })
-            .ToList();
-
-            costGroup = DataAccessLayer.Create(costGroup, costValues).Key;
-            DataAccessLayer.Create(new AttribType
-            {
-                DictGroup = costGroup,
-                Type = typeof(DictGroup).FullName,
-            });
-
-            #endregion
-
-            #region education
-
-            var educationGroup = new DictGroup
-            {
-                Code = Constants.EducationCode,
-                Description = "Образование"
-            };
-            var educationValues = Constants.EducationValues.Select((t, i) => new DictValue
-                {
-                Code = Constants.EducationValuesCode[i],
-                Description = t
-            })
-            .ToList();
-
-            educationGroup = DataAccessLayer.Create(educationGroup, educationValues).Key;
-            DataAccessLayer.Create(new AttribType
-            {
-                DictGroup = educationGroup,
-                Type = typeof(DictGroup).FullName,
-            });
-
-            #endregion
-
-            #region city
-
-            var cityGroup = new DictGroup
-            {
-                Code = Constants.CityCode,
-                Description = "Город"
-            };
-            var cityValues = Constants.CityValues.Select(x => new DictValue
-            {
-                Code = x,
-                Description = x
-            })
-            .ToList();
-
-            educationGroup = DataAccessLayer.Create(cityGroup, cityValues).Key;
-            DataAccessLayer.Create(new AttribType
-            {
-                DictGroup = cityGroup,
-                Type = typeof(DictGroup).FullName,
-            });
-
-            #endregion
-
-            #region desired work
-
-            var workGroup = new DictGroup
-            {
-                Code = Constants.DesiredWorkCode,
-                Description = "Желаемая работа"
-            };
-            var workValues = new List<DictValue>() 
-                {
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "MERC",
-                        Description = "Мерчендайзер",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "SUPER",
-                        Description = "Супервайзер",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "COURIER",
-                        Description = "Курьер",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "AUDITOR",
-                        Description = "Аудитор/Чекер",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "BUYER",
-                        Description = "Тайный покупатель",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "PROMOUTER",
-                        Description = "Промоутер",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "ANIMATOR",
-                        Description = "Аниматор",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "PROMO_MODEL",
-                        Description = "Промо-модель",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "MASCOT",
-                        Description = "Ростовая кукла",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "INTERVIEWER",
-                        Description = "Интервьюер",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "MODEL",
-                        Description = "Модель",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "WORKER",
-                        Description = "Разнорабочий",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "BARMEN",
-                        Description = "Бармен",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "WAITER",
-                        Description = "Официант",
-                    }),
-                    DataAccessLayer.Create(new DictValue
-                    {
-                        Code = "HOSTESS",
-                        Description = "Хостес",
-                    }),
-                };
-            workGroup = DataAccessLayer.Create(workGroup, workValues).Key;
-            DataAccessLayer.Create(new AttribType
-            {
-                DictGroup = workGroup,
-                Type = typeof(DictGroup).FullName,
-            });
-
-            #endregion
+            addDictAttrib(Constants.GenderCode, "Пол", Constants.GenderValues);
+            addDictAttrib(Constants.SalaryCode, "Заработная плата за час", Constants.SalaryValues.Select(x => x.ToString(CultureInfo.InvariantCulture)));
+            addDictAttrib(Constants.CityCode, "Город", Constants.CityValues);
+            addDictAttrib(Constants.WorkCode, "Работа", Constants.WorkValues);
+            addDictAttrib(Constants.MobilePhoneCode, "Телефон", Constants.MobilePhoneValues);
+            addDictAttrib(Constants.EducationCode, "Образование", Constants.EducationValues);
 
             DbContext.SaveChanges();
         }
@@ -259,6 +100,10 @@ namespace PandaDataAccessLayer
 
         private void addDefaulAttributes() 
         {
+            try
+            {
+
+   
             var attribs = new[] {
                 new Attrib 
                 {
@@ -293,7 +138,7 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib 
                 {
-                    AttribType = DataAccessLayer.GetAttribType(typeof(bool)),
+                    AttribType = DataAccessLayer.GetAttribType(typeof(string)),
                     Code = Constants.CarCode,
                 },
                 new Attrib 
@@ -303,7 +148,7 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib 
                 {
-                    AttribType = DataAccessLayer.GetAttribType(typeof(string)),
+                    AttribType = DataAccessLayer.GetAttribType(typeof(EntityList)),
                     Code = Constants.MobilePhoneCode,
                 },
                 new Attrib 
@@ -435,13 +280,19 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib
                 {
-                    AttribType = DataAccessLayer.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.DesiredWorkCode),
+                    AttribType = DataAccessLayer.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.WorkCode),
                     Code = Constants.WorkCode
                 }
                 #endregion
             };
             foreach (var attrib in attribs)
                 DataAccessLayer.Create(attrib);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
            DbContext.SaveChanges();
         }
 
@@ -490,7 +341,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Constants.About,
                     DataAccessLayer.Constants.ReadyForWork,
                     DataAccessLayer.Constants.WorkExperience,
-                    DataAccessLayer.Constants.DesiredWork,
+                    DataAccessLayer.Constants.Work,
                     DataAccessLayer.Constants.DesiredWorkTime,
                 };
 

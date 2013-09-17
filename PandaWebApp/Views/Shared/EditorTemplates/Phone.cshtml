@@ -1,0 +1,8 @@
+﻿@model PandaWebApp.ViewModels.PhoneUnit
+@{
+    var countryCodeValues = (IEnumerable<SelectListItem>)ViewBag.CountryCodeValues;
+}
+
+@Html.DropDownListFor(x => x.CountryCode, countryCodeValues)
+@Html.TextBoxFor(x => x.Code)
+@Html.TextBoxFor(x => x.Number)

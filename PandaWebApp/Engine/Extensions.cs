@@ -1,4 +1,5 @@
-﻿using PandaDataAccessLayer.DAL;
+﻿using System.Globalization;
+using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PandaDataAccessLayer.Helpers;
+using PandaWebApp.ViewModels;
 
 namespace PandaWebApp.Engine
 {
@@ -98,7 +100,7 @@ namespace PandaWebApp.Engine
 
         public static string ToPandaString(this int i)
         {
-            return i.ToString();
+            return i.ToString(CultureInfo.InvariantCulture);
         }
 
         #endregion
@@ -121,6 +123,23 @@ namespace PandaWebApp.Engine
         #endregion
 
         #region user
+
+
+        public static PhoneUnit GetPhone(this DataAccessLayer dataAccessLayer, Guid entityListGuid)
+        {
+            var phone = dataAccessLayer.Get<PhoneNumber>(
+                x => x.EntityList.Id == entityListGuid).FirstOrDefault();
+            if (phone == null)
+                return new PhoneUnit();
+
+            return new PhoneUnit
+            {
+                CountryCode = phone.CountryCode != null ? phone.CountryCode.Description : null,
+                Code = phone.Code,
+                Number = phone.Number,
+            };
+        }
+
         public static string ControllerNameByUser(this UserBase user)
         {
             var promouterUser = user as PromouterUser;

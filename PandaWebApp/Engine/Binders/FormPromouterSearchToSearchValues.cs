@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.FormModels;
-using PandaWebApp.ViewModels;
 
 namespace PandaWebApp.Engine.Binders
 {
@@ -25,7 +22,7 @@ namespace PandaWebApp.Engine.Binders
 
         public override void InverseLoad(Dictionary<Attrib, object> source, PromouterSearchForm dest)
         {
-            throw new NotImplementedException();
+            throw new Exception("Only edit bind allowed");
         }
     }
 }

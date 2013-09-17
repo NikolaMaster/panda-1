@@ -29,7 +29,7 @@ namespace PandaWebApp.FormModels
 
         public EmployerSearchForm(DataAccessLayer dataAccessLayer)
         {
-            var desiredWork = dataAccessLayer.Get<DictGroup>(Constants.DesiredWorkCode).DictValues
+            var desiredWork = dataAccessLayer.Get<DictGroup>(Constants.WorkCode).DictValues
                 .Select(x => new DesiredWorkDescription
                 {
                     Value = false,

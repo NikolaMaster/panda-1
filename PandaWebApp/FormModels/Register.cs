@@ -30,10 +30,10 @@ namespace PandaWebApp.FormModels
             
         }
 
-        public class PromouterPasswordLength : MaxLengthAttribute
+        public class CustomPasswordLength : MaxLengthAttribute
         {
             public const int MaxPasswordLength = 10;
-            public PromouterPasswordLength()
+            public CustomPasswordLength()
                 : base(MaxPasswordLength)
             {
                 this.ErrorMessage = "Длина пароля не может быть более " + 
@@ -47,7 +47,7 @@ namespace PandaWebApp.FormModels
             [EmailAddress]
             public string Email { get; set; }
             [Required]
-            [PromouterPasswordLength]
+            [CustomPasswordLength]
             public string Password { get; set; }
             [Required]
             [Compare("Password")]
@@ -59,15 +59,23 @@ namespace PandaWebApp.FormModels
 
         public class Employer
         {
-            [Required]
-            [EmailAddress]
+            [Required, EmailAddress]
             public string Email { get; set; }
-            [Required]
-            [PromouterPasswordLength]
+            [Required, CustomPasswordLength]
             public string Password { get; set; }
-            [Required]
-            [Compare("Password")]
+            [Required, Compare("Password")]
             public string PasswordConfirmation { get; set; }
+
+            [Required]
+            public string City { get; set; }
+            [Required]
+            [MaxLength()]
+            public string FirstName { get; set; }
+            [Required]
+            public string LastName { get; set; }
+            [Required]
+            public string Phone { get; set; }
+
 
             public Guid Id { get; set; }
         }

@@ -53,12 +53,8 @@ namespace PandaDataAccessLayer.DAL
         public const string EndWorkCode = "END_WORK";
         public const string WorkCode = "WORK_CODE";
 
+        #region Education
 
-
-        #region DESIRED_WORK
-        #endregion
-
-        #region EDUCATION
         public static readonly string[] EducationValues =
         {
             "Среднее",
@@ -66,45 +62,34 @@ namespace PandaDataAccessLayer.DAL
             "Неоконченное высшее",
             "Высшее"
         };
-        public static readonly string[] EducationValuesCode =
-        {
-            "MIDDLE",
-            "MIDDLE_FULL",
-            "INCOMPLETE_HEIGHT",
-            "HEIGHT"
-        };
+
         #endregion
 
-        #region SALARY
+        #region Salary
+
         public static readonly int[] SalaryValues =
         {
             150, 170, 180, 200, 220, 240, 250,
             270, 280, 300, 350, 400, 450, 500, 550, 600, 650, 700,
             800, 900, 1000, 1500, 2000, 3000, 4000, 5000
         };
-        public static readonly string[] SalaryValuesCode = SalaryValues
-            .Select(x => SalaryCode + "_" + x.ToString(CultureInfo.InvariantCulture))
-            .ToArray();
+
         #endregion
 
-        #region GENDER
-        public const string MaleCode = "MALE";
-        public const string FemaleCode = "FEMALE";
+        #region Gender
+
+        public const string MaleCode = "Мужской";
+        public const string FemaleCode = "Женский";
 
         public static readonly string[] GenderValues =
-        {
-            "Мужской",
-            "Женский"
-        };
-
-        public static readonly string[] GenderValuesCode =
         {
             MaleCode,
             FemaleCode
         };
+
         #endregion
 
-        #region CITY
+        #region City
 
         public static readonly string[] CityValues =
         {
@@ -1217,6 +1202,38 @@ namespace PandaDataAccessLayer.DAL
             "Тутаев",
             "Углич",
             "Ярославль",
+        };
+
+        #endregion
+
+        #region Work
+        
+        public static readonly string[] WorkValues =
+        {
+            "Мерчендайзер",
+            "Супервайзер",
+            "Курьер",
+            "Аудитор/Чекер",
+            "Тайный покупатель",
+            "Промоутер",
+            "Аниматор",
+            "Промо-модель",
+            "Ростовая кукла",
+            "Интервьюер",
+            "Модель",
+            "Разнорабочий",
+            "Бармен",
+            "Официант",
+            "Хостес",
+        };
+
+        #endregion
+
+        #region Phone
+
+        public static readonly string[] MobilePhoneValues =
+        {
+            "+7",
         };
 
         #endregion

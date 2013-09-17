@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Web;
-using System.Web.Mvc;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.FormModels;
@@ -20,10 +18,10 @@ namespace PandaWebApp.Engine.Binders
 
         public override void Load(EmployerForm source, EmployerUser dest)
         {
-            throw new NotImplementedException();
+            throw new Exception("Only view bind allowed");
         }
 
-        private void inverseMainParam(EmployerUser source, EmployerForm dest)
+        public override void InverseLoad(EmployerUser source, EmployerForm dest)
         {
             dest.UserId = source.Id;
             dest.Email = source.Email;
@@ -39,132 +37,36 @@ namespace PandaWebApp.Engine.Binders
                 })
                 .ToList();
 
-            var checklist = source.MainChecklist;
-            if (checklist == null)
+            ValueFromAttributeConverter.ModelFromAttributes(dest, source.MainChecklist.AttrbuteValues, DataAccessLayer);
+            foreach (var attrib in source.MainChecklist.AttrbuteValues)
             {
-#if DEBUG
-                throw new HttpException(404, "Checklist not found");
-#endif
-#if RELEASE
-                return;
-#endif
-            }
-
-            foreach (var attrib in checklist.AttrbuteValues)
-            {
-                var dateTimeValue = DateTime.UtcNow;
-                var stringValue = attrib.Value;
-                var intValue = 0;
-                var boolValue = true;
-                string dictValue = null;
-
-                DateTime.TryParse(stringValue, out dateTimeValue);
-                int.TryParse(stringValue, out intValue);
-                bool.TryParse(stringValue, out boolValue);
-                if (attrib.Attrib.AttribType.DictGroup != null && attrib.Value != null)
-                {
-                    dictValue = DataAccessLayer.Get<DictValue>(attrib.Value).Description;
-                }
-
-                #region Big switch [TODO by code field]
                 switch (attrib.Attrib.Code)
                 {
-                    case Constants.AboutCode:
-                        dest.About = stringValue;
-                        break;
-                    case Constants.EmployerNameCode:
-                        dest.EmployerName = stringValue;
-                        break;
-                    case Constants.AddressCode:
-                        dest.Address = stringValue;
-                        break;
-                    case Constants.ReadyForWorkCode:
-                        dest.Status = stringValue;
-                        break;
                     case Constants.MobilePhoneCode:
-                        dest.MobilePhone = stringValue;
-                        break;
-                    case Constants.CityCode:
-                        dest.City = stringValue;
+                        Guid entityListId;
+                        if (Guid.TryParse(attrib.Value, out entityListId))
+                        {
+                            dest.Phone = DataAccessLayer.GetPhone(entityListId);
+                        }
                         break;
                 }
-                #endregion
-            }  
-        }
+            }
 
-        private void inverseVacancy(EmployerUser source, EmployerForm dest)
-        {
+            //vacancies
             var checklists = source.Checklists.Where(x => x.ChecklistType.Code != Constants.EmployerMainChecklistTypeCode);
             var vacancyList = new List<EmployerForm.VacancyUnit>();
 
             foreach (var checklist in checklists)
             {
-                var vacancyUnit = new EmployerForm.VacancyUnit
-                {
-                    Id = checklist.Id,
-                    CreationDate = checklist.CreationDate,
-                };
-                foreach (var attrib in checklist.AttrbuteValues)
-                {
-                    DateTime? dateTimeValue = null;
-                    var stringValue = attrib.Value;
-                    var intValue = 0;
-                    var boolValue = true;
-                    string dictValue = null;
-
-                    DateTime dateTimeTmpValue;
-                    if (DateTime.TryParse(stringValue, out dateTimeTmpValue))
-                        dateTimeValue = dateTimeTmpValue;
-                    
-                    int.TryParse(stringValue, out intValue);
-                    bool.TryParse(stringValue, out boolValue);
-
-                    if (attrib.Attrib.AttribType.DictGroup != null && attrib.Value != null)
-                    {
-                        dictValue = DataAccessLayer.Get<DictValue>(attrib.Value).Description;
-                    }
-                    #region Big switch [TODO by code field]
-
-                    switch (attrib.Attrib.Code)
-                    {
-                        case Constants.SalaryCode:
-                            vacancyUnit.Salary = stringValue;
-                            break;
-                        case Constants.WorkCode:
-                            vacancyUnit.Work = stringValue;
-                            break;
-                        case Constants.AboutCode:
-                            vacancyUnit.FullDescription = stringValue;
-                            break;
-                        case Constants.StartWorkCode:
-                            vacancyUnit.StartTime = dateTimeValue;
-                            break;
-                        case Constants.EndWorkCode:
-                            vacancyUnit.EndTime = dateTimeValue;
-                            break;
-                        case Constants.CityCode:
-                            vacancyUnit.City = stringValue;
-                            break;
-                        case Constants.GenderCode:
-                            vacancyUnit.Gender = stringValue;
-                            break;
-                    }
-
-                    #endregion
-                }
-
+                var vacancyUnit = new EmployerForm.VacancyUnit();
+                ValueFromAttributeConverter.ModelFromAttributes(vacancyUnit, checklist.AttrbuteValues, DataAccessLayer);
+                vacancyUnit.CreationDate = checklist.CreationDate;
+                vacancyUnit.Id = checklist.Id;
                 vacancyList.Add(vacancyUnit);
             }
-
             dest.Vacancies = vacancyList
                 .OrderBy(x => x.CreationDate)
                 .ToList();
-        }
-
-        public override void InverseLoad(EmployerUser source, EmployerForm dest)
-        {
-            inverseMainParam(source, dest);
-            inverseVacancy(source, dest);
         }
     }
 }

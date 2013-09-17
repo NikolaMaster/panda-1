@@ -45,6 +45,8 @@ namespace PandaDataAccessLayer
         //Static page
         public DbSet<StaticPageUnit> StaticPageUnit { get; set; }
 
+        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserBase>().ToTable("UserBase");

@@ -63,14 +63,7 @@
                     <div class="row">нет</div>
                 }
 
-                @if (Model.Car)
-                {
-                    <div class="row">есть</div>
-                }
-                else
-                {
-                    <div class="row">нет</div>
-                }
+                <div class="row">@Model.Car</div>
                     
                 <div class="row gap"></div>
                 <div class="row"><a href="#" class="open">открыть</a></div>

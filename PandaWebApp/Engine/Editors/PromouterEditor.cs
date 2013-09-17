@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
+using PandaWebApp.Engine.Binders;
 using PandaWebApp.FormModels;
 using PandaWebApp.ViewModels;
 using System;
@@ -24,16 +25,6 @@ namespace PandaWebApp.Engine.Editors
         {
             dest.Email = source.Email;
             dest.IsAdmin = source.IsAdmin;
-            var checklist = dest.MainChecklist;
-            if (checklist == null)
-            {
-#if DEBUG
-                throw new HttpException(404, "Checklist not found");
-#endif
-#if RELEASE
-                return;
-#endif
-            }
 
             var mainAlbum = dest.Albums.First();
             if (source.NewPhotos != null)
@@ -48,111 +39,53 @@ namespace PandaWebApp.Engine.Editors
                 }
             }
 
-            DataAccessLayer.ClearChecklist(checklist);
+            DataAccessLayer.ClearChecklist(dest.MainChecklist);
 
             foreach (var attribute in DataAccessLayer.GetAttributes(DataAccessLayer.Constants.PromouterChecklistType.Id))
             {
                 var attributeValue = new AttribValue
                 {
+                    Attrib = attribute,
                     AttribId = attribute.Id,
-                    ChecklistId = checklist.Id
+                    ChecklistId = dest.MainChecklist.Id
                 };
 
-                #region Big switch [TODO by code field]
                 switch (attribute.Code)
                 {
-                    case Constants.LastNameCode:
-                        attributeValue.Value = source.LastName;
+                    case Constants.DesiredWorkTimeCode:
+                        attributeValue.Value = editDesiredWorkTime(source);
                         break;
-                    case Constants.FirstNameCode:
-                        attributeValue.Value = source.FirstName;
-                        break;
-                    case Constants.MiddleNameCode:
-                        attributeValue.Value = source.MiddleName;
-                        break;
-                    case Constants.GenderCode:
-                        attributeValue.Value = source.Gender;
-                        break;
-                    case Constants.DateOfBirthCode:
-                        attributeValue.Value = source.BirthDate.ToPandaString();
-                        break;
-                    case Constants.MedicalBookCode:
-                        attributeValue.Value = source.MedicalBook.ToString();
-                        break;
-                    case Constants.CarCode:
-                        attributeValue.Value = source.Car.ToString();
-                        break;
-                    case Constants.ReadyForWorkCode:
-                        attributeValue.Value = source.ReadyForWork.ToString();
-                        break;
-                    case Constants.MobilePhoneCode:
-                        attributeValue.Value = source.MobilePhone;
-                        break;
-                    case Constants.SalaryCode:
-                        attributeValue.Value = source.Salary;
-                        break;
-                    case Constants.CityCode:
-                        attributeValue.Value = source.City;
-                        break;
-                    case Constants.EducationCode:
-                        attributeValue.Value = source.Education;
+                    case Constants.WorkCode:
+                        attributeValue.Value = editDesiredWork(source);
                         break;
                     case Constants.WorkExperienceCode:
                         attributeValue.Value = editWorkExperience(source);
                         break;
-                    case Constants.HeightCode:
-                        attributeValue.Value = source.Height.ToPandaString();
-                        break;
-                    case Constants.BuildCode:
-                        attributeValue.Value = source.Build;
-                        break;
-                    case Constants.WeightCode:
-                        attributeValue.Value = source.Weight.ToString(CultureInfo.InvariantCulture);
-                        break;
-                    case Constants.SkinTypeCode:
-                        attributeValue.Value = source.SkinType;
-                        break;
-                    case Constants.EyeColorCode:
-                        attributeValue.Value = source.EyeColor;
-                        break;
-                    case Constants.HairColorCode:
-                        attributeValue.Value = source.HairColor;
-                        break;
-                    case Constants.HairLengthCode:
-                        attributeValue.Value = source.HairLength;
-                        break;
-                    case Constants.SizeClothesCode:
-                        attributeValue.Value = source.SizeClothes;
-                        break;
-                    case Constants.SizeShoesCode:
-                        attributeValue.Value = source.SizeShoes;
-                        break;
-                    case Constants.SizeChestCode:
-                        attributeValue.Value = source.SizeChest;
-                        break;
-                    case Constants.RollerSkatesCode:
-                        attributeValue.Value = source.RollerSkates.ToString();
-                        break;
-                    case Constants.WinterSkatesCode:
-                        attributeValue.Value = source.WinterSkates.ToString();
-                        break;
-                    case Constants.AboutCode:
-                        attributeValue.Value = source.About;
-                        break;
-                    case Constants.HobbiesCode:
-                        attributeValue.Value = source.Hobbies;
-                        break;
-                    case Constants.DesiredWorkTimeCode:
-                        attributeValue.Value = editDesiredWorkTime(source);
-                        break;
-                    case Constants.DesiredWorkCode:
-                        attributeValue.Value = editDesiredWork(source);
+                    case Constants.MobilePhoneCode:
+                        attributeValue.Value = editPhone(source);
                         break;
                 }
-                #endregion
 
-                checklist.AttrbuteValues.Add(attributeValue);
+                dest.MainChecklist.AttrbuteValues.Add(attributeValue);
             }
+
+            ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
+        }
+
+        private string editPhone(PromouterForm source)
+        {
+            var entityList = DataAccessLayer.Create(new EntityList { });
+            if (source.Phone != null)
+            {
+                DataAccessLayer.Create(new PhoneNumber
+                {
+                    EntityList = entityList,
+                    CountryCode = DataAccessLayer.Get<DictValue>(source.Phone.CountryCode),
+                    Code = source.Phone.Code,
+                    Number = source.Phone.Number,
+                });
+            }
+            return entityList.Id.ToString();
         }
 
         private string editWorkExperience(PromouterForm source) 

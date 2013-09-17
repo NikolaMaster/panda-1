@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaDataAccessLayer.Helpers;
@@ -258,26 +257,17 @@ namespace PandaDataAccessLayer
             var desiredWorkEntity = DataAccessLayer.Create(new EntityList() { });
             var desiredWorkTimeEntity = DataAccessLayer.Create(new EntityList() { });
             var workExperienceEntity = DataAccessLayer.Create(new EntityList() { });
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
 
-            var works = new[]
-                {
-                    DataAccessLayer.Get<DictValue>("MERC"),
-                    DataAccessLayer.Get<DictValue>("SUPER"),
-                    DataAccessLayer.Get<DictValue>("COURIER"),
-                    DataAccessLayer.Get<DictValue>("AUDITOR"),
-                    DataAccessLayer.Get<DictValue>("BUYER"),
-                    DataAccessLayer.Get<DictValue>("PROMOUTER"),
-                    DataAccessLayer.Get<DictValue>("ANIMATOR"),
-                    DataAccessLayer.Get<DictValue>("PROMO_MODEL"),
-                    DataAccessLayer.Get<DictValue>("MASCOT"),
-                    DataAccessLayer.Get<DictValue>("INTERVIEWER"),
-                    DataAccessLayer.Get<DictValue>("MODEL"),
-                    DataAccessLayer.Get<DictValue>("WORKER"),
-                    DataAccessLayer.Get<DictValue>("BARMEN"),
-                    DataAccessLayer.Get<DictValue>("WAITER"),
-                    DataAccessLayer.Get<DictValue>("HOSTESS"),
-                };
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
+            });
 
+            var works = Constants.WorkValues.Select(x => DataAccessLayer.Get<DictValue>(x));
             foreach (var t in works)
             {
                 DataAccessLayer.Create(new DesiredWork
@@ -392,12 +382,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 3395"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value = Constants.SalaryValuesCode[9]
+                    Value = Constants.SalaryValues[9].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -407,7 +397,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EducationCode),
-                    Value = Constants.EducationValuesCode[3]
+                    Value = Constants.EducationValues[3]
                 },
                 new AttribValue
                 {
@@ -417,12 +407,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.HeightCode),
-                    Value = "176 см."
+                    Value = "176"
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WeightCode),
-                    Value = "66 кг."
+                    Value = "66"
                 },
                 new AttribValue
                 {
@@ -535,18 +525,17 @@ namespace PandaDataAccessLayer
             var desiredWorkEntity = DataAccessLayer.Create(new EntityList() { });
             var desiredWorkTimeEntity = DataAccessLayer.Create(new EntityList() { });
             var workExperienceEntity = DataAccessLayer.Create(new EntityList() { });
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
 
-            var works = new[]
-                {
-                    DataAccessLayer.Get<DictValue>("MERC"),
-                    DataAccessLayer.Get<DictValue>("SUPER"),
-                    DataAccessLayer.Get<DictValue>("BUYER"),
-                    DataAccessLayer.Get<DictValue>("PROMOUTER"),
-                    DataAccessLayer.Get<DictValue>("PROMO_MODEL"),
-                    DataAccessLayer.Get<DictValue>("WAITER"),
-                    DataAccessLayer.Get<DictValue>("HOSTESS"),
-                };
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
+            });
 
+            var works = Constants.WorkValues.Where((x, i) => i % 2 == 0).Select(x => DataAccessLayer.Get<DictValue>(x));
             foreach (var t in works)
             {
                 DataAccessLayer.Create(new DesiredWork
@@ -676,12 +665,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value = Constants.SalaryValuesCode[2]
+                    Value = Constants.SalaryValues[2].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -691,7 +680,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EducationCode),
-                    Value = Constants.EducationValuesCode[2]
+                    Value = Constants.EducationValues[2]
                 },
                 new AttribValue
                 {
@@ -701,12 +690,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.HeightCode),
-                    Value = "156 см."
+                    Value = "156"
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WeightCode),
-                    Value = "97 кг."
+                    Value = "97"
                 },
                 new AttribValue
                 {
@@ -869,19 +858,17 @@ namespace PandaDataAccessLayer
             var desiredWorkEntity = DataAccessLayer.Create(new EntityList() { });
             var desiredWorkTimeEntity = DataAccessLayer.Create(new EntityList() { });
             var workExperienceEntity = DataAccessLayer.Create(new EntityList() { });
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
 
-            var works = new[]
-                {
-                    DataAccessLayer.Get<DictValue>("MERC"),
-                    DataAccessLayer.Get<DictValue>("SUPER"),
-                    DataAccessLayer.Get<DictValue>("BUYER"),
-                    DataAccessLayer.Get<DictValue>("PROMOUTER"),
-                    DataAccessLayer.Get<DictValue>("ANIMATOR"),
-                    DataAccessLayer.Get<DictValue>("PROMO_MODEL"),
-                    DataAccessLayer.Get<DictValue>("WAITER"),
-                    DataAccessLayer.Get<DictValue>("HOSTESS"),
-                };
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
+            });
 
+            var works = Constants.WorkValues.Where((x, i) => i % 2 == 1).Select(x => DataAccessLayer.Get<DictValue>(x));
             foreach (var t in works)
             {
                 DataAccessLayer.Create(new DesiredWork
@@ -1011,12 +998,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value = Constants.SalaryValuesCode[2]
+                    Value = Constants.SalaryValues[2].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -1026,7 +1013,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EducationCode),
-                    Value = Constants.EducationValuesCode[2]
+                    Value = Constants.EducationValues[2]
                 },
                 new AttribValue
                 {
@@ -1036,12 +1023,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.HeightCode),
-                    Value = "156 см."
+                    Value = "156"
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WeightCode),
-                    Value = "97 кг."
+                    Value = "97"
                 },
                 new AttribValue
                 {
@@ -1204,17 +1191,17 @@ namespace PandaDataAccessLayer
             var desiredWorkEntity = DataAccessLayer.Create(new EntityList() { });
             var desiredWorkTimeEntity = DataAccessLayer.Create(new EntityList() { });
             var workExperienceEntity = DataAccessLayer.Create(new EntityList() { });
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
 
-            var works = new[]
-                {
-                    DataAccessLayer.Get<DictValue>("MERC"),
-                    DataAccessLayer.Get<DictValue>("SUPER"),
-                    DataAccessLayer.Get<DictValue>("BUYER"),
-                    DataAccessLayer.Get<DictValue>("PROMOUTER"),
-                    DataAccessLayer.Get<DictValue>("PROMO_MODEL"),
-                    DataAccessLayer.Get<DictValue>("WAITER"),
-                    DataAccessLayer.Get<DictValue>("HOSTESS"),
-                };
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
+            });
+
+            var works = Constants.WorkValues.Where((x, i) => i % 3 == 0).Select(x => DataAccessLayer.Get<DictValue>(x));
 
             foreach (var t in works)
             {
@@ -1345,12 +1332,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value = Constants.SalaryValuesCode[2]
+                    Value = Constants.SalaryValues[2].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -1360,7 +1347,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EducationCode),
-                    Value = Constants.EducationValuesCode[2]
+                    Value = Constants.EducationValues[2]
                 },
                 new AttribValue
                 {
@@ -1370,12 +1357,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.HeightCode),
-                    Value = "190 см."
+                    Value = "190"
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WeightCode),
-                    Value = "97 кг."
+                    Value = "97"
                 },
                 new AttribValue
                 {
@@ -1541,18 +1528,17 @@ namespace PandaDataAccessLayer
             var desiredWorkEntity = DataAccessLayer.Create(new EntityList() { });
             var desiredWorkTimeEntity = DataAccessLayer.Create(new EntityList() { });
             var workExperienceEntity = DataAccessLayer.Create(new EntityList() { });
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
 
-            var works = new[]
-                {
-                    DataAccessLayer.Get<DictValue>("MERC"),
-                    DataAccessLayer.Get<DictValue>("SUPER"),
-                    DataAccessLayer.Get<DictValue>("BUYER"),
-                    DataAccessLayer.Get<DictValue>("PROMOUTER"),
-                    DataAccessLayer.Get<DictValue>("PROMO_MODEL"),
-                    DataAccessLayer.Get<DictValue>("WAITER"),
-                    DataAccessLayer.Get<DictValue>("HOSTESS"),
-                };
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
+            });
 
+            var works = Constants.WorkValues.Where((x, i) => i % 3 == 1).Select(x => DataAccessLayer.Get<DictValue>(x));
             foreach (var t in works)
             {
                 DataAccessLayer.Create(new DesiredWork
@@ -1682,12 +1668,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value = Constants.SalaryValuesCode[2]
+                    Value = Constants.SalaryValues[2].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -1697,7 +1683,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EducationCode),
-                    Value = Constants.EducationValuesCode[2]
+                    Value = Constants.EducationValues[2]
                 },
                 new AttribValue
                 {
@@ -1707,12 +1693,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.HeightCode),
-                    Value = "156 см."
+                    Value = "156"
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WeightCode),
-                    Value = "97 кг."
+                    Value = "97"
                 },
                 new AttribValue
                 {
@@ -1873,18 +1859,17 @@ namespace PandaDataAccessLayer
             var desiredWorkEntity = DataAccessLayer.Create(new EntityList() { });
             var desiredWorkTimeEntity = DataAccessLayer.Create(new EntityList() { });
             var workExperienceEntity = DataAccessLayer.Create(new EntityList() { });
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
 
-            var works = new[]
-                {
-                    DataAccessLayer.Get<DictValue>("MERC"),
-                    DataAccessLayer.Get<DictValue>("SUPER"),
-                    DataAccessLayer.Get<DictValue>("BUYER"),
-                    DataAccessLayer.Get<DictValue>("PROMOUTER"),
-                    DataAccessLayer.Get<DictValue>("PROMO_MODEL"),
-                    DataAccessLayer.Get<DictValue>("WAITER"),
-                    DataAccessLayer.Get<DictValue>("HOSTESS"),
-                };
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
+            });
 
+            var works = Constants.WorkValues.Where((x, i) => i % 3 == 2).Select(x => DataAccessLayer.Get<DictValue>(x));
             foreach (var t in works)
             {
                 DataAccessLayer.Create(new DesiredWork
@@ -2014,12 +1999,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value = Constants.SalaryValuesCode[2]
+                    Value = Constants.SalaryValues[2].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2029,7 +2014,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EducationCode),
-                    Value = Constants.EducationValuesCode[2]
+                    Value = Constants.EducationValues[2]
                 },
                 new AttribValue
                 {
@@ -2039,12 +2024,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.HeightCode),
-                    Value = "156 см."
+                    Value = "156"
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WeightCode),
-                    Value = "97 кг."
+                    Value = "97"
                 },
                 new AttribValue
                 {
@@ -2172,10 +2157,20 @@ namespace PandaDataAccessLayer
                 Password = "123",
             });
 
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
+
             DataAccessLayer.Create(new Session
             {
                 LastHit = DateTime.UtcNow,
                 User = user
+            });
+
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
             });
 
             DataAccessLayer.Update(user.MainChecklist, new List<AttribValue>
@@ -2195,7 +2190,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
@@ -2279,7 +2274,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[0]
+                    Value =  Constants.SalaryValues[0].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2304,12 +2299,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.FemaleCode,
+                    Value =Constants.FemaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
 
@@ -2318,7 +2313,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2343,12 +2338,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.MaleCode,
+                    Value = Constants.MaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "WORKER"
+                    Value = "Разнорабочий"
                 },
             });
 
@@ -2357,7 +2352,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[3]
+                    Value =  Constants.SalaryValues[3].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2382,7 +2377,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
 
@@ -2391,7 +2386,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2416,7 +2411,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "WORKER"
+                    Value = "Разнорабочий"
                 },
             });
             DataAccessLayer.DbContext.SaveChanges();
@@ -2431,10 +2426,20 @@ namespace PandaDataAccessLayer
                 Password = "123",
             });
 
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
+
             DataAccessLayer.Create(new Session
             {
                 LastHit = DateTime.UtcNow,
                 User = user
+            });
+
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
             });
 
             DataAccessLayer.Update(user.MainChecklist, new List<AttribValue>
@@ -2454,7 +2459,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
@@ -2538,7 +2543,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[0]
+                    Value =  Constants.SalaryValues[0].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2563,12 +2568,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.FemaleCode,
+                    Value = Constants.FemaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "HOSTESS"
+                    Value = "Хостес"
                 },
             });
 
@@ -2577,7 +2582,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2602,12 +2607,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.MaleCode,
+                    Value = Constants.MaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "WAITER"
+                    Value = "Официант"
                 },
             });
 
@@ -2616,7 +2621,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[3]
+                    Value =  Constants.SalaryValues[3].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2641,7 +2646,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
 
@@ -2650,7 +2655,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2675,7 +2680,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
             DataAccessLayer.DbContext.SaveChanges();
@@ -2689,16 +2694,21 @@ namespace PandaDataAccessLayer
                 Password = "123",
             });
 
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
+
             DataAccessLayer.Create(new Session
             {
                 LastHit = DateTime.UtcNow,
                 User = user
             });
 
-
-            var desiredWorkEntity = DataAccessLayer.Create(new EntityList() { });
-            var desiredWorkTimeEntity = DataAccessLayer.Create(new EntityList() { });
-            var workExperienceEntity = DataAccessLayer.Create(new EntityList() { });
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
+            });
 
             DataAccessLayer.Update(user.MainChecklist, new List<AttribValue>
             {
@@ -2707,8 +2717,6 @@ namespace PandaDataAccessLayer
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EmployerNameCode),
                     Value = "Пупкин и Ко"
                 },
-
-
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.AddressCode),
@@ -2717,7 +2725,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
@@ -2801,7 +2809,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[0]
+                    Value =  Constants.SalaryValues[0].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2826,12 +2834,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.FemaleCode,
+                    Value = Constants.FemaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "HOSTESS"
+                    Value = "Хостес"
                 },
             });
 
@@ -2840,7 +2848,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2865,12 +2873,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.MaleCode,
+                    Value = Constants.MaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "WAITER"
+                    Value = "Официант"
                 },
             });
 
@@ -2879,7 +2887,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[3]
+                    Value =  Constants.SalaryValues[3].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2904,7 +2912,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
 
@@ -2913,7 +2921,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -2938,7 +2946,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
             DataAccessLayer.DbContext.SaveChanges();
@@ -2952,10 +2960,20 @@ namespace PandaDataAccessLayer
                 Password = "123",
             });
 
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
+
             DataAccessLayer.Create(new Session
             {
                 LastHit = DateTime.UtcNow,
                 User = user
+            });
+
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
             });
 
             DataAccessLayer.Update(user.MainChecklist, new List<AttribValue>
@@ -2965,8 +2983,6 @@ namespace PandaDataAccessLayer
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.EmployerNameCode),
                     Value = "Ко и Ко"
                 },
-
-
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.AddressCode),
@@ -2975,7 +2991,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
@@ -3059,7 +3075,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[0]
+                    Value =  Constants.SalaryValues[0].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3089,7 +3105,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "HOSTESS"
+                    Value = "Хостес"
                 },
             });
 
@@ -3098,7 +3114,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3123,12 +3139,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.MaleCode,
+                    Value = Constants.MaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "WAITER"
+                    Value = "Официант"
                 },
             });
 
@@ -3137,7 +3153,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[3]
+                    Value =  Constants.SalaryValues[3].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3162,7 +3178,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
 
@@ -3171,7 +3187,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3196,7 +3212,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
             DataAccessLayer.DbContext.SaveChanges();
@@ -3210,10 +3226,20 @@ namespace PandaDataAccessLayer
                 Password = "123",
             });
 
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
+
             DataAccessLayer.Create(new Session
             {
                 LastHit = DateTime.UtcNow,
                 User = user
+            });
+
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
             });
 
             DataAccessLayer.Update(user.MainChecklist, new List<AttribValue>
@@ -3233,7 +3259,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
@@ -3317,7 +3343,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[0]
+                    Value =  Constants.SalaryValues[0].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3347,7 +3373,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "HOSTESS"
+                    Value = "Хостес"
                 },
             });
 
@@ -3356,7 +3382,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[0].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3381,12 +3407,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.MaleCode,
+                    Value = Constants.MaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "WAITER"
+                    Value = "Официант"
                 },
             });
 
@@ -3395,7 +3421,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[3]
+                    Value =  Constants.SalaryValues[3].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3420,7 +3446,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
 
@@ -3429,7 +3455,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[5].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3454,7 +3480,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
             DataAccessLayer.DbContext.SaveChanges();
@@ -3469,10 +3495,20 @@ namespace PandaDataAccessLayer
                 Password = "123",
             });
 
+            var phoneEntity = DataAccessLayer.Create(new EntityList() { });
+
             DataAccessLayer.Create(new Session
             {
                 LastHit = DateTime.UtcNow,
                 User = user
+            });
+
+            var phoneNumber = DataAccessLayer.Create(new PhoneNumber
+            {
+                CountryCode = DataAccessLayer.Get<DictValue>("+7"),
+                Code = "912",
+                Number = "3833395",
+                EntityList = phoneEntity,
             });
 
             DataAccessLayer.Update(user.MainChecklist, new List<AttribValue>
@@ -3492,7 +3528,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.MobilePhoneCode),
-                    Value = "+7 912 383 6959"
+                    Value = phoneEntity.Id.ToString()
                 },
                 new AttribValue
                 {
@@ -3576,7 +3612,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[0]
+                    Value =  Constants.SalaryValues[1].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3606,7 +3642,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "HOSTESS"
+                    Value = "Хостес"
                 },
             });
 
@@ -3615,7 +3651,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[5].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3640,12 +3676,12 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.GenderCode),
-                    Value = Constants.MaleCode,
+                    Value = Constants.MaleCode
                 },
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "WAITER"
+                    Value = "Официант"
                 },
             });
 
@@ -3654,7 +3690,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[3]
+                    Value =  Constants.SalaryValues[4].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3679,7 +3715,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
 
@@ -3688,7 +3724,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.SalaryCode),
-                    Value =  Constants.SalaryValuesCode[1]
+                    Value =  Constants.SalaryValues[5].ToString(CultureInfo.InvariantCulture)
                 },
                 new AttribValue
                 {
@@ -3713,7 +3749,7 @@ namespace PandaDataAccessLayer
                 new AttribValue
                 {
                     Attrib = DataAccessLayer.Get<Attrib>(Constants.WorkCode),
-                    Value = "MERC"
+                    Value = "Мерчендайзер"
                 },
             });
             DataAccessLayer.DbContext.SaveChanges();

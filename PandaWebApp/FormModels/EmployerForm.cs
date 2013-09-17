@@ -13,37 +13,59 @@ namespace PandaWebApp.FormModels
 {
     public class EmployerForm
     {
-        public struct VacancyUnit
+        public class VacancyUnit
         {
-            public Guid Id { get; set; }
+            [ValueFrom(Constants.StartWorkCode)]
             public DateTime? StartTime { get; set; }
+            [ValueFrom(Constants.EndWorkCode)]
             public DateTime? EndTime { get; set; }
+            [ValueFrom(Constants.WorkCode)]
             public string Work { get; set; }
+            [ValueFrom(Constants.SalaryCode)]
             public string Salary { get; set; }
-            public string DaysOnSite { get; set; }
+            [ValueFrom(Constants.AboutCode)]
             public string FullDescription { get; set; }
+            [ValueFrom(Constants.CityCode)]
             public string City { get; set; }
+            [ValueFrom(Constants.GenderCode)]
             public string Gender { get; set; }
+
+            public Guid Id { get; set; }
+            public string DaysOnSite { get; set; }
             public DateTime CreationDate { get;set; }
+
+            public VacancyUnit()
+            {
+                StartTime = null;
+                EndTime = null;
+            }
         }
 
-        public Guid UserId { get; set; }
-        public string Icon { get; set; }
+
+        [ValueFrom(Constants.EmployerNameCode)]
         public string EmployerName { get; set; }
-        public string Status { get; set; }
-        public string Photo { get; set; }
-        public string MobilePhone { get; set; }
-        public string Email { get; set; }
+        [ValueFrom(Constants.CityCode)]
         public string City { get; set; }
+        [ValueFrom(Constants.AboutCode)]
         public string About { get; set; }
+        [ValueFrom(Constants.AddressCode)]
         public string Address { get; set; }
+
+        public Guid UserId { get; set; }
+
         public int Number { get; set; }
         public int DaysOnSite { get; set; }
         public bool IsAdmin { get; set; }
         public bool AccountConfirmed { get; set; }
 
+        public string Icon { get; set; }
+        public string Status { get; set; }
+        public string Photo { get; set; }
+        public string Email { get; set; }
+
         public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
 
+        public PhoneUnit Phone { get; set; }
         public IList<AlbumUnit> Albums { get; set; }
         public IList<VacancyUnit> Vacancies { get; set; }
 

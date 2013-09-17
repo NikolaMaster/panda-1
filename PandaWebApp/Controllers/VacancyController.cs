@@ -18,10 +18,12 @@ namespace PandaWebApp.Controllers
                 .ListItemsFromDict(Constants.SalaryCode)
                 .OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
                 .ToList();
-            ViewBag.WorkValues = DataAccessLayer.ListItemsFromDict(Constants.DesiredWorkCode);
-            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode).
-                OrderBy(x => x.Text)
-                .ToList();
+            ViewBag.WorkValues = DataAccessLayer.ListItemsFromDict(Constants.WorkCode);
+            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
+            ViewBag.GenderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode);
+            ViewBag.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
+            ViewBag.CountryCodeValues = DataAccessLayer.ListItemsFromDict(Constants.MobilePhoneCode);
+
             return PartialView("Index", EmployerForm.Bind(DataAccessLayer, userId));
         }
 

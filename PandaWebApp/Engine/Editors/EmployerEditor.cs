@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Web;
+﻿using System.Linq;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine.Binders;
 using PandaWebApp.FormModels;
-using PandaWebApp.ViewModels;
 using PandaDataAccessLayer.DAL;
 
 namespace PandaWebApp.Engine.Editors
@@ -19,20 +14,10 @@ namespace PandaWebApp.Engine.Editors
         {
         }
 
-        private void editMainParam(EmployerForm source, EmployerUser dest)
+        public void Edit(EmployerForm source, EmployerUser dest)
         {
             dest.Email = source.Email;
             dest.IsAdmin = source.IsAdmin;
-            var checklist = dest.MainChecklist;
-            if (checklist == null)
-            {
-#if DEBUG
-                throw new HttpException(404, "Checklist not found");
-#endif
-#if RELEASE
-                return;
-#endif
-            }
 
             var mainAlbum = dest.Albums.First();
             if (source.NewPhotos != null)
@@ -47,55 +32,33 @@ namespace PandaWebApp.Engine.Editors
                 }
             }
 
-            DataAccessLayer.ClearChecklist(checklist);
+            DataAccessLayer.ClearChecklist(dest.MainChecklist);
 
             foreach (var attribute in DataAccessLayer.GetAttributes(DataAccessLayer.Constants.EmployerMainChecklistType.Id))
             {
                 var attributeValue = new AttribValue
                 {
+                    Attrib = attribute,
                     AttribId = attribute.Id,
-                    ChecklistId = checklist.Id
+                    ChecklistId = dest.MainChecklist.Id
                 };
 
-                #region Big switch [TODO by code field]
                 switch (attribute.Code)
                 {
-                    case Constants.AboutCode:
-                        attributeValue.Value = source.About;
-                        break;
-                    case Constants.EmployerNameCode:
-                        attributeValue.Value = source.EmployerName;
-                        break;
-                    case Constants.AddressCode:
-                        attributeValue.Value = source.Address;
-                        break;
                     case Constants.MobilePhoneCode:
-                        attributeValue.Value = source.MobilePhone;
-                        break;
-                    case Constants.CityCode:
-                        attributeValue.Value = source.City;
+                        attributeValue.Value = editPhone(source);
                         break;
                 }
-                #endregion
 
-                checklist.AttrbuteValues.Add(attributeValue);
+                dest.MainChecklist.AttrbuteValues.Add(attributeValue);
             }
-        }
 
-        private void editChecklists(EmployerForm source, EmployerUser dest)
-        {
+            ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
+
+            //vacancies
             foreach (var vacancy in source.Vacancies.OrderBy(x => x.CreationDate))
             {
                 var checklist = DataAccessLayer.GetById<Checklist>(vacancy.Id);
-                if (checklist == null)
-                {
-#if DEBUG
-                    throw new HttpException(404, "Checklist not found");
-#endif
-#if RELEASE
-                return;
-#endif
-                }
 
                 DataAccessLayer.ClearChecklist(checklist);
 
@@ -103,44 +66,33 @@ namespace PandaWebApp.Engine.Editors
                 {
                     var attributeValue = new AttribValue
                     {
+                        Attrib = attribute,
                         AttribId = attribute.Id,
                         ChecklistId = checklist.Id
                     };
-                    switch (attribute.Code)
-                    {
-                        case Constants.SalaryCode:
-                            attributeValue.Value = vacancy.Salary;
-                            break;
-                        case Constants.WorkCode:
-                            attributeValue.Value = vacancy.Work;
-                            break;
-                        case Constants.AboutCode:
-                            attributeValue.Value = vacancy.FullDescription;
-                            break;
-                        case Constants.StartWorkCode:
-                            attributeValue.Value = vacancy.StartTime.ToPandaString();
-                            break;
-                        case Constants.EndWorkCode:
-                            attributeValue.Value = vacancy.EndTime.ToPandaString();
-                            break;
-                        case Constants.CityCode:
-                            attributeValue.Value = vacancy.City;
-                            break;
-                        case Constants.GenderCode:
-                            attributeValue.Value = vacancy.Gender;
-                            break;
-                    }
 
                     checklist.AttrbuteValues.Add(attributeValue);
                 }
-             
+
+                ValueFromAttributeConverter.AttributesFromModel(vacancy, checklist.AttrbuteValues, DataAccessLayer);
+
             }
         }
 
-        public void Edit(EmployerForm source, EmployerUser dest)
+        private string editPhone(EmployerForm source)
         {
-            editMainParam(source, dest);
-            editChecklists(source, dest);
+            var entityList = DataAccessLayer.Create(new EntityList());
+            if (source.Phone != null)
+            {
+                DataAccessLayer.Create(new PhoneNumber
+                {
+                    EntityList = entityList,
+                    CountryCode = DataAccessLayer.Get<DictValue>(source.Phone.CountryCode),
+                    Code = source.Phone.Code,
+                    Number = source.Phone.Number,
+                });
+            }
+            return entityList.Id.ToString();
         }
     }
 }

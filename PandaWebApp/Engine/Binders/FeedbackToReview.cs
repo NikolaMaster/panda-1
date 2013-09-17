@@ -2,9 +2,6 @@
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace PandaWebApp.Engine.Binders
 {
@@ -18,7 +15,7 @@ namespace PandaWebApp.Engine.Binders
 
         public override void Load(Feedback.Entry source, Review dest)
         {
-            throw new NotImplementedException();
+            throw new Exception("Only view bind allowed");
         }
 
         public override void InverseLoad(Review source, Feedback.Entry dest)

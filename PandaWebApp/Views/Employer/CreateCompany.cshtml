@@ -1,0 +1,29 @@
+﻿@model PandaWebApp.FormModels.CompanyRegister
+@{
+    var companySubTypeValues = (IEnumerable<SelectListItem>) ViewBag.CompanySubTypeValues;
+    var cityValues = (IEnumerable<SelectListItem>) ViewBag.CityValues;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(x =>x.EmployerName, "Название компании")
+    @Html.TextBoxFor(x => x.EmployerName)
+    
+    @Html.LabelFor(x =>x.CompanySubType, "Тип компании")
+    @Html.DropDownListFor(x => x.CompanySubType, companySubTypeValues)
+
+    @Html.LabelFor(x =>x.City, "Город")
+    @Html.DropDownListFor(x => x.City, cityValues)
+
+    @Html.LabelFor(x =>x.FirstName, "Имя")
+    @Html.TextBoxFor(x => x.FirstName)
+
+    @Html.LabelFor(x =>x.LastName, "Фамилия")
+    @Html.TextBoxFor(x => x.LastName)
+
+    @Html.LabelFor(x =>x.JobTitle, "Должность")
+    @Html.TextBoxFor(x => x.JobTitle)
+
+    @Html.LabelFor(x =>x.Phone, "Телефон")
+    @Html.TextBoxFor(x => x.Phone, "Phone")
+}

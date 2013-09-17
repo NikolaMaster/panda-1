@@ -33,6 +33,7 @@ namespace PandaDataAccessLayer.DAL
                 entityList.DesiredWork.Clear();
                 entityList.DesiredWorkTime.Clear();
                 entityList.WorkExpirience.Clear();
+                entityList.PhoneNumbers.Clear();
                 Delete(entityList);
             }
             checklist.AttrbuteValues.Clear();

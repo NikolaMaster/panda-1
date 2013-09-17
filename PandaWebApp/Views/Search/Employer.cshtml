@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "Поиск вакансий";
     Layout = "~/Views/Shared/Layout.cshtml";
+    var cityValues = (IEnumerable<SelectListItem>)ViewBag.CityValues;
+    var genderValues = (IEnumerable<SelectListItem>)ViewBag.GenderValues;
+    var salaryValues = (IEnumerable<SelectListItem>)ViewBag.SalaryValues;
 }
 
 <h2>Поиск вакансий</h2>
@@ -31,9 +34,9 @@
         }
     </div>
     <hr />
-    <div>Город @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.CityValues, string.Empty)</div>
-    <div>Пол @Html.DropDownListFor(x => x.Gender, (IEnumerable<SelectListItem>)ViewBag.GenderValues, string.Empty)</div>
-    <div>Цена за час @Html.DropDownListFor(x => x.Salary, (IEnumerable<SelectListItem>)ViewBag.SalaryValues, string.Empty)</div>
+    <div>Город @Html.DropDownListFor(x => x.City, cityValues, string.Empty)</div>
+    <div>Пол @Html.DropDownListFor(x => x.Gender, genderValues, string.Empty)</div>
+    <div>Цена за час @Html.DropDownListFor(x => x.Salary, salaryValues, string.Empty)</div>
     <hr />
 }
 

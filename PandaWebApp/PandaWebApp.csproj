@@ -127,6 +127,7 @@
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Engine\Authorize.cs" />
+    <Compile Include="Engine\Binders\ValueFromAttribute.cs" />
     <Compile Include="Engine\Binders\ViewPromouterSearchViewToChecklist.cs" />
     <Compile Include="Engine\Binders\FormPromouterSearchToSearchValues.cs" />
     <Compile Include="Engine\Binders\FormEmployerToUser.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Filters\BaseAuthorizationReuired.cs" />
     <Compile Include="FormModels\AlbumUnit.cs" />
     <Compile Include="FormModels\Authorize.cs" />
+    <Compile Include="FormModels\EmployerRegister.cs" />
     <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
     <Compile Include="FormModels\FeedbackForm.cs" />
@@ -172,6 +174,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Admin.cs" />
+    <Compile Include="ViewModels\PhoneUnit.cs" />
     <Compile Include="ViewModels\PromouterSearchView.cs" />
     <Compile Include="ViewModels\Blog.cs" />
     <Compile Include="ViewModels\Employer.cs" />
@@ -607,6 +610,8 @@
     <Content Include="Views\Shared\_AuthPanel.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
     <Content Include="Views\Feedback\TopDialogFeedback.cshtml" />
+    <Content Include="Views\Employer\CreateCompany.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

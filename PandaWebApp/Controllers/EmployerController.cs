@@ -75,9 +75,16 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode).
-                OrderBy(x => x.Text)
+            ViewBag.SalaryValues = DataAccessLayer
+                .ListItemsFromDict(Constants.SalaryCode)
+                .OrderBy(x => string.IsNullOrEmpty(x.Text) ? int.MaxValue : int.Parse(x.Text))
                 .ToList();
+            ViewBag.WorkValues = DataAccessLayer.ListItemsFromDict(Constants.WorkCode);
+            ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
+            ViewBag.GenderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode);
+            ViewBag.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
+            ViewBag.CountryCodeValues = DataAccessLayer.ListItemsFromDict(Constants.MobilePhoneCode);
+
             var binder = new FormEmployerToUser(DataAccessLayer);
             var user = DataAccessLayer.GetById<EmployerUser>(id);
             var model = new EmployerForm();

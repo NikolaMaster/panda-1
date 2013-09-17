@@ -4,7 +4,6 @@ using PandaWebApp.FormModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace PandaWebApp.Engine.Binders
 {
@@ -30,7 +29,7 @@ namespace PandaWebApp.Engine.Binders
 
         public override void InverseLoad(Dictionary<Attrib, object> source, EmployerSearchForm dest)
         {
-            throw new NotImplementedException();
+            throw new Exception("Only edit bind allowed");
         }
     }
 }
