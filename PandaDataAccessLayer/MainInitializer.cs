@@ -100,10 +100,6 @@ namespace PandaDataAccessLayer
 
         private void addDefaulAttributes() 
         {
-            try
-            {
-
-   
             var attribs = new[] {
                 new Attrib 
                 {
@@ -282,17 +278,17 @@ namespace PandaDataAccessLayer
                 {
                     AttribType = DataAccessLayer.DbContext.AttribTypes.Single(x => x.DictGroup.Code == Constants.WorkCode),
                     Code = Constants.WorkCode
-                }
+                },
                 #endregion
+
+                new Attrib
+                {
+                    AttribType = DataAccessLayer.GetAttribType(typeof(EntityList)),
+                    Code = Constants.EmailCode
+                }
             };
             foreach (var attrib in attribs)
                 DataAccessLayer.Create(attrib);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
            DbContext.SaveChanges();
         }
 

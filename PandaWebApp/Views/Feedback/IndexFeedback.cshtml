@@ -1,6 +1,17 @@
 ﻿@model PandaWebApp.ViewModels.Feedback
 <div class="feedbacks">
-    <div class="header">Мнение о промоутере</div>
+        @if (Model.User == null)
+        {
+            <div class="header">Отзывы: (@Model.Count):</div>
+        }
+        else if (Model.User is PandaDataAccessLayer.Entities.EmployerUser)
+        {
+            <div class="header">Мнение о компании</div>
+        }
+        else
+        {
+            <div class="header">Мнение о промоутере</div>
+        }
     <ul>
         @foreach (var entry in Model.Entries)
         {

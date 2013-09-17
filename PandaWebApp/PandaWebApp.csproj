@@ -164,6 +164,7 @@
     <Compile Include="FormModels\AlbumUnit.cs" />
     <Compile Include="FormModels\Authorize.cs" />
     <Compile Include="FormModels\EmployerRegister.cs" />
+    <Compile Include="FormModels\EditCoinsForm.cs" />
     <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
     <Compile Include="FormModels\FeedbackForm.cs" />
@@ -583,7 +584,7 @@
     <Content Include="Views\Promouter\Edit.cshtml" />
     <Content Include="Views\Job\Index.cshtml" />
     <Content Include="Views\Employer\Edit.cshtml" />
-    <Content Include="Views\Admin\Panel1.cshtml" />
+    <Content Include="Views\Admin\EditStaticPage.cshtml" />
     <Content Include="Views\WorkExperience\Index.cshtml" />
     <Content Include="Views\DesiredWorkTime\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\WorkExperience.cshtml" />
@@ -605,13 +606,13 @@
     <Content Include="Views\Search\PromouterSearchResult.cshtml" />
     <Content Include="Views\Album\Album.cshtml" />
     <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
-    <Content Include="Views\Employer\EditCoins.cshtml" />
-    <Content Include="Views\Promouter\EditCoins.cshtml" />
     <Content Include="Views\Shared\_AuthPanel.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
     <Content Include="Views\Feedback\TopDialogFeedback.cshtml" />
     <Content Include="Views\Employer\CreateCompany.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
+    <Content Include="Views\Admin\_editCoinsPartial.cshtml" />
+    <Content Include="Views\Admin\EditUserCoins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

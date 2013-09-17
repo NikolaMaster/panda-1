@@ -76,8 +76,31 @@ namespace PandaWebApp.Controllers
             var model = new Promouter();
             var binder = new ViewPromouterToUsers(DataAccessLayer);
             binder.InverseLoad(entry, model);
-          
-            return View(model);
+
+
+            var core = AuthorizationCore.StaticCreate();
+            var listBought = new List<string>();
+            
+            var isBought =
+               DataAccessLayer.Get<CoinsInfo>(x => x.BuyUser == core.User.Id && x.UserId == id && x.Code.Code == Constants.MobilePhoneCode)
+                              .FirstOrDefault();
+            if (isBought != null)
+            {
+                listBought.Add(Constants.MobilePhoneCode);
+            }
+
+            isBought =
+               DataAccessLayer.Get<CoinsInfo>(x => x.BuyUser == core.User.Id && x.UserId == id && x.Code.Code == Constants.EmailCode)
+                              .FirstOrDefault();
+
+            if (isBought != null)
+            {
+                listBought.Add(Constants.EmailCode);
+            }
+
+            var pTuple = new Tuple<Promouter, List<string>>(model, listBought);
+
+            return View(pTuple);
         }
 
         [HttpGet]
@@ -120,25 +143,5 @@ namespace PandaWebApp.Controllers
             return new EmptyResult();
 #endif
         }
-
-        public ActionResult EditCoins(Guid userId)
-        {
-            var userBase = DataAccessLayer.GetById<UserBase>(userId);
-            var promouter = new Promouter()
-            {
-                UserId = userId,
-                Coins = userBase.Coins
-            };
-            return View(promouter);
-        }
-
-        [HttpPost]
-        public ActionResult EditCoins(Promouter promouter)
-        {
-            DataAccessLayer.UpdateById<UserBase>(promouter.UserId, x => x.Coins = promouter.Coins);
-            DataAccessLayer.DbContext.SaveChanges();
-            return RedirectToAction("Index", "Home");
-        }
-
     }
 }

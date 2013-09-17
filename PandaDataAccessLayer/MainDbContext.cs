@@ -44,6 +44,8 @@ namespace PandaDataAccessLayer
         public DbSet<DesiredWorkTime> DesiredWorkTime { get; set; }
         //Static page
         public DbSet<StaticPageUnit> StaticPageUnit { get; set; }
+        //CoinsInfo
+        public DbSet<CoinsInfo> CoinsInfo { get; set; }
 
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
 

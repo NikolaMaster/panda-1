@@ -1,4 +1,6 @@
 ﻿using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Web.Mvc.Ajax;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using System;
@@ -151,6 +153,109 @@ namespace PandaWebApp.Engine
             else
                 throw new Exception("Incorrect user type");
         }
+        #endregion
+
+        #region status
+
+        private static int getWordEnd(int number)
+        {
+            if (Regex.Match(number.ToString(CultureInfo.InvariantCulture), "1\\d$").Success)
+                return 2;
+            if (Regex.Match(number.ToString(CultureInfo.InvariantCulture), "1$").Success)
+                return 0;
+            if (Regex.Match(number.ToString(CultureInfo.InvariantCulture), "(2|3|4)$").Success)
+                return 1;
+            return 2;
+        }
+
+        public static string GetDayOnSiteStatus(DateTime date)
+        {
+            var days = new string[]
+                {
+                    "день",
+                    "дня",
+                    "дней"
+                };
+
+            var mounth = new string[]
+                {
+                    "месяц",
+                    "месяца",
+                    "месяцев"
+                };
+
+            var differenceTime = DateTime.UtcNow - date;
+
+            if (Equals(Convert.ToInt32(differenceTime.TotalDays), 0))
+                return string.Format("1 день");
+            
+            if (Convert.ToInt32(differenceTime.TotalDays) < 31)
+            {
+                int timeSpan = Convert.ToInt32(differenceTime.TotalDays);
+                return string.Format("{0} {1}", timeSpan, days[getWordEnd(timeSpan)]);
+                
+            }
+            else
+            {
+                int timeSpan = Convert.ToInt32(Math.Round(differenceTime.TotalDays/31,0));
+                return string.Format("{0} {1}", timeSpan, mounth[getWordEnd(timeSpan)]);
+            }
+        }
+
+        public static string GetActivityStatus(DateTime date)
+        {
+            #region data
+
+            string[] mins = new string[]
+                {
+                    "минуту",
+                    "минуты",
+                    "минут"
+                };
+
+            string[] hours = new string[]
+                {
+                    "час",
+                    "часа",
+                    "часов"
+                };
+
+            string[] days = new string[]
+                {
+                    "день",
+                    "дня",
+                    "дней"
+                };
+
+            #endregion
+
+            var differenceTime = DateTime.UtcNow - date;
+            int timeSpan;
+            const string onlineStatus = "Онлайн";
+            const string offlineStatus = "Оффлайн";
+
+            if (differenceTime.TotalMinutes < 60)
+            {
+                if (Convert.ToInt32(differenceTime.TotalMinutes) < 5)
+                    return onlineStatus;
+                
+                timeSpan = Convert.ToInt32(differenceTime.TotalMinutes);
+                return string.Format("Был на сайте: {0} {1} назад", timeSpan, mins[getWordEnd(timeSpan)]);
+            }
+
+            if (differenceTime.TotalMinutes >= 60 && differenceTime.TotalMinutes < 1440)
+            {
+                timeSpan = Convert.ToInt32(differenceTime.TotalHours);
+                return string.Format("Был на сайте: {0} {1} назад", timeSpan, hours[getWordEnd(timeSpan)]);
+            }
+            else
+            {
+                timeSpan = Convert.ToInt32(differenceTime.TotalDays);
+                return string.Format("Был на сайте: {0} {1} назад", timeSpan, days[getWordEnd(timeSpan)]);
+            }
+            return offlineStatus;
+        }
+
         #endregion
     }
 }

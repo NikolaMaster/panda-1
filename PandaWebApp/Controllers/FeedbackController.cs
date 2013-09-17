@@ -45,6 +45,8 @@ namespace PandaWebApp.Controllers
         public ActionResult Index(Guid userId)
         {
             var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId));
+            var user = DataAccessLayer.GetById<UserBase>(userId);
+            feedback.User = user;
             return View("Index", feedback);
         }
 
@@ -58,7 +60,6 @@ namespace PandaWebApp.Controllers
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
             var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId), UserFeedbacksCount);
-            var type = user as EmployerUser;
             feedback.User = user;
             return PartialView(feedback);
         }
@@ -66,7 +67,8 @@ namespace PandaWebApp.Controllers
 
         public ActionResult TopDialogFeedback()
         {
-
+            var totalFeedback = DataAccessLayer.Get<Review>();
+            
             var list = new List<Feedback.Entry>();
             int counter = 0;
             while (true)
@@ -96,7 +98,10 @@ namespace PandaWebApp.Controllers
                     break;
 
             }
-            return PartialView(list);
+
+            var tuple = new Tuple<ICollection<Feedback.Entry>, int>(list,totalFeedback.Count());
+        
+            return PartialView(tuple);
 
         }
 
@@ -104,7 +109,6 @@ namespace PandaWebApp.Controllers
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
             var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId), UserFeedbacksCount);
-            var type = user as EmployerUser;
             feedback.User = user;
             return PartialView(feedback);
         }

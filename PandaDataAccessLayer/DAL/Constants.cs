@@ -52,6 +52,7 @@ namespace PandaDataAccessLayer.DAL
         public const string StartWorkCode = "START_WORK";
         public const string EndWorkCode = "END_WORK";
         public const string WorkCode = "WORK_CODE";
+        public const string EmailCode = "EMAIL_CODE";
 
         #region Education
 
@@ -1440,6 +1441,11 @@ namespace PandaDataAccessLayer.DAL
         public Attrib Work
         {
             get { return DataAccessLayer.Get<Attrib>(WorkCode); }
+        }
+
+        public Attrib Email
+        {
+            get { return DataAccessLayer.Get<Attrib>(EmailCode); }
         }
     }
 }
