@@ -25,7 +25,9 @@
         <div class="clear"></div>
     </div>					
     <div class="photo left">
-        <img src="@ImageCreator.Create(Model.Item1.Photo, 128, 128)" />
+        <a id="one_photo" href="@ImageCreator.Create(Model.Item1.Photo, 256, 256)">
+            <img src="@ImageCreator.Create(Model.Item1.Photo, 128, 128)" alt="one_photo" />
+        </a>
     </div>
 
     <div class="info right">
@@ -56,32 +58,48 @@
                 
                 @if (!isGuest)
                 {
+                    string fullphone = string.Format("{0} {1} {2}", Model.Item1.Phone.CountryCode, Model.Item1.Phone.Code, Model.Item1.Phone.Number);
+                    
                     if (Equals(user.Id, Model.Item1.UserId))
                     {
-                        <div class="row">@Model.Item1.Phone</div>
+                        <div class="row">@fullphone</div>
                         <div class="row">@Model.Item1.Email</div>
                     }
                     else
                     {
-                        <div class="row" id ="MOBILE_PHONE">
-                            @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
-                                             new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.MobilePhoneCode, value = Model.Item1.Phone},
-                                             new AjaxOptions()
-                                                 {
-                                                     HttpMethod = "POST",
-                                                     UpdateTargetId = Constants.MobilePhoneCode
-                                                 }, new {@class = "open"})
-                        </div>
-
-                        <div class="row" id ="EMAIL_CODE">
-                            @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
-                                             new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.EmailCode, value = Model.Item1.Email},
-                                             new AjaxOptions()
-                                                 {
-                                                     HttpMethod = "POST",
-                                                     UpdateTargetId = Constants.EmailCode
-                                                 }, new {@class = "open"})
-                        </div>
+                        if (Model.Item2.Contains(Constants.MobilePhoneCode))
+                        {
+                            <div class="row">@fullphone</div>
+                        }
+                        else
+                        {
+                            fullphone = string.Format("{0} {1} {2}", Model.Item1.Phone.CountryCode, Model.Item1.Phone.Code, Model.Item1.Phone.Number);
+                            <div class="row" id ="MOBILE_PHONE">
+                                @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.MobilePhoneCode, value = fullphone},
+                                                 new AjaxOptions()
+                                                     {
+                                                         HttpMethod = "POST",
+                                                         UpdateTargetId = Constants.MobilePhoneCode
+                                                     }, new {@class = "open"})
+                            </div>
+                        }
+                        if (Model.Item2.Contains(Constants.EmailCode))
+                        {
+                            <div class="row">@Model.Item1.Email</div>
+                        }
+                        else
+                        {
+                            <div class="row" id ="EMAIL_CODE">
+                                @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.EmailCode, value = Model.Item1.Email},
+                                                 new AjaxOptions()
+                                                     {
+                                                         HttpMethod = "POST",
+                                                         UpdateTargetId = Constants.EmailCode
+                                                     }, new {@class = "open"})
+                            </div>
+                        }
                     }
                 }
                 else
@@ -130,9 +148,11 @@
                         {
                             break;
                         }
-                                
+                     
                         <li class="@(index == 0 ? "first" : "")">
-                            <img src="@ImageCreator.Create(item, 128, 128)" />
+                            <a rel="group_photo" href="@ImageCreator.Create(item, 256, 256)">
+                                <img src="@ImageCreator.Create(item, 128, 128)"/>
+                            </a>
                         </li>
 
                         if (index == 4)

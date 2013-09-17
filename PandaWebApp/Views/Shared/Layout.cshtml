@@ -8,133 +8,168 @@
         <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/south-street/jquery-ui-1.10.3.custom.min.css")" />
         <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/south-street/jquery.ui.timepicker.css")" />
         <link rel="stylesheet" href="@Url.Content("~/Content/css/style.css")" />
-        <!-- include scripts there -->
-        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-1.9.1.js")"></script>
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/frameworks/jquery/jquery.fancybox-1.3.4.css")"/>        <!-- include scripts there -->
+          <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-1.4.3.min.js")"></script>
+       @* <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-1.9.1.js")"></script>*@
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-ui-1.10.3.custom.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.unobtrusive-ajax.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.ui.timepicker.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/custom/inplace-editor.js")"></script>
-        <script src="~/Content/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
+       
+        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.mousewheel-3.0.4.pack.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.fancybox-1.3.4.pack.js")"></script>
+        
+        @*<script type="text/javascript" src="@Url.Content("~/Content/js/AuthValidator.js")"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>*@
+
+
+
+        <style>
+            body { font-size: 62.5%; }
+            label, input { display:block; }
+            input.text { margin-bottom:12px; width:95%; padding: .4em; }
+            fieldset { padding:0; border:0; margin-top:25px; }
+            h1 { font-size: 1.2em; margin: .6em 0; }
+            div#users-contain { width: 350px; margin: 20px 0; }
+            div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+            div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+            .ui-dialog .ui-state-error { padding: .3em; }
+            .validateTips { border: 1px solid transparent; padding: 0.3em; }
+        </style>
+        
         <script>
             function initializeDateTime() {
                 $(".datePicker").datepicker({ dateFormat: "dd.mm.yy" });
                 $(".timePicker").timepicker();
             }
-            $(function () {
+
+            $(document).ready(function() {
+               
+                $("a#one_photo").fancybox();
+                $("a[rel=group_photo]").fancybox({
+                    'transitionIn': 'none',
+                    'transitionOut': 'none',
+                    'titlePosition': 'over',
+                    'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
+                        return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+                    }
+                });
+
                 initializeDateTime();
-            });
+                
+            });
         </script>
     </head>
-
-	
-	<body>
-	
-		<div id="top" class="top-panel layer zero"></div>
+    <body>
+        <div id="top" class="top-panel layer zero"></div>
 		
-		<div class="body layer one">
-			<div class="header">
+        <div class="body layer one">
+            <div class="header">
                 @Html.Partial("_AuthPanel")
-				<div class="content-width">
-					<div class="logo left"><a href="@Url.Action("Index","Home")"><img src="~/Content/img/logo.png" /></a></div>
-					<div class="right">
-						<div class="banner-top"></div>
-						<ul class="main-menu horiz">
-							<li><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></li>
-							<li><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Словарь</a></li>
-							<li><a href="@Url.Action("Posts","Blog")">Блог</a></li>
-							<li><a href="@Url.Action("Index","StaticPage",new { code = "FAQ"})">Вопрос-Ответ</a></li>
-							<li><a href="@Url.Action("Index","StaticPage",new { code = "Contacts"})">Контакты</a></li>
-							<li><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></li>
-						</ul>
-					</div>
-					<div class="clear"></div>
-				</div>
+                <div class="content-width">
+                    <div class="logo left"><a href="@Url.Action("Index","Home")"><img src="~/Content/img/logo.png" /></a></div>
+                    <div class="right">
+                        <div class="banner-top"></div>
+                        <ul class="main-menu horiz">
+                            <li><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></li>
+                            <li><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Словарь</a></li>
+                            <li><a href="@Url.Action("Posts","Blog")">Блог</a></li>
+                            <li><a href="@Url.Action("Index","StaticPage",new { code = "FAQ"})">Вопрос-Ответ</a></li>
+                            <li><a href="@Url.Action("Index","StaticPage",new { code = "Contacts"})">Контакты</a></li>
+                            <li><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
 
-				<div id="shadow" class="top-shadow layer zero"></div>
-			</div>
+                <div id="shadow" class="top-shadow layer zero"></div>
+            </div>
 
-			<div class="content content-width">
-				<div class="base-content left">
-				        @RenderBody()
-				</div>
-				<div class="right-sidebar right">
-					 @{ Html.RenderAction("PandaPulse", "Home"); }
+            <div class="content content-width">
+                <div class="base-content left">
+                    @RenderBody()
+                </div>
+                <div class="right-sidebar right">
+                    @{ Html.RenderAction("PandaPulse", "Home"); }
 				    
-				    @{
+                    @{
                         if (ViewBag.Title!=null && !ViewBag.Title.Equals("Главная"))
                         {
                             <div class="banner-side empty"></div>
-					        <div class="banner-side empty"></div>
-					        <div class="banner-side empty"></div>
-					        <div class="banner-side empty"></div>
-					        <div class="banner-side empty"></div>
+                            <div class="banner-side empty"></div>
+                            <div class="banner-side empty"></div>
+                            <div class="banner-side empty"></div>
+                            <div class="banner-side empty"></div>
                         }
-				    }
+                    }
                     
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-        
-        
-            @if (ViewBag.Title!=null && ViewBag.Title.Equals("Главная"))
-            {
-                <div class="full-width-content content-width">
-                    @{ Html.RenderAction("IndexStaticPage", "StaticPage", new { code = "FiveReasons" }); }
-
-                    
-                    @{Html.RenderAction("TopDialogFeedback","Feedback");}
-
-                    <div class="simple-delimiter"></div>
-
-                    @{ Html.RenderAction("TopPosts", "Blog"); }
                 </div>
-            }
+                <div class="clear"></div>
+            </div>
+        </div>
+        
+        
+        @if (ViewBag.Title!=null && ViewBag.Title.Equals("Главная"))
+        {
+            <div class="full-width-content content-width">
+                @{ Html.RenderAction("IndexStaticPage", "StaticPage", new { code = "FiveReasons" }); }
+
+                    
+                @{Html.RenderAction("TopDialogFeedback","Feedback");}
+
+                <div class="simple-delimiter"></div>
+
+                @{ Html.RenderAction("TopPosts", "Blog"); }
+            </div>
+        }
 		
 	   
-	    <div class="simple-delimiter"></div>
+        <div class="simple-delimiter"></div>
 
-		<div class="footer content-width">
-			<ul class="main-menu horiz">
-				<li><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></li>
-				<li><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Словарь</a></li>
-				<li><a href="@Url.Action("Posts","Blog")">Блог</a></li>
-				<li><a href="@Url.Action("Index","StaticPage",new { code = "FAQ"})">Вопрос-Ответ</a></li>
-				<li><a href="@Url.Action("Index","StaticPage",new { code = "Contacts"})">Контакты</a></li>
-				<li><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></li>
-			</ul>
-			<div class="clear"></div>
+        <div class="footer content-width">
+            <ul class="main-menu horiz">
+                <li><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></li>
+                <li><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Словарь</a></li>
+                <li><a href="@Url.Action("Posts","Blog")">Блог</a></li>
+                <li><a href="@Url.Action("Index","StaticPage",new { code = "FAQ"})">Вопрос-Ответ</a></li>
+                <li><a href="@Url.Action("Index","StaticPage",new { code = "Contacts"})">Контакты</a></li>
+                <li><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></li>
+            </ul>
+            <div class="clear"></div>
 
-			<div class="links">
-				<div class="table-4">
-					<div class="column">
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></div>
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Commercial"})">Реклама на сайте</a></div>
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "SiteTerms"})">Условия пользования сайтом</a></div>
-					</div>
-					<div class="column">
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "ToWorker"})">Работодателям</a></div>
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Regulations"})">Правила сайта</a></div>
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></div>
-					</div>
-					<div class="column">
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Applicants"})">Соискателям</a></div>
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Tips for Newcomers"})">Советы новичкам</a></div>
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Useful Articles"})">Полезные статьи</a></div>
-					</div>
-					<div class="column">
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Help"})">Помощь</a></div>
-						<div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Промо-словарь</a></div>
-						<div class="row"><a href="#">Написать в службу поддержки</a></div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
+            <div class="links">
+                <div class="table-4">
+                    <div class="column">
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "About"})">О проекте</a></div>
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Commercial"})">Реклама на сайте</a></div>
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "SiteTerms"})">Условия пользования сайтом</a></div>
+                    </div>
+                    <div class="column">
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "ToWorker"})">Работодателям</a></div>
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Regulations"})">Правила сайта</a></div>
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "PaidServices"})">Платные услуги</a></div>
+                    </div>
+                    <div class="column">
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Applicants"})">Соискателям</a></div>
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Tips for Newcomers"})">Советы новичкам</a></div>
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Useful Articles"})">Полезные статьи</a></div>
+                    </div>
+                    <div class="column">
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Help"})">Помощь</a></div>
+                        <div class="row"><a href="@Url.Action("Index","StaticPage",new { code = "Dictionary"})">Промо-словарь</a></div>
+                        <div class="row"><a href="#">Написать в службу поддержки</a></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
 
-			<div class="link"><p><a href="#">Сообщество ВКонтакте (с) @DateTime.UtcNow.Year -  @(DateTime.UtcNow.Year+1)</a></p></div>
-			<div class="link"><p><a href="#">Контактная информация</a></p></div>
-			<div class="logo">PromoPanda © 2013</div>
-		</div>
+            <div class="link"><p><a href="#">Сообщество ВКонтакте (с) @DateTime.UtcNow.Year -  @(DateTime.UtcNow.Year+1)</a></p></div>
+            <div class="link"><p><a href="#">Контактная информация</a></p></div>
+            <div class="logo">PromoPanda © 2013</div>
+        </div>
 	
-	</body>
+    </body>
 </html>

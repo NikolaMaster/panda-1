@@ -163,7 +163,6 @@
     <Compile Include="Filters\BaseAuthorizationReuired.cs" />
     <Compile Include="FormModels\AlbumUnit.cs" />
     <Compile Include="FormModels\Authorize.cs" />
-    <Compile Include="FormModels\EmployerRegister.cs" />
     <Compile Include="FormModels\EditCoinsForm.cs" />
     <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
@@ -445,6 +444,7 @@
     <Content Include="Content\ckeditor\skins\moono\images\lock.png" />
     <Content Include="Content\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="Content\ckeditor\styles.js" />
+    <Content Include="Content\css\frameworks\jquery\jquery.fancybox-1.3.4.css" />
     <Content Include="Content\img\all-feedbacks-mark.png" />
     <Content Include="Content\img\cache\readme.txt" />
     <Content Include="Content\img\company.png" />
@@ -462,6 +462,31 @@
     <Content Include="Content\img\del-3.png" />
     <Content Include="Content\img\del-4.png" />
     <Content Include="Content\img\del-5.png" />
+    <Content Include="Content\img\fancybox\blank.gif" />
+    <Content Include="Content\img\fancybox\fancybox-x.png" />
+    <Content Include="Content\img\fancybox\fancybox-y.png" />
+    <Content Include="Content\img\fancybox\fancybox.png" />
+    <Content Include="Content\img\fancybox\fancy_close.png" />
+    <Content Include="Content\img\fancybox\fancy_loading.png" />
+    <Content Include="Content\img\fancybox\fancy_nav_left.png" />
+    <Content Include="Content\img\fancybox\fancy_nav_right.png" />
+    <Content Include="Content\img\fancybox\fancy_shadow_e.png" />
+    <Content Include="Content\img\fancybox\fancy_shadow_n.png" />
+    <Content Include="Content\img\fancybox\fancy_shadow_ne.png" />
+    <Content Include="Content\img\fancybox\fancy_shadow_nw.png" />
+    <Content Include="Content\img\fancybox\fancy_shadow_s.png" />
+    <Content Include="Content\img\fancybox\fancy_shadow_se.png" />
+    <Content Include="Content\img\fancybox\fancy_shadow_sw.png" />
+    <Content Include="Content\img\fancybox\fancy_shadow_w.png" />
+    <Content Include="Content\img\fancybox\fancy_title_left.png" />
+    <Content Include="Content\img\fancybox\fancy_title_main.png" />
+    <Content Include="Content\img\fancybox\fancy_title_over.png" />
+    <Content Include="Content\img\fancybox\fancy_title_right.png" />
+    <Content Include="Content\img\fancybox\jquery.easing-1.3.pack.js" />
+    <Content Include="Content\img\fancybox\jquery.fancybox-1.3.4.css" />
+    <Content Include="Content\img\fancybox\jquery.fancybox-1.3.4.js" />
+    <Content Include="Content\img\fancybox\jquery.fancybox-1.3.4.pack.js" />
+    <Content Include="Content\img\fancybox\jquery.mousewheel-3.0.4.pack.js" />
     <Content Include="Content\img\five-reasons-marker.png" />
     <Content Include="Content\img\five-reasons-top-bg.png" />
     <Content Include="Content\img\five-resons.png" />
@@ -502,11 +527,15 @@
     <Content Include="Content\img\simple-delimiter.png" />
     <Content Include="Content\img\top.png" />
     <Content Include="Content\img\woman.png" />
+    <Content Include="Content\js\AuthValidator.js" />
     <Content Include="Content\js\frameworks\custom\inplace-editor.js" />
+    <Content Include="Content\js\frameworks\jquery\jquery-1.4.3.min.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-1.9.1.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Content\css\frameworks\jquery\south-street\jquery.ui.timepicker.css" />
+    <Content Include="Content\js\frameworks\jquery\jquery.fancybox-1.3.4.pack.js" />
+    <Content Include="Content\js\frameworks\jquery\jquery.mousewheel-3.0.4.pack.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.ui.timepicker.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.js" />
@@ -609,10 +638,9 @@
     <Content Include="Views\Shared\_AuthPanel.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
     <Content Include="Views\Feedback\TopDialogFeedback.cshtml" />
-    <Content Include="Views\Employer\CreateCompany.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
     <Content Include="Views\Admin\_editCoinsPartial.cshtml" />
     <Content Include="Views\Admin\EditUserCoins.cshtml" />
+    <Content Include="Views\Shared\AuthForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">
