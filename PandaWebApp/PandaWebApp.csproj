@@ -165,6 +165,7 @@
     <Compile Include="FormModels\AlbumUnit.cs" />
     <Compile Include="FormModels\Authorize.cs" />
     <Compile Include="FormModels\EditCoinsForm.cs" />
+    <Compile Include="FormModels\EmployerRegister.cs" />
     <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
     <Compile Include="FormModels\FeedbackForm.cs" />

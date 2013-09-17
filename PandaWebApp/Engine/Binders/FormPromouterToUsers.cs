@@ -59,7 +59,7 @@ namespace PandaWebApp.Engine.Binders
                     case Constants.WorkExperienceCode:
                         getWorkExperience(stringValue, dest);
                         break;
-                    case Constants.WorkCode:
+                    case Constants.DesiredWorkCode:
                         getDesiredWork(stringValue, dest);
                         break;
                     case Constants.DesiredWorkTimeCode:

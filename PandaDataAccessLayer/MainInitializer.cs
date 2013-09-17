@@ -372,7 +372,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Constants.About,
                     DataAccessLayer.Constants.ReadyForWork,
                     DataAccessLayer.Constants.WorkExperience,
-                    DataAccessLayer.Constants.Work,
+                    DataAccessLayer.Constants.DesiredWork,
                     DataAccessLayer.Constants.DesiredWorkTime,
                 };
 
