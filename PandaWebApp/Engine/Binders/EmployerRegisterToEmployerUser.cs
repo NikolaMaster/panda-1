@@ -9,17 +9,17 @@ using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Engine.Binders
 {
-    public class EmployerRegisterToEmployerUser : BaseDataAccessLayerBinder<CompanyRegister, EmployerUser>
+    public class EmployerRegisterToEmployerUser : BaseDataAccessLayerBinder<EmployerRegister, EmployerUser>
     {
         public EmployerRegisterToEmployerUser(DataAccessLayer dataAccessLayer)
             : base(dataAccessLayer)
         {
         }
 
-        public override void Load(CompanyRegister source, EmployerUser dest)
+        public override void Load(EmployerRegister source, EmployerUser dest)
         {
             dest.Email = source.Email;
-            dest.Password = Crypt.GetMD5Hash(source.Password);
+            dest.Password = Password.MakePassword(source.Password, DateTime.UtcNow);
 
             ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
 
@@ -43,7 +43,7 @@ namespace PandaWebApp.Engine.Binders
             }
         }
 
-        public override void InverseLoad(EmployerUser source, CompanyRegister dest)
+        public override void InverseLoad(EmployerUser source, EmployerRegister dest)
         {
             throw new Exception("Only edit bind allowed");
         }

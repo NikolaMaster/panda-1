@@ -21,12 +21,23 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var model = new FormModels.Register.Promouter();
-
-            return View();
+            return PartialView();
         }
 
-       
+        [HttpPost]
+        public ActionResult Create(PromouterRegister model)
+        {
+            if (ModelState.IsValid)
+            {
+                var binder = new PromouterRegisterToPromouterUser(DataAccessLayer);
+                var user = DataAccessLayer.Create(new PromouterUser());
+                binder.Load(model, user);
+                DataAccessLayer.DbContext.SaveChanges();
+                return Json(new { path = "/Promouter/Detail/" + user.Id });
+            }
+            return PartialView();
+        }
+
         public ActionResult TopPromouters(int count)
         {
             var topPromoutersUserBase = DataAccessLayer.TopRandom<PromouterUser>(count);
@@ -40,28 +51,6 @@ namespace PandaWebApp.Controllers
             }
 
             return PartialView(models);
-        }
-
-
-
-        [HttpPost]
-        public ActionResult Create(FormModels.Register.Promouter model)
-        {
-            if (ModelState.IsValid)
-            {
-                //salt
-                model.Password = Password.MakePassword(model.Password, DateTime.UtcNow);
-                var binder = new RegisterPromouterToUsers();
-                var entry = new PromouterUser();
-                binder.Load(model, entry);
-
-                DataAccessLayer.Create(entry);
-                DataAccessLayer.DbContext.SaveChanges();
-
-                return RedirectToAction("Detail", new { id = entry.Id });
-            }
-
-            return View(model);
         }
 
         [HttpGet]

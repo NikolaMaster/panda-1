@@ -65,10 +65,22 @@
                 
                 $("#dialog-form1").dialog({
                     autoOpen: false
-                    
                 });
                 
-
+                $('#registerForm').dialog({
+                    autoOpen: false,
+                    width: 'auto',
+                    height: 'auto',
+                    resizable: false,
+                    modal: true,
+                    position: { my: 'top', at: 'top', of: window}
+                });
+                
+                $("#registerButton").click(function (e) {
+                      e.preventDefault();
+                      $("#registerForm").dialog("open");
+                });
+                
                 $("#enterButton")
                   .click(function (e) {
                       e.preventDefault();
@@ -79,6 +91,7 @@
     </head>
     <body>
         @Html.Partial("AuthForm")
+        @Html.Partial("RegisterForm")
         <div id="top" class="top-panel layer zero"></div>
 		
         <div class="body layer one">
