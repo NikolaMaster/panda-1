@@ -5,8 +5,7 @@
     var user = core.User;
 }   
 
-<div class="full-width-content content-width">
-           <div class="blog">
+        <div class="blog">
             <div class="header">Уютный бложечек нашей компании <span class="count">(@Model.Posts.Count)</span></div>
             <ul class="messages">
                 @foreach (var iter in Model.Posts)
@@ -15,7 +14,7 @@
                 }
             </ul>
         </div>
-    </div>
+   
 
 
 @if (!isGuest && user.IsAdmin)

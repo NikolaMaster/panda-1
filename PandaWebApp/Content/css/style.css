@@ -264,6 +264,7 @@ ul.list-style { margin-left: 20px; }
 .blog .messages .picture { width: 220px; }
 .blog .messages .picture img { width: 220px; }
 .blog .messages .short-description { margin-left: 15px; width: 725px; }
+.blog .messages .short-description-posts { margin-left: 5px; width: 450px; }
 .blog .messages .short-description p { font-family: 'Arial'; font-size: 12px; color: #4c4c4c; }
 .blog .messages .link { margin-top: 10px; }
 .blog .messages .link a { font-family: 'Arial'; font-size: 12px; color: #0a3a66; }

@@ -9,7 +9,23 @@
     <ul class="messages">
         @foreach (var iter in Model.Posts)
         {
-            Html.RenderAction("Post", "Blog", new { id = iter.Id }); 
+            <li>
+                <div class="header">@iter.Title
+                    <div class="date">@iter.CreatedDate</div>
+                </div>
+                <div class="left picture"><img src="@ImageCreator.Create(iter.Image, 128, 128)" /></div>
+    
+                <div class="right short-description">
+                    <p>@Html.Raw(iter.ShortText)</p>
+                </div>
+                <div class="link">
+                    <p class="right-aligned">
+                        <a href="@Url.Action("Detail","Blog",new { id = iter.Id})">посмотреть всю статью</a>
+                    </p>
+                </div>
+            </li>
+            <div class="clear"></div>  
+            
         }
     </ul>
     @if (!isGuest && user.IsAdmin)
