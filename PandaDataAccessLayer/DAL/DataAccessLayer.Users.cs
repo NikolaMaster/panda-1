@@ -72,9 +72,9 @@ namespace PandaDataAccessLayer.DAL
 
         public IEnumerable<Pulse> GetPulseUsers(int count)
         {
-            return DbContext.Pulse.OrderBy(x => x.OperationDate)
+            return DbContext.Pulse.Include("UserBase").Include("Operation").OrderBy(x => x.OperationDate)
                             .ToList()
-                            .Where(x => !string.IsNullOrEmpty(GetPulseUserName(x.User)))
+                            .Where(x => !string.IsNullOrWhiteSpace(GetPulseUserName(x.UserBase)))
                             .Take(count)
                             .ToList();
         }

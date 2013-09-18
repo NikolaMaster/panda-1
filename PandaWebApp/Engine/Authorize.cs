@@ -125,10 +125,11 @@ namespace PandaWebApp.Engine
 
                 _mCachedUser = user;
                 _mCachedSession = dal.Create(new Session { User = _mCachedUser, LastHit = DateTime.UtcNow });
-                dal.Create(new Pulse
+                var pulse = dal.Create(new Pulse
                     {
-                        Operation = dal.Get<DictValue>(Constants.Login)
+                        Operation = dal.Get<DictValue>(Constants.Login),
                     });
+                _mCachedUser.Pulse = new List<Pulse> { pulse };
                 dal.DbContext.SaveChanges();
 
                 //remember session id
@@ -141,10 +142,11 @@ namespace PandaWebApp.Engine
         {
             using (var dal = new DataAccessLayer())
             {
-                dal.Create(new Pulse
-                    {
-                        Operation = dal.Get<DictValue>(Constants.Logout)
-                    });
+                var pulse = dal.Create(new Pulse
+                {
+                    Operation = dal.Get<DictValue>(Constants.Login),
+                });
+                _mCachedUser.Pulse = new List<Pulse> { pulse };
                 SessionId = Guid.Empty;
             }
         }

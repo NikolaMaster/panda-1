@@ -145,7 +145,7 @@ namespace PandaWebApp.Controllers
                     .Select(x =>
                     {
                         var t = new PandaPulse.Entry();
-                        binder.InverseLoad(x.User, t);
+                        binder.InverseLoad(x.UserBase, t);
                         t.Operation = x.Operation.Description;
                         return t;
                     })
