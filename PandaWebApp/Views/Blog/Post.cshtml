@@ -1,5 +1,9 @@
 ﻿@model PandaWebApp.ViewModels.Blog.Entry
-
+@{
+    var core = AuthorizationCore.StaticCreate();
+    var isGuest = core.IsGuest;
+    var user = core.User;
+}   
 <li>
     <div class="header">@Model.Title
         <div class="date">@Model.CreatedDate</div>
@@ -17,6 +21,8 @@
 </li>
 
 <div class="clear"></div>  
-
-<a href="@Url.Action("Edit","Blog",new { id = Model.Id})">Редактировать</a>
-<a href="@Url.Action("Delete","Blog",new { id = Model.Id})">Удалить</a>
+@if (!isGuest && user.IsAdmin)
+{
+    <a href="@Url.Action("Edit", "Blog", new {id = Model.Id})">Редактировать</a>
+    <a href="@Url.Action("Delete", "Blog", new {id = Model.Id})">Удалить</a>
+}

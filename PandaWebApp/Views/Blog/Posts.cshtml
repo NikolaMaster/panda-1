@@ -1,5 +1,9 @@
 ﻿@model PandaWebApp.ViewModels.Blog
-
+@{
+    var core = AuthorizationCore.StaticCreate();
+    var isGuest = core.IsGuest;
+    var user = core.User;
+}   
 
 <div class="full-width-content content-width">
            <div class="blog">
@@ -14,9 +18,7 @@
     </div>
 
 
-
-
-@Html.ActionLink("Создать пост", "Create", "Blog") 
-
-
-
+@if (!isGuest && user.IsAdmin)
+{
+    @Html.ActionLink("Создать пост", "Create", "Blog")
+}

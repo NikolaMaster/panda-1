@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PandaDataAccessLayer.Helpers;
 
 namespace PandaWebApp.Engine
 {
@@ -103,7 +104,20 @@ namespace PandaWebApp.Engine
         {
             using (var dal = new DataAccessLayer())
             {
-                var user = dal.Get<UserBase>().FirstOrDefault(x => x.Email == email && x.Password == password);
+                var users = dal.Get<UserBase>(x => x.Email == email).DefaultIfEmpty();
+                UserBase user = null;
+                foreach (var iter in users)
+                {
+                    var passw = Password.MakePassword(password, iter.CreationDate);
+
+                    if (Equals(iter.Email, email) && Equals(iter.Password, passw))
+                    {
+                        user = iter;
+                        break;
+                    }
+                }
+                
+
                 if (user == null)
                 {
                     return false;
