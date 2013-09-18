@@ -2,6 +2,7 @@
 ﻿<script>
     function onPromouterValidation(data) {
         try {
+            $('#registerForm').dialog('close');
             var json = JSON.parse(data.responseText);
             window.location.replace(json.path);
         }
@@ -12,6 +13,7 @@
     
     function onLoginValidation(data) {
         try {
+            $('#registerForm').dialog('close');
             var json = JSON.parse(data.responseText);
             window.location.replace(json.path);
         }
