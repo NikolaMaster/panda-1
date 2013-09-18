@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.Entities
 {
-    public class Confirmation :IGuidIdentifiable
+    public class Confirmation : IGuidIdentifiable
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }

@@ -90,7 +90,6 @@
     <Compile Include="Entities\UserBase.cs" />
     <Compile Include="Entities\WorkExpirience.cs" />
     <Compile Include="Helpers\DataAccessLayerExtensions.cs" />
-    <Compile Include="Helpers\MailSender.cs" />
     <Compile Include="Helpers\Password.cs" />
     <Compile Include="MainDbContext.cs" />
     <Compile Include="MainInitializer.cs" />
