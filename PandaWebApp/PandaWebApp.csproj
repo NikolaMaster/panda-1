@@ -176,6 +176,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\PhoneUnit.cs" />
     <Compile Include="ViewModels\PromouterSearchView.cs" />
     <Compile Include="ViewModels\Blog.cs" />
@@ -519,6 +524,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -626,7 +635,6 @@
     <Content Include="Views\Admin\EditUserCoins.cshtml" />
     <Content Include="Views\Authorization\AuthForm.cshtml" />
     <Content Include="Views\Authorization\Confirmation.cshtml" />
-    <Content Include="Views\Shared\AuthForm.cshtml" />
     <Content Include="Views\Employer\CreateCompany.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
     <Content Include="Views\Employer\CreatePrivateEmployer.cshtml" />

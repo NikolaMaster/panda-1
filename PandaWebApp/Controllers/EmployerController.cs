@@ -188,6 +188,8 @@ namespace PandaWebApp.Controllers
             var user = DataAccessLayer.Create(new EmployerUser());
             binder.Load(model, user);
             DataAccessLayer.DbContext.SaveChanges();
+            DataAccessLayer.SendConfirmation(user.Id);
+            DataAccessLayer.DbContext.SaveChanges();
             return user;
         }
     }

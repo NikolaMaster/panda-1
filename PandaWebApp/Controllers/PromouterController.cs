@@ -34,6 +34,8 @@ namespace PandaWebApp.Controllers
                 var user = DataAccessLayer.Create(new PromouterUser());
                 binder.Load(model, user);
                 DataAccessLayer.DbContext.SaveChanges();
+                DataAccessLayer.SendConfirmation(user.Id);
+                DataAccessLayer.DbContext.SaveChanges();
                 return Json(new { path = "/Promouter/Detail/" + user.Id });
             }
             return PartialView();

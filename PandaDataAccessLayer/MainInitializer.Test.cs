@@ -835,7 +835,7 @@ namespace PandaDataAccessLayer
 
             //DataAccessLayer.Create<Confirmation>(new Confirmation() {Token = confirmToken, UserId = user.Id});
          
-            //MailSender.SendMail("smtp.gmail.com", "tmnsokol@gmail.com", "", "mailsokol@mail.ru"/*user.Email*/, "Подтверждение аккаунта", bodyMessage, null);
+         //   MailSender.SendMail("smtp.gmail.com", "tmnsokol@gmail.com", "", "mailsokol@mail.ru"/*user.Email*/, "Подтверждение аккаунта", bodyMessage, null);
 
         }
 
