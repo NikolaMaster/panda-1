@@ -1,22 +1,40 @@
-﻿@model PandaWebApp.FormModels.Register.Employer
-
+﻿@using PandaDataAccessLayer.DAL
 <script>
-    $(function() {
+    function onEmployerValidation(data) {
+        try {
+            var json = JSON.parse(data.responseText);
+            window.location.replace(json.path);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+    $(function () {
+        onEmployerValidation();
         $('#registerTabs').tabs();
-    });
+        $('body').on('change', '[id=CompanyType]', function () {
+            var checked = $('[id=CompanyType]:checked');
+            if (checked.val() == "@Constants.RecroutingCompany") {
+                    $('#companySubTypePlace').hide();
+                } else {
+                    $('#companySubTypePlace').show();
+                }
+            });
+        });
 </script>
-<div id="registerTabs">
+    <div id="registerTabs">
         <ul>
             <li><a href="#company">Представитель компании</a></li>
             <li><a href="#privateEmployer">Частный работодатель</a></li>
             <li><a href="#privateRecrouter">Частный рекрутер</a></li>
         </ul>
-    <div id="company">
-        @{ Html.RenderAction("CreateCompany"); }
+        <div id="company">
+            @{ Html.RenderAction("CreateCompany"); }
+        </div>
+        <div id="privateEmployer">
+            @{ Html.RenderAction("CreatePrivateEmployer"); }
+        </div>
+        <div id="privateRecrouter">
+            @{ Html.RenderAction("CreatePrivateRecruiter"); }
+        </div>
     </div>
-    <div id="privateEmployer">
-    </div>
-    <div id="privateRecrouter">
-    </div>
-</div>
-            

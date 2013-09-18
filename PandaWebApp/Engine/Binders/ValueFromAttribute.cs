@@ -80,7 +80,7 @@ namespace PandaWebApp.Engine.Binders
         public static void AttributesFromModel<TModel>(TModel model, IEnumerable<AttribValue> attributeValues, DataAccessLayer dataAccessLayer)
         {
 
-            var type = typeof(TModel);
+            var type = model.GetType();
             var properties = type.GetProperties()
                 .Where(x => Attribute.IsDefined(x, typeof(ValueFromAttribute)))
                 .Select(x => new

@@ -1,43 +1,16 @@
-﻿@using PandaDataAccessLayer.DAL
-@model PandaWebApp.FormModels.CompanyRegister
+﻿@model PandaWebApp.FormModels.PrivateEmployerRegister
 @{
     var companySubTypeValues = (IEnumerable<SelectListItem>)ViewBag.CompanySubTypeValues;
     var cityValues = (IEnumerable<SelectListItem>) ViewBag.CityValues;
 }
 
-@using (Ajax.BeginForm("CreateCompany", "Employer", new AjaxOptions
+@using (Ajax.BeginForm("CreatePrivateEmployer", "Employer", new AjaxOptions
     {
-        UpdateTargetId = "company",
+        UpdateTargetId = "privateEmployer",
         HttpMethod = "POST",
-        OnComplete = "onEmployerValidation"
+        OnSuccess = "onEmployerValidation"
     }))
 {
-    <h1>Информация о компании</h1>
-    <hr/>
-    <div class="editor">
-        <div class="editor-label">
-            @Html.LabelFor(x =>x.EmployerName)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(x => x.EmployerName)
-            <div class="editor-company-type">
-                @Html.RadioButtonFor(x => x.CompanyType, Constants.DirectEmployer, new { @checked = "checked" })<label>@Constants.DirectEmployer</label>
-                @Html.RadioButtonFor(x => x.CompanyType, Constants.RecroutingCompany) <label>@Constants.RecroutingCompany</label>
-            </div>
-            @Html.ValidationMessageFor(x => x.EmployerName)
-        </div>
-    </div>
-    <div class="editor">
-        <div id="companySubTypePlace">
-            <div class="editor-label">
-                @Html.LabelFor(x =>x.CompanySubType)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(x => x.CompanySubType, companySubTypeValues, string.Empty)
-                @Html.ValidationMessageFor(x => x.CompanySubType)
-            </div>
-        </div>
-    </div>
     <div class="editor">
         <div class="editor-label">
             @Html.LabelFor(x =>x.City)
@@ -47,9 +20,6 @@
             @Html.ValidationMessageFor(x => x.City)
         </div>
     </div>
-
-    <h1>Информация о себе (будет доступна только администратору сайта)</h1>
-    <hr/>
     <div class="editor">
         <div class="editor-label">
             @Html.LabelFor(x =>x.FirstName)

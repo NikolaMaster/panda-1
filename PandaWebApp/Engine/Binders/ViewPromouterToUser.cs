@@ -70,6 +70,7 @@ namespace PandaWebApp.Engine.Binders
 
         private void getDesiredWork(string value, Promouter dest)
         {
+            dest.DesiredWork = new List<PromouterForm.DesiredWorkUnit>();
             if (string.IsNullOrEmpty(value))
                 return;
 
@@ -118,6 +119,7 @@ namespace PandaWebApp.Engine.Binders
 
         private void getDesiredTimeOfWork(string value, Promouter dest)
         {
+            dest.DesiredWorkTime = new List<Promouter.TimeOfWorkUnit>();
             if (string.IsNullOrEmpty(value)) 
                 return;
 
@@ -201,6 +203,7 @@ namespace PandaWebApp.Engine.Binders
 
         private void getWorkExperience(string value, Promouter dest)
         {
+            dest.WorkExperience = new List<Promouter.WorkExperienceUnit>();
             if (string.IsNullOrEmpty(value)) 
                 return;
 

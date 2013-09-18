@@ -1,19 +1,48 @@
-﻿@model PandaWebApp.FormModels.Register.Promouter
-@{
-    ViewBag.Title = "Create";
-}
+﻿@model PandaWebApp.FormModels.PromouterRegister
 
-@using (Html.BeginForm())
+<div id="promouter">
+@using (Ajax.BeginForm("Create", "Promouter", new AjaxOptions
+    {
+        UpdateTargetId = "promouter",
+        HttpMethod = "POST",
+        OnComplete = "onPromouterValidation"
+    }))
 {
-    @Html.ValidationSummary();
-    
-    <div class="label">Почта</div>
-    <div class="editor">@Html.TextBoxFor(model => model.Email)</div>
-    
-    <div class="label">Пароль</div>
-    <div class="editor">@Html.PasswordFor(model => model.Password)</div>
-    
-    <div class="lebel">Подтверждение пароля</div>
-    <div class="editor">@Html.PasswordFor(model => model.PasswordConfirmation)</div>
-    <input type="submit" value="Создать" />
+    <div class="editor">
+        <div class="editor-label">
+            @Html.LabelFor(x =>x.Email)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(x => x.Email)
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+    </div>
+    <div class="editor">
+        <div class="editor-label">
+            @Html.LabelFor(x =>x.Password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(x => x.Password)
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+    </div>
+    <div class="editor">
+        <div class="editor-label">
+            @Html.LabelFor(x =>x.PasswordConfirmation)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(x => x.PasswordConfirmation)
+            @Html.ValidationMessageFor(x => x.PasswordConfirmation)
+        </div>
+    </div>
+
+    <hr/>
+    <div class="editor">
+        <div class="editor-label">
+        </div>
+        <div class="editor-field">
+            <button type="submit" class="center-aligned">Зарегестрироваться</button>
+        </div>
+    </div>
 }
+</div>

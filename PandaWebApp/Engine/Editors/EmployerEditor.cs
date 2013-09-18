@@ -55,27 +55,31 @@ namespace PandaWebApp.Engine.Editors
 
             ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
 
-            //vacancies
-            foreach (var vacancy in source.Vacancies.OrderBy(x => x.CreationDate))
+            if (source.Vacancies != null)
             {
-                var checklist = DataAccessLayer.GetById<Checklist>(vacancy.Id);
-
-                DataAccessLayer.ClearChecklist(checklist);
-
-                foreach (var attribute in DataAccessLayer.GetAttributes(DataAccessLayer.Constants.EmployerChecklistType.Id))
+                //vacancies
+                foreach (var vacancy in source.Vacancies.OrderBy(x => x.CreationDate))
                 {
-                    var attributeValue = new AttribValue
+                    var checklist = DataAccessLayer.GetById<Checklist>(vacancy.Id);
+
+                    DataAccessLayer.ClearChecklist(checklist);
+
+                    foreach (
+                        var attribute in
+                            DataAccessLayer.GetAttributes(DataAccessLayer.Constants.EmployerChecklistType.Id))
                     {
-                        Attrib = attribute,
-                        AttribId = attribute.Id,
-                        ChecklistId = checklist.Id
-                    };
+                        var attributeValue = new AttribValue
+                        {
+                            Attrib = attribute,
+                            AttribId = attribute.Id,
+                            ChecklistId = checklist.Id
+                        };
 
-                    checklist.AttrbuteValues.Add(attributeValue);
+                        checklist.AttrbuteValues.Add(attributeValue);
+                    }
+
+                    ValueFromAttributeConverter.AttributesFromModel(vacancy, checklist.AttrbuteValues, DataAccessLayer);
                 }
-
-                ValueFromAttributeConverter.AttributesFromModel(vacancy, checklist.AttrbuteValues, DataAccessLayer);
-
             }
         }
 

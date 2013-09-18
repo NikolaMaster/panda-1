@@ -292,3 +292,18 @@ ul.list-style { margin-left: 20px; }
 	right: 0;
 	top: 190px;
 }
+
+.editor { margin-bottom: 5px; }
+.editor-label { float: left; clear: both; }
+.editor-label label { font-size: 16px; display: block; }
+
+.editor-field { margin-left: 200px; font-size: 16px; }
+
+.editor-field input, .editor-field select{ font-size: 16px; width: 300px;}
+
+.editor-field-country-code { width: 50px !important;float: left; margin-right: 5px;}
+.editor-field-code { width: 50px !important;float: left; margin-right: 5px; }
+.editor-field-number { width: 190px !important; }
+
+.editor-company-type input { float: left; font-size: 11px; margin-left: 0px;width: auto; }
+.editor-company-type label { float: left; font-size: 11px; margin-right: 5px;}

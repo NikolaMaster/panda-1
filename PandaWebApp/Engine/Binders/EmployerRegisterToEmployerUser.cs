@@ -9,23 +9,21 @@ using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Engine.Binders
 {
-    public class EmployerRegisterToEmployerUser : BaseDataAccessLayerBinder<CompanyRegister, EmployerUser>
+    public class EmployerRegisterToEmployerUser : BaseDataAccessLayerBinder<EmployerRegister, EmployerUser>
     {
         public EmployerRegisterToEmployerUser(DataAccessLayer dataAccessLayer)
             : base(dataAccessLayer)
         {
         }
 
-        public override void Load(CompanyRegister source, EmployerUser dest)
+        public override void Load(EmployerRegister source, EmployerUser dest)
         {
-            dest = DataAccessLayer.Create(new EmployerUser
-            {
-                Email = source.Email,
-                Password = Crypt.GetMD5Hash(source.Password),
-            });
+            dest.Email = source.Email;
+            dest.Password = Password.MakePassword(source.Password, DateTime.UtcNow);
+
+            ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
 
             var phoneEntity = DataAccessLayer.Create(new EntityList());
-
             var phoneNumber = DataAccessLayer.Create(new PhoneNumber
             {
                 CountryCode = DataAccessLayer.Get<DictValue>(source.Phone.CountryCode),
@@ -34,10 +32,18 @@ namespace PandaWebApp.Engine.Binders
                 EntityList = phoneEntity,
             });
 
-            ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
+            foreach (var attrib in dest.MainChecklist.AttrbuteValues)
+            {
+                switch (attrib.Attrib.Code)
+                {
+                    case Constants.MobilePhoneCode:
+                        attrib.Value = phoneEntity.Id.ToString();
+                        break;
+                }
+            }
         }
 
-        public override void InverseLoad(EmployerUser source, CompanyRegister dest)
+        public override void InverseLoad(EmployerUser source, EmployerRegister dest)
         {
             throw new Exception("Only edit bind allowed");
         }

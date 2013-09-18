@@ -343,39 +343,32 @@
         <div class="header">Опыт работы</div>
         <div class="exp">
             <div class="table-2">
-                @{
-                    <div class="column">
-                        @{
-                            var list = Model.Item1.WorkExperience as List<Promouter.WorkExperienceUnit>;
+                <div class="column">
+                    @{ var list = Model.Item1.WorkExperience.ToList(); }
 
-                            for (int iter = 0; iter <= list.Count() / 2; iter++)
-                        {
-                            <div class="row">
-                                    <p>Место работы @list[iter].Title</p>
-                                    <p>Кем работал @list[iter].WorkName</p>
-                                    <p>Время работы @list[iter].Hours</p>
-                            </div>
-                        }
-                        }
-                    </div>
+                    @for (int i = 0; i < (list.Count / 2 + list.Count % 2); i++)
+                    {
+                        <div class="row">
+                            <p>Место работы @list[i].Title</p>
+                            <p>Кем работал @list[i].WorkName</p>
+                            <p>Время работы @list[i].Hours</p>
+                        </div>
+                    }
+                </div>
+                <div class="column">
 
-                    <div class="column">
-                         @{
-                             var list2 = Model.Item1.WorkExperience as List<Promouter.WorkExperienceUnit>;
+                    @for (int i = list.Count / 2; i < list.Count; i++)
+                    {
+                        <div class="row">
+                            <p>Место работы @list[i].Title</p>
+                            <p>Кем работал @list[i].WorkName</p>
+                            <p>Время работы @list[i].Hours</p>
+                        </div>
+                    }
 
-                             for (int iter = list2.Count() / 2 + 1; iter < list2.Count(); iter++)
-                        {
-                            <div class="row">
-                                     <p>Место работы @list2[iter].Title</p>
-                                     <p>Кем работал @list2[iter].WorkName</p>
-                                     <p>Время работы @list2[iter].Hours</p>
-                            </div>
-                        }
-                         }
-                    </div>
+                </div>
 
-                    <div class="clear"></div>
-                }
+                <div class="clear"></div>
             </div>
         </div>
     </div>

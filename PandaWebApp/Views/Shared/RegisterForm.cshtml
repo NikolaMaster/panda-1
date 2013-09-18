@@ -1,0 +1,16 @@
+﻿<div id="registerForm" title="Регистрация">
+    <h1>Я ищу работу.</h1>
+    <script>
+        function onPromouterValidation(data) {
+            try {
+                var json = JSON.parse(data.responseText);
+                window.location.replace(json.path);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        }
+    </script>
+    @{ Html.RenderAction("Create", "Promouter"); }
+    @Html.ActionLink("Я работодатель", "Create", "Employer")
+</div>

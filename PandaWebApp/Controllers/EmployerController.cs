@@ -145,8 +145,7 @@ namespace PandaWebApp.Controllers
         public ActionResult CreateCompany()
         {
             prepareViewBag();
-            var model = new CompanyRegister();
-            return PartialView(model);
+            return PartialView();
         }
 
         [HttpPost]
@@ -155,13 +154,58 @@ namespace PandaWebApp.Controllers
             prepareViewBag();
             if (ModelState.IsValid)
             {
-                var binder = new EmployerRegisterToEmployerUser(DataAccessLayer);
-                var user = new EmployerUser();
-                binder.Load(model, user);
-                DataAccessLayer.DbContext.SaveChanges();
-                return PartialView(model);
+                var user = CreateEmployer(model);
+                return Json(new { path = "/Employer/Detail/" + user.Id });
             }
-            return PartialView(model);
+            return PartialView("CreateCompany");
+        }
+
+        [HttpGet]
+        public ActionResult CreatePrivateEmployer()
+        {
+            prepareViewBag();
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePrivateEmployer(PrivateEmployerRegister model)
+        {
+            prepareViewBag();
+            if (ModelState.IsValid)
+            {
+                var user = CreateEmployer(model);
+                return Json(new { path = "/Employer/Detail/" + user.Id });
+            }
+            return PartialView();
+        }
+
+
+        [HttpGet]
+        public ActionResult CreatePrivateRecruiter()
+        {
+            prepareViewBag();
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult CreatePrivateRecruiter(PrivateRecruiterRegister model)
+        {
+            prepareViewBag();
+            if (ModelState.IsValid)
+            {
+                var user = CreateEmployer(model);
+                return Json(new { path = "/Employer/Detail/" + user.Id });
+            }
+            return PartialView();
+        }
+
+        public EmployerUser CreateEmployer(EmployerRegister model)
+        {
+            var binder = new EmployerRegisterToEmployerUser(DataAccessLayer);
+            var user = DataAccessLayer.Create(new EmployerUser());
+            binder.Load(model, user);
+            DataAccessLayer.DbContext.SaveChanges();
+            return user;
         }
     }
 }
