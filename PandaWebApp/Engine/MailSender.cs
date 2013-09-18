@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
+using PandaWebApp.Properties;
 
 namespace PandaDataAccessLayer.Helpers
 {
@@ -37,7 +38,7 @@ namespace PandaDataAccessLayer.Helpers
                     mail.Attachments.Add(new Attachment(attachFile));
                 var client = new SmtpClient
                     {
-                        Host = PandaWebApp.Properties.Settings.Default.MainServer,
+                        Host = PandaWebApp.Properties.Settings.Default.MailServer,
                         Port = 587,
                         EnableSsl = true,
                         Credentials = new NetworkCredential(PandaWebApp.Properties.Settings.Default.MailLogin, PandaWebApp.Properties.Settings.Default.MailPassword),
@@ -59,7 +60,7 @@ namespace PandaDataAccessLayer.Helpers
             var guid = Guid.NewGuid();
             var confirmToken = Crypt.GetMD5Hash(guid.ToString());
 
-            var link = string.Format("http://localhost:4392/Authorization/Confirmation?userId={0}&token={1}", userId, confirmToken);
+            var link = string.Format("{2}Authorization/Confirmation?userId={0}&token={1}", userId, confirmToken, Settings.Default.SiteAddress);
             var bodyMessage = string.Format("Подтвердите пожалуйста, перейдя по ссылке {0}", link);
 
             dataAccessLayer.Create(new Confirmation
