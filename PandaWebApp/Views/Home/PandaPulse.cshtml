@@ -11,7 +11,7 @@
                         if (data != previousValue) {
                             $('#onlineUsers').slideUp({
                                 complete: function () {
-                                    $(this).data('previous-value', data).html(data)
+                                    $(this).data('previous-value', data).html(data);
                                 }
                             }).slideDown();
                         }
@@ -32,7 +32,7 @@
                     var counter = 0;
                     foreach (var entry in Model.Items)
                     {
-                        <li @(counter == 0 ? @"class=""first"" " : string.Empty)>
+                        <li class="@(counter == 0 ? @"first" : string.Empty)  @(entry.Operation)">
 				            <span class="icon"><img src="@ImageCreator.Create(entry.Image, 24, 24)" /></span>
 				            <span class="name">
                             @Html.ActionLink(entry.Name, "Detail", entry.User.ControllerNameByUser(), new { id = entry.User.Id }, new { })

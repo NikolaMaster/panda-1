@@ -141,11 +141,12 @@ namespace PandaWebApp.Controllers
             var pandaPulse = new PandaPulse
             {
                 Online = DataAccessLayer.OnlineUsers(),
-                Items = DataAccessLayer.TopRandom<UserBase>(OnlineUsersCount)
+                Items = DataAccessLayer.GetPulseUsers(OnlineUsersCount)
                     .Select(x =>
                     {
                         var t = new PandaPulse.Entry();
-                        binder.InverseLoad(x, t);
+                        binder.InverseLoad(x.User, t);
+                        t.Operation = x.Operation.Description;
                         return t;
                     })
             };

@@ -50,6 +50,8 @@ namespace PandaDataAccessLayer
         public DbSet<Confirmation> Confirmation { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
 
+        public DbSet<Pulse> Pulse { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserBase>().ToTable("UserBase");

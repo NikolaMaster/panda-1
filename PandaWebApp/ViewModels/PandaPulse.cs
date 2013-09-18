@@ -12,6 +12,7 @@ namespace PandaWebApp.ViewModels
         {
             public string Image { get; set; }
             public string Name { get; set; }
+            public string Operation { get; set; }
             public UserBase User { get; set; }
         }
 

@@ -70,6 +70,15 @@ namespace PandaDataAccessLayer.DAL
             return DbContext.Users.Count(x => x.Sessions.Any(y => EntityFunctions.DiffSeconds(DateTime.UtcNow, y.LastHit) < OnlineTimeout));
         }
 
+        public IEnumerable<Pulse> GetPulseUsers(int count)
+        {
+            return DbContext.Pulse.OrderBy(x => x.OperationDate)
+                            .ToList()
+                            .Where(x => !string.IsNullOrEmpty(GetPulseUserName(x.User)))
+                            .Take(count)
+                            .ToList();
+        }
+
         public string GetPulseUserName(UserBase user)
         {
             var promouter = user as PromouterUser;
@@ -106,6 +115,7 @@ namespace PandaDataAccessLayer.DAL
 
             if (employer != null)
             {
+              //  var employerType = 
                 var employerName = GetAttributeValue(employer.MainChecklist.Id, Constants.EmployerNameCode);
                 return employerName.Value;
             }
