@@ -1,5 +1,4 @@
-﻿
-<html>
+﻿<html>
     <head>
         <title>@ViewBag.Title</title>
         <meta charset="utf-8" />
@@ -18,11 +17,7 @@
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.ui.timepicker.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/custom/inplace-editor.js")"></script>
         <script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
-       
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/lightbox-2.6.min.js")"></script>
-       @*  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>*@
-        
         <script>
             function initializeDateTime() {
                 $(".datePicker").datepicker({ dateFormat: "dd.mm.yy" });
@@ -30,8 +25,6 @@
             }
 
             $(function() {
-                
-                $('#registerForm').tabs();
                 
                 $('#registerForm').dialog({
                     autoOpen: false,
@@ -45,22 +38,20 @@
                 $("#registerButton").click(function (e) {
                       e.preventDefault();
                       $("#registerForm").dialog("open");
+                      $("#registerForm").tabs({ active: 1 });
                 });
                 
                 $("#loginButton").click(function (e) {
                     e.preventDefault();
                     $("#registerForm").dialog("open");
+                    $("#registerForm").tabs({active : 0});
                 });
                
             });
         </script>
     </head>
     <body>
-
-        @Html.Partial("RegisterForm")
-
         <div id="top" class="top-panel layer zero"></div>
-		
         <div class="body layer one">
             <div class="header">
                 @Html.Partial("_AuthPanel")
@@ -165,6 +156,6 @@
             <div class="link"><p><a href="#">Контактная информация</a></p></div>
             <div class="logo">PromoPanda © 2013</div>
         </div>
-	
+	 @Html.Partial("RegisterForm")
     </body>
 </html>
