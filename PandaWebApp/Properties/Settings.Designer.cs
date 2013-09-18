@@ -26,9 +26,9 @@ namespace PandaWebApp.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("smtp.gmail.com")]
-        public string MainServer {
+        public string MailServer {
             get {
-                return ((string)(this["MainServer"]));
+                return ((string)(this["MailServer"]));
             }
         }
         
