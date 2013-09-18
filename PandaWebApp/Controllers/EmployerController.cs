@@ -38,23 +38,6 @@ namespace PandaWebApp.Controllers
             return PartialView(models);
         }
 
-        [HttpPost]
-        public ActionResult Create(FormModels.Register.Employer model)
-        {
-            if (ModelState.IsValid)
-            {
-                model.Password = Password.MakePassword(model.Password, DateTime.UtcNow);
-                var binder = new RegisterEmployerToUsers();
-                var entry = new EmployerUser();
-                binder.Load(model, entry);
-                DataAccessLayer.Create(entry);
-                DataAccessLayer.DbContext.SaveChanges();
-
-                return RedirectToAction("Detail", new { id = entry.Id });
-            }
-
-            return View(model);
-        }
 
         [HttpGet]
         public ActionResult Detail(Guid id)
