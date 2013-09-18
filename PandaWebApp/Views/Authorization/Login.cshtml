@@ -1,18 +1,5 @@
 ﻿@model PandaWebApp.FormModels.Login
 
-<script>
-    function onLoginValidation(data) {
-        try {
-            var json = JSON.parse(data.responseText);
-            window.location.replace(json.path);
-        }
-        catch (e) {
-            console.log(e);
-        }
-    }
-</script>
- 
-
 
 <div id="login">
 @using (Ajax.BeginForm("Login", "Authorization", new AjaxOptions

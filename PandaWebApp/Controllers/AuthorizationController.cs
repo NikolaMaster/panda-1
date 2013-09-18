@@ -30,11 +30,16 @@ namespace PandaWebApp.Controllers
 
         #region Login
 
-        public ActionResult Login(string returnUrl)
+        //public ActionResult Login(string returnUrl)
+        //{
+        //    var model = new FormModels.Login();
+        //    model.ReturnUrl = returnUrl;
+        //    return View(model);
+        //}
+
+        public ActionResult Login()
         {
-            var model = new FormModels.Login();
-            model.ReturnUrl = returnUrl;
-            return View(model);
+            return PartialView();
         }
 
         [HttpPost]
@@ -58,7 +63,7 @@ namespace PandaWebApp.Controllers
                 }
             }
 
-            return View(model);
+            return PartialView();
         }
 
         #endregion
@@ -73,7 +78,7 @@ namespace PandaWebApp.Controllers
 
         #endregion
 
-
+        
         [HttpGet]
         public ActionResult Confirmation(Guid userId, string token)
         {
@@ -89,7 +94,7 @@ namespace PandaWebApp.Controllers
                     DataAccessLayer.DeleteById<Confirmation>(confirmRecord.Id);
                     DataAccessLayer.UpdateById<UserBase>(userId, x => x.IsConfirmed = true);
                     DataAccessLayer.DbContext.SaveChanges();
-                    return View("Confirmation",isConfirm);
+                    return View();
                 }
                 else
                 {
