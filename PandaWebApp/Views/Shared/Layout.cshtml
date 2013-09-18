@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/south-street/jquery-ui-1.10.3.custom.min.css")" />
         <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/south-street/jquery.ui.timepicker.css")" />
         <link rel="stylesheet" href="@Url.Content("~/Content/css/style.css")" />
-        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/frameworks/jquery/jquery.fancybox-1.3.4.css")"/>
+        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/frameworks/jquery/lightbox.css")"/>
         <!-- include scripts there -->
       @*<script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-1.4.3.min.js")"></script>*@
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-1.9.1.js")"></script>
@@ -19,10 +19,7 @@
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/custom/inplace-editor.js")"></script>
         <script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
        
-        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.mousewheel-3.0.4.pack.js")"></script>
-        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.fancybox-1.3.4.pack.js")"></script> 
-        
-       <script type="text/javascript" src="@Url.Content("~/Content/js/AuthValidator.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/lightbox-2.6.min.js")"></script>
        @*  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>*@
         
@@ -33,23 +30,9 @@
             }
 
             $(function() {
-               
-              @*  $("a#one_photo").fancybox();
-
-                $("a[rel=group_photo]").fancybox({
-                    'transitionIn': 'none',
-                    'transitionOut': 'none',
-                    'titlePosition': 'over',
-                    'titleFormat': function (title, currentArray, currentIndex, currentOpts) {
-                        return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
-                    }
-                });
-*@
                 initializeDateTime();
-                
                 $("#dialog-form1").dialog({
                     autoOpen: false
-                    
                 });
                 
 

@@ -826,16 +826,16 @@ namespace PandaDataAccessLayer
             });
             DataAccessLayer.DbContext.SaveChanges();
 
+            
+           
+            //DataAccessLayer.Refresh(user);
+            //var confirmToken = Crypt.GetMD5Hash(user.Id.ToString());
+            //string link = string.Format("http://localhost:4392/Authorization/Confirmation?userId={0}&token={1}",user.Id,confirmToken);
+            //string bodyMessage = string.Format("Подтвердите пожалуйста, перейдя по ссылке {0}", link);
 
-            //TODO: delete
-            DataAccessLayer.Refresh(user);
-            var confirmToken = Crypt.GetMD5Hash(user.Id.ToString());
-            string link = string.Format("http://localhost:4392/Authorization/Confirmation?userId={0}&token={1}",user.Id,confirmToken);
-            string bodyMessage = string.Format("Подтвердите пожалуйста, перейдя по ссылке {0}", link);
-
-            DataAccessLayer.Create<Confirmation>(new Confirmation() {Token = confirmToken, UserId = user.Id});
-            //TODO: delete pass
-            MailSender.SendMail("smtp.gmail.com", "tmnsokol@gmail.com", "mccbnubv", "mailsokol@mail.ru"/*user.Email*/, "Подтверждение аккаунта", bodyMessage, null);
+            //DataAccessLayer.Create<Confirmation>(new Confirmation() {Token = confirmToken, UserId = user.Id});
+         
+            //MailSender.SendMail("smtp.gmail.com", "tmnsokol@gmail.com", "", "mailsokol@mail.ru"/*user.Email*/, "Подтверждение аккаунта", bodyMessage, null);
 
         }
 

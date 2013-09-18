@@ -9,8 +9,6 @@
     var core = AuthorizationCore.StaticCreate();
     var isGuest = core.IsGuest;
     var user = core.User;
-    var username = core.UserName;
-    var city = core.City;
 }   
 
 
@@ -29,9 +27,13 @@
     </div>
 					
     <div class="photo left">
-        <a id="one_photo" href="@ImageCreator.Create(Model.Item1.Photo, 256, 256)">
+        
+        <a href="@ImageCreator.Create(Model.Item1.Photo, 256, 256)" data-lightbox="one_photo"><img src="@ImageCreator.Create(Model.Item1.Photo, 128, 128)"/></a>
+        
+
+        @*<a id="one_photo" href="@ImageCreator.Create(Model.Item1.Photo, 256, 256)">
             <img src="@ImageCreator.Create(Model.Item1.Photo, 128, 128)" alt="one_photo" />
-        </a>
+        </a>*@
         @if (Model.Item1.ReadyForWork)
         {
             <span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
@@ -69,10 +71,16 @@
                 <div class="row">@Model.Item1.BirthDateString</div>
                 <div class="row">@Model.Item1.FullYears</div>
                 @{
-                    string isExist;
-                    isExist = Model.Item1.MedicalBook ? "есть" : "нет";
+                    string isExist = Model.Item1.MedicalBook ? "есть" : "нет";
                     <div class="row">@isExist</div>
-                    <div class="row">@Model.Item1.Car</div>
+                    if (!string.IsNullOrEmpty(Model.Item1.Car))
+                    {
+                        <div class="row">@Model.Item1.Car</div>
+                    }
+                    else
+                    {
+                        <div class="row">Нет</div>
+                    }
                 }
                
                <div class="row gap"></div>
@@ -159,7 +167,7 @@
                             break;
                         }
                         <li class="@(index == 0 ? "first" : "")">
-                            <a rel="group_photo" href="@ImageCreator.Create(item, 256, 256)">
+                            <a href="@ImageCreator.Create(item, 256, 256)" data-lightbox="photo-promouter-set">
                                 <img src="@ImageCreator.Create(item, 128, 128)"/>
                             </a>
                         </li>

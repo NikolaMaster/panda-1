@@ -13,7 +13,7 @@
                 foreach (var item in Model.Photos)
                 {
                     <li class="@(index == 0 ? "first" : "")">
-                        <a rel="group_photo" href="@ImageCreator.Create(item.SourceUrl, PhotoHeight*2, PhotoWidth*2)">
+                        <a data-lightbox="photo-promouter-set" href="@ImageCreator.Create(item.SourceUrl, PhotoHeight*2, PhotoWidth*2)">
                             <img src="@ImageCreator.Create(item.SourceUrl, PhotoHeight, PhotoWidth)"/>
                         </a>
                         @Ajax.ActionLink("Удалить", "Delete", "Album", new { photoId = item.Id }, new AjaxOptions{ UpdateTargetId = "album_"+@Model.Id })
