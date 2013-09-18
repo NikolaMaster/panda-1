@@ -10,9 +10,12 @@
 <div class="top-links content-width">
 @if (isGuest)
 {
-    <a href="#" class="first left middle">Выберите город</a>
-     <a class="second right middle-img" href="@Url.Action(WebConstants.LoginActionName, WebConstants.AuthorizationControllerName)"><img src="~/Content/img/enter-button.png" /></a>
+    <a href="#" class="first left middle">Выберите город</a>@*
+     <a class="second right middle-img" href="@Url.Action(WebConstants.LoginActionName, WebConstants.AuthorizationControllerName)"><img src="~/Content/img/enter-button.png" /></a>*@
 
+    
+    <a href="#" id="loginButton"  class="second right middle-img"><img src="~/Content/img/enter-button.png" /></a>
+    
     @* TODO - why only promouter ??? *@
     <a href="#" id="registerButton"  class="third right middle">Зарегистрироваться на сайте</a>
 }

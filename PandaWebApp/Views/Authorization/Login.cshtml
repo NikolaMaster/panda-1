@@ -1,19 +1,53 @@
 ﻿@model PandaWebApp.FormModels.Login
-@{
-    ViewBag.Title = "Авторизация";
-}
 
-<h2>Авторизация</h2>
-@using (Html.BeginForm())
+<script>
+    function onLoginValidation(data) {
+        try {
+            var json = JSON.parse(data.responseText);
+            window.location.replace(json.path);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+</script>
+ 
+
+
+<div id="login">
+@using (Ajax.BeginForm("Login", "Authorization", new AjaxOptions
+    {
+        UpdateTargetId = "login",
+        HttpMethod = "POST",
+        OnComplete = "onLoginValidation"
+    }))
 {
-    @Html.ValidationSummary()
-    @Html.HiddenFor(model => model.ReturnUrl)
-
-    <div class="label">@Html.DisplayNameFor(model => model.Email)</div>
-    <div class="editor">@Html.EditorFor(model => model.Email)</div>
-    
-    <div class="label">@Html.DisplayNameFor(model => model.Password)</div>
-    <div class="editor">@Html.EditorFor(model => model.Password)</div>
-    
-    <input type="submit" value="Авторизоваться" />
+     @Html.HiddenFor(model => model.ReturnUrl)
+    <div class="editor">
+        <div class="editor-label">
+            @Html.LabelFor(x =>x.Email)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(x => x.Email)
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+    </div>
+    <div class="editor">
+        <div class="editor-label">
+            @Html.LabelFor(x =>x.Password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(x => x.Password)
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+    </div>
+    <hr/>
+    <div class="editor">
+        <div class="editor-label">
+        </div>
+        <div class="editor-field">
+            <button type="submit" class="center-aligned">Войти</button>
+        </div>
+    </div>
 }
+</div>

@@ -1,16 +1,30 @@
-﻿<div id="registerForm" title="Регистрация">
-    <h1>Я ищу работу.</h1>
-    <script>
-        function onPromouterValidation(data) {
-            try {
-                var json = JSON.parse(data.responseText);
-                window.location.replace(json.path);
-            }
-            catch (e) {
-                console.log(e);
-            }
+﻿<script>
+    function onPromouterValidation(data) {
+        try {
+            var json = JSON.parse(data.responseText);
+            window.location.replace(json.path);
         }
-    </script>
-    @{ Html.RenderAction("Create", "Promouter"); }
-    @Html.ActionLink("Я работодатель", "Create", "Employer")
+        catch (e) {
+            console.log(e);
+        }
+    }
+</script>
+ 
+
+
+<div id="registerForm">
+    <h1>Я ищу работу.</h1>
+    <ul>
+        <li><a href="#login">Авторизация</a></li>
+        <li><a href="#register">Регистрация</a></li>
+            
+    </ul>
+    <div id="login">
+        @{ Html.RenderAction("Create", "Promouter"); }
+        @Html.ActionLink("Я работодатель", "Create", "Employer")
+    </div>
+    <div id="register">
+        @{ Html.RenderAction("Login", "Authorization"); }
+       
+    </div>
 </div>

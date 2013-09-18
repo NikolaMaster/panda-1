@@ -45,7 +45,16 @@ namespace PandaWebApp.Controllers
                 var res = AuthorizationCore.StaticCreate().Login(model.Email, model.Password);
                 if (res)
                 {
-                    return WhereToRedirect(model.ReturnUrl);
+                    var core = AuthorizationCore.StaticCreate();
+                    if (core.User is EmployerUser)
+                    {
+                        return Json(new { path = "/Employer/Detail/" + core.User.Id });
+                        
+                    }
+                    else
+                    {
+                        return Json(new { path = "/Promouter/Detail/" + core.User.Id });
+                    }
                 }
             }
 
