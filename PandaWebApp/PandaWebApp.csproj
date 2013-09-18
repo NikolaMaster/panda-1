@@ -643,6 +643,8 @@
     <Content Include="Views\Admin\_editCoinsPartial.cshtml" />
     <Content Include="Views\Admin\EditUserCoins.cshtml" />
     <Content Include="Views\Shared\AuthForm.cshtml" />
+    <Content Include="Views\Employer\CreateCompany.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

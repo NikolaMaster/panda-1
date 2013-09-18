@@ -18,14 +18,12 @@ namespace PandaWebApp.Engine.Binders
 
         public override void Load(CompanyRegister source, EmployerUser dest)
         {
-            dest = DataAccessLayer.Create(new EmployerUser
-            {
-                Email = source.Email,
-                Password = Crypt.GetMD5Hash(source.Password),
-            });
+            dest.Email = source.Email;
+            dest.Password = Crypt.GetMD5Hash(source.Password);
+
+            ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
 
             var phoneEntity = DataAccessLayer.Create(new EntityList());
-
             var phoneNumber = DataAccessLayer.Create(new PhoneNumber
             {
                 CountryCode = DataAccessLayer.Get<DictValue>(source.Phone.CountryCode),
@@ -34,7 +32,15 @@ namespace PandaWebApp.Engine.Binders
                 EntityList = phoneEntity,
             });
 
-            ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
+            foreach (var attrib in dest.MainChecklist.AttrbuteValues)
+            {
+                switch (attrib.Attrib.Code)
+                {
+                    case Constants.MobilePhoneCode:
+                        attrib.Value = phoneEntity.Id.ToString();
+                        break;
+                }
+            }
         }
 
         public override void InverseLoad(EmployerUser source, CompanyRegister dest)

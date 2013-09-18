@@ -311,7 +311,7 @@ namespace PandaDataAccessLayer
 
                 new Attrib
                 {
-                    AttribType = DataAccessLayer.GetAttribType(typeof(EntityList)),
+                    AttribType = DataAccessLayer.GetAttribType(typeof(string)),
                     Code = Constants.EmailCode
                 }
             };
@@ -425,7 +425,8 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Constants.EndWork,
                     DataAccessLayer.Constants.About,
                     DataAccessLayer.Constants.City,
-                    DataAccessLayer.Constants.Gender
+                    DataAccessLayer.Constants.Gender,
+                    DataAccessLayer.Constants.EmployerName,
                 };
 
             foreach (var attrib2Checklist in employer.Select(x => new Attrib2ChecklistType

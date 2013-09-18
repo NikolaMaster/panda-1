@@ -156,7 +156,7 @@ namespace PandaWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var binder = new EmployerRegisterToEmployerUser(DataAccessLayer);
-                var user = new EmployerUser();
+                var user = DataAccessLayer.Create(new EmployerUser());
                 binder.Load(model, user);
                 DataAccessLayer.DbContext.SaveChanges();
                 return PartialView(model);

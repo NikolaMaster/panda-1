@@ -28,13 +28,16 @@ namespace PandaDataAccessLayer.DAL
             {
                 if (attrbuteValue.Attrib.AttribType.Type != typeof (EntityList).FullName) 
                     continue;
-                var entityListId = Guid.Parse(attrbuteValue.Value);
-                var entityList = GetById<EntityList>(entityListId);
-                entityList.DesiredWork.Clear();
-                entityList.DesiredWorkTime.Clear();
-                entityList.WorkExpirience.Clear();
-                entityList.PhoneNumbers.Clear();
-                Delete(entityList);
+                if (attrbuteValue.Value != null)
+                {
+                    var entityListId = Guid.Parse(attrbuteValue.Value);
+                    var entityList = GetById<EntityList>(entityListId);
+                    entityList.DesiredWork.Clear();
+                    entityList.DesiredWorkTime.Clear();
+                    entityList.WorkExpirience.Clear();
+                    entityList.PhoneNumbers.Clear();
+                    Delete(entityList);
+                }
             }
             checklist.AttrbuteValues.Clear();
         }
