@@ -8869,7 +8869,7 @@ $.widget( "ui.dialog", {
 		minWidth: 150,
 		modal: false,
 		position: {
-			my: "center",
+		    my: "center",
 			at: "center",
 			of: window,
 			collision: "fit",

@@ -46,7 +46,8 @@ namespace PandaDataAccessLayer
         public DbSet<StaticPageUnit> StaticPageUnit { get; set; }
         //CoinsInfo
         public DbSet<CoinsInfo> CoinsInfo { get; set; }
-
+        //Confirmation
+        public DbSet<Confirmation> Confirmation { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

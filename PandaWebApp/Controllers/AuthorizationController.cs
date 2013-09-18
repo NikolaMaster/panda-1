@@ -1,4 +1,6 @@
-﻿using PandaWebApp.Engine;
+﻿using PandaDataAccessLayer.Entities;
+using PandaDataAccessLayer.Helpers;
+using PandaWebApp.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Web.Mvc;
 
 namespace PandaWebApp.Controllers
 {
-    public class AuthorizationController : Controller
+    public class AuthorizationController : ModelCareController
     {
         #region Helpers
 
@@ -62,5 +64,32 @@ namespace PandaWebApp.Controllers
 
         #endregion
 
+
+        [HttpGet]
+        public ActionResult Confirmation(Guid userId, string token)
+        {
+            var confirmRecord =
+                DataAccessLayer.Get<Confirmation>(x => x.UserId == userId && x.Token == token).FirstOrDefault();
+
+            if (confirmRecord != null)
+            {
+                var user = DataAccessLayer.Get<UserBase>(x => x.Id == userId).FirstOrDefault();
+                if (user != null && (DateTime.UtcNow - user.CreationDate).Hours < 24)
+                {
+                    string isConfirm = "Ваш аккаунт подтвержден";
+                    DataAccessLayer.DeleteById<Confirmation>(confirmRecord.Id);
+                    DataAccessLayer.UpdateById<UserBase>(userId, x => x.IsConfirmed = true);
+                    DataAccessLayer.DbContext.SaveChanges();
+                    return View("Confirmation",isConfirm);
+                }
+                else
+                {
+                    DataAccessLayer.DeleteById<Confirmation>(confirmRecord.Id);
+                    return HttpNotFound("404");
+                }
+            }
+
+            return HttpNotFound("404");
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿@model PandaWebApp.ViewModels.StaticPage
+
+<h2>Редактирование статичной страницы</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="editor">@Html.HiddenFor(model => model.Id)</div>
+
+    <div class="editor">@Html.HiddenFor(model => model.SeoEntry.Id)</div>
+
+    <div class="editor">@Html.HiddenFor(model => model.MvcAction.Action)</div>
+    <div class="editor">@Html.HiddenFor(model => model.MvcAction.Controller)</div>
+        
+    <div class="label">SeoEntry:</div>
+    <div class="label">Title</div>
+    <div class="editor">@Html.TextBoxFor(model => model.SeoEntry.Title)</div>
+    <div class="label">Keyword</div>
+    <div class="editor">@Html.TextBoxFor(model => model.SeoEntry.Keyword)</div>
+    <div class="label">Description</div>
+    <div class="editor">@Html.TextBoxFor(model => model.SeoEntry.Description)</div>
+    
+    <div class="label">Content:</div>
+    @Html.TextAreaFor(model => model.Content, new Dictionary<string, object>()
+        {
+            {"class", "ckeditor"}, {"name", "editor1"}
+        })
+     <input type="submit" value="Применить" />
+}

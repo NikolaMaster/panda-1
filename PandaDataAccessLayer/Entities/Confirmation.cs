@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,15 +8,11 @@ using System.Threading.Tasks;
 
 namespace PandaDataAccessLayer.Entities
 {
-    public class StaticPageUnit : IGuidIdentifiable
+    public class Confirmation :IGuidIdentifiable
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid Id { get; set; }
-        public virtual MvcAction MvcAction { get; set; }
-        public string Content { get; set; }
-
-        public StaticPageUnit()
-        {
-            Id = Guid.NewGuid();
-        }
+        public Guid UserId { get; set; }
+        public string Token { get; set; }
     }
 }

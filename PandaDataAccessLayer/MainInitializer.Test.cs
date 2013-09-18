@@ -28,107 +28,94 @@ namespace PandaDataAccessLayer
             addStaticPages();
         }
 
+        private void createStaticPage(string action,string controller,string content)
+        {
+            var seoEntry = DataAccessLayer.Create<SeoEntry>(new SeoEntry()
+            {
+                Title = action,
+                Keyword = "Keyword",
+                Description = "Description"
+            });
+            DataAccessLayer.DbContext.SaveChanges();
+
+            var mvcActions =
+                DataAccessLayer.Create<MvcAction>(new MvcAction()
+                {
+                    Action = action,
+                    Controller = controller,
+                    SeoEntry = seoEntry
+                });
+
+            DataAccessLayer.DbContext.SaveChanges();
+
+            DataAccessLayer.Create(new StaticPageUnit()
+            {
+                MvcAction = mvcActions,
+                Content = content
+            });
+
+            DataAccessLayer.DbContext.SaveChanges();
+        }
+
         private void addStaticPages()
         {
-            //add static pages
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "About",
-                Content = "О проекте"
-            });
+            var aboutContent = "О проекте";
+            createStaticPage("about","staticpage",aboutContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "Dictionary",
-                Content = "Словарь"
-            });
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "FAQ",
-                Content = "Вопрос-Ответ"
-            });
+            var fiveReasonsContent = "<div class=\"five-reasons\">" +
+                              "<div class=\"simple-delimiter\"></div>" +
+                              "<div class=\"simple-bg\"></div>" +
+                              "<div class=\"reasons left\">" +
+                              "<h1>5 причин, по которым стоит заказать услуги у нас</h1>" +
+                              "<ul>" +
+                              "<li>Только проверенные участники проходят отбор</li>" +
+                              "<li>Вы сами выбираете исполнителя</li>" +
+                              "<li>0% комиссии для заказчиков</li>" +
+                              "<li>Оперативный подход</li>" +
+                              "<li>Простой и понятный интерфейс</li>" +
+                              "</ul>" +
+                              "</div>" +
+                              "<div class=\"reasons-image right\"><img src=\"/Content/img/five-resons.png\" /></div>" +
+                              "<div class=\"clear\"></div>" +
+                              "</div>";
+            createStaticPage("Fivereasons", "staticpage", fiveReasonsContent);
+                       
+            var dictionaryContent = "Словарь";
+            createStaticPage("Dictionary","staticpage",dictionaryContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "Contacts",
-                Content = "Контакты"
-            });
+            var FAQContent = "Вопрос-Ответ";
+            createStaticPage("FAQ","staticpage",FAQContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "PaidServices",
-                Content = "Платные услуги"
-            });
+            var contactsContent = "Контакты";
+            createStaticPage("Contacts","staticpage",contactsContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "Commercial",
-                Content = "Реклама на сайте"
-            });
+            var paidServicesContent = "Платные услуги";
+            createStaticPage("PaidServices","staticpage",paidServicesContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "SiteTerms",
-                Content = "Условия пользования сайтом"
-            });
+            var commercialContent = "Реклама на сайте";
+            createStaticPage("Commercial","staticpage",commercialContent);
+           
+            var siteTermsContent = "Условия пользования сайтом";
+            createStaticPage("SiteTerms","staticpage",siteTermsContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "ToWorker",
-                Content = "Работодателям"
-            });
+            var toWorkerContent = "Работодателям";
+            createStaticPage("ToWorker","staticpage",toWorkerContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "Regulations",
-                Content = "Правила сайта"
-            });
+            var regulationsContent = "Правила сайта";
+            createStaticPage("Regulations","staticpage",regulationsContent);
+                      
+            var applicantsContent = "Соискателям";
+            createStaticPage("Applicants","staticpage",applicantsContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "Applicants",
-                Content = "Соискателям"
-            });
+            var newcomersContent = "Советы новичкам";
+            createStaticPage("Newcomers","staticpage",newcomersContent);
 
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "Tips for Newcomers",
-                Content = "Советы новичкам"
-            });
-
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "Useful Articles",
-                Content = "Полезные статьи"
-            });
-
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "Help",
-                Content = "Помощь"
-            });
-
-            DataAccessLayer.Create(new StaticPageUnit()
-            {
-                Code = "FiveReasons",
-                Content = "<div class=\"five-reasons\">" +
-                        "<div class=\"simple-delimiter\"></div>" +
-                        "<div class=\"simple-bg\"></div>" +
-                        "<div class=\"reasons left\">" +
-                            "<h1>5 причин, по которым стоит заказать услуги у нас</h1>" +
-                            "<ul>" +
-                                "<li>Только проверенные участники проходят отбор</li>" +
-                                "<li>Вы сами выбираете исполнителя</li>" +
-                                "<li>0% комиссии для заказчиков</li>" +
-                                "<li>Оперативный подход</li>" +
-                                "<li>Простой и понятный интерфейс</li>" +
-                            "</ul>" +
-                        "</div>" +
-                        "<div class=\"reasons-image right\"><img src=\"/Content/img/five-resons.png\" /></div>" +
-                        "<div class=\"clear\"></div>" +
-                    "</div>"
-            });
+            var useful_articlesContent = "Полезные статьи";
+            createStaticPage("UsefulArticles","staticpage",useful_articlesContent);
+              
+            var helpContent = "Полезные статьи";
+            createStaticPage("Help","staticpage",helpContent);
         }
 
 
@@ -512,7 +499,7 @@ namespace PandaDataAccessLayer
             var user = DataAccessLayer.Create(new PromouterUser
             {
                 Email = "ivan@gmail.com",
-                Password = "123",
+                Password = "123"
             });
 
             DataAccessLayer.Create(new Session
@@ -838,6 +825,18 @@ namespace PandaDataAccessLayer
                 Rating = 1
             });
             DataAccessLayer.DbContext.SaveChanges();
+
+
+            //TODO: delete
+            DataAccessLayer.Refresh(user);
+            var confirmToken = Crypt.GetMD5Hash(user.Id.ToString());
+            string link = string.Format("http://localhost:4392/Authorization/Confirmation?userId={0}&token={1}",user.Id,confirmToken);
+            string bodyMessage = string.Format("Подтвердите пожалуйста, перейдя по ссылке {0}", link);
+
+            DataAccessLayer.Create<Confirmation>(new Confirmation() {Token = confirmToken, UserId = user.Id});
+            //TODO: delete pass
+            MailSender.SendMail("smtp.gmail.com", "tmnsokol@gmail.com", "mccbnubv", "mailsokol@mail.ru"/*user.Email*/, "Подтверждение аккаунта", bodyMessage, null);
+
         }
 
         public void addUser5()

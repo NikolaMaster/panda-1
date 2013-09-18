@@ -16,6 +16,7 @@ namespace PandaDataAccessLayer.Entities
 
         public int Coins { get; set; }
         public bool IsAdmin { get; set; }
+        public bool IsConfirmed { get; set; }
         public DateTime CreationDate { get; set; }
         public virtual SeoEntry SeoEntry { get; set; }
         public virtual Photo Avatar { get; set; }
@@ -41,6 +42,7 @@ namespace PandaDataAccessLayer.Entities
                 Albums = new List<Album>();
 
             CreationDate = DateTime.UtcNow;
+            IsConfirmed = false;
         }
     }
 }

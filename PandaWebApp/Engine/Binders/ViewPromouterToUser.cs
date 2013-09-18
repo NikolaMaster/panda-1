@@ -34,6 +34,7 @@ namespace PandaWebApp.Engine.Binders
             dest.Coins = source.Coins;
             dest.Phone = new PhoneUnit();
             dest.DesiredWork = new List<PromouterForm.DesiredWorkUnit>();
+            dest.AccountConfirmed = source.IsConfirmed;
             //get main album
             var firstOrDefault = source.Albums.FirstOrDefault(x => x.Name == "Основной альбом");
             if (firstOrDefault != null)

@@ -2,4 +2,13 @@
 
 @Html.Raw(Model.Content)
 
-<div><a href="@Url.Action("Panel1","Admin", new { pageId = Model.Id})">Отредактировать</a></div>
+@{
+    var core = AuthorizationCore.StaticCreate();
+    var isGuest = core.IsGuest;
+    var user = core.User;  
+
+    if (!isGuest && user.IsAdmin)
+    {
+        <div><a href="@Url.Action("EditStaticPage", "StaticPage", new {pageId = Model.Id})">Отредактировать</a></div>
+    }
+}

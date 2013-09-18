@@ -151,6 +151,7 @@
     <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Binders\ViewEmployerSearchViewToChecklist.cs" />
+    <Compile Include="Engine\MailSender.cs" />
     <Compile Include="Engine\WebConstants.cs" />
     <Compile Include="Engine\Editors\BaseEditor.cs" />
     <Compile Include="Engine\Editors\EmployerEditor.cs" />
@@ -175,7 +176,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Admin.cs" />
     <Compile Include="ViewModels\PhoneUnit.cs" />
     <Compile Include="ViewModels\PromouterSearchView.cs" />
     <Compile Include="ViewModels\Blog.cs" />
@@ -615,7 +615,7 @@
     <Content Include="Views\Promouter\Edit.cshtml" />
     <Content Include="Views\Job\Index.cshtml" />
     <Content Include="Views\Employer\Edit.cshtml" />
-    <Content Include="Views\Admin\EditStaticPage.cshtml" />
+    <Content Include="Views\StaticPage\EditStaticPage.cshtml" />
     <Content Include="Views\WorkExperience\Index.cshtml" />
     <Content Include="Views\DesiredWorkTime\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\WorkExperience.cshtml" />
@@ -636,13 +636,13 @@
     <Content Include="Views\Search\Promouter.cshtml" />
     <Content Include="Views\Search\PromouterSearchResult.cshtml" />
     <Content Include="Views\Album\Album.cshtml" />
-    <Content Include="Views\StaticPage\IndexStaticPage.cshtml" />
     <Content Include="Views\Shared\_AuthPanel.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
     <Content Include="Views\Feedback\TopDialogFeedback.cshtml" />
     <Content Include="Views\Admin\_editCoinsPartial.cshtml" />
     <Content Include="Views\Admin\EditUserCoins.cshtml" />
-    <Content Include="Views\Shared\AuthForm.cshtml" />
+    <Content Include="Views\Authorization\AuthForm.cshtml" />
+    <Content Include="Views\Authorization\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PandaDataAccessLayer\PandaDataAccessLayer.csproj">

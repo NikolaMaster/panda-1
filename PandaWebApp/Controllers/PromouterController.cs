@@ -22,6 +22,7 @@ namespace PandaWebApp.Controllers
         public ActionResult Create()
         {
             var model = new FormModels.Register.Promouter();
+            
 
             return View();
         }
