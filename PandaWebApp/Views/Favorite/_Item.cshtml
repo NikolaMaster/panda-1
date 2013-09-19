@@ -1,0 +1,4 @@
+﻿@model PandaWebApp.ViewModels.FavoriteViewModel.Item
+
+<a href="@Url.Action("Detail", Model.Controller, new { id = Model.UserId })">@Model.UserName</a>
+<a href="javascript: removeFromFavorite('@Model.Id');">Удалить</a>

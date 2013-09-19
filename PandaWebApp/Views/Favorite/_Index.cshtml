@@ -1,0 +1,9 @@
+﻿@model PandaWebApp.ViewModels.FavoriteViewModel
+<ul>
+    @foreach (var item in Model.Items)
+    {
+        <li>
+        @{ Html.RenderPartial("_Item", item); }
+        </li>
+    }
+</ul>

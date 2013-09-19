@@ -12,6 +12,7 @@
 }   
 
 
+<a href="javascript:addToFavorite('@Model.Item1.UserId')">Добавить в избранное</a>			
 <div class="user">
     <div class="header">
         <div class="left">
@@ -25,7 +26,7 @@
         </div>
         <div class="clear"></div>
     </div>
-					
+	
     <div class="photo left">     
         <a href="@ImageCreator.Create(Model.Item1.Photo, 350 ,350)" data-lightbox="one_photo"><img src="@ImageCreator.Create(Model.Item1.Photo, 128, 128)"/></a>
 

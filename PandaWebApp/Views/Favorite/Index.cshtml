@@ -1,0 +1,11 @@
+﻿@model PandaWebApp.ViewModels.FavoriteViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="favorites">
+@{
+    Html.RenderPartial("_Index", Model);
+}
+</div>

@@ -15,6 +15,7 @@ namespace PandaDataAccessLayer.Entities
         public int Number { get; set; }
 
         public int Coins { get; set; }
+        public int MaxLikes { get; set; }
         public bool IsAdmin { get; set; }
         public bool IsConfirmed { get; set; }
         public DateTime CreationDate { get; set; }
@@ -22,6 +23,7 @@ namespace PandaDataAccessLayer.Entities
         public virtual Photo Avatar { get; set; }
         public virtual IEnumerable<Pulse> Pulse { get; set; }
 
+        public virtual ICollection<Favorite> Favorites { get; set; }
         public virtual ICollection<Checklist> Checklists { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }
         public virtual ICollection<Album> Albums { get; set; }
@@ -41,6 +43,8 @@ namespace PandaDataAccessLayer.Entities
                 Sessions = new List<Session>();
             if (Albums == null)
                 Albums = new List<Album>();
+            if (Favorites == null)
+                Favorites = new List<Favorite>();
 
             CreationDate = DateTime.UtcNow;
             IsConfirmed = false;

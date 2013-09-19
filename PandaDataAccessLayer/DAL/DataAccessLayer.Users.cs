@@ -134,5 +134,15 @@ namespace PandaDataAccessLayer.DAL
             throw new Exception("Incorrect user type");
         }
 
+        public UserBase FindUserBase(Guid id)
+        {
+            var user = GetById<UserBase>(id);
+            if (user == null)
+            {
+                throw new Exception("User not found!");
+            }
+            return user;
+        }
+
     }
 }

@@ -124,6 +124,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\DesiredWorkTimeController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
+    <Compile Include="Controllers\FavoriteController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
@@ -184,6 +185,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\FavoriteViewModel.cs" />
     <Compile Include="ViewModels\PhoneUnit.cs" />
     <Compile Include="ViewModels\PromouterSearchView.cs" />
     <Compile Include="ViewModels\Blog.cs" />
@@ -548,6 +550,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\favorites.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -564,6 +567,13 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\RegisterForm.cshtml" />
     <Content Include="Views\Photo\Edit.cshtml" />
+    <Content Include="Views\Favorite\_SuccessAdd.cshtml" />
+    <Content Include="Views\Favorite\_FailAdd.cshtml" />
+    <Content Include="Views\Favorite\_SuccessDelete.cshtml" />
+    <Content Include="Views\Favorite\_FailDelete.cshtml" />
+    <Content Include="Views\Favorite\_Item.cshtml" />
+    <Content Include="Views\Favorite\Index.cshtml" />
+    <Content Include="Views\Favorite\_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
