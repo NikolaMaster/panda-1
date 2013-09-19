@@ -733,10 +733,14 @@ button.ui-button::-moz-focus-inner {
 	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
 	padding: .2em;
 }
-.ui-tabs .ui-tabs-nav {
+.ui-tabs-nav
+{
 	margin: 0;
 	padding: .2em .2em 0;
+	width: 315px;
+	padding-left: 7px;
 }
+
 .ui-tabs .ui-tabs-nav li {
 	list-style: none;
 	float: left;

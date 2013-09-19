@@ -11,11 +11,11 @@ namespace PandaWebApp.FormModels
 {
     public class PromouterRegister
     {
-        [Required, EmailAddress, Display(Name = "Email")]
+        [Required(ErrorMessage = "Email: не заполнено!"), EmailAddress(ErrorMessage = "Email: некорректный"), Display(Name = "Email")]
         public string Email { get; set; }
-        [Required, CustomPasswordLength, Display(Name = "Пароль")]
+        [Required(ErrorMessage = "Пароль: не заполнено!"), CustomPasswordLength, Display(Name = "Пароль")]
         public string Password { get; set; }
-        [Required, Compare("Password"), Display(Name = "Подтверждение пароля")]
+        [Required(ErrorMessage = "Подтверждение пароля: не заполнено!"), Compare("Password", ErrorMessage = "Пароли не совпадают!"), Display(Name = "Подтверждение пароля")]
         public string PasswordConfirmation { get; set; }
     }
 }

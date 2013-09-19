@@ -7,16 +7,15 @@
         
         <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/south-street/jquery-ui-1.10.3.custom.min.css")" />
         <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/south-street/jquery.ui.timepicker.css")" />
+        <link rel="stylesheet" href="@Url.Content("~/Content/css/frameworks/jquery/lightbox.css")"/>
         <link rel="stylesheet" href="@Url.Content("~/Content/css/style.css")" />
-        <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/frameworks/jquery/lightbox.css")"/>
         <!-- include scripts there -->
-      @*<script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-1.4.3.min.js")"></script>*@
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-1.9.1.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery-ui-1.10.3.custom.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.unobtrusive-ajax.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/jquery.ui.timepicker.js")"></script>
-        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/custom/inplace-editor.js")"></script>
-        <script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/custom/inplace-editor.js")"></script><script type="text/javascript" src="@Url.Content("~/Content/ckeditor/ckeditor.js")"></script>
+
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/lightbox-2.6.min.js")"></script>
         <script>
             function initializeDateTime() {
@@ -32,7 +31,7 @@
                     height: 'auto',
                     resizable: false,
                     modal: true,
-                    position: { my: 'top', at: 'top', of: window}
+                    position: { my: 'top', at: 'top', of: window }
                 });
                
                 $("#registerButton").click(function (e) {

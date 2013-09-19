@@ -454,6 +454,7 @@
     <Content Include="Content\css\frameworks\jquery\lightbox.css" />
     <Content Include="Content\img\all-feedbacks-mark.png" />
     <Content Include="Content\img\cache\readme.txt" />
+    <Content Include="Content\img\coins-icon.png" />
     <Content Include="Content\img\company.png" />
     <Content Include="Content\img\company_avatar.jpg" />
     <Content Include="Content\img\del-0.png" />
@@ -513,7 +514,6 @@
     <Content Include="Content\img\simple-delimiter.png" />
     <Content Include="Content\img\top.png" />
     <Content Include="Content\img\woman.png" />
-    <Content Include="Content\js\AuthValidator.js" />
     <Content Include="Content\js\frameworks\custom\inplace-editor.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-1.9.1.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.js" />
