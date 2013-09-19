@@ -63,7 +63,8 @@ namespace PandaWebApp.FormModels
         public string Photo { get; set; }
         public string Email { get; set; }
 
-        public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
+        public IEnumerable<PhotoUnit> NewPhotos { get; set; }
+        public Guid UploadedPhotoId { get; set; }
 
         public PhoneUnit Phone { get; set; }
         public IList<AlbumUnit> Albums { get; set; }

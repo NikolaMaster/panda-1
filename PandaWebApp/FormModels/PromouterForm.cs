@@ -127,8 +127,8 @@ namespace PandaWebApp.FormModels
 
         public PhoneUnit Phone { get; set; }
 
-        public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
-
+        public IEnumerable<PhotoUnit> NewPhotos { get; set; }
+        public Guid UploadedPhotoId { get; set; }
         public IList<AlbumUnit> Albums { get; set; }
 
         public IList<DesiredWorkTimeUnit> DesiredWorkTime { get; set; }

@@ -125,6 +125,7 @@
     <Compile Include="Controllers\DesiredWorkTimeController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Engine\Authorize.cs" />
     <Compile Include="Engine\Binders\EmployerRegisterToEmployerUser.cs" />
@@ -167,6 +168,8 @@
     <Compile Include="FormModels\Authorize.cs" />
     <Compile Include="FormModels\EditCoinsForm.cs" />
     <Compile Include="FormModels\EmployerRegister.cs" />
+    <Compile Include="FormModels\PhotoForm.cs" />
+    <Compile Include="FormModels\PhotoUnit.cs" />
     <Compile Include="FormModels\PromouterRegister.cs" />
     <Compile Include="FormModels\PromouterSearchForm.cs" />
     <Compile Include="FormModels\EmployerForm.cs" />
@@ -451,6 +454,13 @@
     <Content Include="Content\ckeditor\skins\moono\images\lock.png" />
     <Content Include="Content\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="Content\ckeditor\styles.js" />
+    <Content Include="Content\css\frameworks\jquery\imgAreaSelect\border-anim-h.gif" />
+    <Content Include="Content\css\frameworks\jquery\imgAreaSelect\border-anim-v.gif" />
+    <Content Include="Content\css\frameworks\jquery\imgAreaSelect\border-h.gif" />
+    <Content Include="Content\css\frameworks\jquery\imgAreaSelect\border-v.gif" />
+    <Content Include="Content\css\frameworks\jquery\imgAreaSelect\imgareaselect-animated.css" />
+    <Content Include="Content\css\frameworks\jquery\imgAreaSelect\imgareaselect-default.css" />
+    <Content Include="Content\css\frameworks\jquery\imgAreaSelect\imgareaselect-deprecated.css" />
     <Content Include="Content\css\frameworks\jquery\lightbox.css" />
     <Content Include="Content\img\all-feedbacks-mark.png" />
     <Content Include="Content\img\cache\readme.txt" />
@@ -515,10 +525,13 @@
     <Content Include="Content\img\woman.png" />
     <Content Include="Content\js\AuthValidator.js" />
     <Content Include="Content\js\frameworks\custom\inplace-editor.js" />
+    <Content Include="Content\js\frameworks\jquery\imgAreaSelect\jquery.imgareaselect.pack.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-1.9.1.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.min.js" />
     <Content Include="Content\css\frameworks\jquery\south-street\jquery.ui.timepicker.css" />
+    <Content Include="Content\js\frameworks\jquery\imgAreaSelect\jquery.imgareaselect.js" />
+    <Content Include="Content\js\frameworks\jquery\imgAreaSelect\jquery.imgareaselect.min.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.ui.timepicker.js" />
     <Content Include="Content\js\frameworks\jquery\lightbox-2.6.min.js" />
     <Content Include="Global.asax" />
@@ -544,6 +557,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\RegisterForm.cshtml" />
+    <Content Include="Views\Photo\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

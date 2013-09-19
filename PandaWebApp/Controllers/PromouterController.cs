@@ -121,11 +121,19 @@ namespace PandaWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                model.NewPhotos = photos == null ? new List<HttpPostedFileBase>() : photos.Where(x => x != null);
+                model.NewPhotos = (photos == null ? new List<HttpPostedFileBase>() : photos.Where(x => x != null))
+                    .Select(x => new PhotoUnit
+                    {
+                        File = x
+                    });
                 var user = DataAccessLayer.GetById<PromouterUser>(model.UserId);
                 var editor = new PromouterEditor(DataAccessLayer);
                 editor.Edit(model, user);
                 DataAccessLayer.DbContext.SaveChanges();
+                if (model.NewPhotos.Any())
+                {
+                    return new RedirectResult(string.Format("/Photo/Edit/{0}", model.UploadedPhotoId));    
+                }
                 return new RedirectResult(string.Format("/Promouter/Edit/{0}", model.UserId));
             }
             
