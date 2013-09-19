@@ -107,7 +107,7 @@ namespace PandaWebApp.Engine
                 var users = dal.Get<UserBase>(x => x.Email == email).DefaultIfEmpty();
 
                 var userBases = users as UserBase[] ?? users.ToArray();
-                if (userBases.Any())
+                if (!userBases.Any())
                 {
                     return false;
                 }
