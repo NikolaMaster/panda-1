@@ -9,13 +9,10 @@ namespace PandaWebApp.FormModels
 {
     public class Login
     {
-        [Required, EmailAddress, Display(Name = "Введите Email")]
+        [Required(ErrorMessage = "Email: не заполнено!"), EmailAddress(ErrorMessage = "Email: некорректный"), Display(Name = "Email")]
         public string Email { get; set; }
-
-        [Required, CustomPasswordLength, Display(Name = "Введите пароль")]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Пароль: не заполнено!"), CustomPasswordLength, Display(Name = "Пароль")]
         public string Password { get; set; }
-
         public string ReturnUrl { get; set; }
     }
 }

@@ -16,4 +16,22 @@ namespace PandaWebApp.Engine
                 MaxPasswordLength + " символов";
         }
     }
+
+    public class CustomValidator : IValidatableObject
+    {
+        [Display(Name = "Email")]
+        public virtual string Email { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            List<ValidationResult> errors = new List<ValidationResult>();
+            if (string.IsNullOrEmpty(this.Email))
+            {
+                errors.Add(new ValidationResult("Введите название книги"));
+            }
+
+            return errors;
+        }
+    }
+
 }

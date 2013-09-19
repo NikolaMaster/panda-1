@@ -26,7 +26,7 @@
 						<a class="header__offers-selected" href="#">Выбранные вакансии</a> |
 						<a class="header__offers-saw" href="#">Вашу анкету смотрели</a><span class="header__offers-count">(26)</span>
 					</div>
-					<div class="header__coins button">
+					<div class="header__coins button hover">
 						<div class="header__coins-icon"></div>
 						<div class="header__coins-count">
 							<span class="header__coins-count-number">35</span>
@@ -61,416 +61,343 @@
 			</div>
 
 			<div class="content content-width">
-				<div class="base-content left">
-					<div class="user">
-						<div class="header">
-							<div class="left">
-								<img src="img/woman.png" />
-								<span class="user-name">Екатерина Андреевна</span>
-								<span class="user-number">#324562</span>
-							</div>
-							<div class="right user-status">
-								<img src="img/offline.png" />
-								<span>Был на сайте 20 минут назад</span>
-							</div>
-							
+				<div class="">
+					<div class="search">
+						<div class="search__header">Найти работу</div>
+						<div class="search__termContainer">
+							<div class="left"><input class="search__term base-input" type="text" name="term" /></div>
+							<div class="right search__startButton"><a href="#"><img src="img/search.png" /></a></div>
 							<div class="clear"></div>
 						</div>
-					
-						<div class="photo left">
-							<img src="" />
-							<span class="ready-to-work">ГОТОВ РАБОТАТЬ СЕЙЧАС</span>
+						<div class="search__linkContainer">
+							<a href="#" class="search__linkCollapse right">Свернуть поиск</a>
+							<div class="clear"></div>
 						</div>
-						<div class="info right">
-							<div class="table-2">
-								<div class="column">
-									<div class="row on-site">На сайте <span class="days">#DAYS#</span></div>
-									<div class="row">Дата рождения</div>
-									<div class="row">Количество полных лет</div>
-									<div class="row"><div class="icon left"><img src="img/medical-book.png" /></div>Мед. Книжка</div>
-									<div class="row"><div class="icon left"><img src="img/car.png" /></div>Автомобиль</div>
-									<div class="row gap"></div>
-									<div class="row"><div class="icon left"><img src="img/phone.png" /></div>Мобильный телефон</div>
-									<div class="row"><div class="icon left"><img src="img/mail.png" /></div>e-mail</div>
-									<div class="row">Желаемая цена за час работы</div>
-									<div class="row">Город</div>
-									<div class="row">Образование</div>
-
-								</div>
-								<div class="column">
-									<div class="row confirmed-true"><p class="right-aligned">Аккаунт подтвержден</p></div>
-									<div class="row">12.02.1985</div>
-									<div class="row">29</div>
-									<div class="row">есть</div>
-									<div class="row">Toyota Alteza</div>
-									<div class="row gap"></div>
-									<div class="row"><a href="#" class="open">открыть</a></div>
-									<div class="row"><a href="#" class="open">открыть</a></div>
-									<div class="row">300 р.</div>
-									<div class="row">Тюмень</div>
-									<div class="row">Высшее</div>
-								</div>
-								<div class="clear"></div>
-							</div>
-						</div>
-						<div class="photo-album clear">
-							<div class="header">Фото альбом портфолио</div>
-							<div class="album">
+						<div class="">
+							<div class="search__typeHeader">Тип</div>
+							<div class="search__typeContent">
 								<ul class="horiz">
-									<li class="first"><img src="" /></li>
-									<li><img src="" /></li>
-									<li><img src="" /></li>
-									<li><img src="" /></li>
-									<li><img src="" /></li>
-									<li class="first"><img src="" /></li>
-									<li><img src="" /></li>
-									<li><img src="" /></li>
-									<li><img src="" /></li>
-									<li><img src="" /></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all0" />Любой <i>(156)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all4" />Разнорабочий <i>(65)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all8" />Аниматор <i>(56)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all12" />Курьер <i>(23)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all1" />Промоутер <i>(64)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all5" />Мерчендайзер <i>(85)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all9" />Официант <i>(123)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all13" />Модель <i>(62)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all2" />Интервьюер <i>(852)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all6" />Хостес <i>(78)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all10" />Аудитор/чекер <i>(45)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all14" />Бармен <i>(35)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all3" />Промо-модель <i>(45)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all7" />Супервайзер <i>(7452)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all11" />Тайный покупатель <i>(232)</i></li>
+									<li class="search__typeItem"><input type="checkbox" class="base-input" name="all15" />Ростовая кукла <i>(65)</i></li>
 								</ul>
-							</div>
-							<div class="clear"></div>
-							<div class="more"><p>Больше фотографий</p></div>
-						</div>
-						
-						<div class="full-info">
-
-							<!-- parameters -->
-							<div class="table-2">
-
-								<div class="column">
-									<div class="row header">Внешние данные</div>
-									<div class="row">
-
-										<div class="table-2 inner-table">
-											
-											<div class="column">
-												<div class="row">Рост</div>
-												<div class="row">Телосложение</div>
-												<div class="row">Вес</div>
-												<div class="row">Тип кожи</div>
-												<div class="row">Цвет глаз</div>
-												<div class="row">Цвет волос</div>
-												<div class="row">Длина волос</div>
-											</div>
-
-											<div class="column">
-												<div class="row">176 см.</div>
-												<div class="row">спортивное</div>
-												<div class="row">66 кг.</div>
-												<div class="row">Смуглая</div>
-												<div class="row">Голубой</div>
-												<div class="row">Блондинко</div>
-												<div class="row">Длинные</div>
-											</div>
-
-											<div class="clear"></div>
-
-										</div>
-									</div>
-								</div>
-
-								<div class="column">
-									<div class="row header">Параметры и размеры</div>
-									<div class="row">
-										<div class="table-2 inner-table">
-											<div class="column">
-												<div class="row">Размер одежды</div>
-												<div class="row">Размер обуви</div>
-												<div class="row">Размер груди</div>
-											</div>
-
-											<div class="column">
-												<div class="row">48 (М)</div>
-												<div class="row">39</div>
-												<div class="row">2</div>
-											</div>
-
-											<div class="clear"></div>
-										</div>
-									</div>
-								</div>
-
-								<div class="clear"></div>
-
-							</div>
-							
-							<!-- intresting job -->
-							<div class="header">Интересующая работа</div>
-							<div class="table-2 intresting-work">
-								<div class="column">
-									<ul class="list-style">
-										<li>Мерчендайзер</li>
-										<li>Супервайзер</li>
-										<li>Курьер</li>
-										<li>Аудитор/чекер</li>
-										<li>Тайный покупатель</li>
-										<li>Промоутер</li>
-										<li>Аниматор</li>
-										<li>Промо-модель</li>
-									</ul>
-								</div>
-								<div class="column">
-									<ul class="list-style">
-										<li>Ростовая кукла</li>
-										<li>Интервьюер</li>
-										<li>Модель</li>
-										<li>Разнорабочий</li>
-										<li>Бармен</li>
-										<li>Официант</li>
-										<li>Хостес</li>
-									</ul>
-								</div>
 								<div class="clear"></div>
 							</div>
-						</div>
-
-						<div class="work-time">
-							<div class="header">Желаемое время работы</div>
-							<div class="table-7">
-								<div class="column even">
-									<div class="row header"><p class="center-aligned">Понедельник</p></div>
-									<div class="row"><p class="center-aligned">с 09:00 до 12:00</p></div>
-									<div class="row"><p class="center-aligned">с 14:00 до 21:00</p></div>
-								</div>
-								<div class="column odd">
-									<div class="row header"><p class="center-aligned">Вторник</p></div>
-									<div class="row"><p class="center-aligned">с 09:00 до 12:00</p></div>
-									<div class="row"><p class="center-aligned">с 14:00 до 21:00</p></div>
-								</div>
-								<div class="column even">
-									<div class="row header"><p class="center-aligned">Среда</p></div>
-									<div class="row"><p class="center-aligned">с 09:00 до 12:00</p></div>
-									<div class="row"><p class="center-aligned">с 14:00 до 21:00</p></div>
-								</div>
-								<div class="column odd">
-									<div class="row header"><p class="center-aligned">Четверг</p></div>
-									<div class="row"><p class="center-aligned">с 09:00 до 12:00</p></div>
-									<div class="row"><p class="center-aligned">с 14:00 до 21:00</p></div>
-								</div>
-								<div class="column even">
-									<div class="row header"><p class="center-aligned">Пятница</p></div>
-									<div class="row"><p class="center-aligned">с 09:00 до 12:00</p></div>
-									<div class="row"><p class="center-aligned">с 14:00 до 21:00</p></div>
-								</div>
-								<div class="column odd">
-									<div class="row header"><p class="center-aligned">Суббота</p></div>
-									<div class="row"><p class="center-aligned">с 09:00 до 12:00</p></div>
-									<div class="row"><p class="center-aligned">с 14:00 до 21:00</p></div>
-								</div>
-								<div class="column even">
-									<div class="row header"><p class="center-aligned">Воскресенье</p></div>
-									<div class="row"><p class="center-aligned">с 09:00 до 12:00</p></div>
-									<div class="row"><p class="center-aligned">с 14:00 до 21:00</p></div>
-								</div>
-
+							<div class="search__otherFilters">
+								<ul class="horiz top">
+									<li class="search__selectContainer"><select description="Тип занятости:"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li>
+									<li class="search__selectContainer"><select description="Город/регоин"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li>
+									<li class="search__selectContainer"><select description="Пол"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li>
+									<li class="search__selectContainer"><select description="Требования"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li>
+								</ul>
+								<ul class="horiz bottom">
+									<li class="search__selectContainer"><select description="Зарплата"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li>
+									<li class="search__selectContainer"><select description="Иностранный язык"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li>
+								</ul>
 								<div class="clear"></div>
 							</div>
-						</div>
-
-						<div class="intresting-things">
-							<div class="header">Интересы:</div>
-							<div class="things">
-								<p class="nothing">Пользователь еще не заполнил свои интересы, вы можете <a href="#">попросить его</a> заполнить свои интересы</p>
+							<div class="search_applyContainer">
+								<a href="#" class="search__applyLink right">Применить параметры</a>
+								<div class="clear"></div>
 							</div>
-						</div>
-
-						<div class="about">
-							<div class="header">О себе:</div>
-							<div class="things">
-								<p class="nothing">Пользователь еще не написал о себе, вы можете <a href="#">попросить его</a> рассказать о себе подробнее</p>
-							</div>
-						</div>
-
-						<div class="work-exp">
-							<div class="header">Опыт работы</div>
-							<div class="exp">
-								<div class="table-2">
-									
-									<div class="column">
-										<div class="row">
-											<p>Место работы</p>
-											<p>Кем работал</p>
-											<p>Время работы</p>
-										</div>
-										<div class="row">
-											<p>Место работы</p>
-											<p>Кем работал</p>
-											<p>Время работы</p>
-										</div>
-									</div>
-									<div class="column">
-										<div class="row">
-											<p>Место работы</p>
-											<p>Кем работал</p>
-											<p>Время работы</p>
-										</div>
-										<div class="row">
-											<p>Место работы</p>
-											<p>Кем работал</p>
-											<p>Время работы</p>
-										</div>
-									</div>
-
-									<div class="clear"></div>
-
-								</div>
-							</div>
-						</div>
-
-						<div class="simple-delimiter"></div>
-
-						<div class="feedbacks">
-							<div class="header">Мнение о промоутере</div>
-							<ul>
-								<li>
-									<div class="table-2 feedback">
-										<div class="column">
-											<img src="" />
-										</div>
-										<div class="column">
-											<div class="table-2">
-												<div class="column user-name">Анонимусович</div>
-												<div class="column stars"><p class="right-aligned">21.03.2013</p></div>
-												<div class="clear"></div>
-											</div>
-											<p class="feedback-body">
-												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia 
-											</p>
-										</div>
-										<div class="clear"></div>
-									</div>
-								</li>
-								<li>
-									<div class="table-2 feedback">
-										<div class="column">
-											<img src="" />
-										</div>
-										<div class="column">
-											<div class="table-2">
-												<div class="column user-name">Анонимусович</div>
-												<div class="column stars"><p class="right-aligned">21.03.2013</p></div>
-												<div class="clear"></div>
-											</div>
-											<p class="feedback-body">
-												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia 
-											</p>
-										</div>
-										<div class="clear"></div>
-									</div>
-								</li>
-								<li>
-									<div class="table-2 feedback">
-										<div class="column">
-											<img src="" />
-										</div>
-										<div class="column">
-											<div class="table-2">
-												<div class="column user-name">Анонимусович</div>
-												<div class="column stars"><p class="right-aligned">21.03.2013</p></div>
-												<div class="clear"></div>
-											</div>
-											<p class="feedback-body">
-												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia 
-											</p>
-										</div>
-										<div class="clear"></div>
-									</div>
-								</li>
-							</ul>
-							<div class="more"><p>Больше мнений</p></div>
-						</div>
-
-						<div class="promouter-top">
-							<div class="header">
-								Еще промоутеры
-							</div>
-							<ul class="album horiz">
-								<li class="rounded-borders-4"><img src="img/del-0.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-1.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-2.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-3.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-4.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-5.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-0.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-1.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-2.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-3.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-4.png" /></li>
-								<li class="rounded-borders-4"><img src="img/del-5.png" /></li>
-							</ul>
-							<p class="right-aligned clear"><a href="#HREF_TO_SEARCH#">начать поиск по исполнителям</a></p>
 						</div>
 					</div>
-				</div>
-				<div class="right-sidebar right">
-					<div class="pulse">
-						<div class="title">Панда пульс</div>
-						<ul>
-							<li class="temp"></li>
-							<li class="header">
-								<span class="left">ОНЛАЙН</span>
-								<span class="right"><a href="#">#TOTALUSERS#</a></span>
+					<div class="base-content left">
+						<div class="searchResult">
+							<div class="searchResult__header">Поиск вакансий в городе Тюмени</div>
+							<div class="searchResult__body">
+								<div class="right pager top"><img  src="img/left_pager.png" /><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">...</a><a href="#">54</a><img src="img/right_pager.png" /></div>
 								<div class="clear"></div>
+								<ul class="searchResult__blogList">
+									<li>
+										<div class="searchResult__blog">
+											<div class="searchResult__blog__part1 left"><img src="img/red-heart.png"></div>
+											<div class="searchResult__blog__part2 left"><img src="img/search_blog_index.png"></div>
+											<div class="searchResult__blog__part3 left">
+												<div class="left">
+													<div class="position left">Разнорабочий</div><div class="lifetime left">на сайте 15 дней</div>
+													<div class="clear"></div>
+													<ul>
+														<li class="bold">Стационар, куринные котлетки...</li>
+														<li>Дегустация(Тюмень)</li>
+														<li>Временная работа с 23 мая по 28 декабря (96 дней)</li>
+													</ul>
+												</div>
+											</div>
+											<div class="searchResult__blog__part4 left">
+												<div>
+													<div class="payment bold">200 руб/час</div>
+												</div>
+											</div>
+											<a class="companyPage" href="#">Страница компании</a>
+											<img class="searchResult__blog__bottomShadow right" src="img/resultSearch__blog__bottomShadow.png" />
+										</div>
+										<div class="clear"></div>
+									</li>
+									<li>
+										<div class="searchResult__blog">
+											<div class="searchResult__blog__part1 left"><img src="img/red-heart.png"></div>
+											<div class="searchResult__blog__part2 left"><img src="img/search_blog_index.png"></div>
+											<div class="searchResult__blog__part3 left">
+												<div class="left">
+													<div class="position left">Разнорабочий</div><div class="lifetime left">на сайте 15 дней</div>
+													<div class="clear"></div>
+													<ul>
+														<li class="bold">Стационар, куринные котлетки...</li>
+														<li>Дегустация(Тюмень)</li>
+														<li>Временная работа с 23 мая по 28 декабря (96 дней)</li>
+													</ul>
+												</div>
+											</div>
+											<div class="searchResult__blog__part4 left">
+												<div>
+													<div class="payment bold">200 руб/час</div>
+												</div>
+											</div>
+											<a class="companyPage" href="#">Страница компании</a>
+											<img class="searchResult__blog__bottomShadow right" src="img/resultSearch__blog__bottomShadow.png" />
+										</div>
+										<div class="clear"></div>
+									</li>
+									<li>
+										<div class="searchResult__blog">
+											<div class="searchResult__blog__part1 left"><img src="img/red-heart.png"></div>
+											<div class="searchResult__blog__part2 left"><img src="img/search_blog_index.png"></div>
+											<div class="searchResult__blog__part3 left">
+												<div class="left">
+													<div class="position left">Разнорабочий</div><div class="lifetime left">на сайте 15 дней</div>
+													<div class="clear"></div>
+													<ul>
+														<li class="bold">Стационар, куринные котлетки...</li>
+														<li>Дегустация(Тюмень)</li>
+														<li>Временная работа с 23 мая по 28 декабря (96 дней)</li>
+													</ul>
+												</div>
+											</div>
+											<div class="searchResult__blog__part4 left">
+												<div>
+													<div class="payment bold">200 руб/час</div>
+												</div>
+											</div>
+											<a class="companyPage" href="#">Страница компании</a>
+											<img class="searchResult__blog__bottomShadow right" src="img/resultSearch__blog__bottomShadow.png" />
+										</div>
+										<div class="clear"></div>
+									</li>
+									<li class="last">
+										<div class="searchResult__blog">
+											<div class="searchResult__blog__part1 left"><img src="img/red-heart.png"></div>
+											<div class="searchResult__blog__part2 left"><img src="img/search_blog_index.png"></div>
+											<div class="searchResult__blog__part3 left">
+												<div class="left">
+													<div class="position left">Разнорабочий</div><div class="lifetime left">на сайте 15 дней</div>
+													<div class="clear"></div>
+													<ul>
+														<li class="bold">Стационар, куринные котлетки...</li>
+														<li>Дегустация(Тюмень)</li>
+														<li>Временная работа с 23 мая по 28 декабря (96 дней)</li>
+													</ul>
+												</div>
+											</div>
+											<div class="searchResult__blog__part4 left">
+												<div>
+													<div class="payment bold">200 руб/час</div>
+												</div>
+											</div>
+											<a class="companyPage" href="#">Страница компании</a>
+											<img class="searchResult__blog__bottomShadow right" src="img/resultSearch__blog__bottomShadow.png" />
+										</div>
+										<div class="clear"></div>
+									</li>
+								</ul>
+								<div class="banner-side"></div>
+								<ul class="searchResult__blogList">
+									<li>
+										<div class="searchResult__blog">
+											<div class="searchResult__blog__part1 left"><img src="img/red-heart.png"></div>
+											<div class="searchResult__blog__part2 left"><img src="img/search_blog_index.png"></div>
+											<div class="searchResult__blog__part3 left">
+												<div class="left">
+													<div class="position left">Разнорабочий</div><div class="lifetime left">на сайте 15 дней</div>
+													<div class="clear"></div>
+													<ul>
+														<li class="bold">Стационар, куринные котлетки...</li>
+														<li>Дегустация(Тюмень)</li>
+														<li>Временная работа с 23 мая по 28 декабря (96 дней)</li>
+													</ul>
+												</div>
+											</div>
+											<div class="searchResult__blog__part4 left">
+												<div>
+													<div class="payment bold">200 руб/час</div>
+												</div>
+											</div>
+											<a class="companyPage" href="#">Страница компании</a>
+											<img class="searchResult__blog__bottomShadow right" src="img/resultSearch__blog__bottomShadow.png" />
+										</div>
+										<div class="clear"></div>
+									</li>
+									<li class="last">
+										<div class="searchResult__blog">
+											<div class="searchResult__blog__part1 left"><img src="img/red-heart.png"></div>
+											<div class="searchResult__blog__part2 left"><img src="img/search_blog_index.png"></div>
+											<div class="searchResult__blog__part3 left">
+												<div class="left">
+													<div class="position left">Разнорабочий</div><div class="lifetime left">на сайте 15 дней</div>
+													<div class="clear"></div>
+													<ul>
+														<li class="bold">Стационар, куринные котлетки...</li>
+														<li>Дегустация(Тюмень)</li>
+														<li>Временная работа с 23 мая по 28 декабря (96 дней)</li>
+													</ul>
+												</div>
+											</div>
+											<div class="searchResult__blog__part4 left">
+												<div>
+													<div class="payment bold">200 руб/час</div>
+												</div>
+											</div>
+											<a class="companyPage" href="#">Страница компании</a>
+											<img class="searchResult__blog__bottomShadow right" src="img/resultSearch__blog__bottomShadow.png" />
+										</div>
+										<div class="clear"></div>
+									</li>
+								</ul>
+								<div class="right pager bottom"><img  src="img/left_pager.png" /><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">...</a><a href="#">54</a><img src="img/right_pager.png" /></div>
+								<div class="clear"></div>
+								<div class="banner-side"></div>
+							</div>
+						</div>
+						<div class="search-company-top">
+						<div class="company-top">
+						<div class="header">
+							Топ 10 компаний региона
+						</div>
+						<ul class="album horiz">
+							<li class="first">
+								<img src="img/del-1-0.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">BMW</a></p>
+							</li>
+							<li>
+								<img src="img/del-1-1.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">Мухосранск ЛТД</a></p>
+							</li>
+							<li>
+								<img src="img/del-1-2.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">BMW</a></p>
+							</li>
+							<li>
+								<img src="img/del-1-3.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">Мухосранск ЛТД</a></p>
+							</li>
+							<li>
+								<img src="img/del-1-4.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">Мухосранск ЛТД</a></p>
 							</li>
 							<li class="first">
-								<span class="icon"><img src="img/man.png" /></span>
-								<span class="name"><a href="#">Максим Владимирович</a></span>
+								<img src="img/del-1-0.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">BMW</a></p>
 							</li>
 							<li>
-								<span class="icon"><img src="img/woman.png" /></span>
-								<span class="name"><a href="#">Фроська Павловна</a></span>
+								<img src="img/del-1-1.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">Мухосранск ЛТД</a></p>
 							</li>
 							<li>
-								<span class="icon"><img src="img/company.png" /></span>
-								<span class="name"><a href="#">Рога и копытца</a></span>
+								<img src="img/del-1-2.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">BMW</a></p>
 							</li>
 							<li>
-								<span class="icon"><img src="img/man.png" /></span>
-								<span class="name"><a href="#">Максим Владимирович</a></span>
+								<img src="img/del-1-3.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">Мухосранск ЛТД</a></p>
 							</li>
 							<li>
-								<span class="icon"><img src="img/woman.png" /></span>
-								<span class="name"><a href="#">Фроська Павловна</a></span>
-							</li>
-							<li>
-								<span class="icon"><img src="img/company.png" /></span>
-								<span class="name"><a href="#">Рога и копытца</a></span>
-							</li>
-							<li>
-								<span class="icon"><img src="img/man.png" /></span>
-								<span class="name"><a href="#">Максим Владимирович</a></span>
-							</li>
-							<li>
-								<span class="icon"><img src="img/woman.png" /></span>
-								<span class="name"><a href="#">Фроська Павловна</a></span>
-							</li>
-							<li>
-								<span class="icon"><img src="img/company.png" /></span>
-								<span class="name"><a href="#">Рога и копытца</a></span>
-							</li>
-							<li>
-								<span class="icon"><img src="img/man.png" /></span>
-								<span class="name"><a href="#">Максим Владимирович</a></span>
-							</li>
-							<li>
-								<span class="icon"><img src="img/woman.png" /></span>
-								<span class="name"><a href="#">Фроська Павловна</a></span>
-							</li>
-							<li>
-								<span class="icon"><img src="img/company.png" /></span>
-								<span class="name"><a href="#">Рога и копытца</a></span>
+								<img src="img/del-1-4.png" />
+								<p class="center-aligned"><a class="name" href="#HREF_TO_COMPANY#">Мухосранск ЛТД</a></p>
 							</li>
 						</ul>
-						<img src="img/pulse-bottom.png" />
 					</div>
-					
-					<div class="banner-side empty"></div>
-					<div class="banner-side empty"></div>
-					<div class="banner-side empty"></div>
-					<div class="banner-side empty"></div>
-					<div class="banner-side empty"></div>
-				</div>
+					</div>
+					</div>
+					<div class="right-sidebar right">
+						<div class="pulse">
+							<div class="title">Панда пульс</div>
+							<ul>
+								<li class="temp"></li>
+								<li class="header">
+									<span class="left">ОНЛАЙН</span>
+									<span class="right"><a href="#">3895495959</a></span>
+									<div class="clear"></div>
+								</li>
+								<li class="first">
+									<span class="icon"><img src="img/man.png" /></span>
+									<span class="name"><a href="#">Максим Владимирович</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/woman.png" /></span>
+									<span class="name"><a href="#">Фроська Павловна</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/company.png" /></span>
+									<span class="name"><a href="#">Рога и копытца</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/man.png" /></span>
+									<span class="name"><a href="#">Максим Владимирович</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/woman.png" /></span>
+									<span class="name"><a href="#">Фроська Павловна</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/company.png" /></span>
+									<span class="name"><a href="#">Рога и копытца</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/man.png" /></span>
+									<span class="name"><a href="#">Максим Владимирович</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/woman.png" /></span>
+									<span class="name"><a href="#">Фроська Павловна</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/company.png" /></span>
+									<span class="name"><a href="#">Рога и копытца</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/man.png" /></span>
+									<span class="name"><a href="#">Максим Владимирович</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/woman.png" /></span>
+									<span class="name"><a href="#">Фроська Павловна</a></span>
+								</li>
+								<li>
+									<span class="icon"><img src="img/company.png" /></span>
+									<span class="name"><a href="#">Рога и копытца</a></span>
+								</li>
+							</ul>
+							<img src="img/pulse-bottom.png" />
+						</div>
+						<div class="search__banners">
+							<div class="banner-side first"></div>
+							<div class="banner-side"></div>
+							<div class="banner-side"></div>
+						</div>
+					</div>
 				<div class="clear"></div>
 			</div>
 		</div>
