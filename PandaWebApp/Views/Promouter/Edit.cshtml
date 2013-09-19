@@ -17,12 +17,12 @@
         $(function () {
             $('#editPromouterTabs').tabs();
             $('#uploadPhotoButton').click(function () {
-                var count = $(this).data('-file-uploader-count') + 1;
+        /*        var count = $(this).data('-file-uploader-count') + 1;
                 $(this).data('-file-uploader-count', count);
                 $('#fileUploaders').append($('<input>')
                     .attr('id', count)
                     .attr('name', 'photos')
-                    .attr('type', 'file'));
+                    .attr('type', 'file'));*/
             });
         });
     </script> 
@@ -57,8 +57,10 @@
         <div id="photoTab">
             <div>@{ Html.RenderAction("Index", "Album", new { userId = Model.UserId }); }</div>
             <div>
-                <div id="fileUploaders"></div>
-                <button type="button" id="uploadPhotoButton"  data-file-uploader-count="0">Добавить фото</button>
+                <div id="fileUploaders">
+                    <input type="file" name="photos" id="1"/>
+                </div>
+              <!--  <button type="button" id="uploadPhotoButton"  data-file-uploader-count="0">Добавить фото</button> -->
             </div>
         </div>
         <div id="attribTab">

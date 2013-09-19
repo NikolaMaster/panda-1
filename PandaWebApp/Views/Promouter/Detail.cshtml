@@ -252,15 +252,15 @@
         <div class="table-2 intresting-work">
             <div class="column">
                 <ul class="list-style">
-                        @for (int i = 0; i < Model.Item1.DesiredWork.Count/2; i++)
-                        {
-                            <li>@Model.Item1.DesiredWork[i].Title</li>
-                        }
+                    @for (int i = 0; i < Model.Item1.DesiredWork.Count / 2 + Model.Item1.DesiredWork.Count % 2; i++)
+                    {
+                        <li>@Model.Item1.DesiredWork[i].Title</li>
+                    }
                 </ul>
             </div>
             <div class="column">
                 <ul class="list-style">
-                   @for (int i = Model.Item1.DesiredWork.Count / 2 + 1; i < Model.Item1.DesiredWork.Count; i++)
+                   @for (int i = Model.Item1.DesiredWork.Count / 2 + Model.Item1.DesiredWork.Count % 2; i < Model.Item1.DesiredWork.Count; i++)
                    {
                        <li>@Model.Item1.DesiredWork[i].Title</li>
                    }

@@ -57,6 +57,7 @@
     <Compile Include="Entities\Confirmation.cs" />
     <Compile Include="Entities\PhoneNumber.cs" />
     <Compile Include="Entities\CoinsInfo.cs" />
+    <Compile Include="Entities\Pulse.cs" />
     <Compile Include="Helpers\Crypt.cs" />
     <Compile Include="Helpers\Encodings.cs" />
     <Compile Include="DAL\Constants.cs" />

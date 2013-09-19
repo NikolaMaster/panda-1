@@ -64,7 +64,17 @@ namespace PandaDataAccessLayer
             addDictAttrib(Constants.EmployerTypeCode, "Тип работодателя", Constants.EmployerTypeValues);
             addDictAttrib(Constants.CompanyTypeCode, "Тип компании", Constants.CompanyTypeValues);
             addDictAttrib(Constants.CompanySubTypeCode, "Подтип компании", Constants.CompanySubTypeValues);
-            
+
+            DataAccessLayer.Create(new DictGroup()
+                {
+                    Code = Constants.OperationCode,
+                    Description = Constants.OperationCode,
+                },
+                Constants.OperationValues.Select(x => new DictValue
+                    {
+                        Code = x,
+                        Description = x.ToLower(),
+                    }));
 
             DbContext.SaveChanges();
         }

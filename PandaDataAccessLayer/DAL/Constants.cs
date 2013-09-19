@@ -59,6 +59,8 @@ namespace PandaDataAccessLayer.DAL
         public const string CompanySubTypeCode = "COMPANY_SUB_TYPE";
         public const string JobTitleCode = "JOB_TITLE";
 
+        public const string OperationCode = "OPERATIONS_CODE";
+
         #region Education
 
         public static readonly string[] EducationValues =
@@ -1284,7 +1286,19 @@ namespace PandaDataAccessLayer.DAL
         };
 
         #endregion
-        
+
+        #region Operations
+
+        public const string Login = "Login";
+        public const string Logout = "Logout";
+
+        public static readonly string[] OperationValues =
+        {
+            Login,
+            Logout
+        };
+        #endregion
+
 
         public DataAccessLayer DataAccessLayer { get;private set; }
 

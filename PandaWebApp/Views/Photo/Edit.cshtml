@@ -1,0 +1,34 @@
+﻿@model PandaWebApp.FormModels.PhotoForm
+@{
+    ViewBag.Title = "Редактирование фотографии";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<script>
+    $(function () {
+        $('#saveButton').button();
+        $('img#photo').imgAreaSelect({
+            handles: true,
+            onSelectEnd: function (img, selection) {
+                $('input#x1').val(selection.x1);
+                $('input#y1').val(selection.y1);
+                $('input#x2').val(selection.x2);
+                $('input#y2').val(selection.y2);
+            }
+        });
+    });
+</script>
+
+@using (Html.BeginForm("Edit", "Photo", FormMethod.Post))
+{
+    <img id="photo" src="@Model.SourceUrl"/>
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.x1)
+    @Html.HiddenFor(x => x.y1)
+    @Html.HiddenFor(x => x.x2)
+    @Html.HiddenFor(x => x.y2)
+    <br/>
+    <button id="saveButton" type="submit">Сохранить</button>
+}
+
+

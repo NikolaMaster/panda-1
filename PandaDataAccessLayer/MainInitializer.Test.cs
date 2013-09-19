@@ -130,7 +130,7 @@ namespace PandaDataAccessLayer
                 ShortDescription = @"Власти Египта 12 сентября продлили действие режима чрезвычайного положения в ряде провинций страны",
                 Picture = DataAccessLayer.Create(new Photo
                 {
-                   SourceUrl = "~/Content/img/del-3-0.png"
+                   SourceUrl = "/Content/img/del-3-0.png"
                 }),
                 Title = "Власти Египта продлили действие режима чрезвычайного положения"
             });
@@ -148,7 +148,7 @@ namespace PandaDataAccessLayer
                 ShortDescription = "Студия Warner Bros. анонсировала серию фильмов по книге Джоан Роулинг «Фантастические звери и места их обитания»",
                 Picture = DataAccessLayer.Create(new Photo
                 {
-                    SourceUrl = "~/Content/img/del-3-0.png"
+                    SourceUrl = "/Content/img/del-3-0.png"
                 }),
                 Title = "О волшебных зверях из «Гарри Поттера» снимут серию фильмов"
             });
@@ -166,7 +166,7 @@ namespace PandaDataAccessLayer
                 ShortDescription = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство",
                 Picture = DataAccessLayer.Create(new Photo
                 {
-                    SourceUrl = "~/Content/img/del-3-0.png"
+                    SourceUrl = "/Content/img/del-3-0.png"
                 }),
                 Title = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство"
             });
@@ -184,7 +184,7 @@ namespace PandaDataAccessLayer
                 ShortDescription = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство",
                 Picture = DataAccessLayer.Create(new Photo
                 {
-                    SourceUrl = "~/Content/img/del-3-0.png"
+                    SourceUrl = "/Content/img/del-3-0.png"
                 }),
                 Title = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство"
             });
@@ -202,7 +202,7 @@ namespace PandaDataAccessLayer
                 ShortDescription = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство",
                 Picture = DataAccessLayer.Create(new Photo
                 {
-                    SourceUrl = "~/Content/img/del-3-0.png"
+                    SourceUrl = "/Content/img/del-3-0.png"
                 }),
                 Title = "Космический зонд «Вояджер-1» покинул Солнечную систему и вышел в межзвездное пространство"
             });
@@ -217,7 +217,7 @@ namespace PandaDataAccessLayer
 Наблюдение стало неожиданностью для ученых, так как существующие модели не предсказывали такого поведения. По словам исследователей, такое экзотическое поведение может объясняться действием гидратирующей оболочки из молекул воды, которая имеется у каждого иона в растворе. Исследование может иметь важное значение для создания более совершенных элементов питания (где ключевую роль играет транспорт ионов), обессоливания воды или даже секвенирования ДНК методом протаскивания через пору.</p>",
                 Picture = DataAccessLayer.Create(new Photo
                 {
-                    SourceUrl = "~/Content/img/del-3-0.png"
+                    SourceUrl = "/Content/img/del-3-0.png"
                 }),
                 ShortDescription = "У ионов в нанотрубках выявили экзотическое поведение",
                 Title = "У ионов в нанотрубках выявили экзотическое поведение"
@@ -467,7 +467,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-2.png"
+                SourceUrl = "/Content/img/del-2.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -477,17 +477,17 @@ namespace PandaDataAccessLayer
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-5.png"
+                    SourceUrl = "/Content/img/del-5.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-2.png"
+                    SourceUrl = "/Content/img/del-2.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-0.png"
+                    SourceUrl = "/Content/img/del-0.png"
                 });
             }
             DataAccessLayer.DbContext.SaveChanges();
@@ -750,7 +750,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-5.png"
+                SourceUrl = "/Content/img/del-5.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -763,7 +763,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-3.png"
+                        SourceUrl = "/Content/img/del-3.png"
                     });
                 }
                 if (t == 2)
@@ -771,7 +771,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-0.png"
+                        SourceUrl = "/Content/img/del-0.png"
                     });
                 }
                 if (t == 3)
@@ -779,7 +779,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-2.png"
+                        SourceUrl = "/Content/img/del-2.png"
                     });
                 }
             }
@@ -1095,7 +1095,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-5.png"
+                SourceUrl = "/Content/img/del-5.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -1108,7 +1108,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-3.png"
+                        SourceUrl = "/Content/img/del-3.png"
                     });
                 }
                 if (t == 2)
@@ -1116,7 +1116,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-0.png"
+                        SourceUrl = "/Content/img/del-0.png"
                     });
                 }
                 if (t == 3)
@@ -1124,7 +1124,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-2.png"
+                        SourceUrl = "/Content/img/del-2.png"
                     });
                 }
             }
@@ -1430,7 +1430,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-1.png"
+                SourceUrl = "/Content/img/del-1.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -1443,7 +1443,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-3.png"
+                        SourceUrl = "/Content/img/del-3.png"
                     });
                 }
                 if (t == 2)
@@ -1451,7 +1451,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-0.png"
+                        SourceUrl = "/Content/img/del-0.png"
                     });
                 }
                 if (t == 3)
@@ -1459,7 +1459,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-2.png"
+                        SourceUrl = "/Content/img/del-2.png"
                     });
                 }
             }
@@ -1760,7 +1760,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-4.png"
+                SourceUrl = "/Content/img/del-4.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -1773,7 +1773,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-1.png"
+                        SourceUrl = "/Content/img/del-1.png"
                     });
                 }
                 if (t == 2)
@@ -1781,7 +1781,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-0.png"
+                        SourceUrl = "/Content/img/del-0.png"
                     });
                 }
                 if (t == 3)
@@ -1789,7 +1789,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-5.png"
+                        SourceUrl = "/Content/img/del-5.png"
                     });
                 }
             }
@@ -2091,7 +2091,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-0.png"
+                SourceUrl = "/Content/img/del-0.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -2104,7 +2104,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-1.png"
+                        SourceUrl = "/Content/img/del-1.png"
                     });
                 }
                 if (t == 2)
@@ -2112,7 +2112,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-0.png"
+                        SourceUrl = "/Content/img/del-0.png"
                     });
                 }
                 if (t == 3)
@@ -2120,7 +2120,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Create(new Photo()
                     {
                         Album = mainAlbum,
-                        SourceUrl = "~/Content/img/del-5.png"
+                        SourceUrl = "/Content/img/del-5.png"
                     });
                 }
             }
@@ -2207,7 +2207,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-1-4.png"
+                SourceUrl = "/Content/img/del-1-4.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -2217,17 +2217,17 @@ namespace PandaDataAccessLayer
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-2.png"
+                    SourceUrl = "/Content/img/del-1-2.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-4.png"
+                    SourceUrl = "/Content/img/del-1-4.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-0.png"
+                    SourceUrl = "/Content/img/del-1-0.png"
                 });
             }
 
@@ -2476,7 +2476,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-1-3.png"
+                SourceUrl = "/Content/img/del-1-3.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -2486,17 +2486,17 @@ namespace PandaDataAccessLayer
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-3.png"
+                    SourceUrl = "/Content/img/del-1-3.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-4.png"
+                    SourceUrl = "/Content/img/del-1-4.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-0.png"
+                    SourceUrl = "/Content/img/del-1-0.png"
                 });
             }
 
@@ -2742,7 +2742,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-1-1.png"
+                SourceUrl = "/Content/img/del-1-1.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -2752,17 +2752,17 @@ namespace PandaDataAccessLayer
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-3.png"
+                    SourceUrl = "/Content/img/del-1-3.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-4.png"
+                    SourceUrl = "/Content/img/del-1-4.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-0.png"
+                    SourceUrl = "/Content/img/del-1-0.png"
                 });
             }
 
@@ -3008,7 +3008,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-1-1.png"
+                SourceUrl = "/Content/img/del-1-1.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -3018,17 +3018,17 @@ namespace PandaDataAccessLayer
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-3.png"
+                    SourceUrl = "/Content/img/del-1-3.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-4.png"
+                    SourceUrl = "/Content/img/del-1-4.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-0.png"
+                    SourceUrl = "/Content/img/del-1-0.png"
                 });
             }
 
@@ -3276,7 +3276,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-1-1.png"
+                SourceUrl = "/Content/img/del-1-1.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -3286,17 +3286,17 @@ namespace PandaDataAccessLayer
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-3.png"
+                    SourceUrl = "/Content/img/del-1-3.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-4.png"
+                    SourceUrl = "/Content/img/del-1-4.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-0.png"
+                    SourceUrl = "/Content/img/del-1-0.png"
                 });
             }
 
@@ -3545,7 +3545,7 @@ namespace PandaDataAccessLayer
             var avatar = DataAccessLayer.Create(new Photo()
             {
                 Album = mainAlbum,
-                SourceUrl = "~/Content/img/del-1-1.png"
+                SourceUrl = "/Content/img/del-1-1.png"
             });
             DataAccessLayer.DbContext.SaveChanges();
             user.Avatar = avatar;
@@ -3555,17 +3555,17 @@ namespace PandaDataAccessLayer
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-3.png"
+                    SourceUrl = "/Content/img/del-1-3.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-4.png"
+                    SourceUrl = "/Content/img/del-1-4.png"
                 });
                 DataAccessLayer.Create(new Photo()
                 {
                     Album = mainAlbum,
-                    SourceUrl = "~/Content/img/del-1-0.png"
+                    SourceUrl = "/Content/img/del-1-0.png"
                 });
             }
 

@@ -31,11 +31,12 @@ namespace PandaWebApp.Engine.Editors
             {
                 foreach (var photo in source.NewPhotos)
                 {
-                    DataAccessLayer.Create(new Photo
+                    var p = DataAccessLayer.Create(new Photo
                     {
                         Album = DataAccessLayer.GetById<Album>(mainAlbum.Id),
-                        SourceUrl = ImageCreator.SavePhoto(photo)
+                        SourceUrl = ImageCreator.SavePhoto(photo.File)
                     });
+                    source.UploadedPhotoId = p.Id;
                 }
             }
 
@@ -55,7 +56,7 @@ namespace PandaWebApp.Engine.Editors
                     case Constants.DesiredWorkTimeCode:
                         attributeValue.Value = editDesiredWorkTime(source);
                         break;
-                    case Constants.WorkCode:
+                    case Constants.DesiredWorkCode:
                         attributeValue.Value = editDesiredWork(source);
                         break;
                     case Constants.WorkExperienceCode:

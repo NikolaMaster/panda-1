@@ -70,6 +70,15 @@ namespace PandaDataAccessLayer.DAL
             return DbContext.Users.Count(x => x.Sessions.Any(y => EntityFunctions.DiffSeconds(DateTime.UtcNow, y.LastHit) < OnlineTimeout));
         }
 
+        public IEnumerable<Pulse> GetPulseUsers(int count)
+        {
+            return DbContext.Pulse.Include("UserBase").Include("Operation").OrderBy(x => x.OperationDate)
+                            .ToList()
+                            .Where(x => !string.IsNullOrWhiteSpace(GetPulseUserName(x.UserBase)))
+                            .Take(count)
+                            .ToList();
+        }
+
         public string GetPulseUserName(UserBase user)
         {
             var promouter = user as PromouterUser;
@@ -84,8 +93,14 @@ namespace PandaDataAccessLayer.DAL
 
             if (employer != null)
             {
-                var employerName = GetAttributeValue(employer.MainChecklist.Id, Constants.EmployerNameCode);
-                return employerName.Value;
+                var employerName = GetAttributeValue(employer.MainChecklist.Id, Constants.EmployerNameCode).Value;
+                if (string.IsNullOrWhiteSpace(employerName))
+                {
+                    var firstName = GetAttributeValue(employer.MainChecklist.Id, Constants.FirstNameCode);
+                    var lastName = GetAttributeValue(employer.MainChecklist.Id, Constants.LastNameCode);
+                    return string.Format("{0} {1}", firstName.Value, lastName.Value);
+                }
+                return employerName;
             }
 
             throw new Exception("Incorrect user type");
@@ -106,8 +121,14 @@ namespace PandaDataAccessLayer.DAL
 
             if (employer != null)
             {
-                var employerName = GetAttributeValue(employer.MainChecklist.Id, Constants.EmployerNameCode);
-                return employerName.Value;
+                var employerName = GetAttributeValue(employer.MainChecklist.Id, Constants.EmployerNameCode).Value;
+                if (string.IsNullOrWhiteSpace(employerName))
+                {
+                    var firstName = GetAttributeValue(employer.MainChecklist.Id, Constants.FirstNameCode);
+                    var lastName = GetAttributeValue(employer.MainChecklist.Id, Constants.LastNameCode);
+                    return string.Format("{0} {1}", firstName.Value, lastName.Value);
+                }
+                return employerName;
             }
 
             throw new Exception("Incorrect user type");

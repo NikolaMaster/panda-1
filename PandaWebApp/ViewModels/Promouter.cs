@@ -79,7 +79,7 @@ namespace PandaWebApp.ViewModels
         [ValueFrom(Constants.ReadyForWorkCode)]
         public bool ReadyForWork { get; set; }
         [ValueFrom(Constants.DateOfBirthCode)]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public Guid UserId { get; set; }
 
@@ -96,23 +96,18 @@ namespace PandaWebApp.ViewModels
         {
             get
             {
-                if (BirthDate == null)
+                if (!BirthDate.HasValue)
                 {
-#if RELEASE
                     return 0;
-#endif
-#if DEBUG
-                    throw new ArgumentNullException("BirthDate");
-#endif
                 }
                 var date = DateTime.UtcNow;
                 var lastYear = date.Year - 1;
                 var currentBirthDate = new DateTime(
                         date.Year,
-                        BirthDate.Month,
-                        BirthDate.Day
+                        BirthDate.Value.Month,
+                        BirthDate.Value.Day
                     );
-                return lastYear - BirthDate.Year + (currentBirthDate <= date).Int();
+                return lastYear - BirthDate.Value.Year + (currentBirthDate <= date).Int();
             }
         }
 

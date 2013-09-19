@@ -24,11 +24,12 @@ namespace PandaWebApp.Engine.Editors
             {
                 foreach (var photo in source.NewPhotos)
                 {
-                    DataAccessLayer.Create(new Photo
+                    var p = DataAccessLayer.Create(new Photo
                     {
                         Album = DataAccessLayer.GetById<Album>(mainAlbum.Id),
-                        SourceUrl = ImageCreator.SavePhoto(photo)
+                        SourceUrl = ImageCreator.SavePhoto(photo.File)
                     });
+                    source.UploadedPhotoId = p.Id;
                 }
             }
 

@@ -26,7 +26,7 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.User = source;
             dest.Name = DataAccessLayer.GetPulseUserName(source) ?? string.Empty;
-             
+
             var promouterUser = source as PromouterUser;
             var employerUser = source as EmployerUser;
             if (promouterUser == null && employerUser == null)

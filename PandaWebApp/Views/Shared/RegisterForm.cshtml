@@ -18,7 +18,7 @@
             
             var json = JSON.parse(data.responseText);
             if (json != null) {
-                $('#registerForm').dialog('close');
+            $('#registerForm').dialog('close');
             }
             window.location.replace(json.path);
         }
@@ -39,7 +39,7 @@
     <div class="loginTab" id="login">
         @{ Html.RenderAction("Login", "Authorization"); }
     </div>
-    <div class="registerTab" id="register">
+    <div id="register">
         @{Html.RenderAction("Create", "Promouter"); }
     </div>
 </div>

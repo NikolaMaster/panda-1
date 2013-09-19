@@ -120,10 +120,7 @@ namespace PandaWebApp.Engine.Binders
 
         private void getDesiredWork(string value, PromouterForm dest)
         {
-            if (string.IsNullOrEmpty(value)) 
-                return;
-
-            var entityId = Guid.Parse(value);
+            var entityId = string.IsNullOrEmpty(value) ? Guid.NewGuid() : Guid.Parse(value);
 
             dest.DesiredWork = DataAccessLayer.Get<DictGroup>(Constants.WorkCode)
                 .DictValues

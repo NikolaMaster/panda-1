@@ -114,7 +114,7 @@ namespace PandaWebApp.FormModels
         [ValueFrom(Constants.ReadyForWorkCode)]
         public bool ReadyForWork { get; set; }
         [ValueFrom(Constants.DateOfBirthCode)]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public Guid UserId { get; set; }
 
@@ -127,8 +127,8 @@ namespace PandaWebApp.FormModels
 
         public PhoneUnit Phone { get; set; }
 
-        public IEnumerable<HttpPostedFileBase> NewPhotos { get; set; }
-
+        public IEnumerable<PhotoUnit> NewPhotos { get; set; }
+        public Guid UploadedPhotoId { get; set; }
         public IList<AlbumUnit> Albums { get; set; }
 
         public IList<DesiredWorkTimeUnit> DesiredWorkTime { get; set; }
