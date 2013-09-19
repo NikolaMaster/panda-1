@@ -86,6 +86,7 @@ namespace PandaWebApp.Engine.Binders
                         DataAccessLayer.Get<DesiredWork>(
                             y => y.EntityList.Id == entityId && y.Work != null && y.Work.Id == x.Id).Any()
                 })
+                .Where(x => x.Value)
                 .ToList();
 
 

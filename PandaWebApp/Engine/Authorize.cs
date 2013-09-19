@@ -128,6 +128,7 @@ namespace PandaWebApp.Engine
                 var pulse = dal.Create(new Pulse
                     {
                         Operation = dal.Get<DictValue>(Constants.Login),
+                        UserId = _mCachedUser.Id,
                     });
                 _mCachedUser.Pulse = new List<Pulse> { pulse };
                 dal.DbContext.SaveChanges();
@@ -145,6 +146,7 @@ namespace PandaWebApp.Engine
                 var pulse = dal.Create(new Pulse
                 {
                     Operation = dal.Get<DictValue>(Constants.Login),
+                    UserId = _mCachedUser.Id,
                 });
                 _mCachedUser.Pulse = new List<Pulse> { pulse };
                 SessionId = Guid.Empty;

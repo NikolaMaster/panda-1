@@ -114,7 +114,7 @@ namespace PandaWebApp.FormModels
         [ValueFrom(Constants.ReadyForWorkCode)]
         public bool ReadyForWork { get; set; }
         [ValueFrom(Constants.DateOfBirthCode)]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public Guid UserId { get; set; }
 

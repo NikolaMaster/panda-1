@@ -56,7 +56,7 @@ namespace PandaWebApp.Engine.Editors
                     case Constants.DesiredWorkTimeCode:
                         attributeValue.Value = editDesiredWorkTime(source);
                         break;
-                    case Constants.WorkCode:
+                    case Constants.DesiredWorkCode:
                         attributeValue.Value = editDesiredWork(source);
                         break;
                     case Constants.WorkExperienceCode:
