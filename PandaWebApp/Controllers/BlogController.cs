@@ -20,16 +20,17 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult TopPosts()
         {
-            //var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(BlogsCount);
-            var listOfPosts = DataAccessLayer.Get<BlogPost>().Take(BlogsCount);
+            var listOfPosts = DataAccessLayer.Get<BlogPost>();
+           
             if (listOfPosts == null)
             {
                 return HttpNotFound("Posts not found");
             }
 
             var blog = new Blog {Posts = new List<Blog.Entry>()};
+            blog.Count = listOfPosts.Count();
 
-            foreach (var blogPost in listOfPosts)
+            foreach (var blogPost in listOfPosts.Take(BlogsCount))
             {
                 var binder = new BlogToBlogPost(DataAccessLayer);
                 var entry = new Blog.Entry();
@@ -43,7 +44,7 @@ namespace PandaWebApp.Controllers
         [HttpGet]
         public ActionResult Posts()
         {
-            var listOfPosts = DataAccessLayer.TopRandom<BlogPost>(BlogsCount);
+            var listOfPosts = DataAccessLayer.Get<BlogPost>();
             if (listOfPosts == null)
             {
                 return HttpNotFound("Posts not found");
