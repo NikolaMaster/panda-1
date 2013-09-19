@@ -11,6 +11,7 @@
         @Html.HiddenFor(model => model.ReturnUrl)
 
         <div class="error_text">
+            <div>@Html.ValidationSummary()</div>
             <div>@Html.ValidationMessageFor(x => x.Email)</div>
             <div>@Html.ValidationMessageFor(x => x.Password)</div>
         </div>

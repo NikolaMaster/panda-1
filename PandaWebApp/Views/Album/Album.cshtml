@@ -16,7 +16,10 @@
                         <a data-lightbox="photo-promouter-set" href="@ImageCreator.Create(item.SourceUrl, PhotoHeight*2, PhotoWidth*2)">
                             <img src="@ImageCreator.Create(item.SourceUrl, PhotoHeight, PhotoWidth)"/>
                         </a>
+                        <br/>
                         @Ajax.ActionLink("Удалить", "Delete", "Album", new { photoId = item.Id }, new AjaxOptions{ UpdateTargetId = "album_"+@Model.Id })
+                        <br/>
+                        @Html.ActionLink("Редактировать", "Edit", "Photo", new { id = item.Id }, new { })
                     </li>
 
                     if (index == PhotosPerRow)
