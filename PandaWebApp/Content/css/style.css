@@ -506,16 +506,18 @@ border: 1px solid #2E8800;
 }
 
 
-a.active {
-margin: 4px 7px 4px 0;
-background: #888;
-font-weight: bold;
-color: white;
-text-decoration: none;
-padding: 4px 0px;
-border-radius: 6px;
 
-float: left;
-width: 100%;
-margin-bottom: 5px;
-}
+.editor { margin-bottom: 5px; }
+.editor-label { float: left; clear: both; }
+.editor-label label { font-size: 16px; display: block; }
+
+.editor-field { margin-left: 200px; font-size: 16px; }
+
+.editor-field input, .editor-field select{ font-size: 16px; width: 300px;}
+
+.editor-field-country-code { width: 50px !important;float: left; margin-right: 5px;}
+.editor-field-code { width: 50px !important;float: left; margin-right: 5px; }
+.editor-field-number { width: 190px !important; }
+
+.editor-company-type input { float: left; font-size: 11px; margin-left: 0px;width: auto; }
+.editor-company-type label { float: left; font-size: 11px; margin-right: 5px;}

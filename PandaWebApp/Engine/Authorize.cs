@@ -105,8 +105,15 @@ namespace PandaWebApp.Engine
             using (var dal = new DataAccessLayer())
             {
                 var users = dal.Get<UserBase>(x => x.Email == email).DefaultIfEmpty();
+
+                var userBases = users as UserBase[] ?? users.ToArray();
+                if (!userBases.Any())
+                {
+                    return false;
+                }
+
                 UserBase user = null;
-                foreach (var iter in users)
+                foreach (var iter in userBases)
                 {
                     var passw = Password.MakePassword(password, iter.CreationDate);
 

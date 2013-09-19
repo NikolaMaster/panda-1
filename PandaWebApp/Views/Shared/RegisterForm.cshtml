@@ -1,33 +1,33 @@
 ﻿
 ﻿<script>
-    function onPromouterValidation(data) {
-        try {
-            var json = JSON.parse(data.responseText);
-            if (json != null) {
-                $('#registerForm').dialog('close');
-            }
-            window.location.replace(json.path);
-        }
-        catch (e) {
-            console.log(e);
-        }
-    }
-    
-    function onLoginValidation(data) {
-        try {
-            
-            var json = JSON.parse(data.responseText);
-            if (json != null) {
-            $('#registerForm').dialog('close');
-            }
-            window.location.replace(json.path);
-        }
-        catch (e) {
-            console.log(e);
-        }
-    }
-    
-</script>
+     
+     function onPromouterValidation(data) {
+         try {
+             var json = JSON.parse(data.responseText);
+             if (json != null) {
+                 $('#registerForm').dialog('close');
+             }
+             window.location.replace(json.path);
+         }
+         catch (e) {
+             console.log(e);
+         }
+     }
+     
+     function onLoginValidation(data) {
+         try {
+             var json = JSON.parse(data.responseText);
+             if (json != null) {
+                 $('#registerForm').dialog('close');
+             }
+             window.location.replace(json.path);
+         }
+         catch (e) {
+             console.log(e);
+         }
+     }
+
+ </script>
  
 
 
