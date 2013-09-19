@@ -31,9 +31,9 @@ namespace PandaWebApp.Engine.Binders
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 
-
-            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id).ToList();
-            dest.Status = session.Any() ? Extensions.GetActivityStatus(session.First().LastHit) : "Оффлайн";
+            var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id).ToList().OrderBy(x => x.LastHit);
+            dest.Status = session.Any() ? Extensions.GetActivityStatus(session.Last().LastHit) : "Оффлайн";
+            
             dest.Phone = new PhoneUnit();
 
             ValueFromAttributeConverter.ModelFromAttributes(dest, source.MainChecklist.AttrbuteValues, DataAccessLayer);
