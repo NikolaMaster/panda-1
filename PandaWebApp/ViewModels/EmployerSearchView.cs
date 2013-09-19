@@ -20,7 +20,16 @@ namespace PandaWebApp.ViewModels
         public string Work { get; set; }
         [ValueFrom(Constants.GenderCode)]
         public string Gender { get; set; }
+        [ValueFrom(Constants.StartWorkCode)]
+        public DateTime? Start { get; set; }
+        [ValueFrom(Constants.EndWorkCode)]
+        public DateTime? End { get; set; }
+        [ValueFrom(Constants.AboutCode)]
+        public string About { get; set; }
 
+        public int Days { get; set; }
+        public int DaysOnSite { get; set; }
+        public string AvatarUrl { get; set; }
         public Checklist Checklist { get; set; }
     }
 

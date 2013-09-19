@@ -21,6 +21,10 @@ namespace PandaWebApp.Engine.Binders
         {
             ValueFromAttributeConverter.ModelFromAttributes(dest, source.AttrbuteValues, DataAccessLayer);
             dest.Checklist = source;
+            if (dest.Start.HasValue && dest.End.HasValue)
+                dest.Days = (int) ((dest.End.Value - dest.Start.Value).TotalDays);
+            dest.DaysOnSite = (int) (DateTime.UtcNow - source.CreationDate).TotalDays;
+            dest.AvatarUrl = source.User.Avatar.SourceUrl;
         }
     }
 }
