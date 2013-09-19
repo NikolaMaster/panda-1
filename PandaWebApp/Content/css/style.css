@@ -504,18 +504,3 @@ color: white !important;
 text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.3);
 border: 1px solid #2E8800;
 }
-
-
-a.active {
-margin: 4px 7px 4px 0;
-background: #888;
-font-weight: bold;
-color: white;
-text-decoration: none;
-padding: 4px 0px;
-border-radius: 6px;
-
-float: left;
-width: 100%;
-margin-bottom: 5px;
-}
