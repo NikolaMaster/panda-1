@@ -4,8 +4,7 @@
     var core = AuthorizationCore.StaticCreate();
     var isGuest = core.IsGuest;
     var user = core.User;
-    var username = core.UserName;
-    var city = core.City;
+
 }   
 
 <div class="user">
@@ -33,7 +32,7 @@
                 <div class="row">Адрес офиса</div> 
                 <div class="row"><img src="~/Content/img/phone.png" />Телефон</div>
                 <div class="row"><img src="~/Content/img/mail.png" />e-mail</div>
-                 @if (!isGuest && user.Id == Model.Item1.UserId)
+                 @if (!isGuest && Equals(user.Id, Model.Item1.UserId))
                  {
                      <div class="row">Количество монеток: @user.Coins</div>
                  }
@@ -102,7 +101,7 @@
                     <div class="row"><a href="#" class="open">открыть</a></div>
                 }
 
-                @if (!isGuest && Equals(user.Id, Model.Item1.UserId))
+                @if (!isGuest && (Equals(user.Id, Model.Item1.UserId) || user.IsAdmin))
                 {
                     <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.Item1.UserId})" >редактировать</a></div>
                     <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Employer", new {id = Model.Item1.UserId}, new {})</div>
@@ -180,8 +179,6 @@
         }
     }
     <div class="clear"></div>
-
-
 
     @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.Item1.UserId }); }
     
