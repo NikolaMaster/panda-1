@@ -14,5 +14,10 @@ namespace PandaDataAccessLayer.Entities
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string Token { get; set; }
+
+        public Confirmation()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

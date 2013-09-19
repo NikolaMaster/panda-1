@@ -145,10 +145,11 @@ namespace PandaWebApp.Engine
             {
                 var pulse = dal.Create(new Pulse
                 {
-                    Operation = dal.Get<DictValue>(Constants.Login),
-                    UserId = _mCachedUser.Id,
+                    Operation = dal.Get<DictValue>(Constants.Logout),
+                    UserId = User.Id,
                 });
-                _mCachedUser.Pulse = new List<Pulse> { pulse };
+                User.Pulse = new List<Pulse> { pulse };
+                dal.DbContext.SaveChanges();
                 SessionId = Guid.Empty;
             }
         }

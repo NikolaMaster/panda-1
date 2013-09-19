@@ -32,6 +32,7 @@ namespace PandaWebApp.Controllers
                 var model = new Employer();
                 var binder = new ViewEmployerToUser(DataAccessLayer);
                 binder.InverseLoad(employerUserBase, model);
+                model.EmployerName = DataAccessLayer.GetUserName(employerUserBase);
                 models.Add(model);
             }
             
@@ -51,6 +52,7 @@ namespace PandaWebApp.Controllers
             var model = new Employer();
             var binder = new ViewEmployerToUser(DataAccessLayer);
             binder.InverseLoad(entry, model);
+            
 
             var core = AuthorizationCore.StaticCreate();
             var listBought = new List<string>();

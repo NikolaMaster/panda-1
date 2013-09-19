@@ -2,8 +2,7 @@
 <script>
     function onEmployerValidation(data) {
         try {
-            var json = JSON.parse(data.responseText);
-            window.location.replace(json.path);
+            window.location.replace(data.path);
         }
         catch (e) {
             console.log(e);
