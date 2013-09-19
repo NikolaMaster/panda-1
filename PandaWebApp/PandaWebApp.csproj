@@ -474,6 +474,7 @@
     <Content Include="Content\img\five-reasons-top-bg.png" />
     <Content Include="Content\img\five-resons.png" />
     <Content Include="Content\img\girl.jpeg" />
+    <Content Include="Content\img\left_pager.png" />
     <Content Include="Content\img\lightbox\close.png" />
     <Content Include="Content\img\lightbox\loading.gif" />
     <Content Include="Content\img\lightbox\next.png" />
@@ -510,6 +511,11 @@
     <Content Include="Content\img\phone.png" />
     <Content Include="Content\img\pulse-bottom.png" />
     <Content Include="Content\img\ready-to-work.png" />
+    <Content Include="Content\img\red-heart.png" />
+    <Content Include="Content\img\resultSearch__blog__bottomShadow.png" />
+    <Content Include="Content\img\right_pager.png" />
+    <Content Include="Content\img\search.png" />
+    <Content Include="Content\img\search_blog_index.png" />
     <Content Include="Content\img\shadow.png" />
     <Content Include="Content\img\simple-delimiter.png" />
     <Content Include="Content\img\top.png" />
@@ -633,7 +639,6 @@
     <Content Include="Views\Feedback\TopDialogFeedback.cshtml" />
     <Content Include="Views\Admin\_editCoinsPartial.cshtml" />
     <Content Include="Views\Admin\EditUserCoins.cshtml" />
-    <Content Include="Views\Authorization\AuthForm.cshtml" />
     <Content Include="Views\Authorization\Confirmation.cshtml" />
     <Content Include="Views\Employer\CreateCompany.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Phone.cshtml" />
