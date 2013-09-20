@@ -36,6 +36,7 @@ namespace PandaWebApp.Controllers
                 DataAccessLayer.DbContext.SaveChanges();
                 DataAccessLayer.SendConfirmation(user.Id);
                 DataAccessLayer.DbContext.SaveChanges();
+                Response.ContentType = @"text/json";
                 return Json(new { path = "/Promouter/Detail/" + user.Id });
             }
             return PartialView();
