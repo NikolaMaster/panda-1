@@ -17,7 +17,7 @@ namespace PandaWebApp.Filters
         {
             if (!AuthorizationCore.StaticCreate().IsAdmin)
             {
-                Helper.HttpForbidden();
+                filterContext.Result = Helper.HttpForbidden();
             }
         }
     }

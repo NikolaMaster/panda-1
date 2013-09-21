@@ -567,10 +567,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\RegisterForm.cshtml" />
     <Content Include="Views\Photo\Edit.cshtml" />
-    <Content Include="Views\Favorite\_SuccessAdd.cshtml" />
-    <Content Include="Views\Favorite\_FailAdd.cshtml" />
-    <Content Include="Views\Favorite\_SuccessDelete.cshtml" />
-    <Content Include="Views\Favorite\_FailDelete.cshtml" />
     <Content Include="Views\Favorite\_Item.cshtml" />
     <Content Include="Views\Favorite\Index.cshtml" />
     <Content Include="Views\Favorite\_Index.cshtml" />

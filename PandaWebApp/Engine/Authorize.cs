@@ -33,6 +33,7 @@ namespace PandaWebApp.Engine
         private UserBase _mCachedUser;
         private Session _mCachedSession;
         private string _mUserController;
+        private int _mFavoritesCount;
 
         public string UserName { get; set; }
         public string City { get; set; }
@@ -66,10 +67,11 @@ namespace PandaWebApp.Engine
                             //update last hit field
                             dal.UpdateById<Session>(_mCachedSession.Id, x => x.LastHit = DateTime.UtcNow);
                             dal.DbContext.SaveChanges();
-                        }
 
-                        //fill in important values which is used by some views
-                        _mUserController = _mCachedUser.ControllerNameByUser();
+                            //fill in important values which is used by some views
+                            _mUserController = _mCachedUser.ControllerNameByUser();
+                            _mFavoritesCount = dal.GetUserFavorites(_mCachedUser.Id).Count();
+                        }
                     }
                 }
                 return _mCachedUser;
@@ -109,6 +111,14 @@ namespace PandaWebApp.Engine
             get
             {
                 return _mUserController;
+            }
+        }
+
+        public int FavoritesCount
+        {
+            get
+            {
+                return _mFavoritesCount;
             }
         }
 

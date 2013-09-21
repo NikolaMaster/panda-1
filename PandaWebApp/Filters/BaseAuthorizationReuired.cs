@@ -18,9 +18,10 @@ namespace PandaWebApp.Filters
         {
             if (AuthorizationCore.StaticCreate().IsGuest)
             {
-                var url = filterContext.RequestContext.HttpContext.Request.RawUrl;
-                var routeParams = new System.Web.Routing.RouteValueDictionary { { WebConstants.LoginRetUrlParameterName, url } };
-                filterContext.Result = new RedirectToRouteResult(WebConstants.LoginRouteName, routeParams);
+                filterContext.Result = Helper.HttpUnauthorized();
+                //var url = filterContext.RequestContext.HttpContext.Request.RawUrl;
+                //var routeParams = new System.Web.Routing.RouteValueDictionary { { WebConstants.LoginRetUrlParameterName, url } };
+                //filterContext.Result = new RedirectToRouteResult(WebConstants.LoginRouteName, routeParams);
             }
         }
     }
