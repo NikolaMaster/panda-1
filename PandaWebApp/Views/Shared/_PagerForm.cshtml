@@ -1,0 +1,11 @@
+﻿@using PandaWebApp.FormModels
+@{
+    var pager = ViewBag.Pager == null ? null : (PagerFormModel) ViewBag.Pager;
+    if (pager == null)
+    {
+        pager = new PagerFormModel {Page = 1, PerPage = 6};
+    }
+}
+
+<input type="hidden" name="Pager.Page" id="Pager_Page" value="@pager.Page"/>
+<input type="hidden" name="Pager.PerPage" id="Pager_PerPage" value="@pager.PerPage"/>
