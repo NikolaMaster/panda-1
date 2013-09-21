@@ -45,8 +45,9 @@ ul.list-style { margin-left: 20px; }
 	background: linear-gradient(to bottom, #fafafa 0%,#eeeeee 50%,#c5c5c5 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#c5c5c5',GradientType=0 ); /* IE6-9 */
 	white-space: nowrap;
+    display: block;
 }
-.button.hover 
+.button:hover 
 {
 	border: 1px solid #9d9d9d;
 	background: #b4b4b4; /* Old browsers */
@@ -335,7 +336,7 @@ ul.list-style { margin-left: 20px; }
 /* try to bem */
 .header__city { float: left; width: 60px; }
 .header__city-link { font-family: 'Arial'; font-size: 14px; color: #1d4576; }
-.header__prompt { float: left; width: 200px; }
+.header__prompt { float: left; width: 200px;margin-top: 12px !important; }
 .header__prompt-hello { font-family: 'Arial'; font-size: 14px; color: #808080; }
 .header__prompt-name { font-family: 'Arial'; font-size: 14px; color: #333333;}
 .header__offers { float: left; width: 440px; }
@@ -343,13 +344,13 @@ ul.list-style { margin-left: 20px; }
 .header__offers-selected { font-family: 'Arial Narrow'; font-size: 12px; color: #1d4576; }
 .header__offers-saw { font-family: 'Arial Narrow'; font-size: 12px; color: #1d4576; }
 .header__offers-count { font-family: 'Arial'; font-style: italic; font-size: 10px; color: #4c4c4c; }
-.header__coins { float: left; margin-top: 5px !important; width:60px; margin-right: 27px;}
+.header__coins { float: left; margin-top: 5px !important; width:60px;}
 .header__coins-icon { background: url('../img/coins-icon.png') 0 0 no-repeat; width: 19px; height: 19px; float: left; }
 .header__coins-count { float: left; margin-left: 3px; }
 .header__coins-count-number { font-family: 'Arial'; font-size: 12px; color: #1d4576; font-weight: bold; }
 .header__coins-count-unit { font-family: 'Arial'; font-size: 12px; color: #1d4576; font-style: italic; }
-.header__cabinet { float: left; margin-top: 5px !important; width: 107px;  }
-.header__cabinet-link { font-family: 'Arial'; color: black !important; font-size: 16px;}
+.header__userButtons { float: right; padding-top: 5px;margin: 0 !important;height: 30px; }
+.header__cabinet-link { font-family: 'Arial'; color: black !important;height: 18px;}
 
 /*search*/
 .search { background-color: #dadada;  margin-bottom: 37px; }
@@ -416,41 +417,6 @@ ul.list-style { margin-left: 20px; }
 .pager a {position: relative; bottom: 7px; }
 
 .search-company-top .album li { padding-bottom: 30px; }
-
-
-
-
-.button 
-{
-	cursor: pointer;
-	padding: 6px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;  
-	border: 1px solid #afb3ac;
-	background: #fafafa; /* Old browsers */
-	background: -moz-linear-gradient(top, #fafafa 0%, #eeeeee 50%, #c5c5c5 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(50%,#eeeeee), color-stop(100%,#c5c5c5)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #fafafa 0%,#eeeeee 50%,#c5c5c5 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #fafafa 0%,#eeeeee 50%,#c5c5c5 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #fafafa 0%,#eeeeee 50%,#c5c5c5 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #fafafa 0%,#eeeeee 50%,#c5c5c5 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#c5c5c5',GradientType=0 ); /* IE6-9 */
-	white-space: nowrap;
-}
-.button:hover 
-{
-	border: 1px solid #9d9d9d;
-	background: #b4b4b4; /* Old browsers */
-	background: -moz-linear-gradient(top, #b4b4b4 0%, #d5d6d6 14%, #eeeeee 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b4b4b4), color-stop(14%,#d5d6d6), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #b4b4b4 0%,#d5d6d6 14%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #b4b4b4 0%,#d5d6d6 14%,#eeeeee 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #b4b4b4 0%,#d5d6d6 14%,#eeeeee 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #b4b4b4 0%,#d5d6d6 14%,#eeeeee 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b4b4b4', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-
-}
 
 .employer {
 	
