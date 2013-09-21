@@ -553,11 +553,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\favorites.js" />
+    <Content Include="Content\js\pages\favorites.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\js\pages\pager.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -581,7 +582,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\pages\" />
-    <Folder Include="Content\js\pages\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
