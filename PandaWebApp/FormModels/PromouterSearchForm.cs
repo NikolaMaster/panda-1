@@ -7,11 +7,13 @@ using PandaDataAccessLayer.Entities;
 
 namespace PandaWebApp.FormModels
 {
-    public class PromouterSearchForm
+    public class PromouterSearchForm : IPaginators
     {
         public string Query { get; set; }
         public string City { get; set; }
         public string Gender { get; set; }
         public string Salary { get; set; }
+
+        public PagerFormModel Pager { get; set; }
     }
 }

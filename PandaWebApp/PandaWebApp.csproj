@@ -154,6 +154,7 @@
     <Compile Include="Engine\Binders\ViewEmployerSearchViewToChecklist.cs" />
     <Compile Include="Engine\MailSender.cs" />
     <Compile Include="Engine\DataAnnotations.cs" />
+    <Compile Include="Engine\Paginator.cs" />
     <Compile Include="Engine\WebConstants.cs" />
     <Compile Include="Engine\Editors\BaseEditor.cs" />
     <Compile Include="Engine\Editors\EmployerEditor.cs" />
@@ -169,6 +170,8 @@
     <Compile Include="FormModels\Authorize.cs" />
     <Compile Include="FormModels\EditCoinsForm.cs" />
     <Compile Include="FormModels\EmployerRegister.cs" />
+    <Compile Include="FormModels\IPaginators.cs" />
+    <Compile Include="FormModels\PagerFormModel.cs" />
     <Compile Include="FormModels\PhotoForm.cs" />
     <Compile Include="FormModels\PhotoUnit.cs" />
     <Compile Include="FormModels\PromouterRegister.cs" />
@@ -570,6 +573,10 @@
     <Content Include="Views\Favorite\_Item.cshtml" />
     <Content Include="Views\Favorite\Index.cshtml" />
     <Content Include="Views\Favorite\_Index.cshtml" />
+    <Content Include="Views\Shared\_Pager.cshtml" />
+    <Content Include="Views\Shared\_PagerForm.cshtml" />
+    <Content Include="Views\Shared\_PagerBottom.cshtml" />
+    <Content Include="Views\Shared\_PagerTop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

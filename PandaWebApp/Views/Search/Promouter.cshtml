@@ -21,6 +21,6 @@
     <div>Цена за час @Html.DropDownListFor(x => x.Salary, (IEnumerable<SelectListItem>)ViewBag.SalaryValues, string.Empty)</div>
     <hr />
 }
-
+    
 @Html.Partial("PromouterSearchResult", new List<PandaWebApp.ViewModels.PromouterSearchView>())
 </div>

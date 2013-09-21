@@ -48,8 +48,9 @@ namespace PandaWebApp.Controllers
                 var t = new EmployerSearchView();
                 viewBinder.InverseLoad(x, t);
                 return t;
-            });
-            return PartialView(resultModel);
+            }).GetPaginator(model.Pager.Page, model.Pager.PerPage);
+            ViewBag.Pager = resultModel.Pager;
+            return PartialView(resultModel.Collection);
         }
 
         [HttpGet]
@@ -84,8 +85,9 @@ namespace PandaWebApp.Controllers
                 var t = new PromouterSearchView();
                 viewBinder.InverseLoad(x, t);
                 return t;
-            });
-            return PartialView(resultModel);
+            }).GetPaginator(model.Pager.Page, model.Pager.PerPage);
+            ViewBag.Pager = resultModel.Pager;
+            return PartialView(resultModel.Collection);
         }
 
 

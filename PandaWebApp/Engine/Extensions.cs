@@ -257,5 +257,15 @@ namespace PandaWebApp.Engine
         }
 
         #endregion
+
+        #region Paginator
+
+        //default values are here
+        public static Paginator<T> GetPaginator<T>(this IEnumerable<T> src, int page = 1, int perPage = 6)
+        {
+            return new Paginator<T>(src, page, perPage);
+        }
+
+        #endregion
     }
 }
