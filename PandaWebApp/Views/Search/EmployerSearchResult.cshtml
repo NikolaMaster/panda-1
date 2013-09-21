@@ -1,24 +1,32 @@
 ﻿@model IEnumerable<PandaWebApp.ViewModels.EmployerSearchView>
 
 
-    
-<div id ="companySearchResult">
-    <br />
-    <h2>Результаты поиска:</h2>
     @foreach (var item in Model)
-    { 
-        <div>
-            <div>Компания: @item.EmployerName </div>
-            <div>Город: @item.City</div>
-            <div>Работа: @item.Work</div>
-            <div>Пол: @item.Gender</div>
-            <div>Оплата: @item.Salary рублей в час</div>
-            @{
+    {
+        <li>
+            <div class="searchResult__blog">
+                <div class="searchResult__blog__part1 left"><img src="~/Content/img/red-heart.png"></div>
+                <div class="searchResult__blog__part2 left"><img src="@ImageCreator.Create(item.AvatarUrl, 113, 111)"></div>
+                <div class="searchResult__blog__part3 left">
+                    <div class="left">
+                        <div class="position left">@item.Work</div><div class="lifetime left">на сайте @item.DaysOnSite дней</div>
+                        <div class="clear"></div>
+                        <ul>
+                            <li class="bold">@item.About</li>
+                            <li>@item.City</li>
+                            <li>Временная работа с @item.Start.ToPandaString() по  @item.End.ToPandaString() @string.Format("({0} дней)", item.Days)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="searchResult__blog__part4 left">
+                    <div>
+                        <div class="payment bold">@item.Salary руб/час</div>
+                    </div>
+                </div>
+                @Html.ActionLink("Страница компании", "Detail", "Employer", new { id = item.Checklist.User.Id}, new { @class="companyPage" })
+                <img class="searchResult__blog__bottomShadow right" src="~/Content/img/resultSearch__blog__bottomShadow.png" />
+            </div>
+            <div class="clear"></div>
+        </li>
+    }
 
-                <div>@Html.ActionLink("Посмотреть профиль", "Detail", "Employer", new { id = item.Checklist.User.Id}, null)</div> 
-            }
-
-        </div>
-        <hr />
-    } 
-    </div>

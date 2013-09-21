@@ -375,7 +375,7 @@
     @{        
         if (!isGuest && user.Id != Model.Item1.UserId)
         {
-            Html.RenderAction("Create", "Feedback", new { authorId = user.Id, recieverId = user.Id });
+            Html.RenderAction("Create", "Feedback", new { authorId = user.Id, recieverId = Model.Item1.UserId });
         }
     }
 
