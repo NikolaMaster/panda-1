@@ -1,16 +1,61 @@
 ﻿@model PandaWebApp.FormModels.PromouterForm
 
+<script>
+    $(function() {
+        $('.deleteDesiredWorkTimeButton').button();
+        $('#addDesiredWorkTime').button().click(function() {
+            var days = JSON.parse($('#daysValues').val());
+            var options = '';
+            for (var i = 0; i < days.length; i++) {
+                options += '<option value="' + days[i].Value + '">' + days[i].Text + '</option>';
+            }
+            var count = parseInt($('#desiredWorkTimeCount').val());
+            var id = 'DesiredWorkTime_' + count + '__';
+            var name = 'DesiredWorkTime[' + count + '].';
+
+            var dayOfWeek = $('<div>').append('День недели').append($('<select>', {
+                id: id + 'DayOfWeek',
+                name: name + 'DayOfWeek'
+            }).append(options));
+            var start = $('<div>').append('Начало').append($('<input>', {
+                type: 'text',
+                'class': 'timePicker',
+                id: id + 'StartTime',
+                name: name + 'StartTime'
+            }));
+            var end = $('<div>').append('Конец').append($('<input>', {
+                type: 'text',
+                'class': 'timePicker',
+                id: id + 'EndTime',
+                name: name + 'EndTime'
+            }));
+            var newItem = $('<div>', { id: 'addDesiredWorkTime_' + count });
+            newItem.append(dayOfWeek)
+                .append(start)
+                .append(end)
+                .append($('<button type="button">Удалить</button>').button().click(function() {
+                    $('#DesiredWorkTime_' + count).remove();
+                }))
+                .append('<hr>');
+            $('#newDesiredWorkTime').append(newItem);
+            $('#desiredWorkTimeCount').val(count + 1);
+            initializeDateTime();
+        });
+    });
+</script>
 <div id ="desireWorkTime">
+    <input type="hidden" id="desiredWorkTimeCount" value="@Model.DesiredWorkTime.Count"/>
+    <input type="hidden" id="daysValues" value ='@Html.Raw(Json.Encode(PandaWebApp.FormModels.PromouterForm.DesiredWorkTimeUnit.WorkDaysValues))'/>
     @for (var i = 0; i < Model.DesiredWorkTime.Count; i++)
     {
         @Html.EditorFor(x => Model.DesiredWorkTime[i], "DesiredWorkTime")
     }
+    <div id="newDesiredWorkTime">
+        
+    </div>
+
     <br/>
-    @Ajax.ActionLink("Добавить", "Create", new { userId = Model.UserId }, new AjaxOptions
-    {
-        UpdateTargetId = "desireWorkTime", 
-        OnSuccess = "initializeDateTime"
-    })
+    <button type="button" id="addDesiredWorkTime">Добавить</button>
 </div>
 
     

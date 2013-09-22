@@ -8,8 +8,8 @@
     <div>Конец @Html.EditorFor(x => x.EndTime, "Date") </div>    
     <div>Часы @Html.EditorFor(x => x.Hours) </div> 
     <div>  
-        @Ajax.ActionLink("Удалить", "Delete", "WorkExperience", new {workExperienceId = Model.Id},
-            new AjaxOptions {UpdateTargetId = "workExperience_" + Model.Id})     
+        @Ajax.ActionLink("Удалить", "Delete", "WorkExperience", new {workExperienceId = Model.Id}, 
+            new AjaxOptions {UpdateTargetId = "workExperience_" + Model.Id}, new { @class = "deleteWorkExperienceButton" })     
     </div>
     <hr />
 </div>

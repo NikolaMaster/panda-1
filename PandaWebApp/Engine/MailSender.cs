@@ -69,7 +69,7 @@ namespace PandaDataAccessLayer.Helpers
                     UserId = userId
                 });
          
-          /*  SendMail(user.Email, "Подтверждение аккаунта", bodyMessage, null);*/
+            SendMail(user.Email, "Подтверждение аккаунта", bodyMessage, null);
         }
 
 
