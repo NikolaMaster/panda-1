@@ -192,6 +192,9 @@ ul.list-style { margin-left: 20px; }
 .user .about .header { font-size: 16px; color: rgb( 106, 178, 0 ); font-weight: bold; border-bottom: 1px solid #919191; padding-top: 20px; }
 .user .about .things .nothing { font-family: 'Arial'; font-size: 14px; color: #808080; }
 
+.user .vacancies {  }
+.user .vacancies .header { font-size: 16px; color: rgb( 106, 178, 0 ); font-weight: bold; border-bottom: 1px solid #919191; padding-top: 20px; }
+
 .user .work-exp {} 
 .user .work-exp .header { font-size: 16px; color: rgb( 106, 178, 0 ); font-weight: bold; border-bottom: 1px solid #919191; padding-top: 20px; }
 .user .work-exp .row { height: 50px; }

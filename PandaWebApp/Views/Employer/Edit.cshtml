@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Редактирование информации о компании";
     Layout = "~/Views/Shared/Layout.cshtml";
+
+    var core = AuthorizationCore.StaticCreate();
+    var user = core.User;
+    var isAdmin = core.User.IsAdmin;
 }
 
 <h2>Редактирование информации о компании</h2>
@@ -35,7 +39,10 @@
             <div>Адрес</div> @Html.EditorFor(m => m.Address)
             <div>Телефон</div> @Html.EditorFor(m => m.Phone, "Phone")
             <div>Email</div> @Html.EditorFor(m => m.Email)
-            <div>Администратор</div> @Html.CheckBoxFor(m => m.IsAdmin)
+            @if (isAdmin)
+            {
+                <div>Администратор</div>  @Html.CheckBoxFor(m => m.IsAdmin)
+            }
         </div>
         <div id="photoTab">
             <div>@{ Html.RenderAction("Index", "Album", new { userId = Model.UserId }); }</div>

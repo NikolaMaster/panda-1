@@ -27,6 +27,7 @@ namespace PandaWebApp.Engine.Binders
             dest.Email = source.Email;
             dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl;
             dest.Number = source.Number;
+            dest.IsAdmin = source.IsAdmin;
             dest.DaysOnSite = Extensions.GetDayOnSiteStatus(source.CreationDate);
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
@@ -52,13 +53,13 @@ namespace PandaWebApp.Engine.Binders
             }
             //vacancies
             var checklists = source.Checklists.Where(x => x.ChecklistType.Code != Constants.EmployerMainChecklistTypeCode);
-            var vacancyList = new List<Employer.VacancyUnit>();
-
+            var vacancyList = new List<Vacancy>();
+            var binder = new VacancyToChecklist(DataAccessLayer);
             foreach (var checklist in checklists)
             {
-                var vacancyUnit = new Employer.VacancyUnit();
-                ValueFromAttributeConverter.ModelFromAttributes(vacancyUnit, checklist.AttrbuteValues, DataAccessLayer);
-                vacancyList.Add(vacancyUnit);
+                var vacancy = new Vacancy();
+                binder.InverseLoad(checklist, vacancy);
+                vacancyList.Add(vacancy);
             }
             dest.Vacancies = vacancyList;
         }

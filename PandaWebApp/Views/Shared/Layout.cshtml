@@ -24,7 +24,11 @@
         <script type="text/javascript" src="@Url.Content("~/Scripts/favorites.js")"></script>
         <script>
             function initializeDateTime() {
-                $(".datePicker").datepicker({ dateFormat: "dd.mm.yy" });
+                $(".datePicker").datepicker({  
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: "dd.mm.yy"
+                });
                 $(".timePicker").timepicker();
             }
 

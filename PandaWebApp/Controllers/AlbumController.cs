@@ -5,15 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
+using PandaWebApp.Filters;
 using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Controllers
 {
     public class AlbumController : ModelCareController
     {
-        //
-        // GET: /Album/
-
         public ActionResult Index(Guid userId)
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
@@ -27,6 +25,7 @@ namespace PandaWebApp.Controllers
             return PartialView("Index", albumUnit);
         }
 
+        [BaseAuthorizationReuired]
         public ActionResult Delete(Guid photoId)
         {
             var userId = DataAccessLayer.GetById<Photo>(photoId).Album.User.Id;

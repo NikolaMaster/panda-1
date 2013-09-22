@@ -1,10 +1,11 @@
 ﻿@using PandaDataAccessLayer.DAL
+@using PandaWebApp.ViewModels
 @model Tuple<PandaWebApp.ViewModels.Employer, List<string>>
 @{
     var core = AuthorizationCore.StaticCreate();
     var isGuest = core.IsGuest;
     var user = core.User;
-
+    var isAdmin = core.IsAdmin;
 }   
 
 <a href="javascript:addToFavorite('@Model.Item1.UserId')">Добавить в избранное</a>			
@@ -33,7 +34,7 @@
                 <div class="row">Адрес офиса</div> 
                 <div class="row"><img src="~/Content/img/phone.png" />Телефон</div>
                 <div class="row"><img src="~/Content/img/mail.png" />e-mail</div>
-                 @if (!isGuest && Equals(user.Id, Model.Item1.UserId))
+                 @if ((!isGuest && Equals(user.Id, Model.Item1.UserId)) || isAdmin)
                  {
                      <div class="row">Количество монеток: @user.Coins</div>
                  }
@@ -51,11 +52,11 @@
                 <div class="row">@Model.Item1.City</div>
                 <div class="row">@Model.Item1.Address</div>
                 
-                @if (!isGuest)
+                @if (!isGuest || isAdmin)
                 {
                     string fullphone = string.Format("{0} {1} {2}", Model.Item1.Phone.CountryCode, Model.Item1.Phone.Code, Model.Item1.Phone.Number);
-                    
-                    if (Equals(user.Id, Model.Item1.UserId))
+
+                    if (Equals(user.Id, Model.Item1.UserId) || isAdmin)
                     {
                         <div class="row">@fullphone</div>
                         <div class="row">@Model.Item1.Email</div>
@@ -102,9 +103,12 @@
                     <div class="row"><a href="#" class="open">открыть</a></div>
                 }
 
-                @if (!isGuest && (Equals(user.Id, Model.Item1.UserId) || user.IsAdmin))
+                @if (!isGuest && (Equals(user.Id, Model.Item1.UserId) || isAdmin))
                 {
-                    <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.Item1.UserId})" >редактировать</a></div>
+                    if (isAdmin)
+                    {
+                        <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.Item1.UserId})" >редактировать</a></div>
+                    }
                     <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Employer", new {id = Model.Item1.UserId}, new {})</div>
                 }
             </div>
@@ -166,19 +170,16 @@
         <div class="more"><p>@Html.ActionLink("Просмотреть все фотоотчеты","Album","Album",new {userId = Model.Item1.UserId},null)</p></div>
     </div>
         
-    <div class="header">Открытые вакансии</div>
-    @{
-        foreach (var vacancy in Model.Item1.Vacancies)
-        {
-            <div>Наименование работы: @vacancy.JobTitle</div>
-            <div>Описание работы: @vacancy.FullDescription</div>
-            <div>С: @vacancy.StartTime</div>
-            <div>До: @vacancy.EndTime</div>
-            <div>Цена за час: @vacancy.Salary</div>
-            <div>На сайте: @vacancy.DaysOnSite</div>
-            <div>Город: @vacancy.City</div>
-        }
-    }
+    <div class="vacancies clear">
+        <div class="header">Открытые вакансии</div>
+        <div class="searchResult">
+            <div class="searchResult__body">
+                <div class="clear"></div>
+                @Html.Partial("Vacancies", Model.Item1.Vacancies)  
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
     <div class="clear"></div>
 
     @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.Item1.UserId }); }

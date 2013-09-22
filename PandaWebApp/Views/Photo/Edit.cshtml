@@ -7,6 +7,7 @@
 <script>
     $(function () {
         $('#saveButton').button();
+        $('#editButton').button();
         $('img#photo').imgAreaSelect({
             handles: true,
             onSelectEnd: function (img, selection) {
@@ -29,6 +30,7 @@
     @Html.HiddenFor(x => x.y2)
     <br/>
     <button id="saveButton" type="submit">Сохранить</button>
+    <a id = "editButton" href="@Url.Action("Edit", Model.Controller , new { id = Model.UserId })#photoTab">Отмена</a>
 }
 
 

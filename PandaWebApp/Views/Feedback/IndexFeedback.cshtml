@@ -2,7 +2,7 @@
 <div class="feedbacks">
         @if (Model.User == null)
         {
-            <div class="header">Отзывы: (@Model.Count):</div>
+            <div class="header">Отзывы(@Model.Count):</div>
         }
         else if (Model.User is PandaDataAccessLayer.Entities.EmployerUser)
         {

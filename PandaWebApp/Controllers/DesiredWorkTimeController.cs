@@ -8,6 +8,7 @@ using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
+using PandaWebApp.Filters;
 using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Controllers
@@ -28,6 +29,7 @@ namespace PandaWebApp.Controllers
             return PartialView("Index", PromouterForm.Bind(DataAccessLayer, userId));
         }
 
+        [BaseAuthorizationReuired]
         public ActionResult Delete(Guid desireWorkTimeId)
         {
             DataAccessLayer.DeleteById<DesiredWorkTime>(desireWorkTimeId);
@@ -35,6 +37,7 @@ namespace PandaWebApp.Controllers
             return new EmptyResult();
         }
 
+        [BaseAuthorizationReuired]
         public ActionResult Create(Guid userId)
         {
             var user = DataAccessLayer.GetById<PromouterUser>(userId);

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
+using PandaWebApp.Filters;
 using PandaWebApp.ViewModels;
 
 namespace PandaWebApp.Controllers
@@ -127,6 +128,7 @@ namespace PandaWebApp.Controllers
             return RedirectToAction("Index", new { actionName = "Help", controllerName = "StaticPage" });
         }
         
+        [AdministratorAuthorizationRequired]
         public ActionResult EditStaticPage(Guid pageId)
         {
             var staticPageUnit = DataAccessLayer.Get<StaticPageUnit>(x => x.Id == pageId).First();
@@ -139,6 +141,7 @@ namespace PandaWebApp.Controllers
         
         [ValidateInput(false)]
         [HttpPost]
+        [AdministratorAuthorizationRequired]
         public ActionResult EditStaticPage(StaticPage page)
         {
             if (ModelState.IsValid)

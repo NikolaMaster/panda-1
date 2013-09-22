@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PandaWebApp.Filters;
 
 namespace PandaWebApp.Controllers
 {
@@ -70,6 +71,7 @@ namespace PandaWebApp.Controllers
 
         #region Logout
 
+        [BaseAuthorizationReuired]
         public ActionResult Logout(string returnUrl)
         {
             AuthorizationCore.StaticCreate().Logout();

@@ -11,7 +11,7 @@ namespace PandaWebApp.Controllers
 {
     public class FavoriteController : ModelCareController
     {
-        [System.Web.Mvc.NonAction]
+        [NonAction]
         private FavoriteViewModel GetModel(IEnumerable<Favorite> f)
         {
             return new FavoriteViewModel
@@ -26,28 +26,28 @@ namespace PandaWebApp.Controllers
             };
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         [AdministratorAuthorizationRequired]
         public ActionResult AdminIndex()
         {
             return View("Index", GetModel(DataAccessLayer.GetAllFavorites()));
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         [BaseAuthorizationReuired]
         public ActionResult UserIndex()
         {
             return View("Index", GetModel(DataAccessLayer.GetUserFavorites(CurrentUser)));
         }
 
-        [System.Web.Mvc.HttpGet]
+        [HttpGet]
         [BaseAuthorizationReuired]
         public ActionResult _UserIndex()
         {
             return View("_Index", GetModel(DataAccessLayer.GetUserFavorites(CurrentUser)));
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         [BaseAuthorizationReuired]
         public ActionResult AddToFavorite(Guid id)
         {
@@ -57,7 +57,7 @@ namespace PandaWebApp.Controllers
             return PartialView(viewName);
         }
 
-        [System.Web.Mvc.HttpPost]
+        [HttpPost]
         [BaseAuthorizationReuired]
         public ActionResult DeleteFromFavorite(Guid id)
         {

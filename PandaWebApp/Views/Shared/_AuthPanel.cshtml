@@ -4,7 +4,9 @@
     var isGuest = core.IsGuest;
     var user = core.User;
     var username = core.UserName;
+    var firstName = core.FirstName;
     var city = core.City;
+    const int FirstNameLength = 14;
 }    
 
 <div class="top-links content-width">
@@ -26,7 +28,7 @@ else
     <div class="header__city"><a href="#" class="header__city-link">@city</a></div>
 					<div class="header__prompt">
 						<span class="header__prompt-hello">Здравствуйте:</span>
-						<span class="header__prompt-name">@username</span>
+						<span class="header__prompt-name">@firstName.Shorten(FirstNameLength)</span>
 					</div>
 					<div class="header__offers">
 						<a class="header__offers-toyou" href="#">Предложения для вас</a><span class="header__offers-count">(#)</span> |
@@ -41,9 +43,9 @@ else
 						</div>
 						<div class="clear"></div>
 					</div>
-    <div class="header__cabinet button">
-        <a href="#" class="header__cabinet-link">Личный кабинет</a>
-    </div>
+        <div class="header__cabinet button">
+            <a href="#" class="header__cabinet-link">Личный кабинет</a>
+        </div>
         <div class="header__cabinet button">
             @Html.ActionLink("Выход","Logout","Authorization",null,new {@class = "header__cabinet-link"})
         </div>

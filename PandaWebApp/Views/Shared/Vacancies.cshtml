@@ -1,6 +1,6 @@
-﻿@model IEnumerable<PandaWebApp.ViewModels.EmployerSearchView>
+﻿@model IEnumerable<PandaWebApp.ViewModels.Vacancy>
 
-
+<ul class="searchResult__blogList" id="employerSearchResult">
     @foreach (var item in Model)
     {
         <li>
@@ -23,10 +23,13 @@
                         <div class="payment bold">@item.Salary руб/час</div>
                     </div>
                 </div>
-                @Html.ActionLink("Страница компании", "Detail", "Employer", new { id = item.Checklist.User.Id}, new { @class="companyPage" })
+                @if (item.Checklist != null)
+                {
+                    @Html.ActionLink("Страница компании", "Detail", "Employer", new {id = item.Checklist.User.Id}, new {@class = "companyPage"})
+                }
                 <img class="searchResult__blog__bottomShadow right" src="~/Content/img/resultSearch__blog__bottomShadow.png" />
             </div>
             <div class="clear"></div>
         </li>
     }
-
+</ul>

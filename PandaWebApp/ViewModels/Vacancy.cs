@@ -8,7 +8,7 @@ using PandaWebApp.Engine.Binders;
 
 namespace PandaWebApp.ViewModels
 {
-    public class EmployerSearchView
+    public class Vacancy
     {
         [ValueFrom(Constants.EmployerNameCode)]
         public string EmployerName { get; set; }

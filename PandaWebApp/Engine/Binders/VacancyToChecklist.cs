@@ -5,19 +5,19 @@ using System;
 
 namespace PandaWebApp.Engine.Binders
 {
-    public class ViewEmployerSearchViewToChecklist : BaseDataAccessLayerBinder<EmployerSearchView, Checklist>
+    public class VacancyToChecklist : BaseDataAccessLayerBinder<Vacancy, Checklist>
     {
-        public ViewEmployerSearchViewToChecklist(DataAccessLayer dataAccessLayer)
+        public VacancyToChecklist(DataAccessLayer dataAccessLayer)
             : base(dataAccessLayer)
         {
         }
 
-        public override void Load(EmployerSearchView source, Checklist dest)
+        public override void Load(Vacancy source, Checklist dest)
         {
             throw new Exception("Only view bind allowed");
         }
 
-        public override void InverseLoad(Checklist source, EmployerSearchView dest)
+        public override void InverseLoad(Checklist source, Vacancy dest)
         {
             ValueFromAttributeConverter.ModelFromAttributes(dest, source.AttrbuteValues, DataAccessLayer);
             dest.Checklist = source;

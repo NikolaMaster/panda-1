@@ -39,6 +39,7 @@ namespace PandaWebApp.Engine.Binders
             var firstOrDefault = source.Albums.FirstOrDefault(x => x.Name == "Основной альбом");
             if (firstOrDefault != null)
                 dest.Album = firstOrDefault.Photos.Select(x => x.SourceUrl);
+            dest.IsAdmin = source.IsAdmin;
 
             ValueFromAttributeConverter.ModelFromAttributes(dest, source.MainChecklist.AttrbuteValues, DataAccessLayer);
             foreach (var attrib in source.MainChecklist.AttrbuteValues)

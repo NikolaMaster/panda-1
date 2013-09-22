@@ -9,6 +9,7 @@ using PandaDataAccessLayer.Helpers;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
 using PandaWebApp.Engine.Editors;
+using PandaWebApp.Filters;
 using PandaWebApp.ViewModels;
 using PandaWebApp.FormModels;
 
@@ -18,6 +19,7 @@ namespace PandaWebApp.Controllers
     {
 
         [HttpGet]
+        [BaseAuthorizationReuired]
         public ActionResult Create()
         {
             return View();
@@ -80,6 +82,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpGet]
+        [BaseAuthorizationReuired]
         public ActionResult Edit(Guid id)
         {
             prepareViewBag();
@@ -92,6 +95,7 @@ namespace PandaWebApp.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [BaseAuthorizationReuired]
         public ActionResult Edit(EmployerForm model, IEnumerable<HttpPostedFileBase> photos)
         {
             if (ModelState.IsValid)
@@ -119,7 +123,7 @@ namespace PandaWebApp.Controllers
 #endif
         }
 
-
+        [NonAction]
         private void prepareViewBag()
         {
             ViewBag.SalaryValues = DataAccessLayer
@@ -192,6 +196,7 @@ namespace PandaWebApp.Controllers
             return PartialView();
         }
 
+        [NonAction]
         public EmployerUser CreateEmployer(EmployerRegister model)
         {
             var binder = new EmployerRegisterToEmployerUser(DataAccessLayer);
@@ -200,6 +205,7 @@ namespace PandaWebApp.Controllers
             DataAccessLayer.DbContext.SaveChanges();
             DataAccessLayer.SendConfirmation(user.Id);
             DataAccessLayer.DbContext.SaveChanges();
+            new AuthorizationCore().Login(model.Email, model.Password);
             return user;
         }
     }

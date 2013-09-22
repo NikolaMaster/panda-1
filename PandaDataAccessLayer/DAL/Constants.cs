@@ -11,6 +11,8 @@ namespace PandaDataAccessLayer.DAL
 {
     public class Constants
     {
+        public const int OnlineTimeout = 5;
+
         public const string PromouterChecklistTypeCode = "Promouter";
         public const string EmployerChecklistTypeCode = "Employer";
         public const string EmployerMainChecklistTypeCode = "EmployerMain";

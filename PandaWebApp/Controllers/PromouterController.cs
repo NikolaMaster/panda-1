@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 using PandaWebApp.Engine.Binders;
 using PandaDataAccessLayer.Entities;
+using PandaWebApp.Filters;
 using PandaWebApp.ViewModels;
 using PandaWebApp.Engine.Editors;
 using PandaWebApp.FormModels;
@@ -36,6 +37,7 @@ namespace PandaWebApp.Controllers
                 DataAccessLayer.DbContext.SaveChanges();
                 DataAccessLayer.SendConfirmation(user.Id);
                 DataAccessLayer.DbContext.SaveChanges();
+                new AuthorizationCore().Login(model.Email, model.Password);
                 Response.ContentType = @"text/json";
                 return Json(new { path = "/Promouter/Detail/" + user.Id });
             }
@@ -97,6 +99,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpGet]
+        [BaseAuthorizationReuired]
         public ActionResult Edit(Guid id)
         {
             ViewBag.SalaryValues = DataAccessLayer
@@ -118,6 +121,7 @@ namespace PandaWebApp.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [BaseAuthorizationReuired]
         public ActionResult Edit(PromouterForm model, IEnumerable<HttpPostedFileBase> photos)
         {
             if (ModelState.IsValid)
