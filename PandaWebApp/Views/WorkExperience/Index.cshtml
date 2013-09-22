@@ -1,16 +1,72 @@
 ﻿@model PandaWebApp.FormModels.PromouterForm
 
+<script>
+    $(function () {
+        $('.deleteWorkExperienceButton').button();
+        $('#addWorkExperience').button().click(function() {
+            var count = parseInt($('#workExperienceCount').val());
+            var id = 'WorkExperience_' + count + '__';
+            var name = 'WorkExperience[' + count + '].';
+
+            var employerName = $('<div>').append('Название компании').append($('<input>', {
+                type: 'text',
+                'class': 'text-box single-line',
+                id: id + 'Title',
+                name: name + 'Title'
+            }));
+            var work = $('<div>').append('Работа').append($('<input>', {
+                type: 'text',
+                'class': 'text-box single-line',
+                id: id + 'WorkName',
+                name: name + 'WorkName'
+            }));
+            var start = $('<div>').append('Начало').append($('<input>', {
+                type: 'text',
+                'class': 'datePicker',
+                id: id + 'StartTime',
+                name: name + 'StartTime'
+            }));
+            var end = $('<div>').append('Конец').append($('<input>', {
+                type: 'text',
+                'class': 'datePicker',
+                id: id + 'EndTime',
+                name: name + 'EndTime'
+            }));
+            var hours = $('<div>').append('Часы').append($('<input>', {
+                type: 'number',
+                'class': 'text-box single-line',
+                id: id + 'Hours',
+                name: name + 'Hours'
+            }));
+
+            var newItem = $('<div>', { id: 'addWorkExperience_' + count });
+            newItem.append(employerName)
+                .append(work)
+                .append(start)
+                .append(end)
+                .append(hours)
+                .append($('<button type="button">Удалить</button>').button().click(function() {
+                    $('#addWorkExperience_' + count).remove();
+                }))
+                .append('<hr>');
+            $('#newWorkExperience').append(newItem);
+            $('#workExperienceCount').val(count + 1);
+            initializeDateTime();
+        });
+    });
+</script>
 <div id ="workExperience">
+    <input type="hidden" id="workExperienceCount" value="@Model.WorkExperience.Count"/>
     @for (var i = 0;i<Model.WorkExperience.Count;i++)
     {
         @Html.EditorFor(x => x.WorkExperience[i], "WorkExperience")
     }
 
+    <div id="newWorkExperience">
+        
+    </div>
+
     <br/>
-    @Ajax.ActionLink("Добавить", "Create", new {userId = Model.UserId}, new AjaxOptions
-    {
-        UpdateTargetId = "workExperience",
-        OnSuccess = "initializeDateTime"
-    })
+    <button type="button" id="addWorkExperience">Добавить</button>
 </div>
 
