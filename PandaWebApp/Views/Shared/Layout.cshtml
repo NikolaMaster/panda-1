@@ -51,6 +51,7 @@
             </div>
 
             <div class="content content-width">
+                @RenderSection("BeforeBody", false)
                 <div class="base-content left">
                     @RenderBody()
                 </div>
@@ -70,6 +71,7 @@
                     
                 </div>
                 <div class="clear"></div>
+                @RenderSection("AfterBody", false)
             </div>
         </div>
         
