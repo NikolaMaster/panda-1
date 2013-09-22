@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Data.SqlTypes;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Web.Mvc.Ajax;
 using PandaDataAccessLayer.DAL;
@@ -264,6 +265,64 @@ namespace PandaWebApp.Engine
         public static Paginator<T> GetPaginator<T>(this IEnumerable<T> src, int page = 1, int perPage = 6)
         {
             return new Paginator<T>(src, page, perPage);
+        }
+
+        #endregion
+
+        #region Feedback rating
+
+        public static double SafeAverage<TArg>(this IEnumerable<TArg> src, Func<TArg, int> f)
+        {
+            if (!src.Any())
+            {
+                return 0;
+            }
+            return src.Average(f);
+        }
+
+        public static int RedCount(this Feedback.Entry entry)
+        {
+            return entry.Rating % 10;
+        }
+
+        public static int OragneCount(this Feedback.Entry entry)
+        {
+            return entry.Rating / 100;
+        }
+
+        public static int GreenCount(this Feedback.Entry entry)
+        {
+            return entry.Rating % 100 / 10;
+        }
+
+        public static int RedCount(this Review entry)
+        {
+            return entry.Rating%10;
+        }
+
+        public static int OragneCount(this Review entry)
+        {
+            return entry.Rating / 100;
+        }
+
+        public static int GreenCount(this Review entry)
+        {
+            return entry.Rating % 100 / 10;
+        }
+
+        public static double RedAverage(this IEnumerable<Review> model)
+        {
+            return model.SafeAverage(x => x.RedCount());
+        }
+
+        public static double GreenAverage(this IEnumerable<Review> model)
+        {
+            return model.SafeAverage(x => x.GreenCount());
+        }
+
+        public static double OrangeAverage(this IEnumerable<Review> model)
+        {
+            return model.SafeAverage(x => x.OragneCount());
         }
 
         #endregion

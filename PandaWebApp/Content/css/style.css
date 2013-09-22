@@ -108,7 +108,7 @@ ul.list-style { margin-left: 20px; }
 .user .header .user-status 
 { 
 	position: relative;
-	background-color: #ebebeb, 
+    background-color: #ebebeb; 
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -199,7 +199,7 @@ ul.list-style { margin-left: 20px; }
 .user .work-exp .row p { margin: 0; font-family: 'Arial'; font-size: 14px; color: #333333; line-height: 1; }
 
 .user .feedbacks { margin-bottom: 20px;}
-.user .feedbacks .header { font-size: 16px; color: rgb( 106, 178, 0 ); font-weight: bold; border-bottom: 1px solid #919191; padding-top: 20px; }
+.user .feedbacks .header { font-size: 25px; color: rgb( 106, 178, 0 ); line-height: 1.2; border-bottom: 1px solid #919191; float: left; margin-right: 34px; }
 .user .feedbacks ul { margin: 0; }
 .user .feedbacks ul li { background-color: #ededed; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding: 15px; height: 170px; list-style-type: none; margin: 0; margin-bottom: 15px;}
 .user .feedbacks .feedback>.column img { height: 170px; width: 125px; }
@@ -210,6 +210,9 @@ ul.list-style { margin-left: 20px; }
 .user .feedbacks .feedback .feedback-body { margin-top: 20px; font-family: 'Arial'; font-size: 12px; color: #333333; }
 .user .feedbacks .more { font-size: 14px; color: rgb( 80, 86, 92 ); background-color: #f7d2b4; height: 30px; cursor: pointer; }
 .user .feedbacks .more p { text-align: center; padding-top: 0.5em; }
+.user .feedbacks .rating img { position: relative; top: 6px; height: 18px; width: 20px; }
+.user .feedbacks .rating .rating_value { font-size: 16px; font-family: "Arial"; color: rgb( 150, 150, 150 ); line-height: 1.875; margin-right: 24px; position: relative; top: 4px; }
+.user .feedbacks .feedback .stars span img { height: 16px; width: 15px; margin-right: 4px; }
 
 .user .intresting-work ul li { font-size: 14px; padding-bottom: 15px; }
 
@@ -489,3 +492,5 @@ border: 1px solid #2E8800;
 
 .editor-company-type input { float: left; font-size: 11px; margin-left: 0px;width: auto; }
 .editor-company-type label { float: left; font-size: 11px; margin-right: 5px;}
+
+.user .rating_editor img {width: 15px; height:15px; }

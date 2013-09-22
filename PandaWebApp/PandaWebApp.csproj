@@ -545,6 +545,7 @@
     <Content Include="Content\js\frameworks\jquery\imgAreaSelect\jquery.imgareaselect.min.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.ui.timepicker.js" />
     <Content Include="Content\js\frameworks\jquery\lightbox-2.6.min.js" />
+    <Content Include="Content\js\pages\feedback.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.min.js" />
