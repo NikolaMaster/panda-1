@@ -112,6 +112,22 @@ namespace PandaWebApp.Engine
             }
         }
 
+        public bool IsPromouter
+        {
+            get
+            {
+                return User is PromouterUser;
+            }
+        }
+
+        public bool IsEmployer
+        {
+            get
+            {
+                return User is EmployerUser;
+            }
+        }
+
         public string UserController
         {
             get

@@ -11,16 +11,25 @@ namespace PandaWebApp.Engine
 {
     public class ModelCareController : Controller
     {
-        private UserBase _mCachedUser;
+        private AuthorizationCore _mCachedAuthorizationCore;
+
+        public AuthorizationCore Authorization
+        {
+            get
+            {
+                if (_mCachedAuthorizationCore == null)
+                {
+                    _mCachedAuthorizationCore = AuthorizationCore.StaticCreate();
+                }
+                return _mCachedAuthorizationCore;
+            }
+        }
+
         protected UserBase CurrentUser
         {
             get
             {
-                if (_mCachedUser == null)
-                {
-                    _mCachedUser = AuthorizationCore.StaticCreate().User;
-                }
-                return _mCachedUser;
+                return Authorization.User;
             }
         }
 
