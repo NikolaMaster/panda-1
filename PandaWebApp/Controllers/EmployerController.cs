@@ -19,7 +19,6 @@ namespace PandaWebApp.Controllers
     {
 
         [HttpGet]
-        [BaseAuthorizationReuired]
         public ActionResult Create()
         {
             return View();
