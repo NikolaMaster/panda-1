@@ -130,6 +130,7 @@
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Engine\Authorize.cs" />
+    <Compile Include="Engine\Binders\CurrentUserToUserInfo.cs" />
     <Compile Include="Engine\Binders\EmployerRegisterToEmployerUser.cs" />
     <Compile Include="Engine\Binders\PromouterRegisterToPromouterUser.cs" />
     <Compile Include="Engine\Binders\ValueFromAttribute.cs" />
@@ -555,6 +556,7 @@
     <Content Include="Content\js\frameworks\jquery\imgAreaSelect\jquery.imgareaselect.min.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.ui.timepicker.js" />
     <Content Include="Content\js\frameworks\jquery\lightbox-2.6.min.js" />
+    <Content Include="Content\js\pages\core.js" />
     <Content Include="Content\js\pages\feedback.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.js" />

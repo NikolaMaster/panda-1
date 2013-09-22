@@ -23,6 +23,10 @@
                     favoritesAction(data.NextStep, data.NextStepArg);
                 }
             }
+            
+            if (data.Callback) {
+                eval(data.Callback);
+            }
             //console.log(data.Code);
         }
     });
@@ -37,11 +41,5 @@ function removeFromFavorite(userId) {
 }
 
 function reloadFavoritesContent() {
-    $.ajax({
-        type: 'GET',
-        url: '/Favorite/_UserIndex',
-        success: function(data) {
-            $('.favorites').html(data);
-        }
-    });
+    updateFrom('/Favorite/_UserIndex', '#favorites');
 }
