@@ -20,6 +20,11 @@
                 </div>
                 <div class="link">
                     <p class="right-aligned">
+                        @if (!isGuest && user.IsAdmin)
+                        {
+                            <a href="@Url.Action("Edit", "Blog", new {id = iter.Id})">Редактировать</a>
+                            <a href="@Url.Action("Delete", "Blog", new {id = iter.Id})">Удалить</a>
+                        }
                         <a href="@Url.Action("Detail","Blog",new { id = iter.Id})">посмотреть всю статью</a>
                     </p>
                 </div>

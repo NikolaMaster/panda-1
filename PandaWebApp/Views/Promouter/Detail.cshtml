@@ -7,7 +7,7 @@
     var isGuest = core.IsGuest;
     var user = core.User;
     var isAdmin = core.User.IsAdmin;
-    const int WorkExperienceLength = 40;
+    const int WorkExperienceLength = 24;
 }   
 
 
@@ -346,9 +346,9 @@
                     @for (int i = 0; i < (list.Count / 2 + list.Count % 2); i++)
                     {
                         <div class="row">
-                            <p>Место работы @list[i].Title.Shorten(40)</p>
-                            <p>Кем работал @list[i].WorkName.Shorten(40)</p>
-                            <p>Время работы @list[i].Hours.ToPandaString().Shorten(40)</p>
+                            <p>Место работы @list[i].Title.Shorten(WorkExperienceLength)</p>
+                            <p>Кем работал @list[i].WorkName.Shorten(WorkExperienceLength)</p>
+                            <p>Время работы @list[i].Hours.ToPandaString().Shorten(WorkExperienceLength)</p>
                         </div>
                     }
                 </div>

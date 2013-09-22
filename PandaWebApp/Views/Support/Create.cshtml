@@ -1,0 +1,34 @@
+﻿@model PandaWebApp.FormModels.SupportForm
+@{
+    ViewBag.Title = "Написать в службу поддержки";
+}
+
+@using (Html.BeginForm())
+{
+    <div id ="support">
+        <div class="error_text">
+            <div>@Html.ValidationSummary()</div>
+        </div>
+        <div>
+            <label class ="form_label">E-mail</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(x => x.Email, new Dictionary<string, object>() {{"class", "email_field"}})
+        </div>
+        <div>
+            <label class ="form_label">Сообщение</label>
+        </div>
+        <div>
+            @Html.TextAreaFor(x => x.Text, new Dictionary<string, object>() {{"class", "text_area"}})
+        </div>
+        
+        @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+        {
+            <p>@Model.SuccessMessage</p>
+        }
+
+        <button type="submit" class="green_button">Отправить</button>
+
+        <div class="clear"></div>
+    </div>
+}

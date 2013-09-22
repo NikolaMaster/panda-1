@@ -153,7 +153,8 @@ namespace PandaWebApp.Controllers
         public ActionResult Delete(Guid id)
         {
             DataAccessLayer.DeleteById<Review>(id);
-            return new EmptyResult();
+            DataAccessLayer.DbContext.SaveChanges();
+            return new RedirectResult(Request.UrlReferrer.ToString());
         }
     }
 }

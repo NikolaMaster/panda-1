@@ -21,6 +21,7 @@
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/lightbox-2.6.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/imgAreaSelect/jquery.imgareaselect.min.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/frameworks/jquery/imgAreaSelect/jquery.imgareaselect.pack.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/js/pages/core.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/pages/favorites.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/pages/pager.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/pages/feedback.js")"></script>
@@ -85,6 +86,7 @@
             </div>
 
             <div class="content content-width">
+                @RenderSection("BeforeBody", false)
                 <div class="base-content left">
                     @RenderBody()
                 </div>
@@ -104,6 +106,7 @@
                     
                 </div>
                 <div class="clear"></div>
+                @RenderSection("AfterBody", false)
             </div>
         </div>
         
@@ -156,7 +159,7 @@
                     <div class="column">
                         <div class="row"><a href="@Url.Action("Help","StaticPage")">Помощь</a></div>
                         <div class="row"><a href="@Url.Action("Dictionary","StaticPage")">Промо-словарь</a></div>
-                        <div class="row"><a href="#">Написать в службу поддержки</a></div>
+                        <div class="row"><a href="@Url.Action("Create","Support")">Написать в службу поддержки</a></div>
                     </div>
                     <div class="clear"></div>
                 </div>

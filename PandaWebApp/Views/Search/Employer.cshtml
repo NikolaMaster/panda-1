@@ -12,19 +12,21 @@
 
 
 
-@using (Ajax.BeginForm("EmployerSearchResult", new AjaxOptions
+@*@using (Ajax.BeginForm("EmployerSearchResult", new AjaxOptions
     {
         UpdateTargetId = "employerSearchResult",
         HttpMethod = "POST"
     }))
 {
-    <div class="content content-width">
-        <div class="">
+    *@
+@section BeforeBody
+{
+    <form action="@Url.Action("EmployerSearchResult", "Search")" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#employerSearchResult" id="form0" method="post">
             <div class="search">
                 <div class="search__header">Найти работу</div>
                 <div class="search__termContainer">
-                    <div class="left">@Html.TextBoxFor(x => x.Query, new { @class="search__term base-input" })</div>
-                    <div class="right search__startButton"><a href="#"><img src="~/Content/img/search.png" /></a></div>
+            <div class="left"><input class="search__term base-input" type="text" name="term" /></div>
+            <div class="right search__startButton"><a href="javascript: $('#form0').trigger('submit')"><img src="~/Content/img/search.png" /></a></div>
                     <div class="clear"></div>
                 </div>
                 <div class="search__linkContainer">
@@ -67,6 +69,10 @@
                     </div>
                 </div>
             </div>
+}
+<div class="content content-width">
+    <div class="">
+            
             <div class="base-content left">
                 <div class="searchResult">
                     <div class="searchResult__header">Поиск вакансий в городе Тюмени</div>
@@ -82,5 +88,8 @@
             </div>
         </div>
     </div>
-
+@section AfterBody
+{
+    </form>
 }
+@*}*@

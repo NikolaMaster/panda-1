@@ -187,7 +187,7 @@ namespace PandaWebApp.Controllers
 
             DataAccessLayer.DeleteById<BlogPost>(id);
             DataAccessLayer.DbContext.SaveChanges();
-            return RedirectToAction("Posts");
+            return new RedirectResult(Request.UrlReferrer.ToString());
         }
     }
 }

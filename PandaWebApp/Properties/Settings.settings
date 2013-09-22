@@ -3,19 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="MailServer" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">smtp.gmail.com</Value>
+      <Value Profile="(Default)">smtp.yandex.ru</Value>
     </Setting>
     <Setting Name="MailLogin" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">redrick.tmn</Value>
+      <Value Profile="(Default)">pandaTestApp</Value>
     </Setting>
     <Setting Name="MailPassword" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">5idZ4nAJH0906</Value>
+      <Value Profile="(Default)">pandaTestAppPassword</Value>
     </Setting>
     <Setting Name="SiteAddress" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://localhost:4392/</Value>
     </Setting>
     <Setting Name="NoReply" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">noreply@panda.com</Value>
+      <Value Profile="(Default)">pandaTestApp@yandex.ru</Value>
+    </Setting>
+    <Setting Name="SupportEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pandaTestApp@yandex.ru</Value>
     </Setting>
   </Settings>
 </SettingsFile>

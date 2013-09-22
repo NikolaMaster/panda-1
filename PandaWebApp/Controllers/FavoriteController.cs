@@ -21,14 +21,23 @@ namespace PandaWebApp.Controllers
             public Enum Code { get; set; }
             public string NextStep { get; set; }
             public Guid? NextStepArg { get; set; }
+            public string Callback { get; set; }
 
-            public FavoriteActionResultObject(string text, Enum code, string next = "", Guid? nextStepArg = null)
+            public FavoriteActionResultObject(string text, Enum code, string next = "", Guid? nextStepArg = null, string callback = "")
             {
                 Text = text;
                 Code = code;
                 NextStep = next;
                 NextStepArg = nextStepArg;
+                Callback = callback;
             }
+
+            public FavoriteActionResultObject(string text, Enum code, string callback)
+            {
+                Text = text;
+                Code = code;
+                Callback = callback;
+        }
         }
 
         [NonAction]
@@ -64,7 +73,7 @@ namespace PandaWebApp.Controllers
         [BaseAuthorizationReuired]
         public ActionResult _UserIndex()
         {
-            return View("_Index", GetModel(DataAccessLayer.GetUserFavorites(CurrentUser)));
+            return PartialView("_Index", GetModel(DataAccessLayer.GetUserFavorites(CurrentUser)));
         }
 
         [HttpPost]
@@ -80,7 +89,8 @@ namespace PandaWebApp.Controllers
             var res = DataAccessLayer.AddToFavorites(CurrentUser.Id, id);
             var nextStep = res == DAL.DataAccessLayer.AddToFavoritesResult.NeedToBuy ? "BuyFavorites" : "";
             var nextStepArg = res == DAL.DataAccessLayer.AddToFavoritesResult.NeedToBuy ? (Guid?) id : null;
-            return Json(new FavoriteActionResultObject(text[res], res, nextStep, nextStepArg));
+            var callback = res == DAL.DataAccessLayer.AddToFavoritesResult.Ok ? "updateUserInfo()" : "";
+            return Json(new FavoriteActionResultObject(text[res], res, nextStep, nextStepArg, callback));
         }
 
         [HttpPost]
@@ -93,7 +103,8 @@ namespace PandaWebApp.Controllers
                 {DAL.DataAccessLayer.DeleteFromFavoritesResult.NotFound, "Запись не найдена!"}
             };
             var res = DataAccessLayer.DeleteFromFavorite(id);
-            return Json(new FavoriteActionResultObject(text[res], res));
+            var callback = res == DAL.DataAccessLayer.DeleteFromFavoritesResult.Ok ? "$.when(updateUserInfo()).done(reloadFavoritesContent);" : "";
+            return Json(new FavoriteActionResultObject(text[res], res, callback));
         }
 
         [HttpPost]
@@ -101,7 +112,7 @@ namespace PandaWebApp.Controllers
         public ActionResult BuyFavorites(Guid? id)
         {
             var text = new Dictionary<DAL.DataAccessLayer.BuyFavoritesResult, string>
-        {
+            {
                 { DAL.DataAccessLayer.BuyFavoritesResult.NotEnoughMoney, "Недостаточно монет!"},
                 { DAL.DataAccessLayer.BuyFavoritesResult.Ok, "Максимальное количество записей в избранном увеличено на " + FavoritePackage}
             };

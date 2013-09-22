@@ -22,7 +22,7 @@
 
 @using (Html.BeginForm("Edit", "Photo", FormMethod.Post))
 {
-    <img id="photo" src="@Model.SourceUrl"/>
+    <img id="photo" src="@Model.SourceUrl" style="width: 250px; height: 300px;"/>
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.x1)
     @Html.HiddenFor(x => x.y1)
