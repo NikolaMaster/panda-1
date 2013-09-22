@@ -107,7 +107,7 @@ namespace PandaWebApp.Engine.Logic
                 var storedDesiredWork = DataAccessLayer.GetById<EntityList>(entityListId).DesiredWork.Select(x => x.Work);
 
                 
-                return castedValue.All(x => storedDesiredWork.Contains(x));
+                return castedValue.All(storedDesiredWork.Contains);
             }
             else 
             {
@@ -192,7 +192,7 @@ namespace PandaWebApp.Engine.Logic
                 var employerNameAttrib = DataAccessLayer.GetAttributeValue(checklist.User.MainChecklist.Id, Constants.EmployerNameCode);
                 fullStr += employerNameAttrib.Value;
             }
-            return fullStr.Contains(queryStr);
+            return fullStr.ToLower().Contains(queryStr.ToLower());
         }
     }
 }

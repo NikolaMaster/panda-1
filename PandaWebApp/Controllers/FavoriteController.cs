@@ -37,7 +37,7 @@ namespace PandaWebApp.Controllers
                 Text = text;
                 Code = code;
                 Callback = callback;
-            }
+        }
         }
 
         [NonAction]

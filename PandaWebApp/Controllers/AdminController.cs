@@ -7,6 +7,7 @@ using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
+using PandaWebApp.Filters;
 using PandaWebApp.FormModels;
 using PandaWebApp.ViewModels;
 
@@ -41,6 +42,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpPost]
+        [AdministratorAuthorizationRequired]
         public ActionResult ChangeCoins(Guid buyerId, Guid userId, string attrCode,string value)
         {
             if (Request.IsAjaxRequest())
@@ -72,6 +74,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpGet]
+        [AdministratorAuthorizationRequired]
         public ActionResult EditUserCoins(Guid userId)
         {
             var userBase = DataAccessLayer.GetById<UserBase>(userId);
@@ -85,6 +88,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpPost]
+        [AdministratorAuthorizationRequired]
         public ActionResult EditUserCoins(EditCoinsForm user)
         {
             DataAccessLayer.UpdateById<UserBase>(user.UserId, x => x.Coins = user.Coins);

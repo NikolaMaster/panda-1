@@ -42,15 +42,15 @@ namespace PandaWebApp.Controllers
 
             var searchResult = (new Searcher(DataAccessLayer)).Search(searchCollection, formValues, model.Query);
 
-            var viewBinder = new ViewEmployerSearchViewToChecklist(DataAccessLayer);
+            var viewBinder = new VacancyToChecklist(DataAccessLayer);
             var resultModel = searchResult.Select(x =>
             {
-                var t = new EmployerSearchView();
+                var t = new Vacancy();
                 viewBinder.InverseLoad(x, t);
                 return t;
             }).GetPaginator(model.Pager.Page, model.Pager.PerPage);
             ViewBag.Pager = resultModel.Pager;
-            return PartialView(resultModel.Collection);
+            return PartialView(@"Vacancies", resultModel.Collection);
         }
 
         [HttpGet]

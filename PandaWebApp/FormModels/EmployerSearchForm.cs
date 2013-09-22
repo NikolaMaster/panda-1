@@ -16,6 +16,7 @@ namespace PandaWebApp.FormModels
             public string Code { get; set; }
             public string Title { get; set; }
             public bool Value { get; set; }
+            public int Count { get; set; }
         }
 
         public string Query { get; set; }
@@ -35,6 +36,17 @@ namespace PandaWebApp.FormModels
                     Value = false,
                     Code = x.Code,
                     Title = x.Description,
+                    Count = dataAccessLayer
+                        .Get<Checklist>(y => y.ChecklistType.Code == Constants.EmployerChecklistTypeCode)
+                        .Count(y =>
+                        {
+                            var attrib = dataAccessLayer.GetAttributeValue(y.Id, Constants.WorkCode);
+                            if (attrib != null && !string.IsNullOrEmpty(attrib.Value))
+                            {
+                                return attrib.Value == x.Code;
+                            }
+                            return false;
+                        })
                 });
             DesiredWork = new List<DesiredWorkDescription>(desiredWork);
         }

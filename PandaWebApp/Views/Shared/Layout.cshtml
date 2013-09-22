@@ -25,6 +25,41 @@
         <script type="text/javascript" src="@Url.Content("~/Content/js/pages/favorites.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/pages/pager.js")"></script>
         <script type="text/javascript" src="@Url.Content("~/Content/js/pages/feedback.js")"></script>
+        <script>
+            function initializeDateTime() {
+                $(".datePicker").datepicker({  
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: "dd.mm.yy"
+                });
+                $(".timePicker").timepicker();
+            }
+
+            $(function() {
+                initializeDateTime();
+                $('#registerForm').dialog({
+                    autoOpen: false,
+                    width: 'auto',
+                    height: 'auto',
+                    resizable: false,
+                    modal: true,
+                    position: { my: 'top', at: 'top', of: window }
+                });
+               
+                $("#registerButton").click(function (e) {
+                      e.preventDefault();
+                      $("#registerForm").dialog("open");
+                      $("#registerForm").tabs({ active: 1 });
+                });
+                
+                $("#loginButton").click(function (e) {
+                    e.preventDefault();
+                    $("#registerForm").dialog("open");
+                    $("#registerForm").tabs({active : 0});
+                });
+               
+            });
+        </script>
     </head>
     <body>
         <div id="top" class="top-panel layer zero"></div>
@@ -124,7 +159,7 @@
                     <div class="column">
                         <div class="row"><a href="@Url.Action("Help","StaticPage")">Помощь</a></div>
                         <div class="row"><a href="@Url.Action("Dictionary","StaticPage")">Промо-словарь</a></div>
-                        <div class="row"><a href="#">Написать в службу поддержки</a></div>
+                        <div class="row"><a href="@Url.Action("Create","Support")">Написать в службу поддержки</a></div>
                     </div>
                     <div class="clear"></div>
                 </div>

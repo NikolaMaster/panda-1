@@ -3,12 +3,11 @@
 @model Tuple<Promouter, List<string>>
 @{
     ViewBag.Title = "Информация о промоутере";
-}
-
-@{
     var core = AuthorizationCore.StaticCreate();
     var isGuest = core.IsGuest;
     var user = core.User;
+    var isAdmin = core.User.IsAdmin;
+    const int WorkExperienceLength = 24;
 }   
 
 
@@ -49,7 +48,7 @@
                 <div class="row">Желаемая цена за час работы</div>
                 <div class="row">Город</div>
                 <div class="row">Образование</div>
-                @if (!isGuest && user.Id == Model.Item1.UserId)
+                @if ((!isGuest && user.Id == Model.Item1.UserId) || isAdmin)
                 {
                     <div class="row">Количество монеток: @user.Coins</div>
                 }
@@ -81,11 +80,11 @@
                
                <div class="row gap"></div>
                 
-                @if (!isGuest)
+                @if (!isGuest || isAdmin)
                 {
                     string fullphone = string.Format("{0} {1} {2}", Model.Item1.Phone.CountryCode, Model.Item1.Phone.Code, Model.Item1.Phone.Number);
-                    
-                    if (Equals(user.Id, Model.Item1.UserId))
+
+                    if (Equals(user.Id, Model.Item1.UserId) || isAdmin)
                     {
                         <div class="row">@fullphone</div>
                         <div class="row">@Model.Item1.Email</div>
@@ -140,9 +139,12 @@
                 <div class="row">@Model.Item1.Salary</div>
                 <div class="row">@Model.Item1.City</div>
                 <div class="row">@Model.Item1.Education</div>
-                @if (!isGuest && Equals(user.Id, Model.Item1.UserId))
+                @if (!isGuest && Equals(user.Id, Model.Item1.UserId) || isAdmin)
                 {
-                    <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.Item1.UserId})" >редактировать</a></div>
+                    if (isAdmin)
+                    {
+                        <div class="row"><a href="@Url.Action("EditUserCoins", "Admin", new {userId = Model.Item1.UserId})" >редактировать</a></div>
+                    }
                     <div class="row">@Html.ActionLink("редактировать страницу", "Edit", "Promouter", new {id = Model.Item1.UserId}, new {})</div>
                 }
             </div>
@@ -334,7 +336,6 @@
             }
         </div>
     </div>
-
     <div class="work-exp">
         <div class="header">Опыт работы</div>
         <div class="exp">
@@ -345,9 +346,9 @@
                     @for (int i = 0; i < (list.Count / 2 + list.Count % 2); i++)
                     {
                         <div class="row">
-                            <p>Место работы @list[i].Title</p>
-                            <p>Кем работал @list[i].WorkName</p>
-                            <p>Время работы @list[i].Hours</p>
+                            <p>Место работы @list[i].Title.Shorten(WorkExperienceLength)</p>
+                            <p>Кем работал @list[i].WorkName.Shorten(WorkExperienceLength)</p>
+                            <p>Время работы @list[i].Hours.ToPandaString().Shorten(WorkExperienceLength)</p>
                         </div>
                     }
                 </div>
@@ -356,9 +357,9 @@
                     @for (int i = list.Count / 2; i < list.Count; i++)
                     {
                         <div class="row">
-                            <p>Место работы @list[i].Title</p>
-                            <p>Кем работал @list[i].WorkName</p>
-                            <p>Время работы @list[i].Hours</p>
+                            <p>Место работы @list[i].Title.Shorten(WorkExperienceLength)</p>
+                            <p>Кем работал @list[i].WorkName.Shorten(WorkExperienceLength)</p>
+                            <p>Время работы @list[i].Hours.ToPandaString().Shorten(WorkExperienceLength)</p>
                         </div>
                     }
 

@@ -1,4 +1,5 @@
-﻿using PandaDataAccessLayer.DAL;
+﻿using System.Security.Cryptography;
+using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.ViewModels;
 using System;
@@ -22,6 +23,9 @@ namespace PandaWebApp.Engine.Binders
         {
             ValueFromAttributeConverter.ModelFromAttributes(dest, source.AttrbuteValues, DataAccessLayer);
             dest.Checklist = source;
+            dest.DaysOnSite = (int)(DateTime.UtcNow - source.CreationDate).TotalDays;
+            dest.AvatarUrl = source.User.Avatar.SourceUrl;
+            dest.FullName = DataAccessLayer.GetUserName(source.User);
         }
     }
 }

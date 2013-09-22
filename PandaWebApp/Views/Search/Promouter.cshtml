@@ -2,25 +2,74 @@
 @{
     ViewBag.Title = "Поиск по исполнителям";
     Layout = "~/Views/Shared/Layout.cshtml";
+    var cityValues = (IEnumerable<SelectListItem>)ViewBag.CityValues;
+    var genderValues = (IEnumerable<SelectListItem>)ViewBag.GenderValues;
+    var salaryValues = (IEnumerable<SelectListItem>)ViewBag.SalaryValues;
 }
 
-<h2>Поиск вакансий</h2>
 
-<div>
-@using (Ajax.BeginForm("PromouterSearchResult", new AjaxOptions
+
+
+@*@using (Ajax.BeginForm("EmployerSearchResult", new AjaxOptions
     {
-        UpdateTargetId = "promouterSearchResult",
+        UpdateTargetId = "employerSearchResult",
         HttpMethod = "POST"
     }))
 {
-    <h3>Поиск</h3>
-    <div>@Html.TextBoxFor(x => x.Query) <input type="submit" value="Поиск" /></div>
-    <hr />
-    <div>Город @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.CityValues, string.Empty)</div>
-    <div>Пол @Html.DropDownListFor(x => x.Gender, (IEnumerable<SelectListItem>)ViewBag.GenderValues, string.Empty)</div>
-    <div>Цена за час @Html.DropDownListFor(x => x.Salary, (IEnumerable<SelectListItem>)ViewBag.SalaryValues, string.Empty)</div>
-    <hr />
+    *@
+@section BeforeBody
+{
+    <form action="@Url.Action("PromouterSearchResult", "Search")" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#promouterSearchResult" id="form0" method="post">
+            <div class="search">
+                <div class="search__header">Найти исполнителя</div>
+                <div class="search__termContainer">
+                    <div class="left">@Html.TextBoxFor(x => x.Query, new { @class = "search__term base-input"})</div>
+                    <div class="right search__startButton"><a href="javascript: $('#form0').trigger('submit')"><img src="~/Content/img/search.png" /></a></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="search__linkContainer">
+                    <a href="#" class="search__linkCollapse right">Свернуть поиск</a>
+                    <div class="clear"></div>
+                </div>
+                    <div class="search__otherFilters">
+                        <ul class="horiz top">
+                            <!--	<li class="search__selectContainer"><select description="Тип занятости:"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.City, cityValues, "Город/регион", new {description = "Город/регион"})</li>
+                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.Gender, genderValues, "Пол", new {description = "Пол"})</li>
+                            <!--<li class="search__selectContainer"><select description="Требования"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+                        </ul>
+                        <ul class="horiz bottom">
+                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.Salary, salaryValues, "Зарплата", new {description = "Зарплата"})</li>
+                            <!--	<li class="search__selectContainer"><select description="Иностранный язык"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+                        </ul>
+                        <div class="clear"></div>
+                    </div>   
+                    <div class="search_applyContainer">
+                        <a href="#" class="search__applyLink right">Применить параметры</a>
+                        <div class="clear"></div>
+                    </div>
+                </div>
 }
-    
-@Html.Partial("PromouterSearchResult", new List<PandaWebApp.ViewModels.PromouterSearchView>())
-</div>
+<div class="content content-width">
+    <div class="">
+            
+            <div class="base-content left">
+                <div class="searchResult">
+                    <div class="searchResult__header">Поиск вакансий в городе Тюмени</div>
+                    <div class="searchResult__body">
+                      <!--  <div class="right pager top"><img  src="img/left_pager.png" /><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">...</a><a href="#">54</a><img src="img/right_pager.png" /></div> -->
+                        <div class="clear"></div>
+                        @Html.Partial("PromouterSearchResult", new List<PandaWebApp.ViewModels.PromouterSearchView>())
+                      <!--  <div class="right pager bottom"><img  src="img/left_pager.png" /><a href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">...</a><a href="#">54</a><img src="img/right_pager.png" /></div> -->
+                        <div class="clear"></div>
+                        <div class="banner-side"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@section AfterBody
+{
+    </form>
+}
+@*}*@

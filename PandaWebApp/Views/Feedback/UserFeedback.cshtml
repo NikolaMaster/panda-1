@@ -1,6 +1,9 @@
 ﻿@using PandaDataAccessLayer.DAL
 @model PandaWebApp.ViewModels.Feedback
-
+@{
+    var core = AuthorizationCore.StaticCreate();
+    var isAdmin = core.IsAdmin; 
+}
     <div class="feedbacks">
     
         <div class="header">
@@ -16,7 +19,7 @@
         <ul>
             @foreach (var entry in Model.Entries)
             {
-                <li>
+                <li id="feedback_@entry.Id">
                     <div class="table-2 feedback">
                         <div class="column">
                             <img src="@ImageCreator.Create(entry.AuthorPhoto, 128, 128)" />
@@ -40,9 +43,14 @@
                                 @entry.Text
                             </p>
                         </div>
+                        @if (isAdmin)
+                        {
+                            @Html.ActionLink("Удалить", "Delete", new {entry.Id}, new {})
+                        }
                         <div class="clear"></div>
                     </div>
                 </li>
+                
             }
         </ul>
         <div class="more"><p>@Html.ActionLink("Больше мнений", "IndexById", "Feedback", new { userId = Model.User.Id }, null)</p></div>

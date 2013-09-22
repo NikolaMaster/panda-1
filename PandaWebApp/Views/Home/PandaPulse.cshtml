@@ -1,5 +1,7 @@
 ﻿@model PandaWebApp.ViewModels.PandaPulse
-
+@{
+    const int NameLength = 24;
+}
 <div class="pulse">
     <script type="text/javascript">
         $(function () {
@@ -20,7 +22,7 @@
             }, 3000);
         });
     </script>
-	<div class="title">Панда пульс</div>
+    <div class="title">Панда пульс</div>
 	    <ul>
 		    <li class="temp"></li>
 			<li class="header">
@@ -35,7 +37,7 @@
                         <li class="@(counter == 0 ? @"first" : string.Empty)  @(entry.Operation)">
 				            <span class="icon"><img src="@ImageCreator.Create(entry.Image, 24, 24)" /></span>
 				            <span class="name">
-                            @Html.ActionLink(entry.Name, "Detail", entry.User.ControllerNameByUser(), new { id = entry.User.Id }, new { })
+                            @Html.ActionLink(entry.Name.Shorten(NameLength), "Detail", entry.User.ControllerNameByUser(), new { id = entry.User.Id }, new { })
                             </span>
 			            </li>        
                     }

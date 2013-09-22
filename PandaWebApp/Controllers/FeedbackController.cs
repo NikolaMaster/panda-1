@@ -2,6 +2,7 @@
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
+using PandaWebApp.Filters;
 using PandaWebApp.FormModels;
 using PandaWebApp.ViewModels;
 using System;
@@ -18,6 +19,7 @@ namespace PandaWebApp.Controllers
         public const int UserFeedbacksCount = 4;
         public const int IndexFeedbacksCount = 4;
 
+        [NonAction]
         private Feedback prepareFeedbacks(IEnumerable<Review> feedbacks, int count = 0)
         {
             var binder = new FeedbackToReview(DataAccessLayer);
@@ -118,6 +120,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpGet]
+        [BaseAuthorizationReuired]
         public ActionResult Create(Guid authorId, Guid recieverId)
         {
             return PartialView(new FeedbackForm
@@ -128,6 +131,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpPost]
+        [BaseAuthorizationReuired]
         public ActionResult Create(FeedbackForm model)
         {
             var reciever = DataAccessLayer.GetById<UserBase>(model.RecieverId);
@@ -143,6 +147,14 @@ namespace PandaWebApp.Controllers
             });
             DataAccessLayer.DbContext.SaveChanges();
             return new RedirectResult(string.Format("/{0}/Detail/{1}", reciever.ControllerNameByUser(), reciever.Id));
+        }
+
+        [AdministratorAuthorizationRequired]
+        public ActionResult Delete(Guid id)
+        {
+            DataAccessLayer.DeleteById<Review>(id);
+            DataAccessLayer.DbContext.SaveChanges();
+            return new RedirectResult(Request.UrlReferrer.ToString());
         }
     }
 }

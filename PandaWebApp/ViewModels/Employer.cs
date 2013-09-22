@@ -10,24 +10,6 @@ namespace PandaWebApp.ViewModels
 {
     public class Employer
     {
-        public class VacancyUnit
-        {
-            [ValueFrom(Constants.StartWorkCode)]
-            public DateTime? StartTime { get; set; }
-            [ValueFrom(Constants.StartWorkCode)]
-            public DateTime? EndTime { get; set; }
-            [ValueFrom(Constants.WorkCode)]
-            public string JobTitle { get; set; }
-            [ValueFrom(Constants.SalaryCode)]
-            public string Salary { get; set; }
-            [ValueFrom(Constants.AboutCode)]
-            public string FullDescription { get; set; }
-            [ValueFrom(Constants.CityCode)]
-            public string City { get; set; }
-
-            public string DaysOnSite { get; set; }
-        }
-
         [ValueFrom(Constants.EmployerNameCode)]
         public string EmployerName { get; set; }
         [ValueFrom(Constants.CityCode)]
@@ -48,10 +30,11 @@ namespace PandaWebApp.ViewModels
         public string DaysOnSite { get; set; }
         public int Coins { get; set; }
         public bool AccountConfirmed { get; set; }
+        public bool IsAdmin { get; set; }
 
         public PhoneUnit Phone { get; set; }
         public IEnumerable<string> Album { get; set; }
         public IEnumerable<Feedback> Reviews { get; set; }
-        public IEnumerable<VacancyUnit> Vacancies { get; set; }
+        public IEnumerable<Vacancy> Vacancies { get; set; }
     }
 }

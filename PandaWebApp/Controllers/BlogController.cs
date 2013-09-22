@@ -8,6 +8,7 @@ using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
 using PandaWebApp.Engine.Editors;
+using PandaWebApp.Filters;
 using PandaWebApp.FormModels;
 using PandaWebApp.ViewModels;
 
@@ -64,6 +65,7 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpGet]
+        [AdministratorAuthorizationRequired]
         public ActionResult Create()
         {
             return View();
@@ -71,6 +73,7 @@ namespace PandaWebApp.Controllers
         
         //TODO: replace, because very dangerous =)
         [ValidateInput(false)]
+        [AdministratorAuthorizationRequired]
         [HttpPost]
         public ActionResult Create(Blog.Entry model,HttpPostedFileBase photo)
         {
@@ -109,6 +112,7 @@ namespace PandaWebApp.Controllers
         }
        
         [HttpGet]
+        [AdministratorAuthorizationRequired]
         public ActionResult Edit(Guid id)
         {
             var post = DataAccessLayer.GetById<BlogPost>(id);
@@ -154,6 +158,7 @@ namespace PandaWebApp.Controllers
 
         [ValidateInput(false)]
         [HttpPost]
+        [AdministratorAuthorizationRequired]
         public ActionResult Edit(Blog.Entry model)
         {
             if (ModelState.IsValid)
@@ -171,6 +176,7 @@ namespace PandaWebApp.Controllers
         }
         
         [HttpGet]
+        [AdministratorAuthorizationRequired]
         public ActionResult Delete(Guid id)
         {
             var post = DataAccessLayer.GetById<BlogPost>(id);
@@ -181,7 +187,7 @@ namespace PandaWebApp.Controllers
 
             DataAccessLayer.DeleteById<BlogPost>(id);
             DataAccessLayer.DbContext.SaveChanges();
-            return RedirectToAction("Posts");
+            return new RedirectResult(Request.UrlReferrer.ToString());
         }
     }
 }

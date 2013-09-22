@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Objects;
+using System.Linq;
+using PandaDataAccessLayer.DAL;
 
 namespace PandaDataAccessLayer.Entities
 {
@@ -48,6 +51,14 @@ namespace PandaDataAccessLayer.Entities
 
             CreationDate = DateTime.UtcNow;
             IsConfirmed = false;
+        }
+
+        public bool IsOnline
+        {
+            get
+            {
+                return Sessions.Any(x => EntityFunctions.DiffMinutes(x.LastHit, DateTime.UtcNow) < Constants.OnlineTimeout);
+            }
         }
     }
 }

@@ -81,6 +81,7 @@ namespace PandaWebApp.ViewModels
         [ValueFrom(Constants.DateOfBirthCode)]
         public DateTime? BirthDate { get; set; }
 
+
         public Guid UserId { get; set; }
 
         public int Coins { get; set; }
@@ -91,6 +92,7 @@ namespace PandaWebApp.ViewModels
         public string Photo { get; set; }
         public string Email { get; set; }
         public string Icon { get; set; }
+        public bool IsAdmin { get; set; }
 
         public int FullYears 
         {

@@ -1,5 +1,7 @@
 ﻿@model ICollection<PandaWebApp.ViewModels.Employer>
-
+@{
+    const int EmployerNameLength = 16;        
+}
 
 <ul class="album horiz">
     @{ var index = 0; }
@@ -7,7 +9,7 @@
     {
         <li class="rounded-borders-4 @(index == 0 ? "first" : "")">
             <img src="@ImageCreator.Create(employer.Photo, 128, null)" />
-            <p class="center-aligned"><a class="name" href="@Url.Action("Detail", "Employer", new { id = employer.UserId })">@employer.EmployerName</a></p>
+            <p class="center-aligned"><a class="name" href="@Url.Action("Detail", "Employer", new { id = employer.UserId })">@employer.EmployerName.Shorten(EmployerNameLength)</a></p>
         </li>
         index++;
     }

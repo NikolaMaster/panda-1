@@ -3,10 +3,15 @@
 @{
     ViewBag.Title = "Редактирование информации о пользователе";
     Layout = "~/Views/Shared/Layout.cshtml";
+
     var cityValues = (IEnumerable<SelectListItem>)ViewBag.CityValues;
     var genderValues = (IEnumerable<SelectListItem>)ViewBag.GenderValues;
     var salaryValues = (IEnumerable<SelectListItem>)ViewBag.SalaryValues;
     var educationValues = (IEnumerable<SelectListItem>)ViewBag.EducationValues;
+    
+    var core = AuthorizationCore.StaticCreate();
+    var user = core.User;
+    var isAdmin = core.User.IsAdmin;
 }
 
 <h2>Редактирование информации о пользователе</h2>
@@ -52,7 +57,11 @@
             <div>Желаемая цена за час работы</div>@Html.DropDownListFor(x => x.Salary, salaryValues, string.Empty)
             <div>Образование</div> @Html.DropDownListFor(x => x.Education, educationValues, string.Empty)
             <div>Готов работать сейчас</div> @Html.EditorFor(m => m.ReadyForWork)
-            <div>Администратор</div> @Html.CheckBoxFor(m => m.IsAdmin)
+            @if (isAdmin)
+            {
+                <div>Администратор</div>
+                @Html.CheckBoxFor(m => m.IsAdmin)
+            }
         </div>
         <div id="photoTab">
             <div>@{ Html.RenderAction("Index", "Album", new { userId = Model.UserId }); }</div>

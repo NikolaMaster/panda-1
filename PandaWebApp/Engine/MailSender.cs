@@ -29,7 +29,7 @@ namespace PandaDataAccessLayer.Helpers
             {
                 var mail = new MailMessage
                     {
-                        From = new MailAddress(PandaWebApp.Properties.Settings.Default.NoReply)
+                        From = new MailAddress(Settings.Default.NoReply)
                     };
                 mail.To.Add(new MailAddress(mailto));
                 mail.Subject = caption;
@@ -38,7 +38,7 @@ namespace PandaDataAccessLayer.Helpers
                     mail.Attachments.Add(new Attachment(attachFile));
                 var client = new SmtpClient
                     {
-                        Host = PandaWebApp.Properties.Settings.Default.MailServer,
+                        Host = Settings.Default.MailServer,
                         Port = 587,
                         EnableSsl = true,
                         Credentials = new NetworkCredential(PandaWebApp.Properties.Settings.Default.MailLogin, PandaWebApp.Properties.Settings.Default.MailPassword),

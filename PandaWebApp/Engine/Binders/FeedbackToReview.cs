@@ -20,6 +20,7 @@ namespace PandaWebApp.Engine.Binders
 
         public override void InverseLoad(Review source, Feedback.Entry dest)
         {
+            dest.Id = source.Id;
             dest.Text = source.Text;
             dest.Title = source.Title;
             dest.Rating = source.Rating;

@@ -34,6 +34,10 @@ namespace PandaWebApp.Engine
         private Session _mCachedSession;
 
         public string UserName { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         public string City { get; set; }
 
         public UserBase User 
@@ -59,9 +63,17 @@ namespace PandaWebApp.Engine
                             }
                             //set current user
                             _mCachedUser = _mCachedSession.User;
+
                             UserName = dal.GetUserName(_mCachedUser);
+
                             var cityAttr = dal.GetAttributeValue(_mCachedUser.MainChecklist.Id, Constants.CityCode);
-                            City = cityAttr.Value != null ? cityAttr.Value.ToString() : string.Empty;
+                            City = cityAttr.Value ?? string.Empty;
+
+                            var firstNameAttr = dal.GetAttributeValue(_mCachedUser.MainChecklist.Id, Constants.FirstNameCode);
+                            FirstName = firstNameAttr.Value ?? string.Empty;
+
+                            var lastNameAttr = dal.GetAttributeValue(_mCachedUser.MainChecklist.Id, Constants.LastNameCode);
+                            LastName = lastNameAttr.Value ?? string.Empty;
                             //update last hit field
                             dal.UpdateById<Session>(_mCachedSession.Id, x => x.LastHit = DateTime.UtcNow);
                             dal.DbContext.SaveChanges();
@@ -191,6 +203,7 @@ namespace PandaWebApp.Engine
                     UserId = User.Id,
                 });
                 User.Pulse = new List<Pulse> { pulse };
+                dal.DeleteById<Session>(_mCachedSession.Id);
                 dal.DbContext.SaveChanges();
                 SessionId = Guid.Empty;
             }

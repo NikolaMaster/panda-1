@@ -127,6 +127,7 @@
     <Compile Include="Controllers\FavoriteController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Engine\Authorize.cs" />
@@ -153,7 +154,7 @@
     <Compile Include="Engine\Binders\StaticPageToStaticPageUnit.cs" />
     <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
-    <Compile Include="Engine\Binders\ViewEmployerSearchViewToChecklist.cs" />
+    <Compile Include="Engine\Binders\VacancyToChecklist.cs" />
     <Compile Include="Engine\MailSender.cs" />
     <Compile Include="Engine\DataAnnotations.cs" />
     <Compile Include="Engine\Paginator.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="FormModels\FeedbackForm.cs" />
     <Compile Include="FormModels\PromouterForm.cs" />
     <Compile Include="FormModels\EmployerSearchForm.cs" />
+    <Compile Include="FormModels\SupportForm.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,7 +203,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ProjectParticipants.cs" />
     <Compile Include="ViewModels\Promouter.cs" />
-    <Compile Include="ViewModels\EmployerSearchView.cs" />
+    <Compile Include="ViewModels\Vacancy.cs" />
     <Compile Include="ViewModels\StaticPage.cs" />
     <Compile Include="ViewModels\UserInfo.cs" />
   </ItemGroup>
@@ -591,6 +593,7 @@
     <Content Include="Views\Shared\_PagerForm.cshtml" />
     <Content Include="Views\Shared\_PagerBottom.cshtml" />
     <Content Include="Views\Shared\_PagerTop.cshtml" />
+    <Content Include="Views\Support\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -646,7 +649,7 @@
     <Content Include="Views\Feedback\IndexFeedback.cshtml" />
     <Content Include="Views\Feedback\Index.cshtml" />
     <Content Include="Views\Search\Employer.cshtml" />
-    <Content Include="Views\Search\EmployerSearchResult.cshtml" />
+    <Content Include="Views\Shared\Vacancies.cshtml" />
     <Content Include="Views\StaticPage\Index.cshtml" />
     <Content Include="Views\Promouter\Detail.cshtml" />
     <Content Include="Views\Shared\Layout.cshtml" />

@@ -11,7 +11,6 @@ namespace PandaDataAccessLayer.DAL
     public partial class DataAccessLayer : DataAccessLayerBase<MainDbContext>
     {
         private const string MainAlbumName = "Основной альбом";
-        private const int OnlineTimeout = 5;
 
         public PromouterUser Create(PromouterUser user)
         {
@@ -67,7 +66,7 @@ namespace PandaDataAccessLayer.DAL
 
         public int OnlineUsers()
         {
-            return DbContext.Users.Count(x => x.Sessions.Any(y => -EntityFunctions.DiffMinutes(DateTime.UtcNow, y.LastHit) < OnlineTimeout));
+            return DbContext.Users.Count(x => x.Sessions.Any(y => EntityFunctions.DiffMinutes(y.LastHit, DateTime.UtcNow) < Constants.OnlineTimeout));
         }
 
         public IEnumerable<Pulse> GetPulseUsers(int count)

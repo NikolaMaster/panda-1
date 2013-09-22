@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
+using PandaWebApp.Filters;
 using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Controllers
@@ -27,6 +28,7 @@ namespace PandaWebApp.Controllers
             return PartialView("Index", EmployerForm.Bind(DataAccessLayer, userId));
         }
 
+        [BaseAuthorizationReuired]
         public ActionResult Delete(Guid vacancyId)
         {
             DataAccessLayer.DeleteById<Checklist>(vacancyId);
@@ -34,6 +36,7 @@ namespace PandaWebApp.Controllers
             return new EmptyResult();
         }
 
+        [BaseAuthorizationReuired]
         public ActionResult Create(Guid userId)
         {
             var user = DataAccessLayer.GetById<EmployerUser>(userId);

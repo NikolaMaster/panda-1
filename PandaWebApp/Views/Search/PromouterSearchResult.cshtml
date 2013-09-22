@@ -3,27 +3,38 @@
 @{ var vdd = new ViewDataDictionary {{"Pager", ViewBag.Pager}}; }
 @{ Html.RenderPartial("_PagerForm", vdd); }
 @{ Html.RenderPartial("_PagerTop", vdd); }
-<div id ="promouterSearchResult">
-    <br />
-    <h2>Результаты поиска:</h2>
+<ul id ="promouterSearchResult">
     @foreach (var item in Model)
-    { 
-        <div>
-
-            <div>Фамилия: @item.LastName </div>
-            <div>Имя: @item.FirstName</div>
-            <div>Отчество: @item.MiddleName</div>
-            <div>Город: @item.City</div>
-            <div>Оплата: @item.Salary рублей в час</div>
-            @{
-
-                <div>@Html.ActionLink("Посмотреть профиль", "Detail", "Promouter", new { id = item.Checklist.User.Id}, null)</div> 
-            }
-            
-        </div>
-        <hr />
+    {
+        <li>
+            <div class="searchResult__blog">
+                <div class="searchResult__blog__part1 left"><a href="javascript: addToFavorite('@item.Checklist.User.Id')"><img src="~/Content/img/red-heart.png"></a></div>
+                <div class="searchResult__blog__part2 left"><img src="@ImageCreator.Create(item.AvatarUrl, 113, 111)"></div>
+                <div class="searchResult__blog__part3 left">
+                    <div class="left">
+                        <div class="position left">@item.FullName</div><div class="lifetime left">на сайте @item.DaysOnSite дней</div>
+                        <div class="clear"></div>
+                        <ul>
+                            <li class="bold">@item.About</li>
+                            <li>@item.City</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="searchResult__blog__part4 left">
+                    <div>
+                        <div class="payment bold">@item.Salary руб/час</div>
+                    </div>
+                </div>
+                @if (item.Checklist != null)
+                {
+                    @Html.ActionLink("Страница исполнителя", "Detail", "Promouter", new {id = item.Checklist.User.Id}, new {@class = "companyPage"})
+                }
+                <img class="searchResult__blog__bottomShadow right" src="~/Content/img/resultSearch__blog__bottomShadow.png" />
+            </div>
+            <div class="clear"></div>
+        </li>
     }
-</div>
+</ul>
 @{ Html.RenderPartial("_PagerBottom", vdd); }
 
 <script type="text/javascript"> initPager($('body')); </script>
