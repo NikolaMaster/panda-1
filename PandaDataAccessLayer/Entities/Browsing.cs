@@ -11,11 +11,8 @@ namespace PandaDataAccessLayer.Entities
     {
         public Guid Id { get; set; }
 
-        [Required]
         public DateTime When { get; set; }
-        [Required]
         public virtual UserBase Who { get; set; }
-        [Required]
         public virtual UserBase What { get; set; }
     }
 }
