@@ -467,6 +467,7 @@
     <Content Include="Content\ckeditor\skins\moono\images\lock.png" />
     <Content Include="Content\ckeditor\skins\moono\images\refresh.png" />
     <Content Include="Content\ckeditor\styles.js" />
+    <Content Include="Content\css\frameworks\custom\reselect.css" />
     <Content Include="Content\css\frameworks\jquery\imgAreaSelect\border-anim-h.gif" />
     <Content Include="Content\css\frameworks\jquery\imgAreaSelect\border-anim-v.gif" />
     <Content Include="Content\css\frameworks\jquery\imgAreaSelect\border-h.gif" />
@@ -553,6 +554,7 @@
     <Content Include="Content\img\top.png" />
     <Content Include="Content\img\woman.png" />
     <Content Include="Content\js\frameworks\custom\inplace-editor.js" />
+    <Content Include="Content\js\frameworks\custom\reselect.js" />
     <Content Include="Content\js\frameworks\jquery\imgAreaSelect\jquery.imgareaselect.pack.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-1.9.1.js" />
     <Content Include="Content\js\frameworks\jquery\jquery-ui-1.10.3.custom.js" />
