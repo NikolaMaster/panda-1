@@ -127,6 +127,7 @@
     <Compile Include="Controllers\FavoriteController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Engine\Authorize.cs" />
     <Compile Include="Engine\Binders\EmployerRegisterToEmployerUser.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="ViewModels\Promouter.cs" />
     <Compile Include="ViewModels\EmployerSearchView.cs" />
     <Compile Include="ViewModels\StaticPage.cs" />
+    <Compile Include="ViewModels\UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -489,11 +491,17 @@
     <Content Include="Content\img\five-reasons-top-bg.png" />
     <Content Include="Content\img\five-resons.png" />
     <Content Include="Content\img\girl.jpeg" />
+    <Content Include="Content\img\gray_star.png" />
+    <Content Include="Content\img\green_star.png" />
     <Content Include="Content\img\left_pager.png" />
     <Content Include="Content\img\lightbox\close.png" />
     <Content Include="Content\img\lightbox\loading.gif" />
     <Content Include="Content\img\lightbox\next.png" />
     <Content Include="Content\img\lightbox\prev.png" />
+    <Content Include="Content\img\light_gray_star.png" />
+    <Content Include="Content\img\light_green_star.png" />
+    <Content Include="Content\img\light_orange_star.png" />
+    <Content Include="Content\img\light_red_star.png" />
     <Content Include="Content\img\mail.png" />
     <Content Include="Content\img\main.jpg" />
     <Content Include="Content\img\man.png" />
@@ -523,10 +531,12 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\offline.png" />
     <Content Include="Content\img\online.png" />
+    <Content Include="Content\img\orange_star.png" />
     <Content Include="Content\img\phone.png" />
     <Content Include="Content\img\pulse-bottom.png" />
     <Content Include="Content\img\ready-to-work.png" />
     <Content Include="Content\img\red-heart.png" />
+    <Content Include="Content\img\red_star.png" />
     <Content Include="Content\img\resultSearch__blog__bottomShadow.png" />
     <Content Include="Content\img\right_pager.png" />
     <Content Include="Content\img\search.png" />
