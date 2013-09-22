@@ -1,0 +1,50 @@
+﻿@model PandaWebApp.FormModels.Browsing
+
+@{
+    ViewBag.Title = "Статистика просмотров";
+}
+
+<div class="browsing__chart"></div>
+<ul class="browsing_list">
+    @foreach (var item in Model.Values.Keys)
+    {
+        <li id="day_@(item.Year + "_" + item.Month + "_" + item.Day)">
+            <ul class="browsing_innerList">
+                @foreach (var innerItem in Model.Values[item])
+                {
+                    <li>
+                        <a href="@Url.Action("Detail", innerItem.UserController)">@innerItem.UserName</a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
+@using(Html.BeginForm("Index", "Browsing", FormMethod.Post, new { id = "browsing_form" }))
+{
+    <input type="hidden" name="Start" id="Start" value="@Model.Start" />
+    <a href="javascript: $('#browsing_form').trigger('submit');">&lt;- Две недели назад</a>
+}
+
+<script type="text/javascript">
+    var jsonData = @Model.JsonValues;
+    
+    
+    $(document).ready(function () {
+        console.log(jsonData);
+        //$('#chart').tufteBar({
+        //    data: [
+        //      [1.0, {label: 'Dog'}],
+        //      [1.3, {label: 'Raccoon'}],
+        //      [3.6, {label: 'Albatross'}],
+        //      [4.0, {label: 'Panda'}],
+        //      [5.2, {label: 'Tiger'}],
+        //      [7.0, {label: 'Raptor'}]
+        //    ],
+        //    barWidth: 0.8,
+        //    barLabel:  function(index) { return this[0] + 'x' },
+        //    axisLabel: function(index) { return this[1].label },
+        //    color:     function(index) { return ['#E57536', '#82293B'][index % 2] }
+        //});
+    });
+</script>

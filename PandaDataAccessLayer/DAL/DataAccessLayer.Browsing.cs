@@ -51,7 +51,7 @@ namespace PandaDataAccessLayer.DAL
             return true;
         }
 
-        public BrowsingValues GetValues(Guid whoId, DateTime start, DateTime end)
+        public BrowsingValues GetBrowsingValues(Guid whoId, DateTime start, DateTime end)
         {
             return DbContext.Browsing
                 .Where(x => x.Who.Id == whoId && x.When >= start && x.When <= end)
