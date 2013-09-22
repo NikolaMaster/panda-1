@@ -16,6 +16,7 @@ namespace PandaWebApp.FormModels
 
         public class ValueItem
         {
+            public Guid UserId { get; set; }
             public string UserName { get; set; }
             public string UserController { get; set; }
             public DateTime When { get; set; }

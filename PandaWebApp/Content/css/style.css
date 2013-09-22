@@ -502,3 +502,12 @@ border: 1px solid #2E8800;
 .editor-company-type label { float: left; font-size: 11px; margin-right: 5px;}
 
 .user .rating_editor img {width: 15px; height:15px; }
+
+.browsing__chartContainer { height: 350px;padding-top: 10px; }
+.browsing__chartTitle { font-weight: bold;margin-bottom: 11px;text-align: center; }
+.browsing__chart { height: 300px; width: 650px; }
+.browsing__list { margin: 20px;padding: 0; }
+.browsing__listItem { list-style-type: none; }
+
+#chart .label { font-size: 10px; text-align: center; }
+#chart .axis-label { top: 310px !important; }

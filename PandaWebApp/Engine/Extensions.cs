@@ -88,6 +88,11 @@ namespace PandaWebApp.Engine
             return dt.HasValue ? dt.Value.ToPandaTime() : string.Empty;
         }
 
+        public static string ToPandaStringWithoutYear(this DateTime dt)
+        {
+            return dt.ToString("dd.MM");
+        }
+
         #endregion
 
         #region Double

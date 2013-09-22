@@ -11,5 +11,6 @@ namespace PandaWebApp.ViewModels
         public string UserController { get; set; }
         public int FavoritesCount { get; set; }
         public int Coins { get; set; }
+        public int BrowsingValuesCount { get; set; }
     }
 }

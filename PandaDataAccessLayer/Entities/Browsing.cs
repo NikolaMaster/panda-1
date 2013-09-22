@@ -14,5 +14,10 @@ namespace PandaDataAccessLayer.Entities
         public DateTime When { get; set; }
         public virtual UserBase Who { get; set; }
         public virtual UserBase What { get; set; }
+
+        public Browsing()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

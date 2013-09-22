@@ -475,6 +475,7 @@
     <Content Include="Content\css\frameworks\jquery\imgAreaSelect\imgareaselect-default.css" />
     <Content Include="Content\css\frameworks\jquery\imgAreaSelect\imgareaselect-deprecated.css" />
     <Content Include="Content\css\frameworks\jquery\lightbox.css" />
+    <Content Include="Content\css\frameworks\tufte-graph\tufte-graph.css" />
     <Content Include="Content\img\all-feedbacks-mark.png" />
     <Content Include="Content\img\cache\readme.txt" />
     <Content Include="Content\img\coins-icon.png" />
@@ -561,6 +562,9 @@
     <Content Include="Content\js\frameworks\jquery\imgAreaSelect\jquery.imgareaselect.min.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.ui.timepicker.js" />
     <Content Include="Content\js\frameworks\jquery\lightbox-2.6.min.js" />
+    <Content Include="Content\js\frameworks\tufte-graph\jquery.enumerable.js" />
+    <Content Include="Content\js\frameworks\tufte-graph\jquery.tufte-graph.js" />
+    <Content Include="Content\js\frameworks\tufte-graph\raphael.js" />
     <Content Include="Content\js\pages\core.js" />
     <Content Include="Content\js\pages\feedback.js" />
     <Content Include="Global.asax" />

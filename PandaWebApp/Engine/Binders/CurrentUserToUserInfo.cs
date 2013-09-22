@@ -16,6 +16,7 @@ namespace PandaWebApp.Engine.Binders
             dest.FavoritesCount = core.FavoritesCount;
             dest.UserController = core.User.ControllerNameByUser();
             dest.UserId = core.User.Id;
+            dest.BrowsingValuesCount = core.BrowsingValuesCount;
         }
 
         public override void InverseLoad(UserInfo source, object dest)

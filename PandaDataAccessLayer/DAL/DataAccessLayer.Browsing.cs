@@ -32,10 +32,14 @@ namespace PandaDataAccessLayer.DAL
             }
 
             var when = DateTime.UtcNow;
-            var oldB =
-                DbContext.Browsing.FirstOrDefault(
-                    x => x.When.Year == when.Year && x.When.Month == when.Month && x.When.Day == when.Day);
-            if (oldB != null)
+            var exists =
+                DbContext.Browsing.Any(
+                    x => x.What.Id == whatId &&
+                            x.When.Year == when.Year &&
+                            x.When.Month == when.Month &&
+                            x.When.Day == when.Day &&
+                            x.Who.Id == whoId);
+            if (exists)
             {
                 return false;
             }
@@ -51,14 +55,39 @@ namespace PandaDataAccessLayer.DAL
             return true;
         }
 
-        public BrowsingValues GetBrowsingValues(Guid whoId, DateTime start, DateTime end)
+        public int GetAllBrowsingValuesCount(Guid whatId)
         {
-            return DbContext.Browsing
-                .Where(x => x.Who.Id == whoId && x.When >= start && x.When <= end)
+            return DbContext.Browsing.Count(x => x.What.Id == whatId);
+        }
+
+        public BrowsingValues GetBrowsingValues(Guid whatId, DateTime start, DateTime end)
+        {
+#if DEBUG
+            //var col = DbContext.Browsing.Where(x => x.Who.Id == whoId && x.When >= start && x.When <= end);
+            //var groupBy = col.GroupBy(x => new { x.When.Year, x.When.Month, x.When.Day });
+            //var dict = groupBy.ToDictionary(
+            //        key => new DateTime(key.Key.Year, key.Key.Month, key.Key.Day),
+            //        value => value.ToArray());
+            //return dict;
+#endif
+            var dates = new List<DateTime>();
+            var st = start;
+            while (st <= end)
+            {
+                dates.Add(new DateTime(st.Year, st.Month, st.Day));
+                st = st.AddDays(1);
+            }
+
+            var dbValues = DbContext.Browsing
+                .Where(x => x.What.Id == whatId && x.When >= start && x.When <= end)
                 .GroupBy(x => new {x.When.Year, x.When.Month, x.When.Day})
                 .ToDictionary(
                     key => new DateTime(key.Key.Year, key.Key.Month, key.Key.Day),
                     value => value.ToArray());
+            return dates.ToDictionary(
+                key => key,
+                value => dbValues.ContainsKey(value) ? dbValues[value] : new Browsing[0]);
+
         }
     }
 }

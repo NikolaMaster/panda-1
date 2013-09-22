@@ -7,6 +7,7 @@
         success: function(data) {
             $('.header__offers-selected+span').html('(' + data.FavoritesCount + ')');
             $('.header__coins-count-number').html(data.Coins);
+            $('.header__offers-saw+span').html('(' + data.BrowsingValuesCount + ')');
         }
     });
 }

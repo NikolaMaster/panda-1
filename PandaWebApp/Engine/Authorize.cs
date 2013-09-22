@@ -147,6 +147,17 @@ namespace PandaWebApp.Engine
             }
         }
 
+        public int BrowsingValuesCount
+        {
+            get
+            {
+                using (var dal = new DataAccessLayer())
+                {
+                    return dal.GetAllBrowsingValuesCount(User.Id);
+                }
+            }
+        }
+
         public bool Login(string email, string password)
         {
             using (var dal = new DataAccessLayer())

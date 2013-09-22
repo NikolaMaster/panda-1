@@ -14,12 +14,12 @@ namespace PandaWebApp.Controllers
     public class BrowsingController : ModelCareController
     {
         [NonAction]
-        public Browsing GenerateModel(DateTime end)
+        public Browsing GenerateModel(DateTime dt, bool isStart)
         {
             var model = new Browsing
             {
-                Start = end.AddDays(-Browsing.Days),
-                End = end
+                Start = isStart ? dt : dt.AddDays(-Browsing.Days),
+                End = !isStart ? dt : dt.AddDays(Browsing.Days)
             };
             var binder = new BrowsingToValueItem(DataAccessLayer);
             model.Values = DataAccessLayer
@@ -33,21 +33,33 @@ namespace PandaWebApp.Controllers
                         binder.Load(x, b);
                         return b;
                     }));
-            model.JsonValues = JsonConvert.SerializeObject(model.Values);
+            model.JsonValues = JsonConvert.SerializeObject(model.Values.Select(x => new object[2]
+            {
+                x.Value.Count(),
+                new { label = x.Key.ToPandaStringWithoutYear() }
+            }));
             return model;
         }
 
         [BaseAuthorizationReuired]
         public ActionResult Index()
         {
-            return View(GenerateModel(DateTime.UtcNow));
+            return View(GenerateModel(DateTime.UtcNow, false));
         }
 
         [BaseAuthorizationReuired]
         [HttpPost]
         public ActionResult Index(Browsing model)
         {
-            return View(GenerateModel(model.End));
+            if (model.End == DateTime.MinValue)
+            {
+                return View(GenerateModel(model.Start, true));
+            }
+            if (model.Start == DateTime.MinValue)
+            {
+                return View(GenerateModel(model.End, false));
+            }
+            return null;
         }
     }
 }
