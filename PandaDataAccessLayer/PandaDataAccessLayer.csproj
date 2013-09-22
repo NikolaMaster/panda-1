@@ -54,7 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\DataAccessLayer.Browsing.cs" />
     <Compile Include="DAL\DataAccessLayer.Favorites.cs" />
+    <Compile Include="Entities\Browsing.cs" />
     <Compile Include="Entities\Confirmation.cs" />
     <Compile Include="Entities\Favorite.cs" />
     <Compile Include="Entities\PhoneNumber.cs" />

@@ -93,6 +93,9 @@ namespace PandaWebApp.Controllers
 
             var pTuple = new Tuple<Promouter, List<string>>(model, listBought);
 
+            //browsing
+            Helper.TryToCreateBrowsing(model.UserId, Authorization, DataAccessLayer, true);
+
             return View(pTuple);
         }
 

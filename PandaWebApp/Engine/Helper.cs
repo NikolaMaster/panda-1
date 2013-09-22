@@ -38,5 +38,22 @@ namespace PandaWebApp.Engine
         }
 
         #endregion
+
+        #region Browsing
+
+        public static void TryToCreateBrowsing(Guid what, AuthorizationCore auth, DataAccessLayer dal, bool whatIsPromouter)
+        {
+            if (auth.IsGuest)
+            {
+                return;
+            }
+
+            if ((whatIsPromouter && auth.IsEmployer) || (!whatIsPromouter && auth.IsPromouter))
+            {
+                dal.CreateBrowsing(auth.User.Id, what);
+            }
+        }
+
+        #endregion
     }
 }

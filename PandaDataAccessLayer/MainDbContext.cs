@@ -54,6 +54,8 @@ namespace PandaDataAccessLayer
 
         public DbSet<Pulse> Pulse { get; set; }
 
+        public DbSet<Browsing> Browsing { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserBase>().ToTable("UserBase");
