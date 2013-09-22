@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<PandaWebApp.ViewModels.Vacancy>
 
+@{ var vdd = new ViewDataDictionary {{"Pager", ViewBag.Pager}}; }
+@{ Html.RenderPartial("_PagerForm", vdd); }
+@{ Html.RenderPartial("_PagerTop", vdd); }
 <ul class="searchResult__blogList" id="employerSearchResult">
     @foreach (var item in Model)
     {
@@ -33,3 +36,6 @@
         </li>
     }
 </ul>
+@{ Html.RenderPartial("_PagerBottom", vdd); }
+
+<script type="text/javascript"> initPager($('body')); </script>

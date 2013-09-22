@@ -1,4 +1,6 @@
-﻿using PandaDataAccessLayer.DAL;
+﻿using System.Net;
+using System.Web.Http;
+using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,14 +14,14 @@ namespace PandaWebApp.Engine
     {
         #region Exceptions
 
-        public static void HttpUnauthorized(string message = "Unauthorized")
+        public static ActionResult HttpUnauthorized()
         {
-            throw new HttpException(401, message);
+            return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
         }
 
-        public static void HttpForbidden(string message = "Forbidden")
+        public static ActionResult HttpForbidden()
         {
-            throw new HttpException(403, message);
+            return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
         }
 
         #endregion

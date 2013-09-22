@@ -23,10 +23,14 @@ namespace PandaWebApp.Controllers
         private Feedback prepareFeedbacks(IEnumerable<Review> feedbacks, int count = 0)
         {
             var binder = new FeedbackToReview(DataAccessLayer);
-            var collection = count > 0 ? feedbacks.Take(count) : feedbacks;
+            var feedbacksArray = feedbacks as Review[] ?? feedbacks.ToArray();
+            var collection = count > 0 ? feedbacksArray.Take(count) : feedbacksArray;
             return new Feedback
             {
-                Count = feedbacks.Count(),
+                RedAverage = feedbacksArray.RedAverage(),
+                OrangeAverage = feedbacksArray.OrangeAverage(),
+                GreenAverage = feedbacksArray.GreenAverage(),
+                Count = feedbacksArray.Length,
                 Entries = collection.Select(x => {
                     var result = new Feedback.Entry();
                     binder.InverseLoad(x, result);

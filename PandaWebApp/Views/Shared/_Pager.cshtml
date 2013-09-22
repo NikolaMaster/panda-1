@@ -1,0 +1,38 @@
+﻿@using PandaWebApp.FormModels
+@{ var pager = ViewBag.Pager == null ? null : (PagerFormModel)ViewBag.Pager; var d = new[] { -2, -1, 0, 1, 2 }; }
+
+@if (pager != null)
+{
+    if (pager.Page > 1)
+    {
+        <a href="#" style="position: initial;" id="pager_prev"><img src="/Content/img/left_pager.png"></a>
+    }
+
+    for (int i = 0; i < d.Length; i++)
+    {
+        if (pager.Page + d[i] > 0 && pager.Page + d[i] < pager.TotalPages && d[i] != 0)
+        {
+            if (d[i] == 2 || d[i] == -2)
+            {
+                <a href="javascript:void(0)">...</a>
+            }
+            else
+            {
+                <a href="#" class="pager-link">@(pager.Page + d[i])</a>
+            }
+        }
+        else if (d[i] == 0)
+        {
+            <a href="javascript: void(0);" style="text-decoration: none;">@pager.Page</a>
+        }
+    }
+
+    if (pager.Page != pager.TotalPages)
+    {
+        <a href="#" class="pager-link">@pager.TotalPages</a>
+    }
+    if (pager.Page < pager.TotalPages)
+    {
+        <a href="#" style="position: initial;" id="pager_next"><img src="/Content/img/right_pager.png"></a>
+    }
+}

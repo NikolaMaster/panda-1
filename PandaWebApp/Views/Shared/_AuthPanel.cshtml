@@ -9,9 +9,9 @@
     const int FirstNameLength = 14;
 }    
 
-<div class="top-links content-width">
 @if (isGuest)
 {
+    <div class="top-links content-width">
     <a href="#" class="first left middle">Выберите город</a>@*
      <a class="second right middle-img" href="@Url.Action(WebConstants.LoginActionName, WebConstants.AuthorizationControllerName)"><img src="~/Content/img/enter-button.png" /></a>*@
 
@@ -20,19 +20,23 @@
     
     @* TODO - why only promouter ??? *@
     <a href="#" id="registerButton"  class="third right middle">Зарегистрироваться на сайте</a>
+        <div class="clear"></div>
+    </div>
 }
 else 
 {
     <div class="top-links content-width">
 
-    <div class="header__city"><a href="#" class="header__city-link">@city</a></div>
+        <div class="header__city">
+            <a href="#" class="header__city-link">@city</a>
+        </div>
 					<div class="header__prompt">
 						<span class="header__prompt-hello">Здравствуйте:</span>
 						<span class="header__prompt-name">@firstName.Shorten(FirstNameLength)</span>
 					</div>
 					<div class="header__offers">
 						<a class="header__offers-toyou" href="#">Предложения для вас</a><span class="header__offers-count">(#)</span> |
-						<a class="header__offers-selected" href="@Url.Action("UserIndex", "Favorite")">Выбранные вакансии</a> |
+		    <a class="header__offers-selected" href="@Url.Action("UserIndex", "Favorite")">Выбранные вакансии</a><span class="header__offers-count">(@core.FavoritesCount)</span> |
 						<a class="header__offers-saw" href="#">Вашу анкету смотрели</a><span class="header__offers-count">(#)</span>
 					</div>
 					<div class="header__coins button">
@@ -43,13 +47,11 @@ else
 						</div>
 						<div class="clear"></div>
 					</div>
-        <div class="header__cabinet button">
-            <a href="#" class="header__cabinet-link">Личный кабинет</a>
-        </div>
-        <div class="header__cabinet button">
-            @Html.ActionLink("Выход","Logout","Authorization",null,new {@class = "header__cabinet-link"})
+        <div class="header__userButtons">
+            <a href="@Url.Action("Edit", core.UserController, new { id = core.User.Id })" class="header__cabinet-link button left">Личный кабинет</a>
+            @Html.ActionLink("Выход","Logout","Authorization",null,new {@class = "header__cabinet-link button left"})
+            <div class="clear"></div>
         </div>
     </div>
 }
-    <div class="clear"></div>
-</div>
+    

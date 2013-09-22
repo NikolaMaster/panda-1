@@ -9,7 +9,7 @@ using PandaWebApp.Engine;
 
 namespace PandaWebApp.FormModels
 {
-    public class EmployerSearchForm
+    public class EmployerSearchForm : IPaginators
     {
         public class DesiredWorkDescription 
         {
@@ -38,5 +38,7 @@ namespace PandaWebApp.FormModels
                 });
             DesiredWork = new List<DesiredWorkDescription>(desiredWork);
         }
+
+        public PagerFormModel Pager { get; set; }
     }
 }

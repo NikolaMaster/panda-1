@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using DAL = PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Filters;
@@ -11,6 +12,25 @@ namespace PandaWebApp.Controllers
 {
     public class FavoriteController : ModelCareController
     {
+        public static int FavoritePrice = 3;
+        public static int FavoritePackage = 2;
+
+        public class FavoriteActionResultObject
+        {
+            public string Text { get; set; }
+            public Enum Code { get; set; }
+            public string NextStep { get; set; }
+            public Guid? NextStepArg { get; set; }
+
+            public FavoriteActionResultObject(string text, Enum code, string next = "", Guid? nextStepArg = null)
+            {
+                Text = text;
+                Code = code;
+                NextStep = next;
+                NextStepArg = nextStepArg;
+            }
+        }
+
         [NonAction]
         private FavoriteViewModel GetModel(IEnumerable<Favorite> f)
         {
@@ -49,23 +69,49 @@ namespace PandaWebApp.Controllers
 
         [HttpPost]
         [BaseAuthorizationReuired]
-        public ActionResult AddToFavorite(Guid id)
+        public JsonResult AddToFavorite(Guid id)
         {
-            var viewName = DataAccessLayer.AddToFavorites(CurrentUser.Id, id)
-                ? "_SuccessAdd" 
-                : "_FailAdd";
-            return PartialView(viewName);
+            var text = new Dictionary<DAL.DataAccessLayer.AddToFavoritesResult, string>
+            {
+                {DAL.DataAccessLayer.AddToFavoritesResult.NeedToBuy, "Необходимо заплатить, продолжить?"},
+                {DAL.DataAccessLayer.AddToFavoritesResult.Ok, "Запись успешно добавлена в избранное."},
+                {DAL.DataAccessLayer.AddToFavoritesResult.WrongTypes, "Операция невозможна!"}
+            };
+            var res = DataAccessLayer.AddToFavorites(CurrentUser.Id, id);
+            var nextStep = res == DAL.DataAccessLayer.AddToFavoritesResult.NeedToBuy ? "BuyFavorites" : "";
+            var nextStepArg = res == DAL.DataAccessLayer.AddToFavoritesResult.NeedToBuy ? (Guid?) id : null;
+            return Json(new FavoriteActionResultObject(text[res], res, nextStep, nextStepArg));
         }
 
         [HttpPost]
         [BaseAuthorizationReuired]
-        public ActionResult DeleteFromFavorite(Guid id)
+        public JsonResult DeleteFromFavorite(Guid id)
         {
-            var viewName = 
-                DataAccessLayer.DeleteFromFavorite(id)
-                    ? "_SuccessDelete"
-                    : "_FailDelete";
-            return PartialView(viewName);
+            var text = new Dictionary<DAL.DataAccessLayer.DeleteFromFavoritesResult, string>
+            {
+                {DAL.DataAccessLayer.DeleteFromFavoritesResult.Ok, "Запись успешно удалена."},
+                {DAL.DataAccessLayer.DeleteFromFavoritesResult.NotFound, "Запись не найдена!"}
+            };
+            var res = DataAccessLayer.DeleteFromFavorite(id);
+            return Json(new FavoriteActionResultObject(text[res], res));
+        }
+
+        [HttpPost]
+        [BaseAuthorizationReuired]
+        public ActionResult BuyFavorites(Guid? id)
+        {
+            var text = new Dictionary<DAL.DataAccessLayer.BuyFavoritesResult, string>
+        {
+                { DAL.DataAccessLayer.BuyFavoritesResult.NotEnoughMoney, "Недостаточно монет!"},
+                { DAL.DataAccessLayer.BuyFavoritesResult.Ok, "Максимальное количество записей в избранном увеличено на " + FavoritePackage}
+            };
+            var res = DataAccessLayer.BuyFavorites(
+                CurrentUser.Id,
+                FavoritePrice,
+                FavoritePackage);
+            var nextStep = res == DAL.DataAccessLayer.BuyFavoritesResult.Ok ? "AddToFavorite" : "";
+            var nextStepArg = res == DAL.DataAccessLayer.BuyFavoritesResult.Ok ? id : null;
+            return Json(new FavoriteActionResultObject(text[res], res, nextStep, nextStepArg));
         }
     }
 }

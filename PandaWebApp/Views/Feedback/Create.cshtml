@@ -6,7 +6,30 @@
     <div class="editor">@Html.TextBoxFor(m => m.Title)</div>
     
     <div class="label">Рейтинг</div>
-    <div class="editor">@Html.EditorFor(m => m.Rating)</div>
+    <div class="editor rating_editor">
+        <div class="red_stars">
+            @for (int i = 0; i < 10; i++)
+            {
+                <img src="/Content/img/light_gray_star.png" class="left" />
+            }
+            <div class="clear"></div>
+        </div>
+        <div class="orange_stars">
+            @for (int i = 0; i < 10;i++)
+            {
+                <img src="/Content/img/light_gray_star.png" class="left" />
+            }
+            <div class="clear"></div>
+        </div>
+        <div class="green_stars">
+            @for (int i = 0; i < 10;i++)
+            {
+                <img src="/Content/img/light_gray_star.png" class="left" />
+            }
+            <div class="clear"></div>
+        </div>
+        @Html.HiddenFor(x => x.Rating)
+    </div>
     
     <div class="label">Отзыв</div>
     <div class="editor">@Html.TextAreaFor(m => m.Text)</div>
@@ -16,3 +39,4 @@
 
     <input type="submit" value="Отправить" />
 }
+<script type="text/javascript"> initFeedbackCreate();</script>

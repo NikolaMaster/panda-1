@@ -154,6 +154,7 @@
     <Compile Include="Engine\Binders\VacancyToChecklist.cs" />
     <Compile Include="Engine\MailSender.cs" />
     <Compile Include="Engine\DataAnnotations.cs" />
+    <Compile Include="Engine\Paginator.cs" />
     <Compile Include="Engine\WebConstants.cs" />
     <Compile Include="Engine\Editors\BaseEditor.cs" />
     <Compile Include="Engine\Editors\EmployerEditor.cs" />
@@ -169,6 +170,8 @@
     <Compile Include="FormModels\Authorize.cs" />
     <Compile Include="FormModels\EditCoinsForm.cs" />
     <Compile Include="FormModels\EmployerRegister.cs" />
+    <Compile Include="FormModels\IPaginators.cs" />
+    <Compile Include="FormModels\PagerFormModel.cs" />
     <Compile Include="FormModels\PhotoForm.cs" />
     <Compile Include="FormModels\PhotoUnit.cs" />
     <Compile Include="FormModels\PromouterRegister.cs" />
@@ -542,6 +545,7 @@
     <Content Include="Content\js\frameworks\jquery\imgAreaSelect\jquery.imgareaselect.min.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.ui.timepicker.js" />
     <Content Include="Content\js\frameworks\jquery\lightbox-2.6.min.js" />
+    <Content Include="Content\js\pages\feedback.js" />
     <Content Include="Global.asax" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.js" />
     <Content Include="Content\js\frameworks\jquery\jquery.unobtrusive-ajax.min.js" />
@@ -550,11 +554,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\favorites.js" />
+    <Content Include="Content\js\pages\favorites.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\js\pages\pager.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -567,18 +572,17 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\RegisterForm.cshtml" />
     <Content Include="Views\Photo\Edit.cshtml" />
-    <Content Include="Views\Favorite\_SuccessAdd.cshtml" />
-    <Content Include="Views\Favorite\_FailAdd.cshtml" />
-    <Content Include="Views\Favorite\_SuccessDelete.cshtml" />
-    <Content Include="Views\Favorite\_FailDelete.cshtml" />
     <Content Include="Views\Favorite\_Item.cshtml" />
     <Content Include="Views\Favorite\Index.cshtml" />
     <Content Include="Views\Favorite\_Index.cshtml" />
+    <Content Include="Views\Shared\_Pager.cshtml" />
+    <Content Include="Views\Shared\_PagerForm.cshtml" />
+    <Content Include="Views\Shared\_PagerBottom.cshtml" />
+    <Content Include="Views\Shared\_PagerTop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\css\pages\" />
-    <Folder Include="Content\js\pages\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

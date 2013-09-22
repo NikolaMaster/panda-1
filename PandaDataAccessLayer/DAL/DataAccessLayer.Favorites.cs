@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -29,45 +30,46 @@ namespace PandaDataAccessLayer.DAL
             return GetUserFavorites(user);
         }
 
-        public bool CanAddToFavorites(UserBase user)
+        public bool CheckMaxLikes(UserBase user)
         {
             var f = GetUserFavorites(user);
             return user.MaxLikes > f.Count();
         }
 
-        public bool CanAddToFavorites(Guid userId)
+        public bool CheckMaxLikes(Guid userId)
         {
             var user = FindUserBase(userId);
-            return CanAddToFavorites(user);
+            return CheckMaxLikes(user);
         }
 
-        public bool AddToFavorites(Guid ownerId, Guid likeId)
+        public enum AddToFavoritesResult
+        {
+            WrongTypes,
+            NeedToBuy,
+            Ok
+        }
+
+        public AddToFavoritesResult AddToFavorites(Guid ownerId, Guid likeId)
         {
             var owner = FindUserBase(ownerId);
             var like = FindUserBase(likeId);
 
             if (owner is PromouterUser && like is PromouterUser)
             {
-#if DEBUG
-                throw new Exception("Promouter can not add Promouter as favorite!");
-#endif
-                return false;
+                return AddToFavoritesResult.WrongTypes;
             }
 
             if (owner is EmployerUser && like is EmployerUser)
             {
-#if DEBUG
-                throw new Exception("Employer can not add Employer as favorite!");
-#endif
-                return false;
+                return AddToFavoritesResult.WrongTypes;
             }
 
-            if (CanAddToFavorites(owner))
+            if (CheckMaxLikes(owner))
             {
                 //if already added
                 if (DbContext.Favorites.Any(x => x.Owner.Id == owner.Id && x.Like.Id == like.Id))
                 {
-                    return true;
+                    return AddToFavoritesResult.Ok;
                 }
                 DbContext.Favorites.Add(new Favorite
                 {
@@ -78,27 +80,49 @@ namespace PandaDataAccessLayer.DAL
             }
             else
             {
-#if DEBUG
-                throw new Exception("User can not add more favorites!");
-#endif
-                return false;
+                return AddToFavoritesResult.NeedToBuy;
             }
-            return true;
+            return AddToFavoritesResult.Ok;
         }
 
-        public bool DeleteFromFavorite(Guid id)
+        public enum DeleteFromFavoritesResult
+        {
+            Ok,
+            NotFound
+        }
+
+        public DeleteFromFavoritesResult DeleteFromFavorite(Guid id)
         {
             var toDelete = GetById<Favorite>(id);
             if (toDelete == null)
             {
-#if DEBUG
-                throw new Exception("Favorite to delete not found!");
-#endif
-                return false;
+                return DeleteFromFavoritesResult.NotFound;
             }
             DbContext.Favorites.Remove(toDelete);
             DbContext.SaveChanges();
-            return true;
+            return DeleteFromFavoritesResult.Ok;
+        }
+
+        public enum BuyFavoritesResult
+        {
+            NotEnoughMoney,
+            Ok
+        }
+
+        public BuyFavoritesResult BuyFavorites(Guid userId, int price, int count)
+        {
+            var user = FindUserBase(userId);
+            var toPay = price*count;
+            if (toPay > user.Coins)
+            {
+                return BuyFavoritesResult.NotEnoughMoney;
+            }
+
+            user.Coins -= toPay;
+            user.MaxLikes += count;
+            DbContext.Entry(user).State = EntityState.Modified;
+            DbContext.SaveChanges();
+            return BuyFavoritesResult.Ok;
         }
     }
 }
