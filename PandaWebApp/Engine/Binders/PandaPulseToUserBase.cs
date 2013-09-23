@@ -7,10 +7,10 @@ namespace PandaWebApp.Engine.Binders
 {
     public class PandaPulseToUserBase : BaseDataAccessLayerBinder<PandaPulse.Entry, UserBase>
     {
-        public const string EmployerImage = "~/Content/img/company.png";
-        public const string MaleImage = "~/Content/img/man.png";
-        public const string FeemaleImage = "~/Content/img/woman.png";
-        public const string UnknownGenderImage = "~/Content/img/car.png";
+        public const string EmployerImage = "/Content/img/company.png";
+        public const string MaleImage = "/Content/img/man.png";
+        public const string FeemaleImage = "/Content/img/woman.png";
+        public const string UnknownGenderImage = "/Content/img/car.png";
 
         public PandaPulseToUserBase(DataAccessLayer dataAccessLayer)
             : base(dataAccessLayer)
