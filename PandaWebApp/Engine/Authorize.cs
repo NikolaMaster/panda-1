@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PandaDataAccessLayer.Helpers;
+using PandaWebApp.Engine.Binders;
+using PandaWebApp.Engine.Social;
+using PandaWebApp.FormModels;
 
 namespace PandaWebApp.Engine
 {
@@ -162,7 +165,7 @@ namespace PandaWebApp.Engine
         {
             using (var dal = new DataAccessLayer())
             {
-                var users = dal.Get<UserBase>(x => x.Email == email).DefaultIfEmpty();
+                var users = dal.Get<UserBase>(x => x.Email == email);//.DefaultIfEmpty();
 
                 var userBases = users as UserBase[] ?? users.ToArray();
                 if (!userBases.Any())
@@ -188,20 +191,135 @@ namespace PandaWebApp.Engine
                     return false;
                 }
 
-                _mCachedUser = user;
-                _mCachedSession = dal.Create(new Session { User = _mCachedUser, LastHit = DateTime.UtcNow });
-                var pulse = dal.Create(new Pulse
-                    {
-                        Operation = dal.Get<DictValue>(Constants.Login),
-                        UserId = _mCachedUser.Id,
-                    });
-                _mCachedUser.Pulse = new List<Pulse> { pulse };
-                dal.DbContext.SaveChanges();
-
-                //remember session id
-                SessionId = _mCachedSession.Id;
+                Auth(user, dal);
             }
             return true;
+        }
+
+        private void Auth(UserBase user, DataAccessLayer dal)
+        {
+            _mCachedUser = user;
+            _mCachedSession = dal.Create(new Session {User = _mCachedUser, LastHit = DateTime.UtcNow});
+            var pulse = dal.Create(new Pulse
+            {
+                Operation = dal.Get<DictValue>(Constants.Login),
+                UserId = _mCachedUser.Id,
+            });
+            _mCachedUser.Pulse = new List<Pulse> {pulse};
+            dal.DbContext.SaveChanges();
+
+            //remember session id
+            SessionId = _mCachedSession.Id;
+        }
+
+        #region Social logins [TODO make it more abstract]
+
+        public void LoginVk(OAuth.Vk.UserInfo userInfo)
+        {
+            var mainInfo = userInfo.Info.First();
+            //check if user exists
+            using (var dal = new DataAccessLayer())
+            {
+                UserBase user = dal.Get<UserBase>(x => x.VkId == mainInfo.UserId).FirstOrDefault();
+
+                if (user == null)
+                {
+                    user = RegisterPromouter(new PromouterRegister(), dal);
+                    user.VkId = mainInfo.UserId;
+                    dal.DbContext.SaveChanges();
+                    //TODO photo and info
+                }
+                Auth(user, dal);
+            }
+        }
+
+        public void LoginFb(OAuth.FB.UserInfo userInfo)
+        {
+            var mainInfo = userInfo;
+            //check if user exists
+            using (var dal = new DataAccessLayer())
+            {
+                var user = dal.Get<UserBase>(x => x.FbId == mainInfo.UserId).FirstOrDefault();
+
+                if (user == null)
+                {
+                    user = RegisterPromouter(new PromouterRegister(), dal);
+                    user.FbId = mainInfo.UserId;
+                    dal.DbContext.SaveChanges();
+                    //TODO photo and info
+                }
+                Auth(user, dal);
+            }
+        }
+
+        public void LoginGoogle(OAuth.Google.UserInfo userInfo)
+        {
+            var mainInfo = userInfo;
+            //check if user exists
+            using (var dal = new DataAccessLayer())
+            {
+                var user = dal.Get<UserBase>(x => x.GoogleId == mainInfo.UserId).FirstOrDefault();
+
+                if (user == null)
+                {
+                    user = RegisterPromouter(new PromouterRegister(), dal);
+                    user.GoogleId = mainInfo.UserId;
+                    dal.DbContext.SaveChanges();
+                    //TODO photo and info
+                }
+                Auth(user, dal);
+            }
+        }
+
+        public void LoginYandex(OAuth.Yandex.UserInfo userInfo)
+        {
+            var mainInfo = userInfo;
+            //check if user exists
+            using (var dal = new DataAccessLayer())
+            {
+                var user = dal.Get<UserBase>(x => x.YandexId == mainInfo.UserId).FirstOrDefault();
+
+                if (user == null)
+                {
+                    user = RegisterPromouter(new PromouterRegister(), dal);
+                    user.YandexId = mainInfo.UserId;
+                    dal.DbContext.SaveChanges();
+                    //TODO photo and info
+                }
+                Auth(user, dal);
+            }
+        }
+
+        public void LoginMail(OAuth.MailRu.UserInfo userInfo)
+        {
+            var mainInfo = userInfo;
+            //check if user exists
+            using (var dal = new DataAccessLayer())
+            {
+                var user = dal.Get<UserBase>(x => x.MailId == mainInfo.UserId).FirstOrDefault();
+
+                if (user == null)
+                {
+                    user = RegisterPromouter(new PromouterRegister(), dal);
+                    user.MailId = mainInfo.UserId;
+                    dal.DbContext.SaveChanges();
+                    //TODO photo and info
+                }
+                Auth(user, dal);
+            }
+        }
+
+        #endregion
+
+        public PromouterUser RegisterPromouter(PromouterRegister model, DataAccessLayer dal)
+        {            
+            {
+                var binder = new PromouterRegisterToPromouterUser(dal);
+                var user = dal.Create(new PromouterUser());
+                binder.Load(model, user);
+                dal.DbContext.SaveChanges();
+                return user;
+            }
         }
 
         public void Logout()

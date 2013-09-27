@@ -31,13 +31,10 @@ namespace PandaWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var binder = new PromouterRegisterToPromouterUser(DataAccessLayer);
-                var user = DataAccessLayer.Create(new PromouterUser());
-                binder.Load(model, user);
-                DataAccessLayer.DbContext.SaveChanges();
+                var user = Authorization.RegisterPromouter(model, DataAccessLayer);
                 DataAccessLayer.SendConfirmation(user.Id);
                 DataAccessLayer.DbContext.SaveChanges();
-                new AuthorizationCore().Login(model.Email, model.Password);
+                Authorization.Login(model.Email, model.Password);
                 Response.ContentType = @"text/json";
                 return Json(new { path = "/Promouter/Detail/" + user.Id });
             }

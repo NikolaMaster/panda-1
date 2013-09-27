@@ -33,6 +33,11 @@ namespace PandaWebApp
                 });
 
             routes.MapRoute(
+                name: "OAuth",
+                url: "{social}-auth",
+                defaults: new {controller = "OAuth", action = "Ok", social = UrlParameter.Optional });
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

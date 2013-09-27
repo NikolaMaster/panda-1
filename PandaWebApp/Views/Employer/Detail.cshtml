@@ -14,7 +14,10 @@
         <div class="left">
             <span class="user-gender-icon"><img src="~/Content/img/company.png" /></span>
             <span class="user-name">@Model.Item1.EmployerName</span>
-            <span class="user-number">#@Model.Item1.Number</span>
+            @if (isAdmin)
+            {
+                <span class="user-number">#@Model.Item1.Number</span>
+            }
         </div>
         <div class="right user-status">
             <img src="@(Model.Item1.Status == "Онлайн" ? "/Content/img/online.png" : "/Content/img/offline.png")" />

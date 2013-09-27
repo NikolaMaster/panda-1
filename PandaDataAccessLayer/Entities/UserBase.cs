@@ -17,6 +17,13 @@ namespace PandaDataAccessLayer.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Number { get; set; }
 
+        //oauth tokens
+        public int? YandexId { get; set; }
+        public int? VkId { get; set; }
+        public string MailId { get; set; }
+        public string FbId { get; set; }
+        public string GoogleId { get; set; }
+
         public int Coins { get; set; }
         public int MaxLikes { get; set; }
         public bool IsAdmin { get; set; }

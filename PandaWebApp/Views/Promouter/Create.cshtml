@@ -1,4 +1,5 @@
-﻿@model PandaWebApp.FormModels.PromouterRegister
+﻿@using PandaWebApp.Engine.Social
+@model PandaWebApp.FormModels.PromouterRegister
 
 <div id="promouter">
     @using (Ajax.BeginForm("Create", "Promouter", new AjaxOptions
@@ -37,5 +38,8 @@
         <div class="clear"></div><br>
          <button type="submit" class="green_button">Зарегистрироваться</button>
          @Html.ActionLink("Я работодатель", "Create", "Employer")
+        
+        @Html.Partial("_SocialLogin")
+        
     }
 </div>

@@ -127,6 +127,7 @@
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\FavoriteController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
+    <Compile Include="Controllers\OAuthController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
@@ -159,7 +160,13 @@
     <Compile Include="Engine\Binders\VacancyToChecklist.cs" />
     <Compile Include="Engine\MailSender.cs" />
     <Compile Include="Engine\DataAnnotations.cs" />
+    <Compile Include="Engine\Social\OAuth.MailRu.cs" />
+    <Compile Include="Engine\Social\OAuth.Vkontakte.cs" />
+    <Compile Include="Engine\Social\OAuth.Yandex.cs" />
+    <Compile Include="Engine\Social\OAuth.FB.cs" />
+    <Compile Include="Engine\Social\OAuth.Google.cs" />
     <Compile Include="Engine\Paginator.cs" />
+    <Compile Include="Engine\Social\OAuth.cs" />
     <Compile Include="Engine\WebConstants.cs" />
     <Compile Include="Engine\Editors\BaseEditor.cs" />
     <Compile Include="Engine\Editors\EmployerEditor.cs" />
@@ -604,6 +611,7 @@
     <Content Include="Views\Shared\_PagerTop.cshtml" />
     <Content Include="Views\Support\Create.cshtml" />
     <Content Include="Views\Browsing\Index.cshtml" />
+    <Content Include="Views\Shared\_SocialLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -719,11 +727,10 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56587</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>9630</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:123/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -17,7 +17,7 @@ namespace PandaDataAccessLayer.Helpers
             var result = new StringBuilder();
             for (int i = 0; i < hashBytes.Length; i++)
             {
-                result.Append(hashBytes[i].ToString());
+                result.Append(hashBytes[i].ToString("x2"));
             }
             return result.ToString();
         }

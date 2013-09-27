@@ -17,7 +17,10 @@
         <div class="left">
             <img src="~/Content/img/woman.png" />
             <span class="user-name">@string.Format("{0} {1}",Model.Item1.FirstName,Model.Item1.LastName)</span>
-            <span class="user-number">#@Model.Item1.Number</span>
+            @if (isAdmin)
+            {
+                <span class="user-number">#@Model.Item1.Number</span>
+            }
         </div>
         <div class="right user-status">
             <img src="@(Model.Item1.Status == "Онлайн" ? "/Content/img/online.png" : "/Content/img/offline.png")" />
@@ -78,7 +81,7 @@
                     }
                 }
                
-               <div class="row gap"></div>
+               <!--<div class="row gap"></div>-->
                 
                 @if (!isGuest || isAdmin)
                 {
