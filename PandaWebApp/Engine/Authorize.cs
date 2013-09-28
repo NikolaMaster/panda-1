@@ -226,6 +226,40 @@ namespace PandaWebApp.Engine
                 {
                     user = RegisterPromouter(new PromouterRegister(), dal);
                     user.VkId = mainInfo.UserId;
+                    var mainAlbum = user.Albums.First();
+                    var avatar = dal.Create(new Photo()
+                    {
+                        Album = mainAlbum,
+                        SourceUrl = ImageCreator.SavePhoto(mainInfo.Photo)
+                    });
+                    user.Avatar = avatar;
+
+                    DateTime birthday;
+
+                    dal.Update(user.MainChecklist, new List<AttribValue>
+                    {
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.LastNameCode),
+                            Value = mainInfo.LastName
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.FirstNameCode),
+                            Value = mainInfo.FirstName
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.DateOfBirthCode),
+                            Value = DateTime.TryParse(mainInfo.BirthDate, out birthday) ? birthday.ToPandaString() : null
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.GenderCode),
+                            Value = mainInfo.Sex == 2 ? Constants.MaleCode :
+                                    mainInfo.Sex == 1 ? Constants.FemaleCode : null
+                        },
+                    });
                     dal.DbContext.SaveChanges();
                     //TODO photo and info
                 }
@@ -245,6 +279,39 @@ namespace PandaWebApp.Engine
                 {
                     user = RegisterPromouter(new PromouterRegister(), dal);
                     user.FbId = mainInfo.UserId;
+                    user.Email = mainInfo.Email;
+                    DateTime birthday;
+
+                    dal.Update(user.MainChecklist, new List<AttribValue>
+                    {
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.LastNameCode),
+                            Value = mainInfo.LastName
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.FirstNameCode),
+                            Value = mainInfo.FirstName
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.DateOfBirthCode),
+                            Value = DateTime.TryParse(mainInfo.BirthDate, out birthday) ? birthday.ToPandaString() : null
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.EmailCode),
+                            Value = mainInfo.Email
+                        },
+                     new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.GenderCode),
+                            Value = mainInfo.Sex == "male" ? Constants.MaleCode :
+                                    mainInfo.Sex == "female" ? Constants.FemaleCode : null
+                        },
+                    });
+
                     dal.DbContext.SaveChanges();
                     //TODO photo and info
                 }
@@ -264,6 +331,40 @@ namespace PandaWebApp.Engine
                 {
                     user = RegisterPromouter(new PromouterRegister(), dal);
                     user.GoogleId = mainInfo.UserId;
+                    user.Email = mainInfo.Email;
+                    var mainAlbum = user.Albums.First();
+                    var avatar = dal.Create(new Photo()
+                    {
+                        Album = mainAlbum,
+                        SourceUrl = ImageCreator.SavePhoto(mainInfo.Photo)
+                    });
+                    user.Avatar = avatar;
+
+                    dal.Update(user.MainChecklist, new List<AttribValue>
+                    {
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.LastNameCode),
+                            Value = mainInfo.LastName
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.FirstNameCode),
+                            Value = mainInfo.FirstName
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.EmailCode),
+                            Value = mainInfo.Email
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.GenderCode),
+                            Value = mainInfo.Sex == "male" ? Constants.MaleCode :
+                                    mainInfo.Sex == "female" ? Constants.FemaleCode : null
+                        },
+                    });
+
                     dal.DbContext.SaveChanges();
                     //TODO photo and info
                 }
@@ -283,6 +384,34 @@ namespace PandaWebApp.Engine
                 {
                     user = RegisterPromouter(new PromouterRegister(), dal);
                     user.YandexId = mainInfo.UserId;
+                    user.Email = mainInfo.Email;
+
+                    DateTime birthday;
+
+                    dal.Update(user.MainChecklist, new List<AttribValue>
+                    {
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.LastNameCode),
+                            Value = mainInfo.LastName
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.DateOfBirthCode),
+                            Value = DateTime.TryParse(mainInfo.BirthDate, out birthday) ? birthday.ToPandaString() : null
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.EmailCode),
+                            Value = mainInfo.Email
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.GenderCode),
+                            Value = mainInfo.Sex == "male" ? Constants.MaleCode :
+                                    mainInfo.Sex == "female" ? Constants.FemaleCode : null
+                        },
+                    });
                     dal.DbContext.SaveChanges();
                     //TODO photo and info
                 }
@@ -302,6 +431,47 @@ namespace PandaWebApp.Engine
                 {
                     user = RegisterPromouter(new PromouterRegister(), dal);
                     user.MailId = mainInfo.UserId;
+                    user.Email = mainInfo.Email;
+                 
+                    var mainAlbum = user.Albums.First();
+                    var avatar = dal.Create(new Photo()
+                    {
+                        Album = mainAlbum,
+                        SourceUrl = ImageCreator.SavePhoto(mainInfo.Photo)
+                    });
+                    user.Avatar = avatar;
+
+                    DateTime birthday;
+
+                    dal.Update(user.MainChecklist, new List<AttribValue>
+                    {
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.LastNameCode),
+                            Value = mainInfo.LastName
+                        },
+                   new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.FirstNameCode),
+                            Value = mainInfo.FirstName
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.DateOfBirthCode),
+                            Value = DateTime.TryParse(mainInfo.BirthDate, out birthday) ? birthday.ToPandaString() : null
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.EmailCode),
+                            Value = mainInfo.Email
+                        },
+                        new AttribValue
+                        {
+                            Attrib = dal.Get<Attrib>(Constants.GenderCode),
+                            Value = mainInfo.Sex == 0 ? Constants.MaleCode :
+                                    mainInfo.Sex == 1 ? Constants.FemaleCode : null
+                        },
+                    });
                     dal.DbContext.SaveChanges();
                     //TODO photo and info
                 }

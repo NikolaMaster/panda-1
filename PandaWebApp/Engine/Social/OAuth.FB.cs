@@ -44,6 +44,9 @@ namespace PandaWebApp.Engine.Social
 
                 [JsonProperty("birthday")]
                 public string BirthDate { get; set; }
+
+                [JsonProperty("sex")]
+                public string Sex { get; set; }
             }
 
             public static AuthModel AuthCodesBase

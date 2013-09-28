@@ -116,6 +116,7 @@ namespace PandaWebApp.Engine.Social
                 var sign = ParamsString(parameters).Replace("&", "") + AuthCodesBase.ClientSecret;
                 sign = Crypt.GetMD5Hash(sign);
                 parameters.Add("sig", sign);
+                BaseGetJson<UserInfo[]>(urlBase, parameters).First();
                 return BaseGetJson<UserInfo[]>(urlBase, parameters).First();
             }
         }

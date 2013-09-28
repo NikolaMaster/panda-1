@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PandaDataAccessLayer.Helpers;
@@ -94,6 +95,40 @@ namespace PandaWebApp.Engine
                 }
             }
             return ImgPath + fileName;
+        }
+
+        public static string SavePhoto(string url)
+        {
+            var request = WebRequest.Create(url);
+            using (var response = request.GetResponse())
+            using (var stream = response.GetResponseStream())
+            {
+                var contentType = response.ContentType;
+                var ext = string.Empty;
+                switch (contentType)
+                {
+                    case "image/png" : ext = ".png";break;
+                    case "image/jpeg" : ext = ".jpg";break;
+                    default:
+                        throw new Exception("Unknown content type");
+                }
+                var sourcePath = HttpContext.Current.Server.MapPath(ImgPath);
+                var fileName = Guid.NewGuid() + ext;
+
+                // Download the file
+                using (var file = File.OpenWrite(Path.Combine(sourcePath, fileName)))
+                {
+                    var buffer = new byte[4096];
+                    int bytesRead;
+                    do
+                    {
+                        bytesRead = stream.Read(buffer, 0, buffer.Length);
+                        file.Write(buffer, 0, bytesRead);
+                    } while (bytesRead != 0);
+
+                    return ImgPath + fileName;
+                }
+            }
         }
     }
 }
