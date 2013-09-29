@@ -1,8 +1,10 @@
-﻿using PandaDataAccessLayer.DAL;
+﻿using System.Security.Cryptography;
+using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
 using PandaWebApp.Engine;
 using PandaWebApp.Engine.Binders;
 using PandaWebApp.Engine.Logic;
+using PandaWebApp.Filters;
 using PandaWebApp.FormModels;
 using PandaWebApp.ViewModels;
 using System;
@@ -28,6 +30,89 @@ namespace PandaWebApp.Controllers
 
             return View(model);
         }
+
+        [NonAction]
+        private EmployerSearchForm getModel(UserBase user)
+        {
+            var model = new EmployerSearchForm(DataAccessLayer);
+
+            ValueFromAttributeConverter.ModelFromAttributes(model, user.MainChecklist.AttrbuteValues, DataAccessLayer);
+            foreach (var desiredWork in DataAccessLayer.GetDesiredWork(user.MainChecklist.Id))
+            {
+                foreach (var modelDesiredWork in model.DesiredWork)
+                {
+                    if (modelDesiredWork.Code == desiredWork.Work.Code)
+                    {
+                        modelDesiredWork.Value = true;
+                    }
+                }
+            }
+            return model;
+        }
+
+        [HttpGet]
+        [BaseAuthorizationReuired]
+        public ActionResult OffersCount(Guid id)
+        {
+
+            var searchCollection = DataAccessLayer.Get<Checklist>(x => x.ChecklistType.Code == Constants.EmployerChecklistTypeCode);
+
+            var formValues = new Dictionary<Attrib, object>();
+            var formBinder = new FormEmployerSearchToSearchValues(DataAccessLayer);
+
+            var user = DataAccessLayer.GetById<PromouterUser>(id);
+
+            var model = getModel(user);
+            formBinder.Load(model, formValues);
+
+            var searchResult = (new Searcher(DataAccessLayer)).Search(searchCollection, formValues, model.Query).Count();
+            return PartialView(searchResult);
+        }
+
+        [HttpGet]
+        [BaseAuthorizationReuired]
+        public ActionResult Offers(Guid id)
+        {
+            var user = DataAccessLayer.GetById<PromouterUser>(id);
+            var model = new EmployerSearchForm(DataAccessLayer);
+            ValueFromAttributeConverter.ModelFromAttributes(model, user.MainChecklist.AttrbuteValues, DataAccessLayer);
+            foreach (var desiredWork in DataAccessLayer.GetDesiredWork(user.MainChecklist.Id))
+            {
+                foreach (var modelDesiredWork in model.DesiredWork)
+                {
+                    if (modelDesiredWork.Code == desiredWork.Work.Code)
+                    {
+                        modelDesiredWork.Value = true;
+                    }
+                }
+            }
+            var genderValues = DataAccessLayer.ListItemsFromDict(Constants.GenderCode).ToList();
+            genderValues.ForEach(x =>
+            {
+                if (x.Value == model.Gender)
+                    x.Selected = true;
+            });
+            var salaryValues = DataAccessLayer.ListItemsFromDict(Constants.SalaryCode).ToList();
+            salaryValues.ForEach(x =>
+            {
+                if (x.Value == model.Salary)
+                    x.Selected = true;
+            });
+            var cityValues =  DataAccessLayer.ListItemsFromDict(Constants.CityCode).ToList();
+            cityValues.ForEach(x =>
+            {
+                if (x.Value == model.City)
+                    x.Selected = true;
+            });
+            ViewBag.CityValues = cityValues;
+            ViewBag.GenderValues = genderValues;
+            ViewBag.SalaryValues = salaryValues;
+            ViewBag.AutoSubmit = true;
+
+
+            return View("Employer", model);
+        }
+
 
         [HttpPost]
         public ActionResult EmployerSearchResult(EmployerSearchForm model)

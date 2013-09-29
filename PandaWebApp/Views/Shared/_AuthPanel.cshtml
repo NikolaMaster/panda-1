@@ -1,4 +1,5 @@
-﻿
+﻿@using PandaDataAccessLayer.Entities
+
 @{
     var core = AuthorizationCore.StaticCreate();
     var isGuest = core.IsGuest;
@@ -6,6 +7,7 @@
     var username = core.UserName;
     var firstName = core.FirstName;
     var city = core.City;
+
     const int FirstNameLength = 14;
 }    
 
@@ -34,11 +36,15 @@ else
 						<span class="header__prompt-hello">Здравствуйте:</span>
 						<span class="header__prompt-name">@firstName.Shorten(FirstNameLength)</span>
 					</div>
-					<div class="header__offers">
-						<a class="header__offers-toyou" href="#">Предложения для вас</a><span class="header__offers-count">(#)</span> |
-		    <a class="header__offers-selected" href="@Url.Action("UserIndex", "Favorite")">Выбранные вакансии</a><span class="header__offers-count">(@core.FavoritesCount)</span> |
-						<a class="header__offers-saw" href="@Url.Action("Index", "Browsing")">Вашу анкету смотрели</a><span class="header__offers-count">(@core.BrowsingValuesCount)</span>
-					</div>
+        <div class="header__offers">
+            @if (user is PromouterUser)
+            {
+                <a class="header__offers-toyou" href="@Url.Action("Offers", "Search", new {user.Id})">Предложения для вас</a>
+                <span class="header__offers-count">(@{ Html.RenderAction("OffersCount", "Search", new {user.Id}); })</span>
+            }
+            <a class="header__offers-selected" href="@Url.Action("UserIndex", "Favorite")">Выбранные вакансии</a><span class="header__offers-count">(@core.FavoritesCount)</span> |
+            <a class="header__offers-saw" href="@Url.Action("Index", "Browsing")">Вашу анкету смотрели</a><span class="header__offers-count">(@core.BrowsingValuesCount)</span>
+        </div>
 					<div class="header__coins button">
 						<div class="header__coins-icon"></div>
 						<div class="header__coins-count">

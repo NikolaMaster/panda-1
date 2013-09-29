@@ -6,6 +6,7 @@
     var cityValues = (IEnumerable<SelectListItem>)ViewBag.CityValues;
     var genderValues = (IEnumerable<SelectListItem>)ViewBag.GenderValues;
     var salaryValues = (IEnumerable<SelectListItem>)ViewBag.SalaryValues;
+    var autoSubmit = (bool) ViewBag.AutoSubmit;
 }
 
 
@@ -33,9 +34,14 @@
                     $('.search__desiredWork, .search__otherFilters, .search_applyContainer').show();
                 }
             });
+            if ($('#autoSubmit').val() == 'True')
+            {
+                $('#searchForm').submit();
+            }
         });
     </script>
-    <form action="@Url.Action("EmployerSearchResult", "Search")" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#employerSearchResult" id="search_form" method="post">
+    <form id="searchForm" action="@Url.Action("EmployerSearchResult", "Search")" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#employerSearchResult" id="search_form" method="post">
+        <input type="hidden" id="autoSubmit" value="@autoSubmit.ToString()"/>
     <div class="search">
         <div class="search__header">Найти работу</div>
         <div class="search__termContainer">

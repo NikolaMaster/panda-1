@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PandaWebApp.Engine;
+using PandaWebApp.Engine.Binders;
 
 namespace PandaWebApp.FormModels
 {
@@ -20,8 +21,11 @@ namespace PandaWebApp.FormModels
         }
 
         public string Query { get; set; }
+        [ValueFrom(Constants.CityCode)]
         public string City { get; set; }
+        [ValueFrom(Constants.GenderCode)]
         public string Gender { get; set; }
+        [ValueFrom(Constants.SalaryCode)]
         public string Salary { get; set; }
 
         public List<DesiredWorkDescription> DesiredWork { get; set; }

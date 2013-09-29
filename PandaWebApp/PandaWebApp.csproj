@@ -137,6 +137,7 @@
     <Compile Include="Engine\Binders\CurrentUserToUserInfo.cs" />
     <Compile Include="Engine\Binders\EmployerRegisterToEmployerUser.cs" />
     <Compile Include="Engine\Binders\PromouterRegisterToPromouterUser.cs" />
+    <Compile Include="Engine\Binders\PromouterToEmployerSearch.cs" />
     <Compile Include="Engine\Binders\ValueFromAttribute.cs" />
     <Compile Include="Engine\Binders\ViewPromouterSearchViewToChecklist.cs" />
     <Compile Include="Engine\Binders\FormPromouterSearchToSearchValues.cs" />
@@ -612,6 +613,7 @@
     <Content Include="Views\Support\Create.cshtml" />
     <Content Include="Views\Browsing\Index.cshtml" />
     <Content Include="Views\Shared\_SocialLogin.cshtml" />
+    <Content Include="Views\Search\OffersCount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

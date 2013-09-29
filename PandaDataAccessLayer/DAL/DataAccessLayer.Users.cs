@@ -1,4 +1,5 @@
-﻿using PandaDataAccessLayer.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using PandaDataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Objects;
@@ -143,5 +144,15 @@ namespace PandaDataAccessLayer.DAL
             return user;
         }
 
+        public IEnumerable<DesiredWork> GetDesiredWork(Guid checklistId)
+        {
+            var desiredWorkAttr = GetAttributeValue(checklistId, Constants.DesiredWorkCode);
+            if (desiredWorkAttr == null || string.IsNullOrEmpty(desiredWorkAttr.Value))
+            {
+                return new List<DesiredWork>();
+            }
+            var entityList = Guid.Parse(desiredWorkAttr.Value);
+            return Get<DesiredWork>(x => x.EntityList.Id == entityList);
+        }
     }
 }
