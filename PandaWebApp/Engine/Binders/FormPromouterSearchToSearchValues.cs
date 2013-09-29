@@ -18,6 +18,8 @@ namespace PandaWebApp.Engine.Binders
             dest.Add(DataAccessLayer.Constants.City, source.City);
             dest.Add(DataAccessLayer.Constants.Gender, source.Gender);
             dest.Add(DataAccessLayer.Constants.Salary, source.Salary);
+            dest.Add(DataAccessLayer.Constants.Education, source.Education);
+            dest.Add(DataAccessLayer.Constants.DateOfBirth, new Tuple<int, int>(source.MinAge, source.MaxAge));
         }
 
         public override void InverseLoad(Dictionary<Attrib, object> source, PromouterSearchForm dest)

@@ -5,6 +5,9 @@
     var cityValues = (IEnumerable<SelectListItem>)ViewBag.CityValues;
     var genderValues = (IEnumerable<SelectListItem>)ViewBag.GenderValues;
     var salaryValues = (IEnumerable<SelectListItem>)ViewBag.SalaryValues;
+    var educationValues = (IEnumerable<SelectListItem>)ViewBag.EducationValues;
+    var minAge = ViewBag.MinAge;
+    var maxAge = ViewBag.MaxAge;
 }
 
 
@@ -19,36 +22,60 @@
     *@
 @section BeforeBody
 {
+    <script>
+        $(function() {
+            $('#age-range').slider({
+                range: true,
+                min: @{ @minAge },
+                max: @{ @maxAge }, 
+                values: [ @minAge, @maxAge ],
+                slide: function( event, ui ) {
+                    $('#minAge').text(ui.values[0]);
+                    $('#maxAge').text(ui.values[1]);
+                    $('#MinAge').val(ui.values[0]);
+                    $('#MaxAge').val(ui.values[1]);
+                }
+            });
+        });
+    </script>
     <form action="@Url.Action("PromouterSearchResult", "Search")" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#promouterSearchResult" id="search_form" method="post">
-            <div class="search">
-                <div class="search__header">Найти исполнителя</div>
-                <div class="search__termContainer">
-                    <div class="left">@Html.TextBoxFor(x => x.Query, new { @class = "search__term base-input"})</div>
-                    <div class="right search__startButton"><a href="javascript: $('#search_form').trigger('submit')"><img src="~/Content/img/search.png" /></a></div>
-                    <div class="clear"></div>
-                </div>
-                <div class="search__linkContainer">
-                    <a href="#" class="search__linkCollapse right">Свернуть поиск</a>
-                    <div class="clear"></div>
-                </div>
-                    <div class="search__otherFilters">
-                        <ul class="horiz top">
-                            <!--	<li class="search__selectContainer"><select description="Тип занятости:"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
-                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.City, cityValues, "Город/регион", new {description = "Город/регион"})</li>
-                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.Gender, genderValues, "Пол", new {description = "Пол"})</li>
-                            <!--<li class="search__selectContainer"><select description="Требования"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
-                        </ul>
-                        <ul class="horiz bottom">
-                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.Salary, salaryValues, "Зарплата", new {description = "Зарплата"})</li>
-                            <!--	<li class="search__selectContainer"><select description="Иностранный язык"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
-                        </ul>
-                        <div class="clear"></div>
-                    </div>   
-                    <div class="search_applyContainer">
-                        <a href="#" class="search__applyLink right">Применить параметры</a>
-                        <div class="clear"></div>
-                    </div>
-                </div>
+    <div class="search">
+        <div class="search__header">Найти исполнителя</div>
+        <div class="search__termContainer">
+            <div class="left">@Html.TextBoxFor(x => x.Query, new {@class = "search__term base-input"})</div>
+            <div class="right search__startButton"><a href="javascript: $('#search_form').trigger('submit')"><img src="~/Content/img/search.png" /></a></div>
+            <div class="clear"></div>
+        </div>
+        <div class="search__linkContainer">
+            <a href="#" class="search__linkCollapse right">Свернуть поиск</a>
+            <div class="clear"></div>
+        </div>
+        <div class="search__otherFilters">
+            <ul class="horiz top">
+                <!--	<li class="search__selectContainer"><select description="Тип занятости:"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+                <li class="search__selectContainer">@Html.DropDownListFor(x => x.City, cityValues, "Город/регион", new {description = "Город/регион"})</li>
+                <li class="search__selectContainer">@Html.DropDownListFor(x => x.Gender, genderValues, "Пол", new {description = "Пол"})</li>
+                            
+                <!--<li class="search__selectContainer"><select description="Требования"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+            </ul>
+            <ul class="horiz bottom">
+                <li class="search__selectContainer">@Html.DropDownListFor(x => x.Salary, salaryValues, "Зарплата", new {description = "Зарплата"})</li>
+                <li class="search__selectContainer">@Html.DropDownListFor(x => x.Education, educationValues, "Образование", new {description = "Образование"})</li>
+                            
+                <!--	<li class="search__selectContainer"><select description="Иностранный язык"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+            </ul>
+            <div class="clear"></div>
+            <div>Возраст <i>(<span id='minAge'>@minAge</span> - <span id='maxAge'>@maxAge</span>)</i>: </div>
+            <div id="age-range" class="search__slider"></div>
+            @Html.HiddenFor(x => x.MinAge)
+            @Html.HiddenFor(x => x.MaxAge)
+            <div class="clear"></div>
+        </div> 
+        <div class="search_applyContainer">
+            <a href="#" class="search__applyLink right">Применить параметры</a>
+            <div class="clear"></div>
+        </div>
+    </div>
 }
 <div class="content content-width">
     <div class="">

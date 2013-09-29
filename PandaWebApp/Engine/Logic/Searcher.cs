@@ -25,7 +25,9 @@ namespace PandaWebApp.Engine.Logic
                     { DataAccessLayer.Constants.Work, new DictManyValueComparer(DataAccessLayer) },
                     { DataAccessLayer.Constants.City, new DictValueComparer(DataAccessLayer) },
                     { DataAccessLayer.Constants.Gender, new DictValueComparer(DataAccessLayer) },
-                    { DataAccessLayer.Constants.Salary, new DictValueComparer(DataAccessLayer) }
+                    { DataAccessLayer.Constants.Salary, new DictValueComparer(DataAccessLayer) },
+                    { DataAccessLayer.Constants.Education, new DictValueComparer(DataAccessLayer) },
+                    { DataAccessLayer.Constants.DateOfBirth, new IntRangeComparer(DataAccessLayer) }
                 };
             FullTextComparer = new FullTextComparer(DataAccessLayer);
         }
@@ -157,6 +159,26 @@ namespace PandaWebApp.Engine.Logic
             }
         }
     }
+
+    public class IntRangeComparer: ComparerBase 
+    {
+        public IntRangeComparer(DataAccessLayer dataAccessLayer)
+            : base(dataAccessLayer)
+        {
+        }
+
+        public override bool Compare(AttribValue storedValue, object value)
+        {
+            var range = value as Tuple<int, int>;
+            if (range == null)
+                return true;
+            if (storedValue == null || string.IsNullOrEmpty(storedValue.Value))
+                return false;
+            var years = Helper.GetFullYears(DateTime.Parse(storedValue.Value));
+            return years >= range.Item1 && years <= range.Item2;
+        }
+    }
+
 
     public class FullTextComparer
     {

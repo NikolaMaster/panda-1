@@ -12,7 +12,7 @@
                 <div class="searchResult__blog__part2 left"><img src="@ImageCreator.Create(item.AvatarUrl, 113, 111)"></div>
                 <div class="searchResult__blog__part3 left">
                     <div class="left">
-                        <div class="position left">@item.FullName</div><div class="lifetime left">на сайте @item.DaysOnSite дней</div>
+                        <div class="position left">@Html.ActionLink(item.FullName, "Detail", "Promouter", new {id = item.Checklist.User.Id}, new { })</div><div class="lifetime left">на сайте @item.DaysOnSite дней</div>
                         <div class="clear"></div>
                         <ul>
                             <li class="bold">@item.About</li>

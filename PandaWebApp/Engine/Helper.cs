@@ -89,5 +89,17 @@ namespace PandaWebApp.Engine
 
         #endregion
 
+        public static int GetFullYears(DateTime birthDate)
+        {
+            var date = DateTime.UtcNow;
+            var lastYear = date.Year - 1;
+            var currentBirthDate = new DateTime(
+                    date.Year,
+                    birthDate.Month,
+                    birthDate.Day
+                );
+            return lastYear - birthDate.Year + (currentBirthDate <= date).Int();
+        }
+
     }
 }

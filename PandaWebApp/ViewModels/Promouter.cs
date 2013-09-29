@@ -102,14 +102,7 @@ namespace PandaWebApp.ViewModels
                 {
                     return 0;
                 }
-                var date = DateTime.UtcNow;
-                var lastYear = date.Year - 1;
-                var currentBirthDate = new DateTime(
-                        date.Year,
-                        BirthDate.Value.Month,
-                        BirthDate.Value.Day
-                    );
-                return lastYear - BirthDate.Value.Year + (currentBirthDate <= date).Int();
+                return Helper.GetFullYears(BirthDate.Value);
             }
         }
 

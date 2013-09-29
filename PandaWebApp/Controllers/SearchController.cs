@@ -62,7 +62,16 @@ namespace PandaWebApp.Controllers
             ViewBag.SalaryValues = DataAccessLayer.ListItemsFromDict(Constants.SalaryCode)
                 .OrderBy(x => string.IsNullOrEmpty(x.Text) ? -1 : int.Parse(x.Text));
             ViewBag.CityValues = DataAccessLayer.ListItemsFromDict(Constants.CityCode);
+            ViewBag.EducationValues = DataAccessLayer.ListItemsFromDict(Constants.EducationCode);
+            var dates = DataAccessLayer.Get<Checklist>(
+                x => x.ChecklistType.Code == Constants.PromouterChecklistTypeCode)
+                .Select(x => DataAccessLayer.GetAttributeValue(x.Id, Constants.DateOfBirthCode))
+                .Where(x => x != null && !string.IsNullOrEmpty(x.Value))
+                .Select(x => Helper.GetFullYears(DateTime.Parse(x.Value))).ToList();
 
+            ViewBag.MinAge = model.MinAge = dates.Min();
+            ViewBag.MaxAge = model.MaxAge = dates.Max();
+            
             return View(model);
         }
 
