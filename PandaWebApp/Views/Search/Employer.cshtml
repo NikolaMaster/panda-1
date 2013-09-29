@@ -21,55 +21,69 @@
     *@
 @section BeforeBody
 {
+    <script>
+        $(function() {
+            $('#expandSearch').click(function(event) {
+                event.preventDefault();
+                if ($('.search__otherFilters:visible').length > 0) {
+                    $('#expandSearch').text('Развернуть поиск');
+                    $('.search__desiredWork, .search__otherFilters, .search_applyContainer').hide();
+                } else {
+                    $('#expandSearch').text('Свернуть поиск');
+                    $('.search__desiredWork, .search__otherFilters, .search_applyContainer').show();
+                }
+            });
+        });
+    </script>
     <form action="@Url.Action("EmployerSearchResult", "Search")" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#employerSearchResult" id="search_form" method="post">
-            <div class="search">
-                <div class="search__header">Найти работу</div>
-                <div class="search__termContainer">
-            <div class="left">@Html.TextBoxFor(x => x.Query, new { @class = "search__term base-input"})</div>
+    <div class="search">
+        <div class="search__header">Найти работу</div>
+        <div class="search__termContainer">
+            <div class="left">@Html.TextBoxFor(x => x.Query, new {@class = "search__term base-input"})</div>
             <div class="right search__startButton"><a href="javascript: $('#search_form').trigger('submit')"><img src="~/Content/img/search.png" /></a></div>
-                    <div class="clear"></div>
-                </div>
-                <div class="search__linkContainer">
-                    <a href="#" class="search__linkCollapse right">Свернуть поиск</a>
-                    <div class="clear"></div>
-                </div>
-                <div class="">
-                    <div class="search__typeHeader">Тип</div>
-                    <div class="search__typeContent">
-                        <ul class="horiz">
+            <div class="clear"></div>
+        </div>
+        <div class="search__linkContainer">
+            <a href="#" class="search__linkCollapse right" id="expandSearch">Свернуть поиск</a>
+            <div class="clear"></div>
+        </div>
+        <div class="search__desiredWork">
+            <div class="search__typeHeader">Тип</div>
+            <div class="search__typeContent">
+                <ul class="horiz">
       
-                            @{ var i = 0; }
-                            @foreach (var item in Model.DesiredWork)
-                            {
-                                <li class="search__typeItem">
-                                    <input type="hidden" name="@String.Format("DesiredWork[{0}].Code", i)" value="@item.Code" />
-                                    @Html.CheckBox(String.Format("DesiredWork[{0}].Value", i), item.Value, new {@class = "base-input"}) @item.Title<i>(@item.Count)</i>
-                                    @{ i++; }
-                                </li>
-                            }
-                        </ul>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="search__otherFilters">
-                        <ul class="horiz top">
-                            <!--	<li class="search__selectContainer"><select description="Тип занятости:"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
-                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.City, cityValues, "Город/регион", new {description = "Город/регион"})</li>
-                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.Gender, genderValues, "Пол", new {description = "Пол"})</li>
-                            <li class="search__selectContainer">@Html.DropDownListFor(x => x.Salary, salaryValues, "Зарплата", new {description = "Зарплата"})</li>
-                            <!--<li class="search__selectContainer"><select description="Требования"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
-                        </ul>
-                        <ul class="horiz bottom">
-
-                            <!--	<li class="search__selectContainer"><select description="Иностранный язык"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
-                        </ul>
-                        <div class="clear"></div>
-                    </div>   
-                    <div class="search_applyContainer">
-                        <a href="#" class="search__applyLink right">Применить параметры</a>
-                        <div class="clear"></div>
-                    </div>
-                </div>
+                    @{ var i = 0; }
+                    @foreach (var item in Model.DesiredWork)
+                    {
+                        <li class="search__typeItem">
+                            <input type="hidden" name="@String.Format("DesiredWork[{0}].Code", i)" value="@item.Code" />
+                            @Html.CheckBox(String.Format("DesiredWork[{0}].Value", i), item.Value, new {@class = "base-input"}) @item.Title<i>(@item.Count)</i>
+                            @{ i++; }
+                        </li>
+                    }
+                </ul>
+                <div class="clear"></div>
             </div>
+            <div class="search__otherFilters">
+                <ul class="horiz top">
+                    <!--	<li class="search__selectContainer"><select description="Тип занятости:"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+                    <li class="search__selectContainer">@Html.DropDownListFor(x => x.City, cityValues, "Город/регион", new {description = "Город/регион"})</li>
+                    <li class="search__selectContainer">@Html.DropDownListFor(x => x.Gender, genderValues, "Пол", new {description = "Пол"})</li>
+                    <li class="search__selectContainer">@Html.DropDownListFor(x => x.Salary, salaryValues, "Зарплата", new {description = "Зарплата"})</li>
+                    <!--<li class="search__selectContainer"><select description="Требования"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+                </ul>
+                <ul class="horiz bottom">
+
+                    <!--	<li class="search__selectContainer"><select description="Иностранный язык"><option value="0">тестовая штука1</option><option value="1">тестовая штука2</option></select></li> -->
+                </ul>
+                <div class="clear"></div>
+            </div>   
+            <div class="search_applyContainer">
+                <a href="#" class="search__applyLink right">Применить параметры</a>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
 }
 <div class="content content-width">
     <div class="">
