@@ -1,10 +1,5 @@
 ﻿@model PandaWebApp.FormModels.AlbumUnit
 
-@{
-    const int PhotosPerRow = 4;
-    const int PhotoHeight = 120;
-    const int PhotoWidth = 150;
-}
 <div class="photo-album clear"  id="album_@Model.Id">
     <div class="album">
         <ul class="horiz">
@@ -13,8 +8,8 @@
                 foreach (var item in Model.Photos)
                 {
                     <li class="@(index == 0 ? "first" : "")">
-                        <a data-lightbox="photo-promouter-set" href="@ImageCreator.Create(item.SourceUrl, PhotoHeight*2, PhotoWidth*2)">
-                            <img src="@ImageCreator.Create(item.SourceUrl, PhotoHeight, PhotoWidth)"/>
+                        <a data-lightbox="photo-promouter-set" href="@ImageCreator.Create(item.SourceUrl, WebConstants.PhotoHeight*2, WebConstants.PhotoWidth*2)">
+                            <img src="@ImageCreator.Create(item.SourceUrl, WebConstants.PhotoHeight, WebConstants.PhotoWidth)"/>
                         </a>
                         <br/>
                         @Ajax.ActionLink("Удалить", "Delete", "Album", new { photoId = item.Id }, new AjaxOptions{ UpdateTargetId = "album_"+@Model.Id })
@@ -22,7 +17,7 @@
                         @Html.ActionLink("Редактировать", "Edit", "Photo", new { id = item.Id }, new { })
                     </li>
 
-                    if (index == PhotosPerRow)
+                    if (index == WebConstants.PhotoPerRow)
                     {
                         index = 0;
                     }

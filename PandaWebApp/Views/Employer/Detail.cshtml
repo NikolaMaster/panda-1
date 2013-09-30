@@ -135,44 +135,45 @@
         </div>
     </div>
     <div class="clear"></div>
+    
 
     <div class="photo-album clear">
-        <div class="header">Фотоотчеты</div>
-        <div class="album">
-            <ul class="horiz">
-                @{
-                    var index = 0;
-                    int topCount = 10;
-                    foreach (var item in Model.Item1.Album)
-                    {
-                        if (topCount.Equals(0))
-                        {
-                            break;
-                        }
-                     
-                        <li class="@(index == 0 ? "first" : "")">
-                            <a href="@ImageCreator.Create(item, 350 ,350)" data-lightbox="photo-promouter-set">
-                                <img src="@ImageCreator.Create(item, 128, 128)"/>
-                            </a>
-                        </li>
-
-                        if (index == 4)
-                        {
-                            index = 0;
-                        }
-                        else
-                        {
-                            index++;
-                        }
-                        topCount--;
-                    }
-                }
-            </ul>
-        </div>
-        <div class="clear"></div>
-        <div class="more"><p>@Html.ActionLink("Просмотреть все фотоотчеты","Album","Album",new {userId = Model.Item1.UserId},null)</p></div>
-    </div>
+        @using (Ajax.BeginForm("Album2", "Album", new { userId = Model.Item1.UserId }, new AjaxOptions()
+        {
+            UpdateTargetId = "photos",
+            InsertionMode = InsertionMode.InsertAfter,
+            OnSuccess = "OnSuccessAlbumLoad"
+        },
+        new { id = "albumForm" }
         
+        ))
+        {
+            <input type="hidden" name="photosFrom" id="photosFrom" value="@(WebConstants.PhotoPerRow*2)" />
+            <div class="header">Фотоотчеты</div>
+            <div class="album">
+                <ul id="photos"class="horiz">
+                    @{ Html.RenderAction("Album2", "Album", new {userId = Model.Item1.UserId}); }
+                </ul>
+            </div>
+            <div class="clear"></div>
+            <script>
+                function OnSuccessAlbumLoad() {
+                    var val = parseInt($('#photosFrom').val());
+                    $('#photosFrom').val(val + @WebConstants.PhotoPerRow);
+                }
+                $(function() {
+                    $('#morePhotosButton').click(function(e) {
+                        e.preventDefault();
+                        $('#albumForm').submit();
+                        //$('#albumForm').submit();
+                    });
+                })
+            </script>
+            <div class="more"><p><a id="morePhotosButton" href="#">Просмотреть все фотоотчеты</a></p></div>
+        }
+
+    </div>
+
     <div class="vacancies clear">
         <div class="header">Открытые вакансии</div>
         <div class="searchResult">

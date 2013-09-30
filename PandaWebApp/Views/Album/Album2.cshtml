@@ -1,0 +1,23 @@
+﻿@model PandaWebApp.FormModels.AlbumUnit
+
+
+@{
+    var index = 0;
+    foreach (var item in Model.Photos)
+    {
+        <li class="@(index == 0 ? "first" : "")">
+            <a data-lightbox="photo-promouter-set" href="@ImageCreator.Create(item.SourceUrl, WebConstants.PhotoHeight*2, WebConstants.PhotoWidth*2)">
+                <img src="@ImageCreator.Create(item.SourceUrl, WebConstants.PhotoHeight, WebConstants.PhotoWidth)"/>
+            </a>
+        </li>
+
+        if (index == WebConstants.PhotoPerRow - 1)
+        {
+            index = 0;
+        }
+        else
+        {
+            index++;
+        }
+    }
+}

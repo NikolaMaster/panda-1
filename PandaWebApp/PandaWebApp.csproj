@@ -614,6 +614,7 @@
     <Content Include="Views\Browsing\Index.cshtml" />
     <Content Include="Views\Shared\_SocialLogin.cshtml" />
     <Content Include="Views\Search\OffersCount.cshtml" />
+    <Content Include="Views\Album\Album2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

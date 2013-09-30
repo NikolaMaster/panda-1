@@ -183,7 +183,5 @@ namespace PandaWebApp.Controllers
             ViewBag.Pager = resultModel.Pager;
             return PartialView(resultModel.Collection);
         }
-
-
     }
 }

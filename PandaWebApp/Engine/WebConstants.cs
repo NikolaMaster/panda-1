@@ -23,5 +23,9 @@ namespace PandaWebApp.Engine
         public const string MainPageControllerName = "Home";
         public const string MainPageActionName = "Index";
         public const string MainPageUrl = MainPageControllerName + UrlDelimiter + MainPageActionName;
+
+        public const int PhotoPerRow = 5;
+        public const int PhotoHeight = 120;
+        public const int PhotoWidth = 150;
     }
 }

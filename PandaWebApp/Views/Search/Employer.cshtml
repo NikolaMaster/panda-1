@@ -6,7 +6,7 @@
     var cityValues = (IEnumerable<SelectListItem>)ViewBag.CityValues;
     var genderValues = (IEnumerable<SelectListItem>)ViewBag.GenderValues;
     var salaryValues = (IEnumerable<SelectListItem>)ViewBag.SalaryValues;
-    var autoSubmit = (bool) ViewBag.AutoSubmit;
+    var autoSubmit = (bool?) ViewBag.AutoSubmit;
 }
 
 
@@ -46,7 +46,7 @@
         <div class="search__header">Найти работу</div>
         <div class="search__termContainer">
             <div class="left">@Html.TextBoxFor(x => x.Query, new {@class = "search__term base-input"})</div>
-            <div class="right search__startButton"><a href="javascript: $('#search_form').trigger('submit')"><img src="~/Content/img/search.png" /></a></div>
+            <div class="right search__startButton"><a href="javascript: $('#searchForm').trigger('submit')"><img src="~/Content/img/search.png" /></a></div>
             <div class="clear"></div>
         </div>
         <div class="search__linkContainer">
