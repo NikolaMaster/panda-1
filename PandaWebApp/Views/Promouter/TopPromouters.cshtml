@@ -5,7 +5,7 @@
     @foreach (var promouter in Model)
     {
         <li class="rounded-borders-4">
-            <a href="@Url.Action("Detail", "Promouter", new { id = promouter.UserId })"><img src="@ImageCreator.Create(promouter.Photo, 128, 128)" /></a>
+            <a href="@Url.Action("Detail", "Promouter", new { id = promouter.UserId })"><img src="@ImageCreator.Create(promouter.Photo, 105, 123)" /></a>
         </li>
     }
 </ul>

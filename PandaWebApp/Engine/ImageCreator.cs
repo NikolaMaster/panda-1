@@ -23,7 +23,7 @@ namespace PandaWebApp.Engine
             return CachePath + Crypt.GetMD5Hash(srcImagePath + width + height) + ext;
         }
 
-        public static string Create(string src, int? width, int? height)
+        public static string Create(string src, int width, int height)
         {
             try
             {
@@ -34,8 +34,9 @@ namespace PandaWebApp.Engine
                 }
                 using (var srcBitmap = new Bitmap(sourcePath))
                 {
-                    var w = width.HasValue ? width.Value : srcBitmap.Width;
-                    var h = height.HasValue ? height.Value : srcBitmap.Height;
+                    var s = Math.Min((double)width / srcBitmap.Width, (double)height / srcBitmap.Height);
+                    var w = (int)(s * srcBitmap.Width);
+                    var h = (int)(s * srcBitmap.Height);
 
                     var imagePath = generatePath(sourcePath, w, h);
                     var mappedImagePath = HttpContext.Current.Server.MapPath(imagePath);

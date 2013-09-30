@@ -122,8 +122,8 @@ ul.list-style { margin-left: 20px; }
 }
 .user .header .user-status span 
 { font-family: 'Arial Narrow'; font-size: 11px; color: black; padding: 0; position: absolute; right: 10px; top: 4px;}
-.user .photo { position: relative; }
-.user .photo img { width: 250px; height: 350px; }
+.user .photo { position: relative;display: block;text-align: center;width: 250px;height: 350px; }
+
 .user .photo .ready-to-work 
 { 
 	position:absolute; 
@@ -162,9 +162,8 @@ ul.list-style { margin-left: 20px; }
 
 .user .photo-album .header { padding-top: 10px; font-size: 16px; color: rgb( 106, 178, 0 ); font-weight: bold; border-bottom: 2px solid #919191;}
 .user .photo-album ul {  }
-.user .photo-album ul li { list-style-type: none; padding-left: 20px; padding-bottom: 10px; }
+.user .photo-album ul li { list-style-type: none; padding-left: 20px; padding-bottom: 10px;display: block;width: 120px;height: 150px;text-align: center; }
 .user .photo-album ul li.first { padding: 0; }
-.user .photo-album ul li img { width: 120px; height: 150px; }
 .user .photo-album .more { font-size: 14px; color: rgb( 80, 86, 92 ); background-color: #f7d2b4; height: 30px; cursor: pointer; }
 .user .photo-album .more p { text-align: center; padding-top: 0.5em; }
 
@@ -254,8 +253,8 @@ ul.list-style { margin-left: 20px; }
 .promouter-top .header { font-size: 25px; font-family: "Arial"; color: rgb( 106, 178, 0 ); }
 .promouter-top .header .inner { font-size: 18px; font-family: "Arial"; color: rgb( 128, 128, 128 ); font-style: italic; }
 .promouter-top .album { margin: 0; padding: 0; }
-.promouter-top .album li { padding: 2px; border: 1px solid #89908f; margin-left: 4px; margin-top: 15px; height: 123px;}
-.promouter-top .album img { width: 105px; height: 123px; }
+.promouter-top .album li { padding: 2px; border: 1px solid #89908f; margin-left: 4px; margin-top: 15px; height: 123px;width: 105px;}
+.promouter-top .album li a { text-align: center;display: block;}
 .promouter-top a { color: #0a3a66; font-family: 'Arial'; font-size: 12px; }
 
 .simple-delimiter { background: url('../img/simple-delimiter.png'); margin: 9px 0; height: 26px; }
@@ -264,9 +263,10 @@ ul.list-style { margin-left: 20px; }
 .company-top .header { font-size: 25px; font-family: "Arial"; color: rgb( 106, 178, 0 ); margin-bottom: 22px; }
 .company-top .header .inner { font-size: 18px; font-family: "Arial"; color: rgb( 128, 128, 128 ); font-style: italic; }
 .company-top .album { margin: 0; padding: 0; }
-.company-top .album li { margin-left: 10px; }
+.company-top .album li {  width: 127px; height: 130px;  margin-left: 10px; }
 .company-top .album li.first { margin-left: 0; }
-.company-top .album img { width: 127; height: 130px; border: 1px solid #cacaca; }
+.promouter-top .album li { text-align: center;display: block;}
+.company-top .album img { border: 1px solid #cacaca; }
 .company-top>p { padding-top: 20px; }
 .company-top a { color: #0a3a66; font-family: 'Arial'; font-size: 12px; }
 .company-top .name { font-family: 'Arial Narrow'; font-size:16px; color: #808080; }
@@ -296,8 +296,8 @@ ul.list-style { margin-left: 20px; }
 .all-feedbacks .feedbacks-content { }
 .all-feedbacks .feedbacks-content ul li { width: 280px; margin-right: 60px; }
 .all-feedbacks .feedbacks-content ul li.last { width: 280px; margin-right: 0; }
-.all-feedbacks .feedbacks-content .icon-container { width: 76px; margin-right: 10px; }
-.all-feedbacks .feedbacks-content .icon img { width: 74px; border: 1px solid #7d7d7d; border-bottom: 3px solid #7d7d7d; }
+.all-feedbacks .feedbacks-content .icon-container { width: 76px; margin-right: 10px;display: block;text-align: center; }
+.all-feedbacks .feedbacks-content .icon img { border: 1px solid #7d7d7d; border-bottom: 3px solid #7d7d7d; }
 .all-feedbacks .feedbacks-content .name p { font-family: 'Arial Narrow'; font-size: 12px; color: #333333; }
 .all-feedbacks .feedbacks-content .enhanced-feedback-body 
 { width: 170px; border: 1px solid #808080; padding: 10px;position: relative; height: 209px;margin-top: 2px; border-bottom-width: 3px;}
@@ -314,7 +314,7 @@ ul.list-style { margin-left: 20px; }
 .blog .messages li { padding: 0; margin: 0; list-style-type: none; }
 .blog .messages .header { font-family: 'Arial'; font-style: italic; font-size: 16px; color: #333333; position: relative; }
 .blog .messages .header .date { position: absolute; right: 0; top: 0; font-family: 'Arial Narrow'; font-size: 16px; color: #6ab200; }
-.blog .messages .picture { width: 220px; }
+.blog .messages .picture { width: 220px;height: 180px;display: block;text-align: center; }
 .blog .messages .picture img { width: 220px; }
 .blog .messages .short-description { margin-left: 15px; width: 725px; }
 .blog .messages .short-description p { font-family: 'Arial'; font-size: 12px; color: #4c4c4c; }
@@ -402,7 +402,7 @@ ul.list-style { margin-left: 20px; }
 .searchResult__blog .searchResult__blog__part1 { height: 126.5px; width: 40.2px; border-right: 1px solid #dadbda; padding-right: 6px; text-align: right; }
 .searchResult__blog .searchResult__blog__part1>img { margin-top: 8.9px; }
 
-.searchResult__blog .searchResult__blog__part2 { width: 125px; }
+.searchResult__blog .searchResult__blog__part2 { width: 125px;display: block;text-align: center; }
 .searchResult__blog .searchResult__blog__part2>img { margin: 8.9px; }
 
 .searchResult__blog .searchResult__blog__part3 { width: 362px; font-size: 13px; font-family: "Arial"; color: rgb( 51, 51, 51 ); height: 100%; }
