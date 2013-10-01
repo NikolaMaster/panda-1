@@ -185,9 +185,42 @@
         </div>
     </div>
     <div class="clear"></div>
+   <div class="feedbacks">
+        <div class="header">Отзывы о компании (@Model.Item1.FeedbackCount):</div>
+        @{ Html.RenderAction("RatingAverage", "Feedback", new { userId = Model.Item1.UserId }); }
+       
+        @using (Ajax.BeginForm("TopUserFeedback", "Feedback", new { userId = Model.Item1.UserId }, new AjaxOptions()
+        {
+            UpdateTargetId = "feedbacks",
+            InsertionMode = InsertionMode.InsertAfter,
+            OnSuccess = "OnSuccesFeedbacksLoad"
+        },
+        new { id = "feedbackForm" }
+        
+        ))
+        {
+            <input type="hidden" name="feedbacksFrom" id="feedbacksFrom" value="@(WebConstants.FeedbacksPerPage * 2)" />
+            <ul id='feedbacks'>
+                @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.Item1.UserId }); }
+            </ul>
+            <script>
+                function OnSuccesFeedbacksLoad() {
+                    var val = parseInt($('#feedbacksFrom').val());
+                    $('#feedbacksFrom').val(val + @WebConstants.FeedbacksPerPage);
+                }
+                $(function() {
+                    $('#moreFeedbacksButton').click(function(e) {
+                        e.preventDefault();
+                        $('#feedbackForm').submit();
+                    });
+                })
+            </script>
+           
+            <div class="more"><p><a id="moreFeedbacksButton" href="#">Больше мнений</a></p></div>
+        }
 
-    @{ Html.RenderAction("TopUserFeedback", "Feedback", new { userId = Model.Item1.UserId }); }
-    
+    </div>
+
 
     @{
         if (!isGuest && user.Id != Model.Item1.UserId)

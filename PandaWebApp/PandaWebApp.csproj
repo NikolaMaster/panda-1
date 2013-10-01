@@ -615,6 +615,7 @@
     <Content Include="Views\Shared\_SocialLogin.cshtml" />
     <Content Include="Views\Search\OffersCount.cshtml" />
     <Content Include="Views\Album\Album2.cshtml" />
+    <Content Include="Views\Feedback\RatingAverage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

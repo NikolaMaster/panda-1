@@ -204,7 +204,7 @@ ul.list-style { margin-left: 20px; }
 .user .feedbacks .header { font-size: 25px; color: rgb( 106, 178, 0 ); line-height: 1.2; border-bottom: 1px solid #919191; float: left; margin-right: 34px; }
 .user .feedbacks ul { margin: 0; }
 .user .feedbacks ul li { background-color: #ededed; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; padding: 15px; height: 170px; list-style-type: none; margin: 0; margin-bottom: 15px;}
-.user .feedbacks .feedback>.column img { height: 170px; width: 125px; }
+.user .feedbacks .feedback>.column img {  }
 .user .feedbacks .feedback>.column { width: 125px; }
 .user .feedbacks .feedback>.column + .column { width: 520px; padding-left: 15px; }
 .user .feedbacks .feedback .user-name { font-family: 'Arial'; font-size: 16px; color: #333333; }

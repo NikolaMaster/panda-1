@@ -93,6 +93,7 @@ namespace PandaWebApp.ViewModels
         public string Email { get; set; }
         public string Icon { get; set; }
         public bool IsAdmin { get; set; }
+        public int FeedbackCount { get; set; }
 
         public int FullYears 
         {

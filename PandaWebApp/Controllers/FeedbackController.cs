@@ -35,7 +35,7 @@ namespace PandaWebApp.Controllers
                     var result = new Feedback.Entry();
                     binder.InverseLoad(x, result);
                     return result;
-                }).ToList(),
+                }).OrderBy(x => x.SendDate).ToList(),
 
 
             }; 
@@ -66,10 +66,18 @@ namespace PandaWebApp.Controllers
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
             var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId), UserFeedbacksCount);
-            feedback.User = user;
+            feedback.User = user;   
             return PartialView(feedback);
         }
 
+
+        public ActionResult RatingAverage(Guid userId)
+        {
+            var user = DataAccessLayer.GetById<UserBase>(userId);
+            var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId), UserFeedbacksCount);
+            feedback.User = user;
+            return PartialView(feedback);
+        }
 
         public ActionResult TopDialogFeedback()
         {
@@ -113,8 +121,15 @@ namespace PandaWebApp.Controllers
 
         public ActionResult TopUserFeedback(Guid userId)
         {
+            var startFromStr = Request["feedbacksFrom"];
+            var startFrom = 0;
+            if (!string.IsNullOrEmpty(startFromStr))
+                int.TryParse(startFromStr, out startFrom);
+            var endAt = startFrom + (startFrom == 0 ? 2 * WebConstants.FeedbacksPerPage : WebConstants.FeedbacksPerPage);
+
             var user = DataAccessLayer.GetById<UserBase>(userId);
-            var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId), UserFeedbacksCount);
+            var feedback = prepareFeedbacks(DataAccessLayer.Get<Review>(x => x.RecieverId == userId));
+            feedback.Entries = feedback.Entries.Skip(startFrom).Take(endAt - startFrom).ToList();
             feedback.User = user;
             return PartialView(feedback);
         }
@@ -132,6 +147,7 @@ namespace PandaWebApp.Controllers
 
         [HttpPost]
         [BaseAuthorizationReuired]
+        [ValidateInput(false)]
         public ActionResult Create(FeedbackForm model)
         {
             var reciever = DataAccessLayer.GetById<UserBase>(model.RecieverId);

@@ -18,11 +18,11 @@
             <li>
                 <div class="table-2 feedback">
                     <div class="column">
-                        <img src="@ImageCreator.Create(entry.AuthorPhoto, 128, 128)" />
+                        <a href="@Url.Action("Detail", Model.User.ControllerNameByUser(), new { Model.User.Id })"><img src="@ImageCreator.Create(entry.AuthorPhoto, 128, 128)" /></a>
                     </div>
                     <div class="column">
                         <div class="table-2">
-                            <div class="column user-name">@entry.AuthorName</div>
+                            <div class="column user-name"><a href="@Url.Action("Detail", Model.User.ControllerNameByUser(), new { Model.User.Id })">@entry.AuthorName</a></div>
                             <div class="column stars"><p class="right-aligned">@entry.SendDate.ToPandaString()</p></div>
                             <div class="clear"></div>
                         </div>

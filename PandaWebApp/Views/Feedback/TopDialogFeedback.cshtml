@@ -10,9 +10,9 @@
             {
                 <li class="@(index == Model.Item1.Count() - 1 ? "last" : "")">
                     <div class="left icon-container">
-                        <div class="icon"><img src="@ImageCreator.Create(feedback.AuthorPhoto, 74, 91)" /></div>
+                        <div class="icon"><a href="@Url.Action("Detail", feedback.Author.ControllerNameByUser(), new { feedback.Author.Id })"><img src="@ImageCreator.Create(feedback.AuthorPhoto, 74, 91)" /></a></div>
                         <div class="name">
-                            <p>@feedback.AuthorName</p>
+                            <p><a href="@Url.Action("Detail", feedback.Author.ControllerNameByUser(), new { feedback.Author.Id })">@feedback.AuthorName</a></p>
                         </div>
                     </div>
                     <div class="right enhanced-feedback-body">

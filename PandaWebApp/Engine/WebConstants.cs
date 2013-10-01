@@ -27,5 +27,7 @@ namespace PandaWebApp.Engine
         public const int PhotoPerRow = 5;
         public const int PhotoHeight = 120;
         public const int PhotoWidth = 150;
+        public const int FeedbacksPerPage = 2;
     }
+
 }

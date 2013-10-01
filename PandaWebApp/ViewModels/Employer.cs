@@ -26,6 +26,7 @@ namespace PandaWebApp.ViewModels
         public string Photo { get; set; }
         public string Email { get; set; }
 
+        public int FeedbackCount { get; set; }
         public int Number { get; set; }
         public string DaysOnSite { get; set; }
         public int Coins { get; set; }

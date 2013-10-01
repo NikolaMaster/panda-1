@@ -7,32 +7,26 @@
     
     <div class="label">Рейтинг</div>
     <div class="editor rating_editor">
-        <div class="red_stars">
-            @for (int i = 0; i < 10; i++)
+        <div>
+            @for (int i = 0; i < 4; i++)
             {
-                <img src="/Content/img/light_gray_star.png" class="left" />
+                <img src="/Content/img/light_gray_star.png" class="left red_stars" />
             }
-            <div class="clear"></div>
-        </div>
-        <div class="orange_stars">
-            @for (int i = 0; i < 10;i++)
+            @for (int i = 0; i < 3;i++)
             {
-                <img src="/Content/img/light_gray_star.png" class="left" />
+                <img src="/Content/img/light_gray_star.png" class="left orange_stars" />
             }
-            <div class="clear"></div>
-        </div>
-        <div class="green_stars">
-            @for (int i = 0; i < 10;i++)
+            @for (int i = 0; i < 3;i++)
             {
-                <img src="/Content/img/light_gray_star.png" class="left" />
+                <img src="/Content/img/light_gray_star.png" class="left green_stars" />
             }
-            <div class="clear"></div>
         </div>
+        <div class="clear"></div>
         @Html.HiddenFor(x => x.Rating)
     </div>
     
     <div class="label">Отзыв</div>
-    <div class="editor">@Html.TextAreaFor(m => m.Text)</div>
+    <div class="editor">@Html.EditorFor(m => m.Text, "Wysiwyg")</div>
 
     @Html.HiddenFor(x => x.AuthorId)
     @Html.HiddenFor(x => x.RecieverId)

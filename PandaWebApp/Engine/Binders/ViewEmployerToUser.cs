@@ -29,6 +29,7 @@ namespace PandaWebApp.Engine.Binders
             dest.Number = source.Number;
             dest.IsAdmin = source.IsAdmin;
             dest.DaysOnSite = Extensions.GetDayOnSiteStatus(source.CreationDate);
+            dest.FeedbackCount = DataAccessLayer.Count<Review>(x => x.RecieverId == source.Id);
             //get main album
             dest.Album = source.Albums.FirstOrDefault().Photos.Select(x => x.SourceUrl);
 

@@ -5,56 +5,43 @@
     var core = AuthorizationCore.StaticCreate();
     var isAdmin = core.IsAdmin; 
 }
-<div class="feedbacks">
-    
-    <div class="header">
-        @(@Model.User is PandaDataAccessLayer.Entities.EmployerUser ? "Отзывы о компании" : "Мнение о промоутере")
-    </div>
-    <div class="rating">
-        <img class="commom_rating_value" src="/Content/img/red_star.png"><span class="rating_value">@Model.RedAverage</span>
-        <img class="commom_rating_value" src="/Content/img/green_star.png"><span class="rating_value">@Model.GreenAverage</span>
-        <img class="commom_rating_value" src="/Content/img/orange_star.png"><span class="rating_value">@Model.OrangeAverage</span>
-    </div>
-    <div class="clear"></div>
-   
-    <ul>
-        @foreach (var entry in Model.Entries)
-        {
-            <div id="feedback_@entry.Id">
-                <li>
-                    <div class="table-2 feedback">
-                        <div class="column">
-                            <img src="@ImageCreator.Create(entry.AuthorPhoto, 128, 128)" />
-                        </div>
-                        <div class="column">
-                            <div class="table-2">
-                                <div class="column user-name">@entry.AuthorName</div>
-                                <div class="column stars">
-                                    <p class="right-aligned">
-                                        <span>
-                                            <span><img src="/Content/img/light_red_star.png">@entry.RedCount()</span>
-                                            <span><img src="/Content/img/light_orange_star.png">@entry.OragneCount()</span>
-                                            <span><img src="/Content/img/light_green_star.png">@entry.GreenCount()</span>
-                                        </span>
-                                        @entry.SendDate.ToPandaString()
-                                    </p>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <p class="feedback-body">
-                                @entry.Text.Trim(740)
+
+
+@foreach (var entry in Model.Entries)
+{
+    <div id="feedback_@entry.Id">
+        <li>
+            <div class="table-2 feedback">
+                <div class="column icon">
+                    <a href="@Url.Action("Detail", entry.Author.ControllerNameByUser(), new {  entry.Author.Id })"><img src="@ImageCreator.Create(entry.AuthorPhoto, 170, 125)" /></a>
+                </div>
+                <div class="column">
+                    <div class="table-2">
+                        <div class="column user-name"><a href="@Url.Action("Detail", entry.Author.ControllerNameByUser(), new {  entry.Author.Id })">@entry.AuthorName</a></div>
+                        <div class="column stars">
+                            <p class="right-aligned">
+                                <span>
+                                    <span><img src="/Content/img/light_red_star.png">@entry.RedCount()</span>
+                                    <span><img src="/Content/img/light_orange_star.png">@entry.OragneCount()</span>
+                                    <span><img src="/Content/img/light_green_star.png">@entry.GreenCount()</span>
+                                </span>
+                                @entry.SendDate.ToPandaString()
                             </p>
-                            @if (isAdmin)
-                            {
-                                 @Html.ActionLink("Удалить", "Delete", new {entry.Id}, new {})
-                            }
                         </div>
                         <div class="clear"></div>
                     </div>
-                </li>
-        </div>
-        }
-    </ul>
-    <div class="more"><p>@Html.ActionLink("Больше мнений", "IndexById", "Feedback", new { userId = Model.User.Id }, null)</p></div>
-</div>
+                    <p class="feedback-body">
+                        @entry.Text
+                    </p>
+                    @if (isAdmin)
+                    {
+                            @Html.ActionLink("Удалить", "Delete", new {entry.Id}, new {})
+                    }
+                </div>
+                <div class="clear"></div>
+            </div>
+        </li>
+    </div>
+}
+
 
