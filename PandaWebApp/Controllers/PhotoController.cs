@@ -40,5 +40,15 @@ namespace PandaWebApp.Controllers
             return Redirect(string.Format(@"\{0}\Edit\{1}", user.ControllerNameByUser(), user.Id));
         }
 
+        [BaseAuthorizationReuired]
+        public ActionResult Avatar(Guid id)
+        {
+            var photo = DataAccessLayer.GetById<Photo>(id);
+            var user = photo.Album.User;
+            user.Avatar = photo;
+            DataAccessLayer.DbContext.SaveChanges();
+            return Redirect(string.Format(@"\{0}\Edit\{1}", user.ControllerNameByUser(), user.Id));
+        }
+
     }
 }

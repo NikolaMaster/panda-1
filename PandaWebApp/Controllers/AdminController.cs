@@ -15,26 +15,40 @@ namespace PandaWebApp.Controllers
 {
     public class AdminController : ModelCareController
     {
-        public ActionResult _editCoinsPartial(string value)
+/*
+        public ActionResult _editCoinsPartial(bool success, Guid userId)
         {
-            return PartialView(value);
+            if (!success)
+            {
+                return Json(new
+                {
+                    errorMessage = "Недостаточно монеток"
+                });
+            }
+            var userBase = DataAccessLayer.GetById<UserBase>(userId);
+
+
         }
 
+        */
 
-        private void changeByCode(UserBase autorizeUser, Guid userId, Attrib attr)
+        private void changeByCode(UserBase autorizeUser, Guid userId, IEnumerable<string> attr)
         {
             var isBought =
-                DataAccessLayer.Get<CoinsInfo>(x => x.BuyUser == autorizeUser.Id && x.UserId == userId && x.Code.Code == attr.Code)
-                               .FirstOrDefault();
-            if (isBought == null)
+                DataAccessLayer.Get<CoinsInfo>(x => x.BuyUser == autorizeUser.Id && x.UserId == userId)
+                    .All(x => attr.Any(y => y == x.Code.Code));
+            if (!isBought)
             {
-                DataAccessLayer.Create<CoinsInfo>(new CoinsInfo()
+                foreach (var attrib in attr)
+                {
+                    DataAccessLayer.Create(new CoinsInfo()
                     {
                         Id = Guid.NewGuid(),
                         BuyUser = autorizeUser.Id,
                         UserId = userId,
-                        Code = attr
-                    });
+                        Code = DataAccessLayer.Get<Attrib>(attrib)
+                    }); 
+                }
 
                 DataAccessLayer.UpdateById<UserBase>(autorizeUser.Id, x => x.Coins = x.Coins - 1);
                 DataAccessLayer.DbContext.SaveChanges();
@@ -42,32 +56,33 @@ namespace PandaWebApp.Controllers
         }
 
         [HttpPost]
-        [AdministratorAuthorizationRequired]
-        public ActionResult ChangeCoins(Guid buyerId, Guid userId, string attrCode,string value)
+        [BaseAuthorizationReuired]
+        public ActionResult ChangeCoins(Guid buyerId, Guid userId)
         {
             if (Request.IsAjaxRequest())
             {
                 var userBase = DataAccessLayer.GetById<UserBase>(buyerId);
-
+                var user = DataAccessLayer.GetById<PromouterUser>(userId);
+                var attrCode = new[] {Constants.MobilePhoneCode, Constants.EmailCode, Constants.LastNameCode};
                 if (userBase.Coins > 0)
                 {
-                    Attrib attr = null;
-                    if (attrCode == Constants.MobilePhoneCode)
+                    var binder = new ViewPromouterToUsers(DataAccessLayer);
+                    var promouter = new Promouter();
+                    binder.InverseLoad(user, promouter);
+                    changeByCode(userBase, userId, attrCode);
+                    return Json(new
                     {
-                        attr = DataAccessLayer.Constants.MobilePhone;
-                    }
-                    else if (attrCode == Constants.EmailCode)
-                    {
-                        attr = DataAccessLayer.Constants.Email;
-                    }
-
-                    changeByCode(userBase, userId, attr);
-
-                    return PartialView("_editCoinsPartial", value);
+                        phone = promouter.Phone.ToString(),
+                        email = promouter.Email,
+                        name = promouter.LastName
+                    });
                 }
                 else
                 {
-                    return PartialView("_editCoinsPartial", "отсутствуют монеты");
+                    return Json(new
+                    {
+                        errorMessage = "Недостаточно монеток"
+                    });
                 }
             }
             return RedirectToAction("Index", "Home");

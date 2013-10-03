@@ -45,7 +45,7 @@
                 <div class="row">Количество полных лет</div>
                 <div class="row"><div class="icon left"><img src="~/Content/img/medical-book.png" /></div>Мед. Книжка</div>
                 <div class="row"><div class="icon left"><img src="~/Content/img/car.png" /></div>Автомобиль</div>
-                <div class="row gap"></div>
+                <div class="row">Фамилия</div>
                 <div class="row"><div class="icon left"><img src="~/Content/img/phone.png" /></div>Мобильный телефон</div>
                 <div class="row"><div class="icon left"><img src="~/Content/img/mail.png" /></div>e-mail</div>
                 <div class="row">Желаемая цена за час работы</div>
@@ -89,54 +89,53 @@
 
                     if (Equals(user.Id, Model.Item1.UserId) || isAdmin)
                     {
+                        <div class="row">@Model.Item1.LastName</div>
                         <div class="row">@fullphone</div>
                         <div class="row">@Model.Item1.Email</div>
                     }
                     else
                     {
-                        if (Model.Item2.Contains(Constants.MobilePhoneCode))
+                        if (Model.Item2.Contains(Constants.LastNameCode) || Model.Item2.Contains(Constants.MobilePhoneCode) || Model.Item2.Contains(Constants.EmailCode))
                         {
+                            <div class="row">@Model.Item1.LastName</div>
                             <div class="row">@fullphone</div>
-                        }
-                        else
-                        {
-                            <div class="row" id ="MOBILE_PHONE">
-
-                                @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
-                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.MobilePhoneCode, value = fullphone},
-                                                 new AjaxOptions()
-                                                     {
-                                                         HttpMethod = "POST",
-                                                         UpdateTargetId = Constants.MobilePhoneCode
-                                                     }, new {@class = "open"})
-                          
-                            </div>
-                        }
-
-                        if (Model.Item2.Contains("EMAIL_CODE"))
-                        {
                             <div class="row">@Model.Item1.Email</div>
                         }
                         else
                         {
-                            <div class="row" id ="EMAIL_CODE">
-                                @Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
-                                                 new {buyerId = user.Id, userId = Model.Item1.UserId, attrCode = Constants.EmailCode, value = Model.Item1.Email},
-                                                 new AjaxOptions()
-                                                     {
-                                                         HttpMethod = "POST",
-                                                         UpdateTargetId = Constants.EmailCode
-                                                     }, new {@class = "open"})
-                             
-                            </div>
-                        }
-                    }
+                            <script>
+                                function changeCoinsSuccess(data) {
+                                    if (data.success == false) {
+                                        $('#LAST_NAME').append(data.errorMessage);
+                                    } else {
+                                        $('#LAST_NAME').text(data.name);
+                                        $('#MOBILE_PHONE').text(data.phone);
+                                        $('#EMAIL_CODE').text(data.email);
+                                    }
+                                }
+                            </script>
 
+                            <div class="row" id="LAST_NAME">@Ajax.ActionLink("открыть", "ChangeCoins", "Admin",
+                                                new {
+                                                    buyerId = user.Id
+                                                    , userId = Model.Item1.UserId
+                                                    }
+                                                    , new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "POST",
+                                                        OnSuccess = "changeCoinsSuccess"
+                                                    }, new {@class = "open"})
+
+                            </div>
+                            <div class="row" id="MOBILE_PHONE"></div>
+                            <div class="row" id="EMAIL_CODE"></div>
+                        }
+                       
+                    }
                 }
                 else
                 {
-                <div class="row"><a href="#" class="open">открыть</a></div>
-                <div class="row"><a href="#" class="open">открыть</a></div>
+                    <div class="row"><a href="#" class="open">открыть</a></div>
                 }
                 
                 <div class="row">@Model.Item1.Salary</div>

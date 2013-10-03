@@ -18,6 +18,8 @@
                         @Ajax.ActionLink("Удалить", "Delete", "Album", new { photoId = item.Id }, new AjaxOptions{ UpdateTargetId = "album_"+@Model.Id })
                         <br/>
                         @Html.ActionLink("Редактировать", "Edit", "Photo", new { id = item.Id }, new { })
+                         <br/>
+                        @Ajax.ActionLink("Сделать аватаром", "Avatar", "Photo", new { id = item.Id }, new AjaxOptions{ })
                     </li>
 
                     if (index == PhotosPerRow)
