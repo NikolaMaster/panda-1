@@ -545,6 +545,7 @@
     <Content Include="Content\img\car.png" />
     <Content Include="Content\img\enter-button.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\no_photo.jpg" />
     <Content Include="Content\img\offline.png" />
     <Content Include="Content\img\online.png" />
     <Content Include="Content\img\orange_star.png" />

@@ -50,6 +50,10 @@ namespace PandaWebApp.FormModels
         public string About { get; set; }
         [ValueFrom(Constants.AddressCode)]
         public string Address { get; set; }
+        [ValueFrom(Constants.FirstNameCode)]
+        public  string FirstName { get;set; }
+        [ValueFrom(Constants.LastNameCode)]
+        public string LastName { get;set; }
 
         public Guid UserId { get; set; }
 

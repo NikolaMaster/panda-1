@@ -20,7 +20,6 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.Email = source.Email;
             dest.Password = Password.MakePassword(source.Password, DateTime.UtcNow);
-
             ValueFromAttributeConverter.AttributesFromModel(source, dest.MainChecklist.AttrbuteValues, DataAccessLayer);
         }
 

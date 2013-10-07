@@ -24,7 +24,7 @@ namespace PandaWebApp.Engine.Binders
             ValueFromAttributeConverter.ModelFromAttributes(dest, source.AttrbuteValues, DataAccessLayer);
             dest.Checklist = source;
             dest.DaysOnSite = (int)(DateTime.UtcNow - source.CreationDate).TotalDays;
-            dest.AvatarUrl = source.User.Avatar.SourceUrl;
+            dest.AvatarUrl = source.User.Avatar == null ? WebConstants.NoPhoto : source.User.Avatar.SourceUrl;
             dest.FullName = DataAccessLayer.GetUserName(source.User);
         }
     }

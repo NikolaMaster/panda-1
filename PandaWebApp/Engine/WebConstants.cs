@@ -28,6 +28,8 @@ namespace PandaWebApp.Engine
         public const int PhotoHeight = 120;
         public const int PhotoWidth = 150;
         public const int FeedbacksPerPage = 2;
+
+        public const string NoPhoto = "~/Content/img/no_photo.jpg";
     }
 
 }

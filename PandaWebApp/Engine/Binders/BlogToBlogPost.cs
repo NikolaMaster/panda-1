@@ -32,7 +32,7 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.Title = source.Title;
             dest.FullText = source.FullText;
-            dest.Image = source.Picture == null ? string.Empty : source.Picture.SourceUrl;
+            dest.Image = source.Picture == null ?  WebConstants.NoPhoto :  source.Picture.SourceUrl;
             dest.CreatedDate = source.CreationDate;
             dest.ModifyDate = source.ModifyDate;
             dest.Id = source.Id;

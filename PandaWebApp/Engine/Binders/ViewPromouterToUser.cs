@@ -26,7 +26,7 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.UserId = source.Id;
             dest.Email = source.Email;
-            dest.Photo = source.Avatar == null ? string.Empty : source.Avatar.SourceUrl; 
+            dest.Photo = source.Avatar == null ? WebConstants.NoPhoto : source.Avatar.SourceUrl;
             dest.Number = source.Number;
             dest.DaysOnSite = Extensions.GetDayOnSiteStatus(source.CreationDate);
             var session = DataAccessLayer.Get<Session>(x => x.User.Id == source.Id).ToList().OrderBy(x=>x.LastHit);

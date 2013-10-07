@@ -24,7 +24,7 @@ namespace PandaWebApp.Engine.Binders
             if (dest.Start.HasValue && dest.End.HasValue)
                 dest.Days = (int) ((dest.End.Value - dest.Start.Value).TotalDays);
             dest.DaysOnSite = (int) (DateTime.UtcNow - source.CreationDate).TotalDays;
-            dest.AvatarUrl = source.User.Avatar.SourceUrl;
+            dest.AvatarUrl = source.User.Avatar == null ? WebConstants.NoPhoto : source.User.Avatar.SourceUrl;
         }
     }
 }

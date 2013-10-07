@@ -26,7 +26,7 @@ namespace PandaWebApp.Engine.Binders
             dest.Rating = source.Rating;
             dest.SendDate = source.CreationDate;
             dest.AuthorName = DataAccessLayer.GetUserName(source.Author);
-            dest.AuthorPhoto = source.Author.Avatar == null ? string.Empty : source.Author.Avatar.SourceUrl;
+            dest.AuthorPhoto = source.Author.Avatar == null ? WebConstants.NoPhoto : source.Author.Avatar.SourceUrl;
             dest.Author = source.Author;
         }
     }

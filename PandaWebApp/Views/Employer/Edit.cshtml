@@ -34,6 +34,8 @@
             <li><a href="#vacancyTab">Вакансии</a></li>
         </ul>
         <div id="mainTab">
+            <div>Имя</div> @Html.EditorFor(m => m.FirstName)
+            <div>Фамилия</div> @Html.EditorFor(m => m.LastName)
             <div>Название компании</div> @Html.EditorFor(m => m.EmployerName)
             <div>Город</div> @Html.DropDownListFor(m => m.City, (IEnumerable<SelectListItem>)ViewBag.CityValues, string.Empty)
             <div>Адрес</div> @Html.EditorFor(m => m.Address)

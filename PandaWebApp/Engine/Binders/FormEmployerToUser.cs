@@ -25,7 +25,7 @@ namespace PandaWebApp.Engine.Binders
         {
             dest.UserId = source.Id;
             dest.Email = source.Email;
-            dest.Photo = source.Avatar.SourceUrl;
+            dest.Photo = source.Avatar == null ? WebConstants.NoPhoto : source.Avatar.SourceUrl;
             dest.IsAdmin = source.IsAdmin;
 
             dest.Albums = DataAccessLayer.Get<Album>(x => x.User.Id == source.Id)

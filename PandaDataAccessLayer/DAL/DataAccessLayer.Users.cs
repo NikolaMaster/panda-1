@@ -31,10 +31,6 @@ namespace PandaDataAccessLayer.DAL
                     User = user,
                 });
             }
-            if (user.Avatar == null)
-            {
-                user.Avatar = Constants.DefaultAvatar;
-            }
             DbContext.Users.Add(user);
             return user;
         }
@@ -56,10 +52,6 @@ namespace PandaDataAccessLayer.DAL
                     Name = MainAlbumName,
                     User = user,
                 }));
-            }
-            if (user.Avatar == null)
-            {
-                user.Avatar = Constants.DefaultAvatar;
             }
             DbContext.Users.Add(user);
             return user;

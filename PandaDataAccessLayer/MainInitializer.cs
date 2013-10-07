@@ -26,7 +26,6 @@ namespace PandaDataAccessLayer
             addDefaultChecklistTypes();
             addDefaulAttributes();
             addAttrib2ChecklistType();
-            addDefaultImages();
 
             addTestData();
         }
@@ -335,16 +334,6 @@ namespace PandaDataAccessLayer
 
                 throw;
             }
-        }
-
-
-        private void addDefaultImages()
-        {
-            var defaultAvatar = DataAccessLayer.Create<Photo>(new Photo
-            {
-                SourceUrl = Constants.DefaultAvatarImage
-            });
-            DbContext.SaveChanges();
         }
 
 

@@ -16,7 +16,6 @@ namespace PandaDataAccessLayer.DAL
         public const string PromouterChecklistTypeCode = "Promouter";
         public const string EmployerChecklistTypeCode = "Employer";
         public const string EmployerMainChecklistTypeCode = "EmployerMain";
-        public const string DefaultAvatarImage = "motorcycle.jpeg";
 
         public const string DesiredWorkCode = "DESIRED_WORK";
         public const string WorkExperienceCode = "WORK_EXPERIENCE";
@@ -1309,11 +1308,6 @@ namespace PandaDataAccessLayer.DAL
         internal Constants(DataAccessLayer dataAccessLayer)
         {
             DataAccessLayer = dataAccessLayer;
-        }
-
-        public Photo DefaultAvatar
-        {
-            get { return DataAccessLayer.DbContext.Set<Photo>().Single(x => x.SourceUrl == DefaultAvatarImage); }
         }
 
         public ChecklistType PromouterChecklistType 
