@@ -35,7 +35,7 @@ namespace PandaWebApp.Controllers
         public ActionResult Edit(PhotoForm model)
         {
             var photo = DataAccessLayer.GetById<Photo>(Guid.Parse(model.Id));
-            ImageCreator.Create(photo.SourceUrl, new Rectangle(model.x1, model.y1, model.x2 - model.x1, model.y2 - model.y1));
+            ImageCreator.Crop(photo.SourceUrl, model.x1, model.y1, model.x2, model.y2);
             var user = photo.Album.User;
             return Redirect(string.Format(@"\{0}\Edit\{1}", user.ControllerNameByUser(), user.Id));
         }

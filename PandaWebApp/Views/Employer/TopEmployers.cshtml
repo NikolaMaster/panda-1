@@ -8,7 +8,7 @@
     @foreach (var employer in Model)
     {
         <li class="rounded-borders-4 center-aligned @(index == 0 ? "first" : "")">
-            <img src="@ImageCreator.Create(employer.Photo, 105, 123)" />
+            <img src="@ImageCreator.Create(employer.Photo, 105, 105)" />
             <p class="center-aligned"><a class="name" href="@Url.Action("Detail", "Employer", new { id = employer.UserId })">@employer.EmployerName.Shorten(EmployerNameLength)</a></p>
         </li>
         index++;

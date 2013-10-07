@@ -2,20 +2,22 @@
 @{
     ViewBag.Title = "Редактирование фотографии";
     Layout = "~/Views/Shared/Layout.cshtml";
+    var photoWidth = WebConstants.PhotoEditWidth;
+    var photoHeight = WebConstants.PhotoEditHeight;
 }
 
 <script>
     $(function () {
-        $('input#x2').val(250);
-        $('input#y2').val(300);
+        $('input#x2').val(@photoWidth);
+        $('input#y2').val(@photoHeight);
         $('#saveButton').button();
         $('#editButton').button();
         $('img#photo').imgAreaSelect({
             handles: true,
             x1: 0,
             y1: 0,
-            x2: 250,
-            y2: 300,
+            x2: @(photoWidth),
+            y2: @(photoHeight),
             onSelectEnd: function (img, selection) {
                 $('input#x1').val(selection.x1);
                 $('input#y1').val(selection.y1);
@@ -28,7 +30,7 @@
 
 @using (Html.BeginForm("Edit", "Photo", FormMethod.Post))
 {
-    <img id="photo" src="@Model.SourceUrl" style="width: 250px; height: 300px;"/>
+    <img id="photo" src="@Model.SourceUrl" style="width: @(photoWidth)px; height: @(photoHeight)px;"/>
     @Html.HiddenFor(x => x.Id)
     @Html.HiddenFor(x => x.x1)
     @Html.HiddenFor(x => x.y1)

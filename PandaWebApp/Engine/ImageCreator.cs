@@ -25,37 +25,46 @@ namespace PandaWebApp.Engine
 
         public static string Create(string src, int width, int height)
         {
-            try
+            var sourcePath = HttpContext.Current.Server.MapPath(src);
+            if (string.IsNullOrEmpty(sourcePath) || !File.Exists(sourcePath))
             {
-                var sourcePath = HttpContext.Current.Server.MapPath(src);
-                if (string.IsNullOrEmpty(sourcePath) || !File.Exists(sourcePath))
+                return string.Empty;
+            }
+            using (var srcBitmap = new Bitmap(sourcePath))
+            {
+                var s = Math.Min((double)width / srcBitmap.Width, (double)height / srcBitmap.Height);
+                var w = (int)(s * srcBitmap.Width);
+                var h = (int)(s * srcBitmap.Height);
+
+                var imagePath = generatePath(sourcePath, w, h);
+                var mappedImagePath = HttpContext.Current.Server.MapPath(imagePath);
+                if (File.Exists(mappedImagePath))
                 {
-                    return string.Empty;
+                    return imagePath;
                 }
-                using (var srcBitmap = new Bitmap(sourcePath))
+
+                using (var destBitmap = new Bitmap(srcBitmap, new Size(w, h)))
                 {
-                    var s = Math.Min((double)width / srcBitmap.Width, (double)height / srcBitmap.Height);
-                    var w = (int)(s * srcBitmap.Width);
-                    var h = (int)(s * srcBitmap.Height);
-
-                    var imagePath = generatePath(sourcePath, w, h);
-                    var mappedImagePath = HttpContext.Current.Server.MapPath(imagePath);
-                    if (File.Exists(mappedImagePath))
-                    {
-                        return imagePath;
-                    }
-
-                    using (var destBitmap = new Bitmap(srcBitmap, new Size(w, h)))
-                    {
-                        destBitmap.Save(mappedImagePath);
-                        return imagePath;
-                    }
+                    destBitmap.Save(mappedImagePath);
+                    return imagePath;
                 }
             }
-            catch (Exception)
+        }
+
+        public static void Crop(string src, int x1, int y1, int x2, int y2)
+        {
+            var sourcePath = HttpContext.Current.Server.MapPath(src);
+            double kw, kh;
+            using (var srcBitmap = new Bitmap(sourcePath))
             {
-                return src;
+                kw = srcBitmap.Width > WebConstants.PhotoEditWidth ? (double)srcBitmap.Width / WebConstants.PhotoEditWidth : (double)1;
+                kh = srcBitmap.Height > WebConstants.PhotoEditHeight ? (double)srcBitmap.Height / WebConstants.PhotoEditHeight : (double)1;
             }
+            var width = (int)Math.Floor((x2 - x1) * kw);
+            var height = (int)Math.Floor((y2 - y1) * kh);
+            var x = (int)Math.Floor(x1 * kw);
+            var y = (int)Math.Floor(y1 * kh);
+            Create(src, new Rectangle(x, y, width, height));
         }
 
         public static void Create(string src, Rectangle crop)
