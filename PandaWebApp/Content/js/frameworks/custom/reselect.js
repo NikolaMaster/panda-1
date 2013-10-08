@@ -12,13 +12,17 @@ function reselect(select, addclass) {
 
     var sel_options = '';
     $(select).children('option').each(function () {
-        sel_options = sel_options + '<div class="sel_option" value="' + $(this).val() + '">' + $(this).html() + '</div>';
+        var htmlVal = $(this).html() == '' ? '&nbsp;' : $(this).html();
+        sel_options = sel_options + '<div class="sel_option" value="' + $(this).val() + '">' + htmlVal + '</div>';
 
     });
 
+
+    var selectedVal = $(select).children('option').first().html();
+    selectedVal = selectedVal == '' ? '&nbsp;' : selectedVal;
     var sel_imul = '<div class="sel_imul">\
                 <div class="sel_selected">\
-                    <div class="selected-text">' + $(select).children('option').first().html() + '</div>\
+                    <div class="selected-text">' + selectedVal + '</div>\
                     <div class="sel_arraw"></div>\
                 </div>\
                 <div class="sel_options">' + sel_options + '</div>\

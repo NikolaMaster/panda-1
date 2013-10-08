@@ -1,7 +1,7 @@
 ﻿@using PandaDataAccessLayer.DAL
 @model PandaWebApp.FormModels.PromouterForm
 @{
-    ViewBag.Title = "Редактирование информации о пользователе";
+    ViewBag.Title = "Личный кабинет";
     Layout = "~/Views/Shared/Layout.cshtml";
 
     var cityValues = (IEnumerable<SelectListItem>)ViewBag.CityValues;
@@ -13,6 +13,70 @@
     var user = core.User;
     var isAdmin = core.User.IsAdmin;
 }
+<script>
+    $(function() {
+        initReselect();
+    });
+</script>
+
+<div class="cabinet">
+    
+    <div class="header">
+        <ul class="horiz">
+            <li class="first selected"><a href="#">Личные данные</a></li>
+            <li><a href="#">Реклама</a></li>
+            <li><a href="#">Партнерская программа</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    
+    <div class="subheader"><p>Основное</p>
+    </div>
+    <div class="clear"></div>
+    <div>
+        <div class="table-2">
+            
+            <div class="column">
+                <div class="row">
+                    <div class="control">
+                        @Html.LabelFor(m => m.FirstName)<div class="editor">@Html.TextBoxFor(m => m.FirstName, new { @class="base-input big" })</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="control">
+                        @Html.LabelFor(m => m.MiddleName)<div class="editor">@Html.TextBoxFor(m => m.MiddleName, new { @class="base-input big" })</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="control">
+                        @Html.LabelFor(m => m.Gender)<div class="editor">@Html.DropDownListFor(m => m.Gender,  genderValues, string.Empty)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="row">
+                    <div class="control">
+                        @Html.LabelFor(m => m.LastName)<div class="editor">@Html.TextBoxFor(m => m.LastName, new { @class="base-input big" })</div>   
+                    </div>
+                </div>
+
+                <div class="row">
+                </div>
+                
+                <div class="row">
+                    <div class="control">
+                        @Html.LabelFor(m => m.BirthDate)<div class="editor">@Html.EditorFor(x => x.BirthDate, "Date")</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
 
 <h2>Редактирование информации о пользователе</h2>
 @using (Html.BeginForm("Edit", "Promouter", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -22,7 +86,7 @@
         $(function () {
             $('#editPromouterTabs').tabs();
             $('#uploadPhotoButton').click(function () {
-        /*        var count = $(this).data('-file-uploader-count') + 1;
+                /*        var count = $(this).data('-file-uploader-count') + 1;
                 $(this).data('-file-uploader-count', count);
                 $('#fileUploaders').append($('<input>')
                     .attr('id', count)

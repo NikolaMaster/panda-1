@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Security.Cryptography;
 using System.Web;
 using PandaDataAccessLayer.DAL;
 using PandaDataAccessLayer.Entities;
@@ -63,17 +65,17 @@ namespace PandaWebApp.FormModels
             public DateTime CreationDate { get; set; }
         }
 
-        [ValueFrom(Constants.FirstNameCode)]
+        [ValueFrom(Constants.FirstNameCode), Display(Name = "Имя")]
         public string FirstName { get; set; }
-        [ValueFrom(Constants.LastNameCode)]
+        [ValueFrom(Constants.LastNameCode), Display(Name = "Фамилия")]
         public string LastName { get; set; }
-        [ValueFrom(Constants.MiddleNameCode)]
+        [ValueFrom(Constants.MiddleNameCode), Display(Name = "Отчество")]
         public string MiddleName { get; set; }
-        [ValueFrom(Constants.GenderCode)]
+        [ValueFrom(Constants.GenderCode), Display(Name = "Пол", Description = "Пол")]
         public string Gender { get; set; }
-        [ValueFrom(Constants.CityCode)]
+        [ValueFrom(Constants.CityCode), Display(Name = "Город")]
         public string City { get; set; }
-        [ValueFrom(Constants.EducationCode)]
+        [ValueFrom(Constants.EducationCode), Display(Name = "Образование")]
         public string Education { get; set; }
         [ValueFrom(Constants.SalaryCode)]
         public string Salary { get; set; }
@@ -113,7 +115,7 @@ namespace PandaWebApp.FormModels
         public bool WinterSkates { get; set; }
         [ValueFrom(Constants.ReadyForWorkCode)]
         public bool ReadyForWork { get; set; }
-        [ValueFrom(Constants.DateOfBirthCode)]
+        [ValueFrom(Constants.DateOfBirthCode), Display(Name = "Дата рождения")]
         public DateTime? BirthDate { get; set; }
 
         public Guid UserId { get; set; }

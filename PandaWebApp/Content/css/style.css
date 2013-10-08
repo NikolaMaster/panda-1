@@ -17,6 +17,8 @@ body { background-color: #fafafa; }
 
 .column { float: left; }
 .row { height: 20px; }
+.table-3{ }
+.table-3 .column { width: 33.333%; }
 .table-4 { }
 .table-4 .column { width: 25%; }
 .table-2 { }
@@ -513,3 +515,20 @@ border: 1px solid #2E8800;
 
 #chart .label { font-size: 10px; text-align: center; }
 #chart .axis-label { top: 310px !important; }
+
+
+.cabinet .header a { font-family: 'Arial'; color: black !important;font-size: 16pt; }
+.cabinet .header li  { margin-left: 60px; }
+.cabinet .header li.first  { margin-left: 0; }
+.cabinet .header li.selected a  { text-decoration: none; }
+
+.cabinet .subheader {margin-top: 15px;margin-bottom: 8px; height: 46px;width: 100%;background-color: #ededed;border-bottom: 3px solid #a6d260;}
+.cabinet .subheader p {margin-left: 10px; font-family: 'Arial';color: #8c8c8c;font-size: 16pt;line-height: 2em; }
+
+.cabinet div.control label { font-size: 10pt;margin-bottom: 8px;display: block;  }
+.cabinet div.control div.editor { margin-bottom: 8px; }
+
+.cabinet div.control div.editor input[type=text] { font-size: 12pt;padding: 2px; } 
+.cabinet div.control div.editor input[type=text].big { width: 300px; } 
+.cabinet .table-2 .row { height: 60px;}
+.cabinet div.control .sel_wrap { width: 0;padding-left: 0px; }
