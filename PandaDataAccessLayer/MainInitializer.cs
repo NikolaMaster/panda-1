@@ -436,7 +436,7 @@ namespace PandaDataAccessLayer
             {
                 DataAccessLayer.Create(attrib2Checklist);
             }
-
+            DataAccessLayer.DbContext.SaveChanges();
         }
 
     }

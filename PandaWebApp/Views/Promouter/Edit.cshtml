@@ -30,8 +30,7 @@
     </div>
     <div class="clear"></div>
     
-    <div class="subheader"><p>Основное</p>
-    </div>
+    <div class="subheader"><p>Основное</p></div>
     <div class="clear"></div>
     <div>
         <div class="table-2">
@@ -73,6 +72,11 @@
             </div>
         </div>
         <div class="clear"></div>
+    </div>
+
+    <div class="subheader"><p>Фото</p></div>
+    <div class="clear"></div>
+    <div>@{ Html.RenderAction("Edit", "Album", new { userId = Model.UserId }); }
     </div>
 </div>
 
@@ -128,7 +132,7 @@
             }
         </div>
         <div id="photoTab">
-            <div>@{ Html.RenderAction("Index", "Album", new { userId = Model.UserId }); }</div>
+            <div>@{ Html.RenderAction("Edit", "Album", new { userId = Model.UserId }); }</div>
             <div>
                 <div id="fileUploaders">
                     <input type="file" name="photos" id="1"/>

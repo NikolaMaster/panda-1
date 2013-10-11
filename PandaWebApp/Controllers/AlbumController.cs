@@ -12,7 +12,7 @@ namespace PandaWebApp.Controllers
 {
     public class AlbumController : ModelCareController
     {
-        public ActionResult Index(Guid userId)
+        public ActionResult Edit(Guid userId)
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
             AlbumUnit albumUnit;
@@ -22,7 +22,7 @@ namespace PandaWebApp.Controllers
                 albumUnit = EmployerForm.Bind(DataAccessLayer, userId).Albums.First();
             else 
                 throw new Exception("Incorrect user type");
-            return PartialView("Index", albumUnit);
+            return PartialView("Edit", albumUnit);
         }
 
         [BaseAuthorizationReuired]
@@ -31,7 +31,7 @@ namespace PandaWebApp.Controllers
             var userId = DataAccessLayer.GetById<Photo>(photoId).Album.User.Id;
             DataAccessLayer.DeleteById<Photo>(photoId);
             DataAccessLayer.DbContext.SaveChanges();
-            return Index(userId);
+            return Edit(userId);
         }
 
         [HttpGet]
