@@ -74,7 +74,7 @@ ul.list-style { margin-left: 20px; }
 }
 
 .rounded-borders-4 { -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
-
+.rounded-borders-2 { -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
 /*pages*/
 .body { width: 1101px; margin: 0 auto; }
 .body.header { }
@@ -537,3 +537,26 @@ border: 1px solid #2E8800;
 .cabinet .table-2 .tall { height: 60px !important;}
 .cabinet .table-2 .row  { height: 20px;}
 .cabinet div.control .sel_wrap { width: 0;padding-left: 0px; }
+
+.album .image { position: relative; text-align: center; }
+.album .image img { max-height:100%; max-width:100%; }
+.album .avatar { background-color: #ed9c46;padding: 4px; }
+.album .avatar .main-photo { color: #ffffff; font-family: "Arial Narrow", Arial;font-size: 10pt;   }
+
+.album .image h2 {position: absolute;}
+
+.album .image h2.close {width: 100%;top: 0px; text-align: right;margin-left: -3px;margin-top: 3px; }
+
+.album .image h2.make-avatar { left: 8px; padding: 1px 2px 1px 2px; bottom: 8px; text-align: center; background: rgb(0, 0, 0); background: rgba(223, 255, 202, 0.6);border: rgb(182, 182, 182) solid 1px; }
+.album .image h2.make-avatar:hover { background: rgb(0, 0, 0); background: rgba(223, 255, 202, 0.8); }
+.album .image h2.make-avatar span.wrap-inner { width: 100%;}
+
+.album .image h2 span.wrap-inner a { letter-spacing: 0px;color: black;font-family: "Arial Narrow", Arial;font-size: 8pt; text-decoration: none; }
+
+        
+.album ul {  }
+.album ul li { list-style-type: none; padding-left: 19px; padding-bottom: 10px;display: block;width: 120px;height: 150px;text-align: center; }
+.album ul li.first { padding: 0; }
+
+
+.hide{ display: none;}

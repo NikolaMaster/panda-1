@@ -159,6 +159,7 @@
     <Compile Include="Engine\Binders\ViewEmployerToUser.cs" />
     <Compile Include="Engine\Binders\ViewPromouterToUser.cs" />
     <Compile Include="Engine\Binders\VacancyToChecklist.cs" />
+    <Compile Include="Engine\ImageLinkExtensions.cs" />
     <Compile Include="Engine\MailSender.cs" />
     <Compile Include="Engine\DataAnnotations.cs" />
     <Compile Include="Engine\Social\OAuth.MailRu.cs" />
@@ -487,6 +488,7 @@
     <Content Include="Content\css\frameworks\tufte-graph\tufte-graph.css" />
     <Content Include="Content\img\all-feedbacks-mark.png" />
     <Content Include="Content\img\cache\readme.txt" />
+    <Content Include="Content\img\close.png" />
     <Content Include="Content\img\coins-icon.png" />
     <Content Include="Content\img\company.png" />
     <Content Include="Content\img\company_avatar.jpg" />
@@ -687,7 +689,7 @@
     <Content Include="Views\Home\MainView.cshtml" />
     <Content Include="Views\Employer\TopEmployers.cshtml" />
     <Content Include="Views\Promouter\TopPromouters.cshtml" />
-    <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Album\Edit.cshtml" />
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Blog\Posts.cshtml" />
     <Content Include="Views\Feedback\TopUserFeedback.cshtml" />

@@ -47,7 +47,7 @@ namespace PandaWebApp.Controllers
             var user = photo.Album.User;
             user.Avatar = photo;
             DataAccessLayer.DbContext.SaveChanges();
-            return Redirect(string.Format(@"\{0}\Edit\{1}", user.ControllerNameByUser(), user.Id));
+            return Json(new {id});
         }
 
     }

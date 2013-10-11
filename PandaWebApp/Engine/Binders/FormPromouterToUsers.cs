@@ -36,6 +36,7 @@ namespace PandaWebApp.Engine.Binders
                     Id = x.Id,
                     Photos = x.Photos.ToList(),
                     Title = x.Name,
+                    Avatar = x.User.Avatar
                 })
                 .ToList();
 

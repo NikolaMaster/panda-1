@@ -324,7 +324,7 @@ namespace PandaDataAccessLayer
             foreach (var attrib in attribs)
                 DataAccessLayer.Create(attrib);
             DbContext.SaveChanges();
-        }
+            }
 
 
         private void addAttrib2ChecklistType()

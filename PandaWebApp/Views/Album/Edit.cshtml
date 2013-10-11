@@ -1,0 +1,74 @@
+﻿@model PandaWebApp.FormModels.AlbumUnit
+
+@{
+    var photoWidth = WebConstants.PhotoHeight;
+    var photoHeight = WebConstants.PhotoWidth;
+    var PhotosPerRow = WebConstants.PhotoPerRow;
+}
+
+<script>
+    function setAvatatar(div) {
+        div.addClass('avatar rounded-borders-4');
+        $('.close', div).hide();
+        $('.make-avatar', div).hide();
+        $('.main-photo', div).show();
+    }
+
+    function OnSetAvatarSuccess(data) {
+        setAvatatar($('#photo_' + data.id));
+    }
+</script>
+<div class="photo-album"  id="album_@Model.Id">
+    <div class="album">
+        <ul class="horiz">
+            @{
+                var index = 0;
+                foreach (var item in Model.Photos)
+                {
+                    <li class="@(index == 0 ? "first" : "")">
+                        
+                    <div id="photo_@item.Id">
+                        <div class="image">
+
+                                    <img class="rounded-borders-4" src="@ImageCreator.Create(item.SourceUrl, photoWidth, photoHeight)" alt="@item.Album" title="@item.Title" />
+                                        <h2 class="close">
+                                            <span class=" wrap-inner">
+                                                @Ajax.ImageActionLink("/Content/img/close.png", "Delete", "Album", new {id = item.Id}, new AjaxOptions {})
+                                            </span>
+                                        </h2>
+                                        <h2 class="make-avatar rounded-borders-2">
+                                            <span class="wrap-inner">
+                                                @Ajax.ActionLink("Сделать главным", "Avatar", "Photo", new {id = item.Id}, new AjaxOptions { OnSuccess = "OnSetAvatarSuccess"})
+                                            </span>
+                                        </h2>
+                                </div>
+                                <div class="clear"></div>
+                        <p class="main-photo hide">главное фото</p>
+                    </div>
+                        
+                        @if (item == Model.Avatar)
+                        {
+                            <script>
+                                 $(function () {
+                                    setAvatatar($("#photo_" + "@(item.Id)"));
+                                 });
+                            </script>
+                        }
+                    
+
+                        @if (index == PhotosPerRow)
+                        {
+                            index = 0;
+                        }
+                        else
+                        {
+                            index++;
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div class="clear">
+</div>

@@ -11,5 +11,6 @@ namespace PandaWebApp.FormModels
         public Guid Id { get; set; }
         public string Title { get; set; }
         public IList<Photo> Photos { get; set; }
+        public Photo Avatar { get; set; }
     }
 }
