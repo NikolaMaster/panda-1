@@ -81,7 +81,7 @@ namespace PandaWebApp.Engine.Editors
                 DataAccessLayer.Create(new PhoneNumber
                 {
                     EntityList = entityList,
-                    CountryCode = DataAccessLayer.Get<DictValue>(source.Phone.CountryCode),
+                    CountryCode = DataAccessLayer.Get<DictValue>("+7"),
                     Code = source.Phone.Code,
                     Number = source.Phone.Number,
                 });

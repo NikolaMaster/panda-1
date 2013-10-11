@@ -127,6 +127,7 @@ namespace PandaWebApp.FormModels
 
         public bool IsAdmin { get; set; }
 
+        [Display(Name = "Мобильный телефон")]
         public PhoneUnit Phone { get; set; }
 
         public IEnumerable<PhotoUnit> NewPhotos { get; set; }

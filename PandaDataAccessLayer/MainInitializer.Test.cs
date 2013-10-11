@@ -784,46 +784,6 @@ namespace PandaDataAccessLayer
                 }
             }
 
-            DataAccessLayer.Create(new Review
-            {
-                AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
-                RecieverId = user.Id,
-                Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                Rating = 5
-            });
-            DataAccessLayer.Create(new Review
-            {
-                AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
-                RecieverId = user.Id,
-                Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                Rating = 3
-            });
-            DataAccessLayer.Create(new Review
-            {
-                AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
-                RecieverId = user.Id,
-                Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                Rating = 4
-            });
-            DataAccessLayer.Create(new Review
-            {
-                AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
-                RecieverId = user.Id,
-                Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                Rating = 2
-            });
-            DataAccessLayer.Create(new Review
-            {
-                AuthorId = DataAccessLayer.Get<UserBase>(x => x.Id != user.Id).First().Id,
-                RecieverId = user.Id,
-                Title = "Lorem ipsum",
-                Text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                Rating = 1
-            });
             DataAccessLayer.DbContext.SaveChanges();
 
             

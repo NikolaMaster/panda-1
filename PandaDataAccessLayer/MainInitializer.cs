@@ -113,10 +113,6 @@ namespace PandaDataAccessLayer
 
         private void addDefaulAttributes() 
         {
-            try
-            {
-
-
             var attribs = new[] {
                 new Attrib 
                 {
@@ -328,12 +324,6 @@ namespace PandaDataAccessLayer
             foreach (var attrib in attribs)
                 DataAccessLayer.Create(attrib);
             DbContext.SaveChanges();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
 
 
@@ -426,6 +416,8 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Constants.City,
                     DataAccessLayer.Constants.Gender,
                     DataAccessLayer.Constants.EmployerName,
+                    DataAccessLayer.Constants.FirstName,
+                    DataAccessLayer.Constants.LastName
                 };
 
             foreach (var attrib2Checklist in employer.Select(x => new Attrib2ChecklistType
@@ -436,7 +428,7 @@ namespace PandaDataAccessLayer
             {
                 DataAccessLayer.Create(attrib2Checklist);
             }
-
+            DbContext.SaveChanges();
         }
 
     }

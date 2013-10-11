@@ -529,6 +529,11 @@ border: 1px solid #2E8800;
 .cabinet div.control div.editor { margin-bottom: 8px; }
 
 .cabinet div.control div.editor input[type=text] { font-size: 12pt;padding: 2px; } 
-.cabinet div.control div.editor input[type=text].big { width: 300px; } 
-.cabinet .table-2 .row { height: 60px;}
+.cabinet div.control div.editor input[type=text].xl { width: 300px; } 
+.cabinet div.control div.editor input[type=text].l { width: 200px; } 
+.cabinet div.control div.editor input[type=text].m { width: 85px; } 
+.cabinet div.control div.editor input[type=text].s { width: 75px; } 
+
+.cabinet .table-2 .tall { height: 60px !important;}
+.cabinet .table-2 .row  { height: 20px;}
 .cabinet div.control .sel_wrap { width: 0;padding-left: 0px; }

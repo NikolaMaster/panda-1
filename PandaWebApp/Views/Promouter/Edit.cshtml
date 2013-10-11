@@ -8,7 +8,7 @@
     var genderValues = (IEnumerable<SelectListItem>)ViewBag.GenderValues;
     var salaryValues = (IEnumerable<SelectListItem>)ViewBag.SalaryValues;
     var educationValues = (IEnumerable<SelectListItem>)ViewBag.EducationValues;
-    
+
     var core = AuthorizationCore.StaticCreate();
     var user = core.User;
     var isAdmin = core.User.IsAdmin;
@@ -37,34 +37,44 @@
         <div class="table-2">
             
             <div class="column">
-                <div class="row">
+                <div class="row tall">
                     <div class="control">
-                        @Html.LabelFor(m => m.FirstName)<div class="editor">@Html.TextBoxFor(m => m.FirstName, new { @class="base-input big" })</div>
+                        @Html.LabelFor(m => m.FirstName)<div class="editor">@Html.TextBoxFor(m => m.FirstName, new { @class = "base-input xl" })</div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row tall">
                     <div class="control">
-                        @Html.LabelFor(m => m.MiddleName)<div class="editor">@Html.TextBoxFor(m => m.MiddleName, new { @class="base-input big" })</div>
+                        @Html.LabelFor(m => m.MiddleName)<div class="editor">@Html.TextBoxFor(m => m.MiddleName, new { @class = "base-input xl" })</div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row tall">
                     <div class="control">
-                        @Html.LabelFor(m => m.Gender)<div class="editor">@Html.DropDownListFor(m => m.Gender,  genderValues, string.Empty)</div>
+                        @Html.LabelFor(m => m.Gender)<div class="editor">@Html.DropDownListFor(m => m.Gender, genderValues, string.Empty)</div>
+                    </div>
+                </div>
+                <div class="row tall">
+                    <div class="control">
+                        @Html.LabelFor(m => m.Phone)<div class="editor">@Html.EditorFor(m => m.Phone, "Phone")</div>
+                    </div>
+                </div>
+                <div class="row tall">
+                    <div class="control">
+                        @Html.LabelFor(m => m.Email)<div class="editor">@Html.TextBoxFor(m => m.Email, new { @class = "base-input xl" })</div>
                     </div>
                 </div>
             </div>
 
             <div class="column">
-                <div class="row">
+                <div class="row tall">
                     <div class="control">
-                        @Html.LabelFor(m => m.LastName)<div class="editor">@Html.TextBoxFor(m => m.LastName, new { @class="base-input big" })</div>   
+                        @Html.LabelFor(m => m.LastName)<div class="editor">@Html.TextBoxFor(m => m.LastName, new { @class = "base-input xl" })</div>   
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row tall">
                 </div>
                 
-                <div class="row">
+                <div class="row tall">
                     <div class="control">
                         @Html.LabelFor(m => m.BirthDate)<div class="editor">@Html.EditorFor(x => x.BirthDate, "Date")</div>
                     </div>
@@ -74,6 +84,81 @@
         </div>
         <div class="clear"></div>
     </div>
+    
+    <div class="subheader"><p>Фотоальбом</p>
+    </div>
+    <div class="clear"></div>
+    <div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="subheader"><p>Внешние данные</p>
+    </div>
+    <div class="clear"></div>
+    <div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="subheader"><p>Интересующая работа</p>
+    </div>
+    <div class="clear"></div>
+    <div class="table-2">
+        
+        <div class="column">
+            @for (var i = 0; i < Model.DesiredWork.Count / 2 + Model.DesiredWork.Count % 2; i++)
+            {
+                <div class="row">
+                    @Html.HiddenFor(m => m.DesiredWork[i].Code)
+                    @Html.HiddenFor(m => m.DesiredWork[i].Title)
+                    @Html.EditorFor(m => m.DesiredWork[i].Value)
+                    @Html.LabelFor(m => m.DesiredWork[i].Value, Model.DesiredWork[i].Title)
+                </div>
+            }
+        </div>
+        <div class="column">
+            @for (var i = Model.DesiredWork.Count / 2 + Model.DesiredWork.Count % 2; i < Model.DesiredWork.Count; i++)
+            {
+                <div class="row">
+                    @Html.HiddenFor(m => m.DesiredWork[i].Code)
+                    @Html.HiddenFor(m => m.DesiredWork[i].Title)
+                    @Html.EditorFor(m => m.DesiredWork[i].Value)
+                    @Html.LabelFor(m => m.DesiredWork[i].Value, Model.DesiredWork[i].Title)
+                </div>
+            }
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="subheader"><p>Желаемое время работы</p>
+    </div>
+    <div class="clear"></div>
+    <div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="subheader"><p>Интересы</p>
+    </div>
+    <div class="clear"></div>
+    <div>
+        @Html.EditorFor(m => m.Hobbies, "Wysiwyg")
+        <div class="clear"></div>
+    </div>
+    
+    <div class="subheader"><p>О себе</p>
+    </div>
+    <div class="clear"></div>
+    <div>
+        @Html.EditorFor(m => m.About, "Wysiwyg")
+        <div class="clear"></div>
+    </div>
+    
+    <div class="subheader"><p>Опыт работы</p>
+    </div>
+    <div class="clear"></div>
+    <div>
+        <div class="clear"></div>
+    </div>
+
 </div>
 
 
@@ -112,7 +197,7 @@
             <div>Имя</div> @Html.EditorFor(m => m.FirstName)
             <div>Фамилия</div> @Html.EditorFor(m => m.LastName)
             <div>Отчество</div> @Html.EditorFor(m => m.MiddleName)
-            <div>Пол</div> @Html.DropDownListFor(m => m.Gender,  genderValues, string.Empty)
+            <div>Пол</div> @Html.DropDownListFor(m => m.Gender, genderValues, string.Empty)
             <div>Дата рождения</div> @Html.EditorFor(x => x.BirthDate, "Date")
             <div>Мед книжка</div> @Html.EditorFor(m => m.MedicalBook)
             <div>Автомобиль</div> @Html.EditorFor(m => m.Car)
