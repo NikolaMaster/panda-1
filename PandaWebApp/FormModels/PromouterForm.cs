@@ -101,6 +101,8 @@ namespace PandaWebApp.FormModels
         public string About { get; set; }
         [ValueFrom(Constants.CarCode)]
         public string Car { get; set; }
+        [ValueFrom(Constants.WorkExperience2Code)]
+        public bool WorkExperience2 { get; set; }
 
         [ValueFrom(Constants.WeightCode)]
         public int Weight { get; set; }

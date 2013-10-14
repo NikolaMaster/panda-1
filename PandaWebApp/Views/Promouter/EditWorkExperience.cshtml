@@ -1,0 +1,7 @@
+﻿@model PandaWebApp.FormModels.WorkExerience
+
+@using (Ajax.BeginForm())
+{ 
+    @Html.EditorFor(m => m.WorkExperience, "Wysiwyg")
+    <button type="submit">сохранить</button>
+}

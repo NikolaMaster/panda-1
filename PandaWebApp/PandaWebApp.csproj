@@ -128,7 +128,6 @@
     <Compile Include="Controllers\FavoriteController.cs" />
     <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\OAuthController.cs" />
-    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\VacancyController.cs" />
@@ -180,10 +179,12 @@
     <Compile Include="Engine\ModelCareController.cs" />
     <Compile Include="Filters\AdministratorAuthorizationRequired.cs" />
     <Compile Include="Filters\BaseAuthorizationReuired.cs" />
+    <Compile Include="FormModels\About.cs" />
     <Compile Include="FormModels\AlbumUnit.cs" />
     <Compile Include="FormModels\Authorize.cs" />
     <Compile Include="FormModels\EditCoinsForm.cs" />
     <Compile Include="FormModels\EmployerRegister.cs" />
+    <Compile Include="FormModels\Hobbies.cs" />
     <Compile Include="FormModels\IPaginators.cs" />
     <Compile Include="FormModels\PagerFormModel.cs" />
     <Compile Include="FormModels\PhotoForm.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="FormModels\PromouterForm.cs" />
     <Compile Include="FormModels\EmployerSearchForm.cs" />
     <Compile Include="FormModels\SupportForm.cs" />
+    <Compile Include="FormModels\WorkExperience.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -520,6 +522,7 @@
     <Content Include="Content\img\light_green_star.png" />
     <Content Include="Content\img\light_orange_star.png" />
     <Content Include="Content\img\light_red_star.png" />
+    <Content Include="Content\img\loader.GIF" />
     <Content Include="Content\img\mail.png" />
     <Content Include="Content\img\main.jpg" />
     <Content Include="Content\img\man.png" />
@@ -605,7 +608,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\RegisterForm.cshtml" />
-    <Content Include="Views\Photo\Edit.cshtml" />
+    <Content Include="Views\Album\Crop.cshtml" />
     <Content Include="Views\Favorite\_Item.cshtml" />
     <Content Include="Views\Favorite\Index.cshtml" />
     <Content Include="Views\Favorite\_Index.cshtml" />
@@ -617,8 +620,11 @@
     <Content Include="Views\Browsing\Index.cshtml" />
     <Content Include="Views\Shared\_SocialLogin.cshtml" />
     <Content Include="Views\Search\OffersCount.cshtml" />
-    <Content Include="Views\Album\Album2.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Feedback\RatingAverage.cshtml" />
+    <Content Include="Views\Promouter\EditAbout.cshtml" />
+    <Content Include="Views\Promouter\EditWorkExperience.cshtml" />
+    <Content Include="Views\Promouter\EditHobbies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -701,7 +707,6 @@
     <Content Include="Views\Feedback\Create.cshtml" />
     <Content Include="Views\Search\Promouter.cshtml" />
     <Content Include="Views\Search\PromouterSearchResult.cshtml" />
-    <Content Include="Views\Album\Album.cshtml" />
     <Content Include="Views\Shared\_AuthPanel.cshtml" />
     <Content Include="Views\Authorization\Login.cshtml" />
     <Content Include="Views\Feedback\TopDialogFeedback.cshtml" />

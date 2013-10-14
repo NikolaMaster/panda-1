@@ -19,6 +19,7 @@ namespace PandaDataAccessLayer.DAL
 
         public const string DesiredWorkCode = "DESIRED_WORK";
         public const string WorkExperienceCode = "WORK_EXPERIENCE";
+        public const string WorkExperience2Code = "WORK_EXPERIENCE2";
         public const string CityCode = "CITY";
         public const string GenderCode = "GENDER";
         public const string SalaryCode = "SALARY";
@@ -1363,6 +1364,11 @@ namespace PandaDataAccessLayer.DAL
         public Attrib WorkExperience 
         {
             get { return DataAccessLayer.Get<Attrib>(WorkExperienceCode); }
+        }
+
+        public Attrib WorkExperience2
+        {
+            get { return DataAccessLayer.Get<Attrib>(WorkExperience2Code); }
         }
 
         public Attrib DateOfBirth 

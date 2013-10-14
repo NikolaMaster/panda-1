@@ -28,7 +28,7 @@
     });
 </script>
 
-@using (Html.BeginForm("Edit", "Photo", FormMethod.Post))
+@using (Html.BeginForm("Crop", "Album", FormMethod.Post))
 {
     <img id="photo" src="@Model.SourceUrl" style="width: @(photoWidth)px; height: @(photoHeight)px;"/>
     @Html.HiddenFor(x => x.Id)

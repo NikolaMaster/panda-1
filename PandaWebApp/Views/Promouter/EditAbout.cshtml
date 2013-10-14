@@ -1,0 +1,7 @@
+﻿@model PandaWebApp.FormModels.About
+
+@using (Ajax.BeginForm())
+{ 
+    @Html.EditorFor(m => m.About, "Wysiwyg")
+    <div class="clear"></div>
+}

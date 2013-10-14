@@ -182,6 +182,11 @@ namespace PandaDataAccessLayer
                 },
                 new Attrib
                 {
+                    AttribType = DataAccessLayer.GetAttribType(typeof(string)),
+                    Code = Constants.WorkExperience2Code,
+                },
+                new Attrib
+                {
                     AttribType = DataAccessLayer.GetAttribType(typeof(EntityList)),
                     Code = Constants.DesiredWorkCode
                 },
@@ -363,6 +368,7 @@ namespace PandaDataAccessLayer
                     DataAccessLayer.Constants.WorkExperience,
                     DataAccessLayer.Constants.DesiredWork,
                     DataAccessLayer.Constants.DesiredWorkTime,
+                    DataAccessLayer.Constants.WorkExperience2
                 };
 
             foreach (var attrib2Checklist in promouter.Select(x => new Attrib2ChecklistType

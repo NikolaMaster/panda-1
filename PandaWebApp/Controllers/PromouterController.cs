@@ -148,5 +148,35 @@ namespace PandaWebApp.Controllers
             return new EmptyResult();
 #endif
         }
+
+        [BaseAuthorizationReuired]
+        public ActionResult EditWorkExoperience(WorkExperience model) 
+        {
+            var user = DataAccessLayer.GetById<PromouterUser>(model.UserId);
+            var attribValue = DataAccessLayer.GetAttributeValue(user.MainChecklist.Id, Constants.WorkExperience2Code);
+            attribValue.Value = model.Value;
+            DataAccessLayer.DbContext.SaveChanges();
+            return PartialView();
+        }
+
+        [BaseAuthorizationReuired]
+        public ActionResult EditAbout(About model)
+        {
+            var user = DataAccessLayer.GetById<PromouterUser>(model.UserId);
+            var attribValue = DataAccessLayer.GetAttributeValue(user.MainChecklist.Id, Constants.AboutCode);
+            attribValue.Value = model.Value;
+            DataAccessLayer.DbContext.SaveChanges();
+            return PartialView();
+        }
+
+        [BaseAuthorizationReuired]
+        public ActionResult EditHobbies(Hobbies model)
+        {
+            var user = DataAccessLayer.GetById<PromouterUser>(model.UserId);
+            var attribValue = DataAccessLayer.GetAttributeValue(user.MainChecklist.Id, Constants.HobbiesCode);
+            attribValue.Value = model.Value;
+            DataAccessLayer.DbContext.SaveChanges();
+            return PartialView();
+        }
     }
 }

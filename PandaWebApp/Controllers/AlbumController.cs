@@ -12,6 +12,44 @@ namespace PandaWebApp.Controllers
 {
     public class AlbumController : ModelCareController
     {
+        [HttpGet]
+        [BaseAuthorizationReuired]
+        public ActionResult Crop(Guid id)
+        {
+
+            var photo = DataAccessLayer.GetById<Photo>(id);
+            var user = photo.Album.User;
+            var model = new PhotoForm
+            {
+                Id = photo.Id.ToString(),
+                SourceUrl = photo.SourceUrl,
+                Controller = user.ControllerNameByUser(),
+                UserId = user.Id
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [BaseAuthorizationReuired]
+        public ActionResult Crop(PhotoForm model)
+        {
+            var photo = DataAccessLayer.GetById<Photo>(Guid.Parse(model.Id));
+            ImageCreator.Crop(photo.SourceUrl, model.x1, model.y1, model.x2, model.y2);
+            var user = photo.Album.User;
+            return Redirect(string.Format(@"\{0}\Edit\{1}", user.ControllerNameByUser(), user.Id));
+        }
+
+        [BaseAuthorizationReuired]
+        public ActionResult UpdateAvatar(Guid id)
+        {
+            var photo = DataAccessLayer.GetById<Photo>(id);
+            var user = photo.Album.User;
+            user.Avatar = photo;
+            DataAccessLayer.DbContext.SaveChanges();
+            return Edit(user.Id);
+        }
+
+
         public ActionResult Edit(Guid userId)
         {
             var user = DataAccessLayer.GetById<UserBase>(userId);
@@ -34,22 +72,7 @@ namespace PandaWebApp.Controllers
             return Edit(userId);
         }
 
-        [HttpGet]
-        public ActionResult Album(Guid userId)
-        {
-            var user = DataAccessLayer.GetById<UserBase>(userId);
-            AlbumUnit albumUnit;
-            if (user is PromouterUser)
-                albumUnit = PromouterForm.Bind(DataAccessLayer, userId).Albums.First();
-            else if (user is EmployerUser)
-                albumUnit = EmployerForm.Bind(DataAccessLayer, userId).Albums.First();
-            else
-                throw new Exception("Incorrect user type");
-            return View(albumUnit);
-        }
-
-
-        public ActionResult Album2(Guid userId)
+        public ActionResult Index(Guid userId)
         {
             var startFromStr = Request["photosFrom"];
             var startFrom = 0;

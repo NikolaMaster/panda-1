@@ -555,7 +555,7 @@ border: 1px solid #2E8800;
 
         
 .album ul {  }
-.album ul li { list-style-type: none; padding-left: 19px; padding-bottom: 10px;display: block;width: 120px;height: 150px;text-align: center; }
+.album ul li { list-style-type: none; padding-left: 19px; padding-bottom: 10px;display: block;width: 120px;text-align: center; }
 .album ul li.first { padding: 0; }
 
 
